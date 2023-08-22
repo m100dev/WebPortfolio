@@ -1,14 +1,16 @@
 import React from 'react'
-import CV from '../../assets/cv.pdf'
+import {BsLinkedin} from 'react-icons/bs';
+import {FaGithub} from 'react-icons/fa';
+import {SiUpwork} from 'react-icons/si'
 
 const HeaderSocials = () => {
   return (
     <div className='header__socials'>
-        <a href="https://www.linkedin.com/in/mbastien001/" target='_blank'>LinkedIn</a>
-        <a href="https://github.com/m100dev" target='_blank'>Github</a>
-        <a href="https://www.upwork.com/freelancers/~01fec20327e55cadb1" target='_blank'>Upwork</a>
+        <a href="https://www.linkedin.com/in/mbastien001/" target='_blank' rel="noreferrer"><BsLinkedin/></a>
+        <a href="https://github.com/m100dev" target='_blank' rel="noreferrer"><FaGithub/></a>
+        <a href="https://www.upwork.com/freelancers/~01fec20327e55cadb1" target='_blank' rel="noreferrer"><SiUpwork/></a>
     </div>
   )
 }
 
-export default HeaderSocials
+export default HeaderSocials;
