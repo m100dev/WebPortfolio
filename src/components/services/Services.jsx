@@ -16,23 +16,23 @@ const Services = () => {
 
           <ul className="service__list">
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
           </ul>
@@ -45,23 +45,23 @@ const Services = () => {
 
           <ul className="service__list">
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
           </ul>
@@ -74,23 +74,23 @@ const Services = () => {
 
           <ul className="service__list">
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
             <li>
-              <BiCheckSquare/>
+              <BiCheckSquare className='service__list-icon'/>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
             </li>
           </ul>
