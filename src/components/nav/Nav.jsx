@@ -1,8 +1,6 @@
 import React from 'react'
 import './nav.css'
-import { RiHome2Line } from 'react-icons/ri';
-import { RiUser6Line } from 'react-icons/ri';
-import { RiBook2Line } from 'react-icons/ri';
+import { RiHome2Line, RiUser6Line, RiBook2Line } from 'react-icons/ri';
 import { MdOutlineHomeRepairService } from 'react-icons/md';
 import { LuMessagesSquare } from 'react-icons/lu';
 import { useState } from 'react';
