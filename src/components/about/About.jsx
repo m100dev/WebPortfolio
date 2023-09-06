@@ -33,13 +33,13 @@ const About = () => {
               <small>10+ Completed</small>
             </article>
           </div>
+
+          <p>
+            Dynamic and results-driven Front-End Web Developer and Cloud Admin with hands-on experience in Web technologies, AWS, and software development. Proficient in logical analysis, and problem-solving. Seeking opportunities to contribute technical expertise and drive innovation in a software development role, while leveraging cloud services.
+          </p>
+
+          <a href="#contact" className="btn btn-primary">Let's Talk</a>
         </div>
-
-        <p>
-          Dynamic and results-driven Front-End Web Developer and Cloud Admin with hands-on experience in Web technologies, AWS, and software development. Proficient in logical analysis, and problem-solving. Seeking opportunities to contribute technical expertise and drive innovation in a software development role, while leveraging cloud services.
-        </p>
-
-        <a href="#contact" className="btn btn-primary">Let's Talk</a>
       </div>
     </section>
   )
