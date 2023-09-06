@@ -4,6 +4,7 @@ import ME from '../../assets/marc-bastien-portrait.png'
 import HeaderSocials from './HeaderSocials'
 import './header.css'
 
+// Header component which serves as the portfolio landing page
 const Header = () => {
   return (
     <header>

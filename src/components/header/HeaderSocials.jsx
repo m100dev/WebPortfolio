@@ -3,6 +3,7 @@ import {BsLinkedin} from 'react-icons/bs';
 import {FaGithub} from 'react-icons/fa';
 import {SiUpwork} from 'react-icons/si'
 
+// Utilizing React Icons for the different social media links. Styled using the header__socials class
 const HeaderSocials = () => {
   return (
     <div className='header__socials'>

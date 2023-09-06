@@ -1,9 +1,24 @@
 import React from 'react'
 import './nav.css'
+import { RiHome2Line } from 'react-icons/ri';
+import { RiUser6Line } from 'react-icons/ri';
+import { RiBook2Line } from 'react-icons/ri';
+import { MdOutlineHomeRepairService } from 'react-icons/md';
+import { LuMessagesSquare } from 'react-icons/lu';
+import { useState } from 'react';
 
-function Nav() {
+// This component allows the user to navigate between the different sections of the website
+const Nav = () => {
+  const [activeNav, setActiveNav] = useState('#'); // useState used to dynamically handle the the class which highlights the selected menu item
+
   return (
-    <div>Nav</div>
+    <nav>
+      <a href="#" onClick={() => { setActiveNav('#')}} className={ activeNav === '#' ? 'active' : '' }><RiHome2Line/></a>
+      <a href="#about" onClick={() => { setActiveNav('#about')}} className={ activeNav === '#about' ? 'active' : '' }><RiUser6Line/></a>
+      <a href="#experience" onClick={() => { setActiveNav('#experience')}} className={ activeNav === '#experience' ? 'active' : '' }><RiBook2Line/></a>
+      <a href="#services" onClick={() => { setActiveNav('#services')}} className={ activeNav === '#services'? 'active' : '' }><MdOutlineHomeRepairService/></a>
+      <a href="#contact" onClick={() => { setActiveNav('#contact')}} className={ activeNav === '#contact'? 'active' : '' }><LuMessagesSquare/></a>
+    </nav>
   )
 }
 
