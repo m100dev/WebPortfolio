@@ -1,9 +1,9 @@
 import React from 'react'
 import './testimonials.css'
 import AVTR1 from '../../assets/avatar1.jpg'
-import AVTR2 from '../../assets/avatar2.jpg'
+import AVTR2 from '../../assets/avatar2.png'
 import AVTR3 from '../../assets/avatar3.jpg'
-import AVTR4 from '../../assets/avatar4.jpg'
+import AVTR4 from '../../assets/avatar4.png'
 import { register } from 'swiper/element/bundle';
 
 register();

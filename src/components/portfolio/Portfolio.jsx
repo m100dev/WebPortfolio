@@ -1,54 +1,54 @@
 import React from 'react'
 import './portfolio.css'
-import IMG1 from '../../assets/portfolio1.jpg';
-import IMG2 from '../../assets/portfolio2.jpg';
-import IMG3 from '../../assets/portfolio3.jpg';
-import IMG4 from '../../assets/portfolio4.jpg';
-import IMG5 from '../../assets/portfolio5.png';
-import IMG6 from '../../assets/portfolio6.jpg';
+import IMG1 from '../../assets/expense-tracker-project.png';
+import IMG2 from '../../assets/rgb-color-guess-thumbnail.png';
+import IMG3 from '../../assets/task-planner-project.png';
+import IMG4 from '../../assets/xps-xpress.png';
+import IMG5 from '../../assets/villa-majorca-site.png';
+import IMG6 from '../../assets/garage-epoxy-shopify.png';
 
 const data = [
   {
     id: 1,
     image: IMG1,
     title: 'Expense Tracker',
-    github: 'https://github.com',
-    demo: 'https://s3.xyz.fake.com'
+    github: 'https://github.com/m100dev/expense-tracker',
+    demo: 'https://m100dev.github.io/expense-tracker/',
   },
   {
     id: 2,
     image: IMG2,
     title: 'Color Guessing Game',
-    github: 'https://github.com',
-    demo: 'https://s3.xyz.fake.com'
+    github: 'https://github.com/m100dev/rgb-color-guesser',
+    demo: 'https://m100dev.github.io/rgb-color-guesser/'
   },
   {
     id: 3,
     image: IMG3,
-    title: 'Goal Track App',
-    github: 'https://github.com',
-    demo: 'https://s3.xyz.fake.com'
+    title: 'Task Planner',
+    github: 'https://github.com/m100dev/task-planner',
+    demo: 'https://m100dev.github.io/task-planner/'
   },
   {
     id: 4,
     image: IMG4,
     title: 'XPS Xpress Pompano',
     github: 'https://github.com',
-    demo: 'https://s3.xyz.fake.com'
+    demo: 'https://xpsxpresspompanobeach.com/'
   },
   {
     id: 5,
     image: IMG5,
-    title: '1101 Brickell',
+    title: 'Villa Majorca',
     github: 'https://github.com',
-    demo: 'https://s3.xyz.fake.com'
+    demo: 'https://villamajorca.com/'
   },
   {
     id: 6,
     image: IMG6,
     title: 'Garage Epoxy',
     github: 'https://github.com',
-    demo: 'https://s3.xyz.fake.com'
+    demo: 'https://garageepoxy.com/'
   }
 ] 
 
