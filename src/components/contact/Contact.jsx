@@ -1,10 +1,27 @@
-import React from 'react'
-import './contact.css'
-import { MdOutlineMailOutline } from 'react-icons/md'
-import { FaLinkedinIn } from 'react-icons/fa'
-import { FiPhoneCall } from 'react-icons/fi'
+import React, { useRef } from 'react';
+import './contact.css';
+import { MdOutlineMailOutline } from 'react-icons/md';
+import { FaLinkedinIn } from 'react-icons/fa';
+import { FiPhoneCall } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
+  const form = useRef(); 
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm('service_pqmsbzr', 'template_e8nna57', form.current, 'iAe9maex10yhKE02z')
+      .then((result) => {
+        console.log(result.text);
+      }, (error) => {
+        console.log(error.text);
+      });
+
+      // Resets form after submission
+      e.target.reset();
+  }
+
   return (
     <section id='contact'>
       <h5>Get In Touch</h5>
@@ -31,7 +48,7 @@ const Contact = () => {
           </article>
         </div>
         {/* END OF CONTACT OPTIONS */}
-        <form action="">
+        <form action="" ref={form} onSubmit={sendEmail}>
           <input type="text" name='name' placeholder='Your Full Name' required/>
           <input type="email" name='email' placeholder='Your Email' required/>
           <textarea name="message" rows="10" placeholder='Your Message' required></textarea>
