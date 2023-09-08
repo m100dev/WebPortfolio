@@ -32,6 +32,10 @@
     margin-bottom: 1rem;
 }
 
+.gh__inactive {
+    pointer-events: none;
+}
+
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 
 @media screen and (max-width: 1024px) {

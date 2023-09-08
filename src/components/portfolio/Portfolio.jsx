@@ -14,41 +14,47 @@ const data = [
     title: 'Expense Tracker',
     github: 'https://github.com/m100dev/expense-tracker',
     demo: 'https://m100dev.github.io/expense-tracker/',
+    isRepoPublic: true
   },
   {
     id: 2,
     image: IMG2,
     title: 'Color Guessing Game',
     github: 'https://github.com/m100dev/rgb-color-guesser',
-    demo: 'https://m100dev.github.io/rgb-color-guesser/'
+    demo: 'https://m100dev.github.io/rgb-color-guesser/',
+    isRepoPublic: true
   },
   {
     id: 3,
     image: IMG3,
     title: 'Task Planner',
     github: 'https://github.com/m100dev/task-planner',
-    demo: 'https://m100dev.github.io/task-planner/'
+    demo: 'https://m100dev.github.io/task-planner/',
+    isRepoPublic: true
   },
   {
     id: 4,
     image: IMG4,
     title: 'XPS Xpress Pompano',
     github: 'https://github.com',
-    demo: 'https://xpsxpresspompanobeach.com/'
+    demo: 'https://xpsxpresspompanobeach.com/',
+    isRepoPublic: false
   },
   {
     id: 5,
     image: IMG5,
     title: 'Villa Majorca',
     github: 'https://github.com',
-    demo: 'https://villamajorca.com/'
+    demo: 'https://villamajorca.com/',
+    isRepoPublic: false
   },
   {
     id: 6,
     image: IMG6,
     title: 'Garage Epoxy',
     github: 'https://github.com',
-    demo: 'https://garageepoxy.com/'
+    demo: 'https://garageepoxy.com/',
+    isRepoPublic: false
   }
 ] 
 
@@ -59,7 +65,7 @@ function Portfolio() {
       <h2>Portfolio</h2>
       <div className="container portfolio__container">
         {
-          data.map(({id, image, title, github, demo}) => {
+          data.map(({id, image, title, github, demo, isRepoPublic}) => {
             return (
               <article key={id} className='portfolio__item'>
                 <div className="portfolio__item-image">
@@ -67,7 +73,7 @@ function Portfolio() {
                 </div>
                 <h3>{title}</h3>
                 <div className="portfolio__item-cta">
-                  <a href={github} target='_blank' rel="noreferrer" className='btn'>Github</a> 
+                  <a href={github} target='_blank' rel="noreferrer" className={isRepoPublic ? 'btn' : 'btn gh__inactive'}>{isRepoPublic ? 'Github' : 'Private Repo'}</a> 
                   <a href={demo} target='_blank' rel="noreferrer" className="btn btn-primary">Live Demo</a>
                 </div>
               </article>
