@@ -13,12 +13,12 @@
 /* Created CSS Variables to not have to keep typing out the same colors */
 
 :root {
-    --color-bg: #1f1f38;
-    --color-bg-variant: #2c2c6c;
-    --color-primary: #4db5ff;
-    --color-primary-variant: rgba(77, 181, 255, 0.4);
+    --color-bg: #3e4d40;
+    --color-bg-variant: #5B6C5D;
+    --color-primary: #56E39F;
+    --color-primary-variant: rgba(89, 201, 165, 0.4);
     --color-white: #fff;
-    --color-light: rgba(255, 255, 255, 0.6);
+    --color-light: rgba(255, 255, 255, 0.85);
 
     --container-width-lg: 75%;
     --container-width-md: 86%;

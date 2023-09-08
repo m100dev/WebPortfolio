@@ -54,6 +54,10 @@ input, textarea {
     color: var(--color-white);
 }
 
+::placeholder {
+    color: rgba(255, 228, 196, 0.626);
+}
+
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 
