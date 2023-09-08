@@ -1,10 +1,9 @@
 import React from 'react'
-import CV from '../../assets/cv.pdf'
 
 const CTA = () => {
   return (
     <div className='cta'>
-        <a href={CV} download className='btn'>View Resume</a>
+        <a href='https://mbdev-resume-bucket.s3.amazonaws.com/Marc+Bastien+Resume.pdf' download className='btn'>View Resume</a>
         <a href="#contact" className='btn btn-primary'>Let's Talk</a>
     </div>
   )
