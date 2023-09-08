@@ -17,23 +17,23 @@ const Services = () => {
           <ul className="service__list">
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Mobile First Web Development</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>UI UX Design in Figma</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Search Engine Optimization</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Custom Features & Components</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>WordPress, Wix & Shopfiy</p>
             </li>
           </ul>
         </article>
@@ -46,23 +46,23 @@ const Services = () => {
           <ul className="service__list">
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Deploy services on Amazon EC2</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Cloud Architecture Audit</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Automate with AWS SDK</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>CloudWatch Monitoring</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Optimize Savings</p>
             </li>
           </ul>
         </article>
@@ -75,23 +75,23 @@ const Services = () => {
           <ul className="service__list">
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Custom Audio Assets</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Mix & Balance Tracks</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Sync Licensing</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Audio Recording</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+              <p>Video Game Composition</p>
             </li>
           </ul>
         </article>

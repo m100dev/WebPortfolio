@@ -63,22 +63,22 @@ const Experience = () => {
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>Node JS</h4>
+                <h4>Amazon Web Services</h4>
                 <small className='text-light'>Intermediate</small>
               </div>
             </article>
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>MongoDB</h4>
+                <h4>NodeJS</h4>
+                <small className='text-light'>Intermediate</small>
+              </div>
+            </article>
+            <article className='experience__details'>
+              <BsPatchCheckFill className='experience__details-icon'/>
+              <div>                
+                <h4>Azure DevOps</h4>
                 <small className='text-light'>Foundational</small>
-              </div>
-            </article>
-            <article className='experience__details'>
-              <BsPatchCheckFill className='experience__details-icon'/>
-              <div>                
-                <h4>GraphQL</h4>
-                <small className='text-light'>Intermediate</small>
               </div>
             </article>
             <article className='experience__details'>
@@ -91,15 +91,15 @@ const Experience = () => {
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>Json Web Tokens</h4>
-                <small className='text-light'>Intermediate</small>
+                <h4>Google Firebase</h4>
+                <small className='text-light'>Foundational</small>
               </div>
             </article>
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>Amazon Web Services</h4>
-                <small className='text-light'>Intermediate</small>
+                <h4>MongoDB</h4>
+                <small className='text-light'>Foundational</small>
               </div>
             </article>
           </div>
