@@ -13,7 +13,7 @@ const Testimonials = () => {
     {
       avatar: AVTR1,
       name: 'Lyrist',
-      review: 'Marc was very helpful during the initial product launch of Lyrist on Product Hunt. His outreach to potential users made huge impact on the amount of upvotes gained during launch.'
+      review: 'Marc was very helpful during the initial product launch of Lyrist on Product Hunt. His outreach to potential users made a huge impact on the amount of upvotes gained during launch.'
     },
     {
       avatar: AVTR2,
