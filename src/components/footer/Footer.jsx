@@ -4,6 +4,8 @@ import {BsLinkedin} from 'react-icons/bs';
 import {FaGithub} from 'react-icons/fa';
 
 const Footer = () => {
+  const date = new Date();
+  
   return (
     <footer id='footer'>
       <a href="#home" className="footer__logo">Marc Bastien</a>
@@ -24,7 +26,7 @@ const Footer = () => {
       </div>
 
       <div className="footer__copyright">
-        <small>&copy; Marc Bastien. All rights reserved.</small>
+        <small>{`&copy;${date.getFullYear()} Marc Bastien. All rights reserved.`}</small>
       </div>
     
     </footer>
