@@ -35,7 +35,7 @@ const About = () => {
           </div>
 
           <p>
-            Dynamic and results-driven Front-End Web Developer and Cloud Admin with hands-on experience in Web technologies, AWS, and software development. Proficient in logical analysis, and problem-solving. Seeking opportunities to contribute technical expertise and drive innovation in a software development role, while leveraging cloud services.
+            Welcome and thanks for taking the time to learn about me! I'm a dynamic, results-driven Cloud Admin with a passion for coding and Information System Technologies and processes. I enjoy gaming, adventure, making music and spending time with my loved ones. Currently, I'm seeking opportunities to further my career and drive innovation in the Software Development and Cloud DevOps space.
           </p>
 
           <a href="#contact" className="btn btn-primary">Let's Talk</a>
