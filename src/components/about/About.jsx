@@ -38,7 +38,7 @@ const About = () => {
             Welcome and thanks for taking the time to learn about me! I'm a dynamic, results-driven Cloud Admin with a passion for coding, information system technologies and processes. I enjoy gaming, adventure, making music and spending time with my loved ones. Currently, I'm seeking opportunities to further my career and drive innovation in the Software Development and Cloud DevOps space.
           </p>
 
-          <a href="#contact" className="btn btn-primary">Let's Talk</a>
+          <a href="#contact" className="btn btn-primary">Hire Me!</a>
         </div>
       </div>
     </section>
