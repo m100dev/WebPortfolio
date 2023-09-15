@@ -38,7 +38,7 @@ const Testimonials = () => {
       <h2>Testimonials</h2>
 
       <div className='container testimonials__container'>
-        <swiper-container slides-per-view='1' pagination='true' space-between={40}>
+        <swiper-container slides-per-view='1' pagination='true' space-between={40} style={{'--swiper-pagination-color' : '#56E39F'}}>
           {
             data.map(({avatar, name, review}, index) => {
               return (
