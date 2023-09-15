@@ -13,17 +13,17 @@ const Testimonials = () => {
     {
       avatar: AVTR1,
       name: 'Lyrist',
-      review: 'Marc was very helpful during the initial product launch of Lyrist on Product Hunt. His outreach to potential users made huge impact on amount of upvotes gained during launch.'
+      review: 'Marc was very helpful during the initial product launch of Lyrist on Product Hunt. His outreach to potential users made huge impact on the amount of upvotes gained during launch.'
     },
     {
       avatar: AVTR2,
       name: 'GPX Films',
-      review: 'He pays great attention to detail and designed my site based on the criteria I provided. Marc is my go to expert for all things tech, he is patient and listens to your needs.'
+      review: 'He pays great attention to detail and designed my site based on the criteria I provided. Marc is my go to guy for all things tech, he is patient and listens to your needs.'
     },
     {
       avatar: AVTR3,
       name: 'Umba Daima',
-      review: 'Marc is skilled in wireframing utilized Figma to bring our requests into vision. We appreciated his adherence to our deadlines. Will definitely work with him again!'
+      review: 'Marc helped with wireframing our idea in Figma to help in bringing our vision into reality. We appreciated his adherence to our deadlines.'
     },
     {
       avatar: AVTR4,
