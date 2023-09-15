@@ -5,7 +5,7 @@ import { BiCheckSquare } from 'react-icons/bi'
 const Services = () => {
   return (
     <section id='services'>
-      <h5>What I Offer</h5>
+      <h5>Things I Can Accomplish</h5>
       <h2>Services</h2>
 
       <div className="container services__container">
@@ -21,7 +21,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>UI UX Design in Figma</p>
+              <p>Design in Figma</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
@@ -33,7 +33,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>WordPress, Wix & Shopfiy</p>
+              <p>Debugging</p>
             </li>
           </ul>
         </article>
@@ -50,7 +50,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Cloud Architecture Audit</p>
+              <p>Troubleshooting Errors</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
@@ -83,7 +83,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Sync Licensing</p>
+              <p>Add Audio to Video</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
