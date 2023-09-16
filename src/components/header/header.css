@@ -85,3 +85,19 @@ header {
         display: none;
     }
 }
+
+@media screen and (max-width: 400px) {
+    .me {
+        width: 16rem;
+        height: 26rem;
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .me {
+        width: 17rem;
+        height: 21rem;
+        padding: 0;
+    }
+}
