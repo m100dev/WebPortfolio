@@ -75,6 +75,13 @@ header {
 
 
 /* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
+@media screen and (max-width: 960px) {
+    .me {
+        width: 21rem;
+        height: 22rem;
+        padding: 0;
+    }
+}
 
 @media screen and (max-width: 600px) {
     header {
