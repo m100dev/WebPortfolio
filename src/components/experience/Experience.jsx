@@ -36,8 +36,8 @@ const Experience = () => {
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>  
-                <h4>React Native</h4>
-                <small className='text-light'>Intermediate</small>
+                <h4>AWS Amplify</h4>
+                <small className='text-light'>Experienced</small>
               </div>
             </article>
             <article className='experience__details'>
@@ -51,7 +51,7 @@ const Experience = () => {
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
                 <h4>BootStrap</h4>
-                <small className='text-light'>Experienced</small>
+                <small className='text-light'>Advanced</small>
               </div>
             </article>
           </div>
@@ -63,42 +63,42 @@ const Experience = () => {
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>Amazon Web Services</h4>
+                <h4>NodeJS</h4>
                 <small className='text-light'>Experienced</small>
               </div>
             </article>
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>NodeJS</h4>
+                <h4>Express</h4>
                 <small className='text-light'>Intermediate</small>
               </div>
             </article>
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>Azure DevOps</h4>
+                <h4>MongoDB</h4>
                 <small className='text-light'>Intermediate</small>
               </div>
             </article>
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>              
-                <h4>Rest Api</h4>
+                <h4>CRUD Operations</h4>
                 <small className='text-light'>Intermediate</small>
               </div>
             </article>
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>Python</h4>
+                <h4>AWS API Gateway</h4>
                 <small className='text-light'>Foundational</small>
               </div>
             </article>
             <article className='experience__details'>
               <BsPatchCheckFill className='experience__details-icon'/>
               <div>                
-                <h4>Database</h4>
+                <h4>AWS RDS</h4>
                 <small className='text-light'>Foundational</small>
               </div>
             </article>
