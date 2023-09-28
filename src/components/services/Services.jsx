@@ -11,21 +11,21 @@ const Services = () => {
       <div className="container services__container">
         <article className="service">
           <div className="service__head">
-            <h3>Web Development</h3>
+            <h3>Software Development</h3>
           </div>
 
           <ul className="service__list">
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Custom Website</p>
+              <p>Application & Web Development</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Design in Figma</p>
+              <p>Unit Testing</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Search Engine Optimization</p>
+              <p>Debugging</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
@@ -33,7 +33,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Debugging</p>
+              <p>Search Engine Optimization</p>
             </li>
           </ul>
         </article>
@@ -54,44 +54,44 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Automate with AWS SDK</p>
+              <p>Automate with AWS CDK</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>CloudWatch Monitoring</p>
+              <p>Develop REST APIs</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Optimize Savings</p>
+              <p>Serverless Solutions</p>
             </li>
           </ul>
         </article>
         {/* End of AWS Cloud */}
         <article className="service">
           <div className="service__head">
-            <h3>Audio Engineering</h3>
+            <h3>Design</h3>
           </div>
 
           <ul className="service__list">
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Custom Audio Assets</p>
+              <p>Create Custom Audio Assets</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Mix & Balance Tracks</p>
+              <p>Design in Figma</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Add Audio to Video</p>
+              <p>Sync audio with video</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Audio Recording</p>
+              <p>Wireframing</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Video Game Composition</p>
+              <p>Light Photo Editing</p>
             </li>
           </ul>
         </article>
