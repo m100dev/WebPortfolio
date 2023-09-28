@@ -35,7 +35,7 @@ const About = () => {
           </div>
 
           <p>
-            Welcome and thanks for taking the time to learn about me! I'm a dynamic, results-driven Cloud Admin with a passion for coding, information system technologies and processes. I enjoy gaming, adventure, making music and spending time with my loved ones. Currently, I'm seeking opportunities to further my career and drive innovation in the Software Development and Cloud DevOps space.
+            Welcome and thanks for taking the time to learn about me! I'm a dynamic, results-driven individual with a passion for coding, web development technologies and processes. I enjoy gaming, adventure, making music and spending time with my loved ones. I'm interested in opportunities to further my career and innovate as a Software Developer.
           </p>
 
           <a href="#contact" className="btn btn-primary">Hire Me!</a>
