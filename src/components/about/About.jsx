@@ -35,7 +35,7 @@ const About = () => {
           </div>
 
           <p>
-            Welcome and thanks for taking the time to learn about me! I'm a dynamic, results-driven individual with a passion for coding, web development technologies and processes. I enjoy gaming, adventure, making music and spending time with my loved ones. I'm interested in opportunities to further my career and innovate as a Software Developer.
+            Welcome and thanks for taking the time to learn about me! I'm a dynamic, results-driven individual with a passion for coding and information system technologies and processes. I enjoy gaming, adventure, making music and spending time with my loved ones. I'm interested in opportunities to further my career in softwarae development and multicloud sokutions.
           </p>
 
           <a href="#contact" className="btn btn-primary">Hire Me!</a>
