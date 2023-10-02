@@ -74,7 +74,7 @@ function Portfolio() {
                 <h3>{title}</h3>
                 <div className="portfolio__item-cta">
                   <a href={github} target='_blank' rel="noreferrer" className={isRepoPublic ? 'btn' : 'btn gh__inactive'}>{isRepoPublic ? 'Github' : 'Private Repo'}</a> 
-                  <a href={demo} target='_blank' rel="noreferrer" className="btn btn-primary">Live Demo</a>
+                  <a href={demo} target='_blank' rel="noreferrer" className="btn btn-primary">{isRepoPublic ? 'Live Demo' : 'Live Site'}</a>
                 </div>
               </article>
             )
