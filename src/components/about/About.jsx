@@ -20,7 +20,7 @@ const About = () => {
             <article className="about__card">
               <TbMilitaryAward className='about__card-icon'/>
               <h5>Experience</h5>
-              <small>2+ Years</small>
+              <small>4+ Years</small>
             </article>
             <article className="about__card">
               <TbUsersGroup className='about__card-icon'/>
