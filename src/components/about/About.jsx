@@ -35,7 +35,7 @@ const About = () => {
           </div>
 
           <p>
-            Welcome and thanks for taking the time to learn about me! I'm a dedicated, results-driven leader with a passion for improving existing processes and solving problems. I enjoy unconvering the needs of customers, providing the best solutions, and also work hard to maintain a high level of technical excellence. I aim to become the best technology professional that I can be, futhering my knowledge in customer service, software development, computer networking & engineering, and cloud technologies.
+            Welcome and thanks for taking the time to learn about me! I'm a dedicated, results-driven leader with a passion for improving existing processes and solving problems. I enjoy unconvering the needs of customers, providing the best solutions, and also work hard to maintain a high level of technical excellence. I aim to become the best technology professional that I can be, futhering my knowledge in customer service, software development, computer networking & engineering, information security, and cloud technologies.
           </p>
 
           <a href="#contact" className="btn btn-primary">Hire Me!</a>
