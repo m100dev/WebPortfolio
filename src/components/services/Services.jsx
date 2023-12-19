@@ -69,29 +69,29 @@ const Services = () => {
         {/* End of AWS Cloud */}
         <article className="service">
           <div className="service__head">
-            <h3>Design</h3>
+            <h3>Help Desk</h3>
           </div>
 
           <ul className="service__list">
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Create Custom Audio Assets</p>
+              <p>Remote Monitoring & Management</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Design in Figma</p>
+              <p>Linux, Windnows & Mac OS</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Sync audio with video</p>
+              <p>Information & Network Security</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Wireframing</p>
+              <p>Network, App & Hardware Troubleshooting</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Light Photo Editing</p>
+              <p>End User Support & Training</p>
             </li>
           </ul>
         </article>
