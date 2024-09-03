@@ -46,7 +46,7 @@ const Services = () => {
           <ul className="service__list">
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Deploy services on Amazon EC2</p>
+              <p>Deploy Services on Amazon EC2</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
@@ -54,7 +54,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Automate with AWS CDK</p>
+              <p>CI/CD Pipelines</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
@@ -69,7 +69,7 @@ const Services = () => {
         {/* End of AWS Cloud */}
         <article className="service">
           <div className="service__head">
-            <h3>Help Desk</h3>
+            <h3>System Administration</h3>
           </div>
 
           <ul className="service__list">
@@ -79,7 +79,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Linux, Windnows & Mac OS</p>
+              <p>Linux, Windows & Mac OS</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
@@ -87,7 +87,7 @@ const Services = () => {
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
-              <p>Network, App & Hardware Troubleshooting</p>
+              <p>Documentation</p>
             </li>
             <li>
               <BiCheckSquare className='service__list-icon'/>
