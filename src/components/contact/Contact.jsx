@@ -43,8 +43,8 @@ const Contact = () => {
           <article className="contact__option">
             <FiPhoneCall className='contact__option-icon'/>
             <h4>Google Voice</h4>
-            <h5>+15619618623</h5>
-            <a href="tel:+15619618623" target='_blank' rel='noreferrer'>Let's talk</a>
+            <h5>+19418001822</h5>
+            <a href="tel:+19418001822" target='_blank' rel='noreferrer'>Let's talk</a>
           </article>
         </div>
         {/* END OF CONTACT OPTIONS */}
