@@ -10,6 +10,8 @@
     border-radius: 2rem;
     border: 1px solid transparent;
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
 }
 
 .portfolio__item:hover {
@@ -20,6 +22,14 @@
 .portfolio__item-image {
     border-radius: 1.5rem;
     overflow: hidden;
+    aspect-ratio: 16 / 10;
+}
+
+.portfolio__item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .portfolio__item h3 {
@@ -29,6 +39,7 @@
 .portfolio__item-cta {
     display: flex;
     gap: 1rem;
+    margin-top: auto;
     margin-bottom: 1rem;
 }
 
@@ -38,7 +49,7 @@
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1024px) {
     .portfolio__container {
         grid-template-columns: 1fr 1fr;
         gap: 1.2rem;
