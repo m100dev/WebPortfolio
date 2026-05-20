@@ -58,6 +58,67 @@ input, textarea {
     color: rgba(255, 228, 196, 0.626);
 }
 
+button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+input[disabled], textarea[disabled] {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.contact__error {
+    color: #ff8a8a;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    background-color: rgba(255, 138, 138, 0.08);
+    border: 1px solid rgba(255, 138, 138, 0.35);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+}
+
+/* ================== SUCCESS MODAL ================== */
+
+.contact__modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: grid;
+    place-items: center;
+    z-index: 100;
+    padding: 1rem;
+    animation: contact-modal-fade 200ms ease-out;
+}
+
+.contact__modal {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-primary);
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    max-width: 28rem;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.4);
+}
+
+.contact__modal h3 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+}
+
+.contact__modal p {
+    color: var(--color-light);
+    margin-bottom: 1.5rem;
+}
+
+@keyframes contact-modal-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import './about.css'
 import ME from '../../assets/me-about-nature.jpg'
-import { TbMilitaryAward, TbUsersGroup, TbFolderCode } from 'react-icons/tb'
+import { TbMilitaryAward, TbServer2, TbCertificate } from 'react-icons/tb'
 
 const About = () => {
   return (
@@ -20,25 +20,25 @@ const About = () => {
             <article className="about__card">
               <TbMilitaryAward className='about__card-icon'/>
               <h5>Experience</h5>
-              <small>4+ Years</small>
+              <small>5+ Years</small>
             </article>
             <article className="about__card">
-              <TbUsersGroup className='about__card-icon'/>
-              <h5>Clients</h5>
-              <small>5+ Worldwide</small>
+              <TbServer2 className='about__card-icon'/>
+              <h5>Environments</h5>
+              <small>5+ Managed</small>
             </article>
             <article className="about__card">
-              <TbFolderCode className='about__card-icon'/>
-              <h5>Projects</h5>
-              <small>10+ Completed</small>
+              <TbCertificate className='about__card-icon'/>
+              <h5>Certifications</h5>
+              <small>6 Active</small>
             </article>
           </div>
 
           <p>
-            Welcome and thanks for taking the time to learn about me! I'm a dedicated, results-driven leader with a passion for improving existing processes and solving problems. I enjoy uncovering the needs of customers, providing the best solutions, and also work hard to maintain a high level of technical excellence. I aim to become the best cloud technology professional that I can be, furthering my knowledge in software development and cloud engineering technologies.
+            Systems administrator and infrastructure engineer with 5+ years supporting enterprise environments across municipal government, healthcare, and cloud operations. Currently serving as Tier 2 IT Support at a South Florida municipality, managing Active Directory, Entra ID, endpoint security, network infrastructure, and IP telephony systems. CCNA and AWS Solutions Architect certified with hands-on experience in cloud infrastructure, scripting, automation, and change management. Independently building and maintaining a production-grade application project demonstrating database administration, CI/CD pipeline management, and structured deployment workflows.
           </p>
 
-          <a href="#contact" className="btn btn-primary">Hire Me!</a>
+          <a href="#contact" className="btn btn-primary">Get In Touch</a>
         </div>
       </div>
     </section>

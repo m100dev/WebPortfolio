@@ -38,6 +38,7 @@
 .experience__details-icon {
     margin-top: 6px;
     color: var(--color-primary);
+    flex-shrink: 0;
 }
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
@@ -70,6 +71,9 @@
         width: 100%;
         padding: 2rem 1rem;
     }
-}
 
-/* Will need to add another media query for mobile and fix current issues */
+    .experience__content {
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+    }
+}
