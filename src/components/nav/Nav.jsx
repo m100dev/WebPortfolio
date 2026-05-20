@@ -2,6 +2,7 @@ import React from 'react'
 import './nav.css'
 import { RiHome2Line, RiUser6Line, RiBook2Line } from 'react-icons/ri';
 import { MdOutlineHomeRepairService } from 'react-icons/md';
+import { BsRobot } from 'react-icons/bs';
 import { LuMessagesSquare } from 'react-icons/lu';
 import { useState } from 'react';
 
@@ -15,6 +16,7 @@ const Nav = () => {
       <a href="#about" onClick={() => { setActiveNav('#about')}} className={ activeNav === '#about' ? 'active' : '' }><RiUser6Line/></a>
       <a href="#experience" onClick={() => { setActiveNav('#experience')}} className={ activeNav === '#experience' ? 'active' : '' }><RiBook2Line/></a>
       <a href="#services" onClick={() => { setActiveNav('#services')}} className={ activeNav === '#services'? 'active' : '' }><MdOutlineHomeRepairService/></a>
+      <a href="#ai-engineering" onClick={() => { setActiveNav('#ai-engineering')}} className={ activeNav === '#ai-engineering'? 'active' : '' }><BsRobot/></a>
       <a href="#contact" onClick={() => { setActiveNav('#contact')}} className={ activeNav === '#contact'? 'active' : '' }><LuMessagesSquare/></a>
     </nav>
   )
