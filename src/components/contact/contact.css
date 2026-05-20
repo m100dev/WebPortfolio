@@ -55,7 +55,7 @@ input, textarea {
 }
 
 ::placeholder {
-    color: rgba(255, 228, 196, 0.626);
+    color: rgba(226, 232, 240, 0.5);
 }
 
 button[disabled] {
