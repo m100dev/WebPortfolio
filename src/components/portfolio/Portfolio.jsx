@@ -40,21 +40,22 @@ const data = [
   }
 ]
 
-const guides = [
-  {
-    id: 1,
-    title: 'AVD Enterprise Workspace — Project Guide',
-    description: 'Hybrid identity, Microsoft 365, AVD, and Intune lab — including production-grade PowerShell auto-remediation for AVD activation failures.',
-    url: process.env.PUBLIC_URL + '/guides/AVD_Enterprise_Project_Guide.html',
-    repo: 'https://github.com/m100dev/AVD-Enterprise-Lab-Portfolio'
-  },
-  {
-    id: 2,
-    title: 'The Five Levels of AI Autonomy',
-    description: 'A practical framework for measuring growth from AI-assisted coding to fully autonomous multi-agent orchestration.',
-    url: process.env.PUBLIC_URL + '/guides/Marc-Bastien-AI-Autonomy-Levels.html'
-  }
-]
+// Guides data — kept intact; re-enable alongside the guides JSX below once redirects work.
+// const guides = [
+//   {
+//     id: 1,
+//     title: 'AVD Enterprise Workspace — Project Guide',
+//     description: 'Hybrid identity, Microsoft 365, AVD, and Intune lab — including production-grade PowerShell auto-remediation for AVD activation failures.',
+//     url: process.env.PUBLIC_URL + '/guides/AVD_Enterprise_Project_Guide.html',
+//     repo: 'https://github.com/m100dev/AVD-Enterprise-Lab-Portfolio'
+//   },
+//   {
+//     id: 2,
+//     title: 'The Five Levels of AI Autonomy',
+//     description: 'A practical framework for measuring growth from AI-assisted coding to fully autonomous multi-agent orchestration.',
+//     url: process.env.PUBLIC_URL + '/guides/Marc-Bastien-AI-Autonomy-Levels.html'
+//   }
+// ]
 
 function Portfolio() {
   return (
@@ -80,7 +81,9 @@ function Portfolio() {
         }
       </div>
 
-      <div className="container portfolio__guides">
+      {/* Guides section hidden until Amplify redirects serve the /guides/*.html files correctly.
+          Re-enable by uncommenting this block (guides data array above is left intact). */}
+      {/* <div className="container portfolio__guides">
         <h3 className="portfolio__guides-title">Guides &amp; Write-ups</h3>
         <div className="portfolio__guides-list">
           {
@@ -98,7 +101,7 @@ function Portfolio() {
             ))
           }
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }
