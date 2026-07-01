@@ -47,6 +47,54 @@
     pointer-events: none;
 }
 
+.portfolio__guides {
+    margin-top: 4rem;
+}
+
+.portfolio__guides-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--color-light);
+}
+
+.portfolio__guides-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.portfolio__guide {
+    background-color: var(--color-bg-variant);
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    border: 1px solid transparent;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio__guide:hover {
+    border-color: var(--color-primary-variant);
+    background: transparent;
+}
+
+.portfolio__guide-title {
+    color: var(--color-light);
+    margin-bottom: 0.8rem;
+}
+
+.portfolio__guide-desc {
+    color: var(--color-light);
+    font-size: 0.95rem;
+    margin-bottom: 1.8rem;
+}
+
+.portfolio__guide-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 
 @media screen and (max-width: 1024px) {
@@ -61,6 +109,11 @@
 
 @media screen and (max-width: 600px) {
     .portfolio__container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .portfolio__guides-list {
         grid-template-columns: 1fr;
         gap: 1rem;
     }

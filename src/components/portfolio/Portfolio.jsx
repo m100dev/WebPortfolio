@@ -40,6 +40,22 @@ const data = [
   }
 ]
 
+const guides = [
+  {
+    id: 1,
+    title: 'AVD Enterprise Workspace — Project Guide',
+    description: 'Hybrid identity, Microsoft 365, AVD, and Intune lab — including production-grade PowerShell auto-remediation for AVD activation failures.',
+    url: process.env.PUBLIC_URL + '/guides/AVD_Enterprise_Project_Guide.html',
+    repo: 'https://github.com/m100dev/AVD-Enterprise-Lab-Portfolio'
+  },
+  {
+    id: 2,
+    title: 'The Five Levels of AI Autonomy',
+    description: 'A practical framework for measuring growth from AI-assisted coding to fully autonomous multi-agent orchestration.',
+    url: process.env.PUBLIC_URL + '/guides/Marc-Bastien-AI-Autonomy-Levels.html'
+  }
+]
+
 function Portfolio() {
   return (
     <section id='portfolio'>
@@ -62,6 +78,26 @@ function Portfolio() {
             )
           })
         }
+      </div>
+
+      <div className="container portfolio__guides">
+        <h3 className="portfolio__guides-title">Guides &amp; Write-ups</h3>
+        <div className="portfolio__guides-list">
+          {
+            guides.map(({ id, title, description, url, repo }) => (
+              <article key={id} className="portfolio__guide">
+                <h4 className="portfolio__guide-title">{title}</h4>
+                <p className="portfolio__guide-desc">{description}</p>
+                <div className="portfolio__guide-cta">
+                  <a href={url} target='_blank' rel="noreferrer" className="btn btn-primary">Read Guide &rarr;</a>
+                  {repo && (
+                    <a href={repo} target='_blank' rel="noreferrer" className="btn">GitHub</a>
+                  )}
+                </div>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </section>
   )
