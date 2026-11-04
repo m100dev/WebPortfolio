@@ -1,46 +1,134 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     border: 0;
-    outline: 0;
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
 }
 
-/* Created CSS Variables to not have to keep typing out the same colors */
+/* ============= DESIGN TOKENS ============= */
 
+/* Dark is the default (and what renders without JS); public/index.html sets
+   data-theme on <html> before React mounts, and useTheme toggles it.
+   --color-white is "strongest text", so it turns dark in the light theme.
+   --rgb-* helpers are comma-separated for rgba(var(--rgb-x), alpha). */
 :root {
+    color-scheme: dark;
+
+    --rgb-bg: 15, 23, 42;
+    --rgb-bg-variant: 30, 41, 59;
+    --rgb-primary: 245, 158, 11;
+    --rgb-light: 226, 232, 240;
+
     --color-bg: #0F172A;
     --color-bg-variant: #1E293B;
     --color-border: #334155;
     --color-primary: #F59E0B;
-    --color-primary-variant: rgba(245, 158, 11, 0.35);
+    --color-primary-variant: rgba(var(--rgb-primary), 0.35);
     --color-white: #fff;
     --color-light: #E2E8F0;
+    --color-muted: #94A3B8;
+
+    --color-success: #22C55E;
+    --rgb-success: 34, 197, 94;
+    --color-danger: #FF8A8A;
+    --rgb-danger: 255, 138, 138;
+
+    /* Cards sit on a lighter surface in dark mode; light mode needs a soft shadow instead */
+    --shadow-card: none;
+
+    --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'Roboto Mono', ui-monospace, monospace;
+
+    --fs-hero: clamp(2.2rem, 4.2vw, 3.9rem);
+    --fs-h2: clamp(1.9rem, 3.6vw, 3rem);
+    --fs-body: 1rem;
 
     --container-width-lg: 75%;
     --container-width-md: 86%;
     --container-width-sm: 90%;
 
     --transition: all 400ms ease;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    /* Cobalt on cool paper: a near-monochrome base with one deliberate accent (Swiss style),
+       kept clear of warm ivory and clay so light mode doesn't read as Anthropic's palette.
+       Cobalt is 7.1:1 on the page, 7.9:1 on white, and the page colour on a cobalt fill is 7.1:1. */
+    --rgb-bg: 242, 243, 245;
+    --rgb-bg-variant: 255, 255, 255;
+    --rgb-primary: 42, 60, 209;
+    --rgb-light: 39, 39, 42;
+
+    --color-bg: #F2F3F5;
+    --color-bg-variant: #FFFFFF;
+    --color-border: #DFE1E6;
+    --color-primary: #2A3CD1;
+    --color-white: #0A0A0B;
+    --color-light: #27272A;
+    --color-muted: #52525B;
+
+    --color-success: #15803D;
+    --rgb-success: 21, 128, 61;
+    --color-danger: #B91C1C;
+    --rgb-danger: 185, 28, 28;
+
+    --shadow-card: 0 1px 2px rgba(10, 10, 11, 0.04), 0 8px 24px -12px rgba(10, 10, 11, 0.12);
 }
 
 html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary-variant) var(--color-bg);
 }
 
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Thin scrollbar in the accent colour (Chromium/Safari) */
 ::-webkit-scrollbar {
-    display: none;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary-variant);
+    border-radius: 4px;
 }
 
 body {
-    font-family: 'Roboto Mono', monospace;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
     background-color: var(--color-bg);
     color: var(--color-white);
-    line-height: 1.7;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
 }
 
 /* ============= GENERAL STYLES ============= */
@@ -50,31 +138,67 @@ body {
     margin: 0 auto;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h5 {
     font-weight: 500;
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: var(--fs-hero);
 }
 
 section {
-    margin-top: 8rem;
+    margin-top: 9rem;
+    /* Keep anchored sections clear of the fixed top nav */
+    scroll-margin-top: 5rem;
 }
 
-section > h2, 
+/* Editorial section heading: mono eyebrow ("01 — Work") + display title, left-aligned to the container */
+section > h5,
+section > h2 {
+    width: var(--container-width-lg);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 section > h5 {
-    text-align: center;
-    color: var(--color-light);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
 }
 
 section > h2 {
-    color: var(--color-primary);
+    font-size: var(--fs-h2);
+    color: var(--color-white);
+    margin-top: 0.4rem;
     margin-bottom: 3rem;
 }
 
 .text-light {
     color: var(--color-light);
+}
+
+.mono {
+    font-family: var(--font-mono);
+}
+
+/* Read by screen readers, not shown */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
 }
 
 a {
@@ -89,9 +213,10 @@ a:hover {
 .btn {
     width: max-content;
     display: inline-block;
+    font-weight: 500;
     color: var(--color-primary);
-    padding: 0.75rem 1.2rem;
-    border-radius: 0.4rem;
+    padding: 0.75rem 1.3rem;
+    border-radius: 0.5rem;
     cursor: pointer;
     border: 1px solid var(--color-primary);
     transition: var(--transition);
@@ -101,6 +226,7 @@ a:hover {
     background: var(--color-white);
     color: var(--color-bg);
     border-color: transparent;
+    transform: translateY(-2px);
 }
 
 .btn-primary {
@@ -114,16 +240,65 @@ img {
     object-fit: cover;
 }
 
+/* Shared pill tags (experience, portfolio, certifications) */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 1rem;
+    border: 1px solid var(--color-primary-variant);
+    color: var(--color-light);
+}
+
+/* ============= SCROLL REVEAL (driven by src/hooks/useReveal.js) ============= */
+/* Elements stay visible if JS never adds .reveal-ready (the hook adds it to <html> first). */
+
+/* A one-shot animation (fill: backwards) rather than a transition, so it doesn't
+   override each card's own hover transitions once it has played. */
+.reveal-ready .reveal:not(.is-visible) {
+    opacity: 0;
+}
+
+.reveal-ready .reveal.is-visible {
+    animation: reveal-in 700ms var(--ease-out) backwards;
+    animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+@keyframes reveal-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal-ready .reveal:not(.is-visible) {
+        opacity: 1;
+    }
+
+    .reveal-ready .reveal.is-visible {
+        animation: none;
+    }
+}
+
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 
 @media screen and (max-width: 1024px) {
-    .container {
+    .container,
+    section > h5,
+    section > h2 {
         width: var(--container-width-md);
     }
 
     section {
-        margin-top: 6rem;
+        margin-top: 7rem;
     }
 }
 
@@ -131,7 +306,9 @@ img {
 /* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
 
 @media screen and (max-width: 600px) {
-    .container {
+    .container,
+    section > h5,
+    section > h2 {
         width: var(--container-width-sm);
     }
 

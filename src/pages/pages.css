@@ -1,0 +1,412 @@
+/* Shared styles for routed pages (guides, memos, 404) */
+
+.page {
+    /* Same width as .container, used to left-align intro copy with the heading */
+    --page-width: var(--container-width-lg);
+    /* Clear the fixed top nav */
+    padding-top: 4.5rem;
+    min-height: 70vh;
+}
+
+.page > section:first-child {
+    margin-top: 4rem;
+}
+
+.page-intro > h2 {
+    margin-bottom: 1.2rem;
+}
+
+.page-intro__lede,
+.page-intro__body {
+    width: min(44rem, var(--page-width));
+    margin-left: calc((100% - var(--page-width)) / 2);
+}
+
+.page-intro__lede {
+    color: var(--color-light);
+    font-size: 1.05rem;
+}
+
+.page-intro__body > p {
+    margin-bottom: 2rem;
+}
+
+.page-intro__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- Guide index cards (Work-card style) ---------- */
+
+/* Compound selector: global .container (index.css loads last) resets margins */
+.container.guide-cards {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.guide-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: var(--color-bg-variant);
+    box-shadow: var(--shadow-card);
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.guide-card:hover,
+.guide-card:focus-within {
+    border-color: var(--color-primary-variant);
+    background: transparent;
+    translate: 0 -6px;
+}
+
+.guide-card__meta {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.guide-card h3 {
+    font-size: 1.4rem;
+}
+
+/* Whole card is clickable; the link's ::after covers it */
+.guide-card__link {
+    color: var(--color-white);
+}
+
+.guide-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.guide-card__link:focus-visible {
+    outline: none;
+}
+
+.guide-card:has(.guide-card__link:focus-visible) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.guide-card__summary {
+    color: var(--color-light);
+    font-size: 0.95rem;
+}
+
+.guide-card__cta {
+    margin-top: auto;
+    padding-top: 0.6rem;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+
+/* ---------- Memo list ---------- */
+
+.container.memo-list {
+    margin-top: 3rem;
+}
+
+.memo-list__empty {
+    color: var(--color-muted);
+}
+
+.memo-row {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1.5rem;
+    padding: 1.6rem 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.memo-row:last-child {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.memo-row__date {
+    padding-top: 0.3rem;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+}
+
+.memo-row h3 {
+    font-size: 1.25rem;
+}
+
+.memo-row__link {
+    color: var(--color-white);
+}
+
+.memo-row__link:hover {
+    color: var(--color-primary);
+}
+
+.memo-row__summary {
+    margin-top: 0.4rem;
+    color: var(--color-light);
+    font-size: 0.95rem;
+}
+
+.memo-draft {
+    display: inline-block;
+    margin-left: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 1rem;
+    vertical-align: middle;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-danger);
+    border: 1px solid rgba(var(--rgb-danger), 0.4);
+}
+
+/* ---------- Single memo ---------- */
+
+.memo {
+    width: min(var(--page-width), 44rem);
+    margin: 4rem auto 0;
+}
+
+.memo__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-light);
+}
+
+.memo__back:hover {
+    color: var(--color-primary);
+}
+
+.memo__head {
+    margin: 2.5rem 0 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.memo__head .memo-draft {
+    margin-left: 0.8rem;
+}
+
+.memo__date {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.memo__head h1 {
+    margin-top: 0.6rem;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--color-white);
+}
+
+.memo__summary {
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    color: var(--color-light);
+}
+
+.memo__status {
+    color: var(--color-muted);
+}
+
+/* ---------- Shared long-form typography (Markdown output) ---------- */
+
+.prose {
+    color: var(--color-light);
+    font-size: 1.05rem;
+    line-height: 1.75;
+}
+
+.prose > * + * {
+    margin-top: 1.2rem;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+    color: var(--color-white);
+    margin-top: 2.4rem;
+}
+
+.prose h2 { font-size: 1.6rem; }
+.prose h3 { font-size: 1.25rem; }
+.prose h4 { font-size: 1.05rem; }
+
+.prose strong {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.prose a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.prose a:hover {
+    color: var(--color-white);
+}
+
+.prose ul,
+.prose ol {
+    padding-left: 1.4rem;
+}
+
+.prose ul > li {
+    list-style: disc;
+}
+
+.prose ol > li {
+    list-style: decimal;
+}
+
+.prose li + li,
+.prose li > ul,
+.prose li > ol {
+    margin-top: 0.4rem;
+}
+
+.prose li::marker {
+    color: var(--color-primary);
+}
+
+/* GFM task lists */
+.prose li.task-list-item {
+    list-style: none;
+    margin-left: -1.4rem;
+}
+
+.prose li.task-list-item input {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    accent-color: var(--color-primary);
+}
+
+.prose del {
+    /* The global reset removes text-decoration everywhere */
+    text-decoration: line-through;
+}
+
+.prose blockquote {
+    padding: 0.2rem 0 0.2rem 1.2rem;
+    border-left: 3px solid var(--color-primary);
+    color: var(--color-muted);
+    font-style: italic;
+}
+
+.prose :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.3rem;
+    color: var(--color-primary);
+    background-color: rgba(var(--rgb-primary), 0.1);
+}
+
+.prose pre {
+    padding: 1rem 1.2rem;
+    border-radius: 0.9rem;
+    overflow-x: auto;
+    background-color: #0B1220;
+    border: 1px solid var(--color-border);
+}
+
+.prose pre code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #E2E8F0;
+}
+
+.prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+    display: block;
+    overflow-x: auto;
+}
+
+.prose th,
+.prose td {
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.prose th {
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+.prose hr {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 2.5rem 0;
+}
+
+.prose img {
+    border-radius: 0.9rem;
+}
+
+
+/* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
+
+@media screen and (max-width: 1024px) {
+    .page {
+        --page-width: var(--container-width-md);
+    }
+
+    .guide-cards {
+        gap: 1.2rem;
+    }
+}
+
+
+/* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
+
+@media screen and (max-width: 600px) {
+    .page {
+        --page-width: var(--container-width-sm);
+    }
+
+    .page > section:first-child {
+        margin-top: 2.5rem;
+    }
+
+    .memo-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+
+    .memo {
+        margin-top: 2.5rem;
+    }
+
+    .prose {
+        font-size: 1rem;
+    }
+
+    .container.guide-cards {
+        grid-template-columns: 1fr;
+        margin-top: 2.5rem;
+    }
+
+    .guide-card {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+    }
+}

@@ -1,17 +1,45 @@
 import React, { useRef, useState } from 'react';
 import './contact.css';
-import { MdOutlineMailOutline } from 'react-icons/md';
-import { FaLinkedinIn } from 'react-icons/fa';
+import { BsLinkedin } from 'react-icons/bs';
+import { FaGithub } from 'react-icons/fa';
+import { MdContentCopy, MdCheck } from 'react-icons/md';
 import emailjs from '@emailjs/browser';
 
 const SERVICE_ID = 'service_pqmsbzr';
 const TEMPLATE_ID = 'template_e8nna57';
 const PUBLIC_KEY = 'iAe9maex10yhKE02z';
+const EMAIL = 'mbastien.dev@gmail.com';
 
 const Contact = () => {
   const form = useRef();
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  // Copies the email; falls back to a hidden textarea + execCommand where the Clipboard API is unavailable
+  const copyEmail = () => {
+    const done = () => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    };
+    const legacyCopy = () => {
+      const area = document.createElement('textarea');
+      area.value = EMAIL;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(area);
+      if (ok) done();
+    };
+    if (navigator.clipboard?.writeText) {
+      navigator.clipboard.writeText(EMAIL).then(done).catch(legacyCopy);
+    } else {
+      legacyCopy();
+    }
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -39,25 +67,32 @@ const Contact = () => {
 
   return (
     <section id='contact'>
-      <h5>Get In Touch</h5>
-      <h2>Contact Me</h2>
+      <h5 className='reveal'>06 — Contact</h5>
+      <h2 className='reveal'>Let's build something</h2>
       <div className="container contact__container">
-        <div className="contact__options">
-          <article className="contact__option">
-            <MdOutlineMailOutline className='contact__option-icon'/>
-            <h4>Email</h4>
-            <h5>mbastien.dev@gmail.com</h5>
-            <a href='mailto:mbastien.dev@gmail.com' target='_blank' rel='noreferrer'>Send a message</a>
-          </article>
-          <article className="contact__option">
-            <FaLinkedinIn className='contact__option-icon'/>
-            <h4>LinkedIn</h4>
-            <h5>Marc Bastien</h5>
-            <a href='https://www.linkedin.com/in/mbastien001/' target='_blank' rel='noreferrer'>Reach out</a>
-          </article>
+        <div className="contact__intro reveal">
+          <p className="contact__status mono">
+            <span className="contact__status-dot" aria-hidden="true" />
+            Open to Cloud &amp; AI engineering roles · DC/MD · Remote
+          </p>
+          <a href={`mailto:${EMAIL}`} className="contact__email">{EMAIL}</a>
+          <div className="contact__actions">
+            <button type="button" className="btn contact__copy" onClick={copyEmail}>
+              {copied ? <MdCheck aria-hidden="true" /> : <MdContentCopy aria-hidden="true" />}
+              {copied ? 'Copied' : 'Copy email'}
+            </button>
+            <span className="contact__sr" role="status">{copied ? 'Email address copied' : ''}</span>
+          </div>
+          <ul className="contact__links">
+            <li>
+              <a href="https://www.linkedin.com/in/marcbastien00/" target="_blank" rel="noreferrer"><BsLinkedin aria-hidden="true" /> LinkedIn</a>
+            </li>
+            <li>
+              <a href="https://github.com/m100dev" target="_blank" rel="noreferrer"><FaGithub aria-hidden="true" /> GitHub</a>
+            </li>
+          </ul>
         </div>
-        {/* END OF CONTACT OPTIONS */}
-        <form ref={form} onSubmit={sendEmail}>
+        <form ref={form} onSubmit={sendEmail} className="contact__form reveal" style={{ '--i': 1 }}>
           <input type="text" name='name' placeholder='Your Full Name' required disabled={isSending}/>
           <input type="email" name='email' placeholder='Your Email' required disabled={isSending}/>
           <textarea name="message" rows="10" placeholder='Your Message' required disabled={isSending}></textarea>

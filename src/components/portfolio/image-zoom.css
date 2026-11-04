@@ -1,0 +1,125 @@
+/* Enlarged project image (native modal <dialog>). Opened by clicking/tapping a thumbnail;
+   where view transitions are supported the thumbnail morphs into it, otherwise it fades in. */
+
+.image-zoom {
+    margin: auto;
+    padding: 0;
+    border: 0;
+    max-width: none;
+    max-height: none;
+    overflow: visible;
+    background: transparent;
+    color: var(--color-light);
+}
+
+.image-zoom::backdrop {
+    background-color: rgba(var(--rgb-bg), 0.8);
+    backdrop-filter: blur(4px);
+}
+
+/* The page behind shouldn't scroll while an image is open */
+html:has(.image-zoom[open]) {
+    overflow: hidden;
+}
+
+.image-zoom__figure {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.image-zoom__img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: min(92vw, 1200px);
+    max-height: calc(88vh - 3rem);
+    border-radius: 0.75rem;
+    background-color: var(--color-bg-variant);
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.55);
+}
+
+/* Diagrams keep the same off-white backdrop they have in their card */
+.image-zoom--contain .image-zoom__img {
+    padding: 0.75rem;
+    background-color: #f8f8f6;
+}
+
+.image-zoom__caption {
+    font-size: 0.8rem;
+    color: var(--color-light);
+}
+
+.image-zoom__close {
+    position: absolute;
+    top: -0.9rem;
+    right: -0.9rem;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-white);
+    background-color: var(--color-bg-variant);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-card);
+    transition: background-color 200ms ease, color 200ms ease;
+}
+
+.image-zoom__close:hover {
+    color: var(--color-bg);
+    background-color: var(--color-primary);
+}
+
+/* Fallback entrance when there's no view-transition morph */
+.image-zoom[open]:not(.is-morphing) .image-zoom__figure {
+    animation: image-zoom-in 220ms var(--ease-out);
+}
+
+.image-zoom[open]:not(.is-morphing)::backdrop {
+    animation: image-zoom-fade 220ms ease;
+}
+
+@keyframes image-zoom-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: none; }
+}
+
+@keyframes image-zoom-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* The morph itself */
+::view-transition-group(image-zoom) {
+    animation-duration: 340ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 220ms;
+}
+
+@media screen and (max-width: 600px) {
+    /* Sit above the image instead of covering its corner */
+    .image-zoom__close {
+        top: -3rem;
+        right: 0;
+    }
+
+    .image-zoom__img {
+        border-radius: 0.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .image-zoom[open]:not(.is-morphing) .image-zoom__figure {
+        animation-name: image-zoom-fade;
+    }
+}
