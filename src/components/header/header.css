@@ -1,110 +1,237 @@
 header {
-    height: 100vh;
-    padding-top: 7rem;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    /* Top padding clears the fixed nav bar */
+    padding: 7rem 0 5rem;
     overflow: hidden;
 }
 
+/* Hero gets a wider container than the sections so the headline breathes */
+.container.header__container {
+    width: min(84%, 76rem);
+}
+
+/* Slow-drifting amber glow behind the hero for depth */
+.header__glow {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 52rem;
+    max-height: 52rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.18), transparent 65%);
+    filter: blur(40px);
+    pointer-events: none;
+    animation: glow-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes glow-drift {
+    to {
+        transform: translate(-12%, 18%) scale(1.1);
+    }
+}
+
 .header__container {
-    text-align: center;
-    height: 100%;
     position: relative;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Staggered entrance on first load */
+.header__intro > *,
+.header__portrait {
+    animation: hero-in 900ms var(--ease-out) both;
+}
+
+.header__intro > :nth-child(2) { animation-delay: 80ms; }
+.header__intro > :nth-child(3) { animation-delay: 160ms; }
+.header__intro > :nth-child(4) { animation-delay: 240ms; }
+.header__intro > :nth-child(5) { animation-delay: 320ms; }
+.header__intro > :nth-child(6) { animation-delay: 400ms; }
+.header__portrait { animation-delay: 200ms; }
+
+@keyframes hero-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+}
+
+.header__eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 1.2rem;
+}
+
+.header__headline {
+    letter-spacing: -0.02em;
+}
+
+.header__headline span {
+    color: var(--color-muted);
+}
+
+.header__lede {
+    margin-top: 1.4rem;
+    max-width: 38rem;
+    font-size: 1.1rem;
+    color: var(--color-light);
 }
 
 /* ============ CTA ============ */
 .cta {
-    margin-top: 2.5rem;
+    margin-top: 2.2rem;
     display: flex;
-    gap: 1.2rem;
-    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* ============ PROOF METRICS ============ */
+.header__metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.header__metrics li {
+    display: flex;
+    flex-direction: column;
+    max-width: 11rem;
+}
+
+.header__metric-value {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.header__metric-value small {
+    font-size: 0.9rem;
+}
+
+.header__metric-label {
+    font-size: 0.8rem;
+    color: var(--color-muted);
 }
 
 /* ============ HEADER SOCIALS ============ */
 .header__socials {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-    position: absolute;
-    left: 0;
-    bottom: 3rem;
+    gap: 1.2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
 }
 
-.header__socials::after {
+.header__socials::before {
     content: '';
-    width: 1px;
-    height: 2rem;
+    width: 2.5rem;
+    height: 1px;
     background-color: var(--color-primary);
 }
 
-/* ================ ME ================= */
-.me {
-    background: linear-gradient(var(--color-primary), transparent);
-    width: 22rem;
-    height: 30rem;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 0;
-    margin-top: 4rem;
-    border-radius: 12rem 12rem 0 0;
-    overflow: hidden;
-    padding: 5rem 1.5rem 1.5rem 1.5rem;
+/* ============ PORTRAIT ============ */
+.header__portrait {
+    position: relative;
+    justify-self: end;
+    width: 100%;
+    max-width: 24rem;
+    aspect-ratio: 4 / 5;
 }
 
-
-/* ===================== SROLL DOWN  ===================== */
-
-.scroll__down {
+/* Amber offset outline */
+.header__portrait::before {
+    content: '';
     position: absolute;
-    right: -2.3rem;
-    bottom: 5rem;
-    transform: rotate(90deg);
-    font-weight: 300;
-    font-size: 0.9rem;
+    inset: 0;
+    transform: translate(1rem, 1rem);
+    border: 2px solid var(--color-primary);
+    border-radius: 1.5rem;
+    transition: transform 500ms var(--ease-out);
 }
 
+.header__portrait:hover::before {
+    transform: translate(0.5rem, 0.5rem);
+}
+
+.header__portrait img {
+    position: relative;
+    height: 100%;
+    border-radius: 1.5rem;
+    object-position: center 20%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header__glow,
+    .header__intro > *,
+    .header__portrait {
+        animation: none;
+    }
+}
 
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 
 @media screen and (max-width: 1024px) {
     header {
-        height: 68vh;
+        padding-top: 6.5rem;
+    }
+
+    .container.header__container {
+        width: var(--container-width-md);
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .header__portrait {
+        grid-row: 1;
+        justify-self: start;
+        max-width: 14rem;
     }
 }
 
 
 /* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
-@media screen and (max-width: 960px) {
-    .me {
-        width: 21rem;
-        height: 22rem;
-        padding: 0;
-    }
-}
 
 @media screen and (max-width: 600px) {
     header {
-        height: 100vh;
+        min-height: auto;
+        padding: 6rem 0 3rem;
     }
 
-    .header__socials, .scroll__down {
-        display: none;
+    .container.header__container {
+        width: var(--container-width-sm);
     }
-}
 
-@media screen and (max-width: 400px) {
-    .me {
-        width: 16rem;
-        height: 26rem;
-        padding: 0;
+    .header__portrait {
+        max-width: 11rem;
     }
-}
 
-@media screen and (max-width: 300px) {
-    .me {
-        width: 17rem;
-        height: 21rem;
-        padding: 0;
+    .header__lede {
+        font-size: 1rem;
+    }
+
+    .header__metrics {
+        gap: 1.5rem;
+    }
+
+    .header__metrics li {
+        max-width: 9rem;
+    }
+
+    .header__metric-value {
+        font-size: 1.3rem;
     }
 }

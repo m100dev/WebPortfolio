@@ -1,0 +1,45 @@
+/* Small round arrow: scrolls to the next section, flips to back-to-top at the end */
+.scroll__button {
+    position: fixed;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    z-index: 40;
+    width: 3rem;
+    height: 3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 1.15rem;
+    color: var(--color-primary);
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-primary-variant);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.scroll__button:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-bg);
+    translate: 0 -3px;
+}
+
+.scroll__button-icon {
+    transition: transform 400ms var(--ease-out);
+}
+
+.scroll__button-icon--up {
+    transform: rotate(180deg);
+}
+
+/* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
+
+@media screen and (max-width: 600px) {
+    .scroll__button {
+        right: 1rem;
+        bottom: 1rem;
+        width: 2.75rem;
+        height: 2.75rem;
+    }
+}
