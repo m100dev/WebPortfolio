@@ -164,11 +164,6 @@ const toc = [
     "id": "p7",
     "text": "Phase 7 — Validation",
     "sub": false
-  },
-  {
-    "id": "iv",
-    "text": "Interview Talking Points",
-    "sub": false
   }
 ]
 
