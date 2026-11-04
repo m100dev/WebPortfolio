@@ -1,54 +1,75 @@
-.container.testimonials__container {
-    width: 40%;
-    padding-bottom: 4rem;
-}
-
-.client__avatar {
-    width: 4rem;
-    aspect-ratio: 1/1;
-    overflow: hidden;
-    border-radius: 50%;
-    margin: 0 auto;
-    border: 0.4rem solid var(--color-primary-variant)
+.testimonials__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
 }
 
 .testimonial {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
     background-color: var(--color-bg-variant);
-    text-align: center;
-    padding: 2rem;
-    border-radius: 2rem;
-    user-select: none;
+    padding: 2.5rem 2rem 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.testimonial:hover {
+    border-color: var(--color-primary-variant);
+    translate: 0 -4px;
+}
+
+/* Large amber quote mark */
+.testimonial::before {
+    content: '\201C';
+    position: absolute;
+    top: 0.2rem;
+    left: 1.6rem;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--color-primary);
+    opacity: 0.6;
 }
 
 .client__review {
     color: var(--color-light);
-    font-weight: 300;
-    display: block;
-    width: 80%;
-    margin: 0.8rem auto 0;
+    font-size: 0.95rem;
 }
 
-swiper-slide {
-    padding-bottom: 4rem;
+.client__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
-/* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
-
-@media screen and (max-width: 1024px) {
-    .container.testimonials__container {
-        width: 60%;
-    }
+.client__avatar {
+    width: 2.6rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 2px solid var(--color-primary-variant);
 }
 
+.client__name {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-primary);
+}
 
 /* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
 
 @media screen and (max-width: 600px) {
-    .container.testimonials__container {
-        width: var(--container-width-sm);   
+    .testimonials__container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
-    .client__review {
-        width: var(--container-width-sm);
+    .testimonial {
+        padding: 2.3rem 1.4rem 1.5rem;
     }
 }
