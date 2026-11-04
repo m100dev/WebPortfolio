@@ -1,0 +1,36 @@
+// Inline SVG icon bodies from the original guide's IC map (24x24, stroke-based).
+// strokeWidth defaults to 1.6, as in the original.
+const ICONS = {
+  check: { d: '<path d="M5 12l5 5L20 7"/>', sw: 2.2 },
+  chevR: { d: '<path d="M9 6l6 6-6 6"/>' },
+  arrowR: { d: '<path d="M5 12h14m-6-6 6 6-6 6"/>' },
+  target: { d: '<circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="9"/>' },
+  list: { d: '<path d="M9 6h11M9 12h11M9 18h11M5 6v.01M5 12v.01M5 18v.01"/>' },
+  school: { d: '<path d="M22 9 12 5 2 9l10 4 10-4Zm-6 3v5c0 1-2 2-4 2s-4-1-4-2v-5"/>' },
+  rocket: { d: '<path d="M4 13a8 8 0 0 1 7 7 6 6 0 0 0 3-5 9 9 0 0 0 6-8 3 3 0 0 0-3-3 9 9 0 0 0-8 6 6 6 0 0 0-5 3"/><circle cx="15" cy="9" r="1"/>' },
+  user: { d: '<circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>' },
+  sparkles: { d: '<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>' },
+  eye: { d: '<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>' },
+  ok: { d: '<path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12s4.5 10 10 10Z"/><path d="m9 12 2 2 4-4"/>' },
+  map: { d: '<path d="m3 7 6-3 6 3 6-3v13l-6 3-6-3-6 3Z"/><path d="M9 4v13m6-10v13"/>' },
+  bot: { d: '<rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><circle cx="9" cy="16" r="1"/><circle cx="15" cy="16" r="1"/>' },
+  code: { d: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>' },
+  gitpr: { d: '<circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="6" cy="18" r="3"/><path d="M6 9v9m12-3V9a3 3 0 0 0-3-3h-3"/>' },
+  commit: { d: '<circle cx="12" cy="12" r="4"/><path d="M12 2v6m0 8v6"/>' },
+  shield: { d: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>' },
+  test: { d: '<path d="M9 3h6m-5 0v4l-4 8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l-4-8V3"/>' },
+  file: { d: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/>' },
+  play: { d: '<polygon points="5,3 19,12 5,21"/>' },
+  refresh: { d: '<path d="M3 12a9 9 0 0 1 15-6.7L21 8m0-5v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16m0 5v-5h5"/>' },
+  checks: { d: '<path d="m2 12 5 5L12 12m3-3 3.5 3.5L22 9"/>' },
+  checkbox: { d: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 12 2 2 4-4"/>' },
+  writing: { d: '<path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>' },
+  compass: { d: '<circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/>' },
+  hierarchy: { d: '<rect x="10" y="2" width="4" height="4" rx="1"/><rect x="3" y="18" width="4" height="4" rx="1"/><rect x="17" y="18" width="4" height="4" rx="1"/><path d="M12 6v4m0 0-7 4m7-4 7 4m-14 4v-4m14 4v-4"/>' },
+  split: { d: '<circle cx="7" cy="6" r="3"/><circle cx="17" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M7 9v2a4 4 0 0 0 4 4h2m4-6v2a4 4 0 0 1-4 4h-2"/>' },
+  merge: { d: '<circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M12 15V9m-3.5-1.5L12 9m3.5-1.5L12 9"/>' },
+  report: { d: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M16 13H8m8 4H8"/>' },
+  clipcheck: { d: '<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>' },
+}
+
+export default ICONS

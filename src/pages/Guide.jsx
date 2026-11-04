@@ -1,25 +1,25 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { useParams } from 'react-router-dom'
 import { findGuide } from '../content/guides'
+import GuideLayout from '../components/guides/GuideLayout'
 import NotFound from './NotFound'
 import useDocumentTitle from '../hooks/useDocumentTitle'
-import './pages.css'
 
 const Guide = () => {
   const { slug } = useParams()
   const guide = findGuide(slug)
   useDocumentTitle(guide?.title)
 
-  if (!guide) return <NotFound/>
+  if (!guide?.Component) return <NotFound/>
+
+  const { Component } = guide
 
   return (
-    <div className='page'>
-      <section className='page-intro'>
-        <h5>Guide</h5>
-        <h2>{guide.title}</h2>
-        <p className='page-intro__lede'>{guide.summary}</p>
-      </section>
-    </div>
+    <Suspense fallback={<p className='guide__loading mono'>Loading guide…</p>}>
+      <GuideLayout guide={guide}>
+        <Component/>
+      </GuideLayout>
+    </Suspense>
   )
 }
 

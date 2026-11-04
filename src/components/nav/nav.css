@@ -126,7 +126,7 @@
 
 /* ============================== MEDIA QUERIES (MEDIUM / SMALL DEVICES) ============================== */
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 1024px) {
     .site-nav__inner {
         width: var(--container-width-md);
         height: 4rem;

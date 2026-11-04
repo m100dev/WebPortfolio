@@ -1,0 +1,618 @@
+/* The Five Levels of AI Autonomy, in the site theme.
+   Each level gets its own accent (--lv / --lv-rgb, set inline from its c1..c5 slot);
+   light-theme values are darker so text in the accent colour passes contrast on white. */
+
+:root {
+    --alv-c1: #6FA8D0; --alv-c1-rgb: 111, 168, 208;
+    --alv-c2: #9084CF; --alv-c2-rgb: 144, 132, 207;
+    --alv-c3: #48B593; --alv-c3-rgb: 72, 181, 147;
+    --alv-c4: #CF7E54; --alv-c4-rgb: 207, 126, 84;
+    --alv-c5: #F59E0B; --alv-c5-rgb: 245, 158, 11;
+}
+
+:root[data-theme="light"] {
+    --alv-c1: #1D6A9E; --alv-c1-rgb: 29, 106, 158;
+    --alv-c2: #5B4BB0; --alv-c2-rgb: 91, 75, 176;
+    --alv-c3: #1C7558; --alv-c3-rgb: 28, 117, 88;
+    --alv-c4: #A84B1E; --alv-c4-rgb: 168, 75, 30;
+    --alv-c5: #B45309; --alv-c5-rgb: 180, 83, 9;
+}
+
+.alv svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+}
+
+.alv-notice {
+    margin-bottom: 1.5rem;
+    padding: 0.7rem 1rem;
+    border-radius: 0.6rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-variant);
+    font-size: 0.85rem;
+    color: var(--color-light);
+}
+
+.alv-notice button {
+    background: none;
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    font: inherit;
+}
+
+/* ---------- Progress chips ---------- */
+
+.alv-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.alv-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 2rem;
+    border: 1px solid var(--color-border);
+    font-size: 0.82rem;
+    color: var(--color-light);
+}
+
+.alv-chip:hover {
+    color: var(--color-white);
+    border-color: rgba(var(--lv-rgb), 0.6);
+}
+
+.alv-chip__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--color-border);
+}
+
+.alv-chip.is-done {
+    color: var(--lv);
+    border-color: rgba(var(--lv-rgb), 0.45);
+}
+
+.alv-chip.is-done .alv-chip__dot {
+    background-color: var(--lv);
+    box-shadow: 0 0 8px rgba(var(--lv-rgb), 0.6);
+}
+
+.alv-chip__pct {
+    font-size: 0.7rem;
+    color: var(--color-muted);
+}
+
+/* ---------- Level ---------- */
+
+.alv-level {
+    padding-top: 4rem;
+    margin-top: 4rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.alv-level:first-of-type {
+    border-top: 0;
+    margin-top: 0;
+    padding-top: 2.5rem;
+}
+
+.alv-level__head {
+    display: flex;
+    gap: 1.4rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.alv-level__num {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 3.4rem;
+    height: 3.4rem;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--lv);
+    background-color: rgba(var(--lv-rgb), 0.1);
+    border: 1px solid rgba(var(--lv-rgb), 0.35);
+}
+
+.alv-level h2 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: var(--color-white);
+}
+
+.alv-level__head p {
+    margin-top: 0.6rem;
+    max-width: 42rem;
+    color: var(--color-light);
+}
+
+.alv h3 {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-white);
+}
+
+/* ---------- Workflow diagram ---------- */
+
+.alv-diagram {
+    padding: 1.5rem;
+    border-radius: 1.4rem;
+    border: 1px solid var(--color-border);
+    background:
+        radial-gradient(circle at 15% 0%, rgba(var(--lv-rgb), 0.08), transparent 55%),
+        var(--color-bg-variant);
+    box-shadow: var(--shadow-card);
+}
+
+.alv-diagram__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1.6rem;
+}
+
+.alv-diagram__label {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.alv-diagram__legend {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.78rem;
+    color: var(--color-light);
+}
+
+.alv-diagram__legend > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.alv-legend {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+}
+
+.alv-legend--you {
+    border: 1.5px solid var(--lv);
+    background-color: rgba(var(--lv-rgb), 0.12);
+}
+
+.alv-legend--agent {
+    background-color: rgba(var(--lv-rgb), 0.25);
+}
+
+.alv-flow {
+    display: flex;
+    align-items: flex-start;
+}
+
+.alv-node {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    text-align: center;
+    min-width: 0;
+}
+
+.alv-flow__arrow {
+    position: absolute;
+    top: 1.15rem;
+    left: 0;
+    translate: -50% 0;
+    font-size: 1rem;
+    color: var(--color-muted);
+}
+
+.alv-node__circle {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    font-size: 1.35rem;
+    color: var(--lv);
+    background-color: rgba(var(--lv-rgb), 0.14);
+    border: 1px solid rgba(var(--lv-rgb), 0.3);
+    transition: translate 300ms var(--ease-out);
+}
+
+.alv-node:hover .alv-node__circle {
+    translate: 0 -3px;
+}
+
+.alv-node--you .alv-node__circle {
+    background-color: var(--color-bg);
+    border: 1.5px solid var(--lv);
+    box-shadow: 0 0 18px rgba(var(--lv-rgb), 0.25);
+}
+
+.alv-node__badge {
+    position: absolute;
+    top: -0.45rem;
+    right: -0.7rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--color-bg);
+    background-color: var(--lv);
+}
+
+.alv-node__text {
+    font-size: 0.78rem;
+    line-height: 1.35;
+    color: var(--color-light);
+    padding: 0 0.3rem;
+}
+
+.alv-node--you .alv-node__text {
+    color: var(--lv);
+    font-weight: 500;
+}
+
+/* ---------- Info cards ---------- */
+
+.alv-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+}
+
+.alv-card {
+    padding: 1.4rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-variant);
+    box-shadow: var(--shadow-card);
+}
+
+.alv-card__head {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.alv-card__icon {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    color: var(--lv);
+    background-color: rgba(var(--lv-rgb), 0.12);
+}
+
+.alv-card li,
+.alv-next li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: 0.88rem;
+    color: var(--color-light);
+}
+
+.alv-card li + li {
+    margin-top: 0.5rem;
+}
+
+.alv-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--lv);
+    opacity: 0.6;
+}
+
+/* ---------- Checklist ---------- */
+
+.alv-checklist {
+    margin-top: 1.2rem;
+    padding: 1.4rem;
+    border-radius: 1.2rem;
+    border: 1px solid rgba(var(--lv-rgb), 0.3);
+    background-color: rgba(var(--lv-rgb), 0.04);
+}
+
+.alv-checklist__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alv-checklist__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.alv-checklist__label svg {
+    color: var(--lv);
+    font-size: 1.1rem;
+}
+
+.alv-checklist__pct {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.55rem;
+    border-radius: 1rem;
+    color: var(--lv);
+    background-color: rgba(var(--lv-rgb), 0.12);
+}
+
+.alv-checklist__track {
+    height: 4px;
+    margin: 1rem 0 0.6rem;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: var(--color-border);
+}
+
+.alv-checklist__fill {
+    height: 100%;
+    border-radius: inherit;
+    background-color: var(--lv);
+    transition: width 500ms var(--ease-out);
+}
+
+.alv-skill {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 0.6rem 0.4rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+}
+
+.alv-skill:hover {
+    background-color: rgba(var(--lv-rgb), 0.06);
+}
+
+/* Native checkbox stays focusable and announced; the styled box is visual only */
+.alv-skill input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.alv-skill input:focus-visible + .alv-skill__box {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.alv-skill__box {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-top: 0.15rem;
+    border-radius: 0.35rem;
+    border: 1.5px solid var(--color-muted);
+    font-size: 0.8rem;
+    color: transparent;
+    transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+
+.alv-skill.is-on .alv-skill__box {
+    color: var(--color-bg);
+    background-color: var(--lv);
+    border-color: var(--lv);
+}
+
+.alv-skill__text {
+    font-size: 0.9rem;
+    color: var(--color-light);
+    transition: color 200ms ease;
+}
+
+.alv-skill.is-on .alv-skill__text {
+    color: var(--color-muted);
+    text-decoration: line-through;
+    text-decoration-color: rgba(var(--lv-rgb), 0.5);
+}
+
+/* ---------- Next steps ---------- */
+
+.alv-next {
+    margin-top: 2rem;
+}
+
+.alv-next__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+}
+
+.alv-next__title svg {
+    color: var(--lv);
+    font-size: 1.1rem;
+}
+
+/* Timeline rail with a dot per step */
+.alv-next ol {
+    border-left: 1px solid rgba(var(--lv-rgb), 0.3);
+    margin-left: 0.35rem;
+}
+
+.alv-next li {
+    padding-left: 1.4rem;
+    padding-bottom: 1.1rem;
+}
+
+.alv-next li:last-child {
+    padding-bottom: 0;
+}
+
+.alv-next li::before {
+    content: '';
+    position: absolute;
+    left: -0.35rem;
+    top: 0.35rem;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    background-color: var(--color-bg);
+    border: 1.5px solid var(--lv);
+}
+
+.alv-next strong {
+    display: block;
+    font-weight: 500;
+    color: var(--color-white);
+}
+
+.alv-next span {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+}
+
+/* ---------- Next level link ---------- */
+
+.alv-go-next {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    border-radius: 1rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-white);
+}
+
+.alv-go-next:hover {
+    color: var(--color-white);
+    border-color: rgba(var(--lv-rgb), 0.5);
+    background-color: rgba(var(--lv-rgb), 0.05);
+}
+
+.alv-go-next > svg {
+    margin-left: auto;
+    font-size: 1.2rem;
+    color: var(--color-muted);
+    transition: translate 300ms var(--ease-out), color 200ms ease;
+}
+
+.alv-go-next:hover > svg {
+    translate: 4px 0;
+    color: var(--lv);
+}
+
+.alv-go-next__badge {
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 0.7rem;
+    color: var(--lv);
+    background-color: rgba(var(--lv-rgb), 0.12);
+}
+
+.alv-go-next__sub {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.alv-go-next__name {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+}
+
+
+/* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
+
+@media screen and (max-width: 600px) {
+    .alv-level__head {
+        gap: 1rem;
+    }
+
+    .alv-level__num {
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: 1.15rem;
+    }
+
+    .alv-diagram {
+        padding: 1.2rem;
+    }
+
+    /* Workflow becomes a vertical list on phones */
+    .alv-flow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.4rem;
+    }
+
+    .alv-node {
+        flex-direction: row;
+        text-align: left;
+        gap: 1rem;
+    }
+
+    .alv-flow__arrow {
+        top: auto;
+        bottom: calc(100% + 0.2rem);
+        left: 1.6rem;
+        rotate: 90deg;
+    }
+
+    .alv-node__circle {
+        width: 2.8rem;
+        height: 2.8rem;
+        flex-shrink: 0;
+        font-size: 1.2rem;
+    }
+
+    .alv-node__text {
+        font-size: 0.88rem;
+    }
+
+    .alv-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .alv-checklist__fill,
+    .alv-node__circle,
+    .alv-go-next > svg {
+        transition: none;
+    }
+}
