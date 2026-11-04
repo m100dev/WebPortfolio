@@ -92,7 +92,7 @@ const Contact = () => {
             </li>
           </ul>
         </div>
-        <form ref={form} onSubmit={sendEmail} className="reveal" style={{ '--i': 1 }}>
+        <form ref={form} onSubmit={sendEmail} className="contact__form reveal" style={{ '--i': 1 }}>
           <input type="text" name='name' placeholder='Your Full Name' required disabled={isSending}/>
           <input type="email" name='email' placeholder='Your Email' required disabled={isSending}/>
           <textarea name="message" rows="10" placeholder='Your Message' required disabled={isSending}></textarea>

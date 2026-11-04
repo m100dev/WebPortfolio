@@ -4,6 +4,7 @@ import { HiOutlineMenuAlt4, HiOutlineX, HiOutlineSun, HiOutlineMoon } from 'reac
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import useActiveSection from '../../hooks/useActiveSection'
 import useTheme from '../../hooks/useTheme'
+import { hasPublishedMemos } from '../../content/memos'
 
 // Home sections, linked as #id on the home page and /#id from other pages
 const links = [
@@ -14,9 +15,10 @@ const links = [
   { id: 'contact', label: 'Contact' }
 ]
 
-// Separate pages, linked as routes
+// Separate pages, linked as routes. Memos stays hidden until something is published.
 const pages = [
-  { to: '/guides', label: 'Guides' }
+  { to: '/guides', label: 'Guides' },
+  ...(hasPublishedMemos() ? [{ to: '/memos', label: 'Memos' }] : [])
 ]
 
 // On home, plain anchors keep native smooth scrolling; elsewhere route back to /#id.

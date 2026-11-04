@@ -93,13 +93,15 @@
 
 /* ================== FORM ================== */
 
-form {
+/* Scoped to the contact form so other pages' inputs (guide checklists, Markdown task lists) aren't restyled */
+.contact__form {
     display: flex;
     flex-direction: column;
     gap:  1.2rem;
 }
 
-input, textarea {
+.contact__form input,
+.contact__form textarea {
     width: 100%;
     padding: 1.1rem 1.2rem;
     border-radius: 0.6rem;
@@ -112,13 +114,13 @@ input, textarea {
     transition: border-color 250ms ease, background-color 250ms ease;
 }
 
-input:focus,
-textarea:focus {
+.contact__form input:focus,
+.contact__form textarea:focus {
     border-color: var(--color-primary);
     background-color: transparent;
 }
 
-::placeholder {
+.contact__form ::placeholder {
     color: rgba(var(--rgb-light), 0.5);
 }
 
@@ -127,7 +129,8 @@ button[disabled] {
     cursor: not-allowed;
 }
 
-input[disabled], textarea[disabled] {
+.contact__form input[disabled],
+.contact__form textarea[disabled] {
     opacity: 0.7;
     cursor: not-allowed;
 }

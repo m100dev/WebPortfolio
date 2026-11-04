@@ -8,7 +8,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle'
 const Guide = () => {
   const { slug } = useParams()
   const guide = findGuide(slug)
-  useDocumentTitle(guide?.title)
+  useDocumentTitle(guide?.Component ? guide.title : 'Page not found')
 
   if (!guide?.Component) return <NotFound/>
 
