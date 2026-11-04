@@ -6,6 +6,20 @@
     <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <meta name="theme-color" content="#0F172A" />
+    <!-- Set the theme before first paint so there's no flash of the wrong one.
+         Keep in sync with src/hooks/useTheme.js (storage key "theme"). -->
+    <script>
+      (function () {
+        var t
+        try { t = localStorage.getItem('theme') } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        }
+        document.documentElement.setAttribute('data-theme', t)
+        var meta = document.querySelector('meta[name="theme-color"]')
+        if (meta) meta.setAttribute('content', t === 'light' ? '#F8FAFC' : '#0F172A')
+      })()
+    </script>
     <meta name="description" content="Cloud and AI engineer in the DC/Maryland area. 6+ years supporting production systems on AWS and Azure; building MyAutoTab end to end with agentic AI workflows." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Marc Bastien | Cloud & AI Engineer" />

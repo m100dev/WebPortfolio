@@ -10,7 +10,7 @@
 
 /* Frosted once the page has scrolled (or the mobile menu is open) */
 .site-nav--solid {
-    background-color: rgba(15, 23, 42, 0.78);
+    background-color: rgba(var(--rgb-bg), 0.78);
     backdrop-filter: blur(14px);
     border-bottom-color: var(--color-border);
 }
@@ -47,6 +47,7 @@
     display: flex;
     align-items: center;
     gap: 2rem;
+    margin-left: auto;
 }
 
 .site-nav__links a:not(.btn) {
@@ -84,6 +85,33 @@
 .site-nav__cta .btn {
     padding: 0.55rem 1.1rem;
     font-size: 0.9rem;
+}
+
+.site-nav__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: 1.2rem;
+}
+
+.site-nav__theme {
+    display: grid;
+    place-items: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-light);
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    transition: color 200ms ease, border-color 200ms ease, rotate 400ms var(--ease-out);
+}
+
+.site-nav__theme:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary-variant);
+    rotate: 20deg;
 }
 
 .site-nav__toggle {
@@ -164,6 +192,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .site-nav__theme,
     .site-nav,
     .site-nav__links,
     .site-nav__links a:not(.btn)::after {

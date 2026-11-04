@@ -23,7 +23,7 @@ header {
     max-width: 52rem;
     max-height: 52rem;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(245, 158, 11, 0.18), transparent 65%);
+    background: radial-gradient(circle, rgba(var(--rgb-primary), 0.18), transparent 65%);
     filter: blur(40px);
     pointer-events: none;
     animation: glow-drift 18s ease-in-out infinite alternate;

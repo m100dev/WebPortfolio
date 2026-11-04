@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './nav.css'
-import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'
+import { HiOutlineMenuAlt4, HiOutlineX, HiOutlineSun, HiOutlineMoon } from 'react-icons/hi'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import useActiveSection from '../../hooks/useActiveSection'
+import useTheme from '../../hooks/useTheme'
 
 // Home sections, linked as #id on the home page and /#id from other pages
 const links = [
@@ -30,6 +31,8 @@ const Nav = () => {
   const { pathname } = useLocation()
   const onHome = pathname === '/'
   const active = useActiveSection(onHome)
+  const { theme, toggleTheme } = useTheme()
+  const nextTheme = theme === 'dark' ? 'light' : 'dark'
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButton = useRef(null)
@@ -91,17 +94,29 @@ const Nav = () => {
           </li>
         </ul>
 
-        <button
-          ref={menuButton}
-          type='button'
-          className='site-nav__toggle'
-          aria-expanded={menuOpen}
-          aria-controls='site-nav-links'
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? <HiOutlineX /> : <HiOutlineMenuAlt4 />}
-        </button>
+        <div className='site-nav__actions'>
+          <button
+            type='button'
+            className='site-nav__theme'
+            aria-label={`Switch to ${nextTheme} theme`}
+            title={`Switch to ${nextTheme} theme`}
+            onClick={toggleTheme}
+          >
+            {theme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
+          </button>
+
+          <button
+            ref={menuButton}
+            type='button'
+            className='site-nav__toggle'
+            aria-expanded={menuOpen}
+            aria-controls='site-nav-links'
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <HiOutlineX /> : <HiOutlineMenuAlt4 />}
+          </button>
+        </div>
       </div>
     </nav>
   )

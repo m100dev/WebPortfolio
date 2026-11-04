@@ -44,7 +44,7 @@
     padding: 1.4rem 1.6rem;
     border-radius: 1.2rem;
     border: 1px solid var(--color-border);
-    background-color: rgba(30, 41, 59, 0.5);
+    background-color: rgba(var(--rgb-bg-variant), 0.5);
 }
 
 .about__now-title {
@@ -65,13 +65,13 @@
     height: 0.5rem;
     border-radius: 50%;
     background-color: var(--color-primary);
-    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6);
+    box-shadow: 0 0 0 0 rgba(var(--rgb-primary), 0.6);
     animation: now-pulse 2.4s ease-out infinite;
 }
 
 @keyframes now-pulse {
     to {
-        box-shadow: 0 0 0 0.6rem rgba(245, 158, 11, 0);
+        box-shadow: 0 0 0 0.6rem rgba(var(--rgb-primary), 0);
     }
 }
 

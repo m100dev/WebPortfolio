@@ -6,6 +6,7 @@
 
 .portfolio__item {
     background-color: var(--color-bg-variant);
+    box-shadow: var(--shadow-card);
     padding: 1.3rem;
     border-radius: 2rem;
     border: 1px solid transparent;
@@ -18,7 +19,7 @@
     border-color: var(--color-primary-variant);
     background: transparent;
     translate: 0 -6px;
-    box-shadow: 0 18px 40px -20px rgba(245, 158, 11, 0.35);
+    box-shadow: 0 18px 40px -20px rgba(var(--rgb-primary), 0.35);
 }
 
 /* Subtle zoom on the visible screenshot */
@@ -62,6 +63,7 @@
 
 /* Diagrams: show the whole image instead of cropping it */
 .portfolio__item-image--contain {
+    /* Off-white backdrop to match the light diagram images, in both themes */
     background-color: #f8f8f6;
 }
 
@@ -78,7 +80,7 @@
     padding: 0.25rem 0.6rem;
     border-radius: 1rem;
     color: var(--color-light);
-    background-color: rgba(15, 23, 42, 0.75);
+    background-color: rgba(var(--rgb-bg), 0.75);
 }
 
 .portfolio__item-dots {
@@ -94,7 +96,7 @@
     height: 8px;
     border-radius: 50%;
     cursor: pointer;
-    background-color: rgba(226, 232, 240, 0.6);
+    background-color: rgba(var(--rgb-light), 0.6);
     transition: var(--transition);
 }
 
