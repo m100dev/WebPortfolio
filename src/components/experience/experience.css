@@ -1,61 +1,144 @@
-.experience__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+.experience__timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-left: 2rem;
+    border-left: 2px solid var(--color-primary-variant);
 }
 
-.experience__container > div {
+.experience__item {
+    position: relative;
     background-color: var(--color-bg-variant);
-    padding: 2.4rem 5rem;
-    border-radius: 2rem;
+    padding: 1.8rem 2rem;
+    border-radius: 1.5rem;
     border: 1px solid transparent;
     transition: var(--transition);
 }
 
-.experience__container > div:hover {
+/* Timeline dot */
+.experience__item::before {
+    content: '';
+    position: absolute;
+    left: calc(-2rem - 7px);
+    top: 2.1rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    box-shadow: 0 0 0 4px var(--color-bg);
+}
+
+.experience__item:hover {
     background-color: transparent;
     border-color: var(--color-primary-variant);
-    cursor: default;
+    translate: 4px 0;
 }
 
-.experience__container > div h3 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--color-primary);
+/* Amber progress line that fills as you scroll through the timeline.
+   Progressive enhancement: browsers without scroll-driven animations keep the faint static rule. */
+.experience__timeline::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: var(--color-primary);
+    transform-origin: top;
+    transform: scaleY(0);
 }
 
-.experience__content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 2rem;
+@supports (animation-timeline: view()) {
+    .experience__timeline::before {
+        animation: timeline-fill linear both;
+        animation-timeline: view();
+        animation-range: entry 20% cover 75%;
+    }
 }
 
-.experience__details {
+@keyframes timeline-fill {
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .experience__timeline::before {
+        animation: none;
+        transform: scaleY(1);
+    }
+}
+
+.experience__item-head {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 1rem;
+    margin-bottom: 1rem;
 }
 
-.experience__details-icon {
-    margin-top: 6px;
+.experience__company {
     color: var(--color-primary);
+}
+
+.experience__title {
+    color: var(--color-white);
+    font-weight: 400;
+    margin-top: 0.2rem;
+}
+
+.experience__note {
+    display: block;
+    margin-top: 0.4rem;
+    font-size: 0.75rem;
+    color: var(--color-light);
+    opacity: 0.8;
+}
+
+.experience__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
     flex-shrink: 0;
+}
+
+.experience__highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+}
+
+.experience__highlights li {
+    position: relative;
+    padding-left: 1.2rem;
+    color: var(--color-light);
+    font-size: 0.9rem;
+}
+
+.experience__highlights li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+}
+
+.experience__earlier {
+    color: var(--color-light);
+    font-size: 0.85rem;
+}
+
+.experience__earlier strong {
+    color: var(--color-primary);
 }
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
 
 @media screen and (max-width: 1024px) {
-    .experience__container {
-        grid-template-columns: 1fr;
-    }
-
-    .experience__container > div {
-        width: 80%;
-        padding: 2rem;
-        margin: 0 auto
-    }
-
-    .experience__content {
-        padding: 1rem;
+    .experience__item {
+        padding: 1.5rem;
     }
 }
 
@@ -63,17 +146,26 @@
 /* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
 
 @media screen and (max-width: 600px) {
-    .experience__container {
-        gap: 1rem;
+    .experience__timeline {
+        padding-left: 1.2rem;
     }
 
-    .experience__container > div {
-        width: 100%;
-        padding: 2rem 1rem;
+    .experience__item {
+        padding: 1.2rem;
     }
 
-    .experience__content {
-        grid-template-columns: 1fr;
-        row-gap: 1rem;
+    .experience__item::before {
+        left: calc(-1.2rem - 7px);
+        top: 1.5rem;
+    }
+
+    .experience__item-head {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .experience__meta {
+        align-items: flex-start;
+        text-align: left;
     }
 }
