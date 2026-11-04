@@ -1,4 +1,5 @@
-// Ported verbatim from the original standalone guide (public/guides/Marc-Bastien-AI-Autonomy-Levels.html).
+// Ported from the original standalone guide (public/guides/Marc-Bastien-AI-Autonomy-Levels.html);
+// tool-specific names generalized so it applies to any agentic coding tool.
 // Fields: c = colour slot (c1..c5), flow nodes (i = icon, t = text, h = human step),
 // cards, skills (checklist; progress key is `${id}-${index}`), next = steps to the next level.
 const DATA = [
@@ -23,8 +24,8 @@ const DATA = [
       "Debug effectively using AI chat with good context"
     ],
     next:[
-      {s:"Start using an agentic tool",d:"Claude Code, Cursor, or similar — AI reads files and runs commands"},
-      {s:"Create a project context file",d:"A CLAUDE.md that tells the AI about your codebase conventions"},
+      {s:"Start using an agentic tool",d:"Claude Code, Codex, Cursor, or similar — AI reads files and runs commands"},
+      {s:"Create a project context file",d:"An instructions file (AGENTS.md, CLAUDE.md, or your tool's equivalent) that tells the AI your codebase conventions"},
       {s:"Let AI make multi-file edits",d:"Shift from asking questions to giving implementation tasks"},
       {s:"Learn to review diffs",d:"Review the diff as a whole instead of watching every keystroke"}
     ]
@@ -41,11 +42,11 @@ const DATA = [
     ],
     cards:[
       {i:"target",t:"What this level does",items:["Agent reads multiple files and makes coordinated changes","Agent runs commands: tests, builds, linting","You create branches and the agent implements on them","Iterative feedback loop: you direct, agent adjusts"]},
-      {i:"list",t:"What you should be doing",items:["Writing plans in plan mode before implementation","One branch per task, one session per branch","Maintaining CLAUDE.md with project conventions","Starting fresh sessions to manage context window"]}
+      {i:"list",t:"What you should be doing",items:["Writing a plan before any implementation starts","One branch per task, one session per branch","Maintaining a project context file with your conventions","Starting fresh sessions to manage context window"]}
     ],
     skills:[
-      "Write a CLAUDE.md that front-loads essential project knowledge",
-      "Use plan mode to break work into clear steps",
+      "Write a project context file (e.g. AGENTS.md or CLAUDE.md in the repo root) that front-loads essential project knowledge",
+      "Use a planning pass to break work into clear steps",
       "Manage context: surgical file reads, clean session boundaries",
       "Externalize plans to files instead of keeping them in chat",
       "Review AI diffs with the same rigor as a code review",
@@ -84,7 +85,7 @@ const DATA = [
       "Configure git worktrees for parallel isolated work"
     ],
     next:[
-      {s:"Run headless sessions",d:"Use 'claude -p' for non-interactive execution that produces PRs"},
+      {s:"Run headless sessions",d:"Run the agent non-interactively from a script or CI job so it produces PRs"},
       {s:"Achieve 70%+ test coverage",d:"Including E2E tests for critical user flows"},
       {s:"Let agent commit to branches",d:"Without manual review of every change"},
       {s:"Run overnight tasks",d:"Agent produces PR, you review in the morning"},
@@ -109,7 +110,7 @@ const DATA = [
     skills:[
       "Write machine-verifiable acceptance criteria with zero ambiguity",
       "Design E2E test suites catching cross-feature integration bugs",
-      "Run headless Claude sessions that produce reviewable PRs",
+      "Run headless agent sessions that produce reviewable PRs",
       "Build plan revision gates for invalidated assumptions",
       "Implement rebase-and-validate between sequential checkpoints",
       "Monitor and optimize token spend across autonomous runs",
@@ -117,10 +118,10 @@ const DATA = [
       "Debug agent failures from PR diffs without session replay"
     ],
     next:[
-      {s:"Implement Agent Teams",d:"Manager agent orchestrating specialized parallel workers"},
+      {s:"Build agent teams",d:"Manager agent orchestrating specialized parallel workers"},
       {s:"Enable inter-agent communication",d:"Shared task lists with dependency tracking"},
       {s:"Design adaptive orchestration",d:"Agent revises plans when assumptions change"},
-      {s:"Set up Routines",d:"Scheduled autonomous tasks: nightly audits, daily deploys"},
+      {s:"Schedule agent runs",d:"Scheduled autonomous tasks: nightly audits, daily deploys"},
       {s:"Build review agents",d:"Agents that evaluate other agents' output quality"}
     ]
   },
@@ -143,10 +144,10 @@ const DATA = [
       "Design agent team topologies with clear ownership boundaries",
       "Implement shared task lists with dependency and status tracking",
       "Build canary checkpoint patterns (first checkpoint pauses for review)",
-      "Create SubagentStop hooks validating worker output before merge",
+      "Add completion hooks that validate worker output before merge",
       "Design integration test phases after all checkpoints merge",
       "Implement adaptive plan revision for invalidated assumptions",
-      "Set up Routines for scheduled autonomous operations",
+      "Schedule recurring runs for autonomous operations",
       "Optimize multi-agent token economics across parallel runs",
       "Debug coordination failures across parallel agent sessions"
     ],
