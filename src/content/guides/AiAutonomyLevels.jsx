@@ -59,24 +59,47 @@ const scrollToId = (e, id) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-const ProgressChips = ({ checks }) => (
-  <nav className='alv-chips' aria-label='Levels and your progress'>
-    {DATA.map((level) => {
-      const { pct } = progress(level, checks)
-      return (
-        <a
-          key={level.id}
-          href={`#level-${level.id}`}
-          className={pct === 100 ? 'alv-chip is-done' : 'alv-chip'}
-          style={levelStyle(level)}
-          onClick={(e) => scrollToId(e, `level-${level.id}`)}
-        >
-          <span className='alv-chip__dot' aria-hidden='true' />
-          L{level.id} · {level.label}
-          <span className='alv-chip__pct mono'>{pct}%</span>
-        </a>
-      )
-    })}
+const pad = (n) => String(n).padStart(2, '0')
+
+// Ordered jump nav: one cell per level with a rising meter (lit up to that level) and a
+// hairline along the bottom that fills with the level's checklist progress. Nothing shows
+// at 0, so a first-time visitor doesn't see a row of "0%".
+const AutonomyScale = ({ checks }) => (
+  <nav className='alv-scale' aria-labelledby='alv-scale-label'>
+    <p className='alv-scale__label mono' id='alv-scale-label'>Jump to a level</p>
+    <ol className='alv-scale__list'>
+      {DATA.map((level) => {
+        const { done, total, pct } = progress(level, checks)
+        return (
+          <li key={level.id}>
+            <a
+              href={`#level-${level.id}`}
+              className={done === total ? 'alv-scale__cell is-done' : 'alv-scale__cell'}
+              style={{ ...levelStyle(level), '--pct': `${pct}%` }}
+              onClick={(e) => scrollToId(e, `level-${level.id}`)}
+            >
+              <span className='alv-scale__top'>
+                <span className='alv-scale__num mono'>
+                  <span className='visually-hidden'>Level </span>{pad(level.id)}
+                  {done === total && <Icon name='check' />}
+                </span>
+                <span className='alv-scale__arrow mono' aria-hidden='true'>↓</span>
+              </span>
+              <span className='alv-scale__name'>{level.label}</span>
+              <span className='alv-scale__meter' aria-hidden='true'>
+                {DATA.map((step) => <span key={step.id} className={step.id <= level.id ? 'is-on' : undefined} />)}
+              </span>
+              {done > 0 && (
+                <span className='visually-hidden'>
+                  {done === total ? ', all skills checked' : `, ${done} of ${total} skills checked`}
+                </span>
+              )}
+              <span className='alv-scale__progress' aria-hidden='true' />
+            </a>
+          </li>
+        )
+      })}
+    </ol>
   </nav>
 )
 
@@ -197,9 +220,8 @@ const LevelSection = ({ level, next, checks, onToggle }) => (
         style={levelStyle(next)}
         onClick={(e) => scrollToId(e, `level-${next.id}`)}
       >
-        <span className='alv-go-next__badge mono'>{next.id}</span>
         <span>
-          <span className='alv-go-next__sub'>Next level</span>
+          <span className='alv-go-next__sub mono'>Next level · {pad(next.id)}</span>
           <span className='alv-go-next__name'>{next.title}</span>
         </span>
         <Icon name='arrowR' />
@@ -223,7 +245,7 @@ const AiAutonomyLevels = () => {
         </p>
       )}
 
-      <ProgressChips checks={checks} />
+      <AutonomyScale checks={checks} />
 
       {DATA.map((level, i) => (
         <LevelSection key={level.id} level={level} next={DATA[i + 1]} checks={checks} onToggle={toggle} />

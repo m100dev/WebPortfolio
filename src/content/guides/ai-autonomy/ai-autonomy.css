@@ -1,21 +1,22 @@
 /* The Five Levels of AI Autonomy, in the site theme.
-   Each level gets its own accent (--lv / --lv-rgb, set inline from its c1..c5 slot);
-   light-theme values are darker so text in the accent colour passes contrast on white. */
+   Each level gets its own accent (--lv / --lv-rgb, set inline from its c1..c5 slot).
+   A vivid "signal" set (cyan, violet, lime, pink, then the site accent for the top level),
+   chosen to stay clear of Anthropic's muted blue/clay/green accents.
+   Light values are darker so text in the accent colour passes AA on white and on the page. */
 
 :root {
-    --alv-c1: #6FA8D0; --alv-c1-rgb: 111, 168, 208;
-    --alv-c2: #9084CF; --alv-c2-rgb: 144, 132, 207;
-    --alv-c3: #48B593; --alv-c3-rgb: 72, 181, 147;
-    --alv-c4: #CF7E54; --alv-c4-rgb: 207, 126, 84;
-    --alv-c5: #F59E0B; --alv-c5-rgb: 245, 158, 11;
+    --alv-c1: #22D3EE; --alv-c1-rgb: 34, 211, 238;
+    --alv-c2: #A78BFA; --alv-c2-rgb: 167, 139, 250;
+    --alv-c3: #A3E635; --alv-c3-rgb: 163, 230, 53;
+    --alv-c4: #F472B6; --alv-c4-rgb: 244, 114, 182;
+    --alv-c5: var(--color-primary); --alv-c5-rgb: var(--rgb-primary);
 }
 
 :root[data-theme="light"] {
-    --alv-c1: #1D6A9E; --alv-c1-rgb: 29, 106, 158;
-    --alv-c2: #5B4BB0; --alv-c2-rgb: 91, 75, 176;
-    --alv-c3: #1C7558; --alv-c3-rgb: 28, 117, 88;
-    --alv-c4: #A84B1E; --alv-c4-rgb: 168, 75, 30;
-    --alv-c5: #A16207; --alv-c5-rgb: 161, 98, 7;
+    --alv-c1: #0E7490; --alv-c1-rgb: 14, 116, 144;
+    --alv-c2: #6D28D9; --alv-c2-rgb: 109, 40, 217;
+    --alv-c3: #3F6212; --alv-c3-rgb: 63, 98, 18;
+    --alv-c4: #BE185D; --alv-c4-rgb: 190, 24, 93;
 }
 
 .alv svg {
@@ -43,51 +44,142 @@
     font: inherit;
 }
 
-/* ---------- Progress chips ---------- */
+/* ---------- Autonomy scale (jump nav) ----------
+   A connected, ordered strip rather than pills: each cell carries a rising "staircase" meter,
+   and a hairline along its bottom edge fills with that level's checklist progress. */
 
-.alv-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
+.alv-scale {
     margin-bottom: 1rem;
 }
 
-.alv-chip {
+.alv-scale__label {
+    margin-bottom: 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.alv-scale__list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: var(--color-bg-variant);
+    box-shadow: var(--shadow-card);
+}
+
+.alv-scale__list > li + li {
+    border-left: 1px solid var(--color-border);
+}
+
+.alv-scale__cell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    height: 100%;
+    padding: 0.85rem 0.9rem 1rem;
+    color: var(--color-light);
+    transition: background-color 200ms ease;
+}
+
+/* Top rule that draws in on hover/focus */
+.alv-scale__cell::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--lv);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 300ms var(--ease-out);
+}
+
+.alv-scale__cell:hover,
+.alv-scale__cell:focus-visible {
+    color: var(--color-white);
+    background-color: rgba(var(--lv-rgb), 0.08);
+}
+
+.alv-scale__cell:hover::before,
+.alv-scale__cell:focus-visible::before {
+    transform: scaleX(1);
+}
+
+.alv-scale__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.alv-scale__num {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.45rem 0.9rem;
-    border-radius: 2rem;
-    border: 1px solid var(--color-border);
-    font-size: 0.82rem;
-    color: var(--color-light);
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--lv);
 }
 
-.alv-chip:hover {
+.alv-scale__arrow {
+    font-size: 0.8rem;
+    color: var(--lv);
+    opacity: 0;
+    translate: 0 -3px;
+    transition: opacity 200ms ease, translate 300ms var(--ease-out);
+}
+
+.alv-scale__cell:hover .alv-scale__arrow,
+.alv-scale__cell:focus-visible .alv-scale__arrow {
+    opacity: 1;
+    translate: 0 0;
+}
+
+.alv-scale__name {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
     color: var(--color-white);
-    border-color: rgba(var(--lv-rgb), 0.6);
 }
 
-.alv-chip__dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
+/* Five rising bars; the first N are lit for level N */
+.alv-scale__meter {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 14px;
+}
+
+.alv-scale__meter > span {
+    width: 4px;
+    border-radius: 1px;
     background-color: var(--color-border);
 }
 
-.alv-chip.is-done {
-    color: var(--lv);
-    border-color: rgba(var(--lv-rgb), 0.45);
-}
+.alv-scale__meter > span:nth-child(1) { height: 20%; }
+.alv-scale__meter > span:nth-child(2) { height: 40%; }
+.alv-scale__meter > span:nth-child(3) { height: 60%; }
+.alv-scale__meter > span:nth-child(4) { height: 80%; }
+.alv-scale__meter > span:nth-child(5) { height: 100%; }
 
-.alv-chip.is-done .alv-chip__dot {
+.alv-scale__meter > span.is-on {
     background-color: var(--lv);
-    box-shadow: 0 0 8px rgba(var(--lv-rgb), 0.6);
 }
 
-.alv-chip__pct {
-    font-size: 0.7rem;
-    color: var(--color-muted);
+/* Checklist progress along the bottom edge (nothing shows at 0) */
+.alv-scale__progress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: var(--pct, 0%);
+    background-color: var(--lv);
+    transition: width 500ms var(--ease-out);
 }
 
 /* ---------- Level ---------- */
@@ -508,15 +600,17 @@
     align-items: center;
     gap: 1rem;
     padding: 1rem 1.2rem;
-    border-radius: 1rem;
+    border-radius: 4px;
     border: 1px solid var(--color-border);
+    border-left: 3px solid var(--lv);
     color: var(--color-white);
+    transition: background-color 200ms ease;
 }
 
-.alv-go-next:hover {
+.alv-go-next:hover,
+.alv-go-next:focus-visible {
     color: var(--color-white);
-    border-color: rgba(var(--lv-rgb), 0.5);
-    background-color: rgba(var(--lv-rgb), 0.05);
+    background-color: rgba(var(--lv-rgb), 0.06);
 }
 
 .alv-go-next > svg {
@@ -526,27 +620,18 @@
     transition: translate 300ms var(--ease-out), color 200ms ease;
 }
 
-.alv-go-next:hover > svg {
+.alv-go-next:hover > svg,
+.alv-go-next:focus-visible > svg {
     translate: 4px 0;
     color: var(--lv);
-}
-
-.alv-go-next__badge {
-    display: grid;
-    place-items: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    border-radius: 0.7rem;
-    color: var(--lv);
-    background-color: rgba(var(--lv-rgb), 0.12);
 }
 
 .alv-go-next__sub {
     display: block;
     font-size: 0.72rem;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--lv);
 }
 
 .alv-go-next__name {
@@ -559,6 +644,18 @@
 /* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
 
 @media screen and (max-width: 600px) {
+    /* The scale scrolls sideways on phones so level names never truncate */
+    .alv-scale__list {
+        grid-template-columns: repeat(5, minmax(6.8rem, 1fr));
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+    }
+
+    .alv-scale__list > li {
+        scroll-snap-align: start;
+    }
+
     .alv-level__head {
         gap: 1rem;
     }
@@ -612,7 +709,12 @@
 @media (prefers-reduced-motion: reduce) {
     .alv-checklist__fill,
     .alv-node__circle,
-    .alv-go-next > svg {
+    .alv-go-next,
+    .alv-go-next > svg,
+    .alv-scale__cell,
+    .alv-scale__cell::before,
+    .alv-scale__arrow,
+    .alv-scale__progress {
         transition: none;
     }
 }
