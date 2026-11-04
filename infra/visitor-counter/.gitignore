@@ -1,0 +1,11 @@
+# Terraform working files and state (state is local by default; keep it out of git)
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+.build/
+
+# Python
+__pycache__/
+*.pyc
