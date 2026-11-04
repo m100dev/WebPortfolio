@@ -1,8 +1,27 @@
+/* Left-aligned under the section heading, matching the editorial layout */
 .ai-engineering__intro {
-    text-align: center;
-    max-width: 50rem;
-    margin: 0 auto 3rem;
+    width: var(--container-width-lg);
+    margin: -1.5rem auto 3rem;
+    font-size: 1.1rem;
     color: var(--color-light);
+}
+
+.ai-engineering__intro > * {
+    max-width: 48rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .ai-engineering__intro {
+        width: var(--container-width-md);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .ai-engineering__intro {
+        width: var(--container-width-sm);
+        margin-top: -0.5rem;
+        font-size: 1rem;
+    }
 }
 
 .ai-engineering__container {
@@ -25,6 +44,8 @@
     border-color: var(--color-primary-variant);
     background: transparent;
     cursor: default;
+    translate: 0 -6px;
+    box-shadow: 0 18px 40px -20px rgba(245, 158, 11, 0.35);
 }
 
 .ai-engineering__card-icon {
