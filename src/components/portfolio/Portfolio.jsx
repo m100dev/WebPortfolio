@@ -6,6 +6,7 @@ import IMG_1101_SITE from '../../assets/1101-Brickell-Site.webp';
 import IMG_1101_MAPS from '../../assets/1101-Maps-Api-Feature.webp';
 import IMG_BOCA from '../../assets/bocadelray.webp';
 import IMG_VILLA from '../../assets/villa-majorca-site.webp';
+import IMG_LOCAL_LLM from '../../assets/Hello-LocalLLM-Project.webp';
 import { Link } from 'react-router-dom';
 import { BsCpu, BsArrowRight } from 'react-icons/bs';
 
@@ -23,7 +24,7 @@ const data = [
   },
   {
     id: 6,
-    images: [],
+    images: [{ src: IMG_LOCAL_LLM, caption: 'Hermes Agent running Qwen3.6-35B-A3B locally' }],
     title: 'Self-Hosted AI Agent (Mac mini M5 Pro)',
     description: 'Running Hermes Agent with local models, so prompts and data never leave the machine. Tool calls run only in a Docker sandbox, with access limited to specific folders through volume mounts. Using the setup to compare open-source LLMs on inference speed and output quality across quantization levels, and ran LTX-Video from the CLI to generate short clips locally. Now building an Obsidian knowledge base the agent uses for long-term context.',
     stack: ['Docker', 'Local LLMs', 'AI Agents', 'llama.cpp', 'Python', 'CLI'],
