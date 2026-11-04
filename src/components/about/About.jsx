@@ -1,6 +1,7 @@
 import React from 'react'
 import './about.css'
 import ME from '../../assets/Marc Bastien About Casual.webp'
+import AskMarc from './AskMarc'
 
 // What Marc is working on right now (replaces the old stat cards, which repeated the hero metrics)
 const now = [
@@ -43,23 +44,29 @@ const About = () => {
             </dl>
           </div>
 
-          <div className="about__bio">
-            <p>
-              I’m a cloud and AI engineer in the DC/Maryland area, and I like building things that actually get used.
-            </p>
-            <p>
-              Right now that’s MyAutoTab, a vehicle management app for owners of cars, boats, jet skis, and ATVs. I built it end to end with React, .NET, and PostgreSQL, set up CI/CD with GitHub Actions, and use a test-driven Claude Code workflow that took features from about a week to under a day. I share the build on YouTube, including a walkthrough of how I debugged a race condition.
-            </p>
-            <p>
-              Before this, I spent six years keeping enterprise systems running for a city government, a healthcare company, and airline customers on AWS and Azure, including identity and device management for 3,000+ devices at the City of Miami Beach.
-            </p>
-            <p>
-              I also run a sandboxed local AI agent on a Mac mini and publish hands-on lab guides, like my Hybrid Azure Virtual Desktop lab.
-            </p>
-            <p>
-              CCNA and Azure Fundamentals certified, working toward Security+. U.S. citizen, eligible for a security clearance.
-            </p>
-          </div>
+          <AskMarc />
+
+          {/* Everything the chat says, readable (and crawlable) without clicking through it */}
+          <details className="about__fullbio">
+            <summary>Read full bio</summary>
+            <div className="about__bio">
+              <p>
+                I’m a cloud and AI engineer in the DC/Maryland area, and I like building things that actually get used.
+              </p>
+              <p>
+                Right now that’s MyAutoTab, a vehicle management app for owners of cars, boats, jet skis, and ATVs. I built it end to end with React, .NET, and PostgreSQL, set up CI/CD with GitHub Actions, and use a test-driven Claude Code workflow that took features from about a week to under a day. I share the build on YouTube, including a walkthrough of how I debugged a race condition.
+              </p>
+              <p>
+                Before this, I spent six years keeping enterprise systems running for a city government, a healthcare company, and airline customers on AWS and Azure, including identity and device management for 3,000+ devices at the City of Miami Beach.
+              </p>
+              <p>
+                I also run a sandboxed local AI agent on a Mac mini and publish hands-on lab guides, like my Hybrid Azure Virtual Desktop lab.
+              </p>
+              <p>
+                CCNA and Azure Fundamentals certified, working toward Security+. U.S. citizen, eligible for a security clearance.
+              </p>
+            </div>
+          </details>
 
           <ul className="tag-list about__certs">
             {certs.map(({ name, status }) => (
