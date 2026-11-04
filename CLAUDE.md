@@ -13,7 +13,16 @@ Do not run `npm run eject` — it is a one-way operation that abandons CRA's man
 
 ## Architecture
 
-Single-page personal portfolio built on Create React App (react-scripts 5). There is no router: `src/App.jsx` renders every section in order (`Header`, `Nav`, `About`, `Experience`, `Services`, `Portfolio`, `Testimonials`, `Contact`, `Footer`), and the nav bar (`src/components/nav/Nav.jsx`) uses anchor links (`#home`, `#about`, `#experience`, `#services`, `#contact`) against `id`s on each section. `html { scroll-behavior: smooth }` in `src/index.css` powers the scroll transitions, so new sections must keep this pattern (matching `id` on the `<section>` plus an entry in `Nav.jsx`) for navigation to work.
+Personal portfolio built on Create React App (react-scripts 5) with `react-router-dom` v6 (`BrowserRouter` in `src/index.js`). `src/App.jsx` defines the routes inside a shared `Layout` (`Nav` + `<Outlet/>` + `Footer`):
+
+- `/` → `src/pages/Home.jsx`, which renders every home section in order (`Header`, `Portfolio`, `AiEngineering`, `Experience`, `About`, `Testimonials`, `Contact`, plus the floating `ScrollButton`).
+- `/guides`, `/guides/:slug` → `src/pages/Guides.jsx` / `Guide.jsx`, driven by `src/content/guides/index.js`.
+- `/memos`, `/memos/:slug` → `src/pages/Memos.jsx` / `Memo.jsx`.
+- `*` → `src/pages/NotFound.jsx`.
+
+Home sections are reached by anchor `id`s. On the home page the nav (`src/components/nav/Nav.jsx`) uses plain `<a href="#id">` links so `html { scroll-behavior: smooth }` in `src/index.css` animates them; on other pages the same links become router links to `/#id`, and `src/hooks/useHashScroll.js` scrolls to the hash after the route changes (or to the top when there is no hash). `useActiveSection` only tracks on `/`. New home sections need a matching `id` on the `<section>` plus an entry in `Nav.jsx`; new pages need a `<Route>` in `App.jsx` and, if they belong in the nav, an entry in its `pages` list. Pages set their `<title>` with `useDocumentTitle`, and shared page styles (`.page`, `.page-intro`) live in `src/pages/pages.css`.
+
+Hosting is AWS Amplify. Its rewrite rules are kept in the untracked `amplify-redirects.json` and pasted into the Amplify Console by hand: apex → www, 301s from the retired `/guides/*.html` files to their routes, then the SPA rewrite to `/index.html` last.
 
 Each section lives in `src/components/<name>/` as a paired `<Name>.jsx` + `<name>.css`, and the component imports its own stylesheet. Section content (portfolio cards, services, experience items, testimonials) is hardcoded as a `data` array at the top of the component and rendered with `.map()` — there is no CMS, JSON file, or backend; updating a project card means editing the array in the relevant component.
 

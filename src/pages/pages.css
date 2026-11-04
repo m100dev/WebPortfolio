@@ -1,0 +1,147 @@
+/* Shared styles for routed pages (guides, memos, 404) */
+
+.page {
+    /* Same width as .container, used to left-align intro copy with the heading */
+    --page-width: var(--container-width-lg);
+    /* Clear the fixed top nav */
+    padding-top: 4.5rem;
+    min-height: 70vh;
+}
+
+.page > section:first-child {
+    margin-top: 4rem;
+}
+
+.page-intro > h2 {
+    margin-bottom: 1.2rem;
+}
+
+.page-intro__lede,
+.page-intro__body {
+    width: min(44rem, var(--page-width));
+    margin-left: calc((100% - var(--page-width)) / 2);
+}
+
+.page-intro__lede {
+    color: var(--color-light);
+    font-size: 1.05rem;
+}
+
+.page-intro__body > p {
+    margin-bottom: 2rem;
+}
+
+.page-intro__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- Guide index cards (Work-card style) ---------- */
+
+/* Compound selector: global .container (index.css loads last) resets margins */
+.container.guide-cards {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.guide-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 2rem;
+    border-radius: 2rem;
+    background-color: var(--color-bg-variant);
+    border: 1px solid transparent;
+    transition: var(--transition);
+}
+
+.guide-card:hover,
+.guide-card:focus-within {
+    border-color: var(--color-primary-variant);
+    background: transparent;
+    translate: 0 -6px;
+}
+
+.guide-card__meta {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.guide-card h3 {
+    font-size: 1.4rem;
+}
+
+/* Whole card is clickable; the link's ::after covers it */
+.guide-card__link {
+    color: var(--color-white);
+}
+
+.guide-card__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+.guide-card__link:focus-visible {
+    outline: none;
+}
+
+.guide-card:has(.guide-card__link:focus-visible) {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+}
+
+.guide-card__summary {
+    color: var(--color-light);
+    font-size: 0.95rem;
+}
+
+.guide-card__cta {
+    margin-top: auto;
+    padding-top: 0.6rem;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+
+/* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
+
+@media screen and (max-width: 1024px) {
+    .page {
+        --page-width: var(--container-width-md);
+    }
+
+    .guide-cards {
+        gap: 1.2rem;
+    }
+}
+
+
+/* ============================== MEDIA QUERIES (SMALL DEVICES) ============================== */
+
+@media screen and (max-width: 600px) {
+    .page {
+        --page-width: var(--container-width-sm);
+    }
+
+    .page > section:first-child {
+        margin-top: 2.5rem;
+    }
+
+    .container.guide-cards {
+        grid-template-columns: 1fr;
+        margin-top: 2.5rem;
+    }
+
+    .guide-card {
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+    }
+}

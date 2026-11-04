@@ -7,10 +7,14 @@ const isAtPageBottom = () =>
   window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
 
 // Returns the id of the section currently crossing the middle of the viewport.
-const useActiveSection = () => {
+// Only tracks while `enabled` (the home page); returns null elsewhere.
+const useActiveSection = (enabled = true) => {
   const [active, setActive] = useState('home')
 
   useEffect(() => {
+    if (!enabled) return undefined
+    setActive('home')
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -35,9 +39,9 @@ const useActiveSection = () => {
       observer.disconnect()
       window.removeEventListener('scroll', onScroll)
     }
-  }, [])
+  }, [enabled])
 
-  return active
+  return enabled ? active : null
 }
 
 export default useActiveSection

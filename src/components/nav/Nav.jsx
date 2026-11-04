@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './nav.css'
 import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import useActiveSection from '../../hooks/useActiveSection'
 
+// Home sections, linked as #id on the home page and /#id from other pages
 const links = [
   { id: 'portfolio', label: 'Work' },
   { id: 'ai-engineering', label: 'How I Build' },
@@ -11,10 +13,23 @@ const links = [
   { id: 'contact', label: 'Contact' }
 ]
 
+// Separate pages, linked as routes
+const pages = [
+  { to: '/guides', label: 'Guides' }
+]
+
+// On home, plain anchors keep native smooth scrolling; elsewhere route back to /#id.
+const SectionLink = ({ id, onHome, children, ...props }) =>
+  onHome
+    ? <a href={`#${id}`} {...props}>{children}</a>
+    : <Link to={{ pathname: '/', hash: `#${id}` }} {...props}>{children}</Link>
+
 // Sticky top bar: transparent over the hero, frosted once scrolled.
 // The active link follows the section in view; on small screens the links move into a menu sheet.
 const Nav = () => {
-  const active = useActiveSection()
+  const { pathname } = useLocation()
+  const onHome = pathname === '/'
+  const active = useActiveSection(onHome)
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButton = useRef(null)
@@ -46,25 +61,33 @@ const Nav = () => {
       className={`site-nav${scrolled || menuOpen ? ' site-nav--solid' : ''}${menuOpen ? ' site-nav--open' : ''}`}
     >
       <div className='site-nav__inner'>
-        <a href='#home' className='site-nav__logo' aria-label='Marc Bastien, back to top' onClick={closeMenu}>
+        <SectionLink id='home' onHome={onHome} className='site-nav__logo' aria-label='Marc Bastien, back to top' onClick={closeMenu}>
           MB
-        </a>
+        </SectionLink>
 
         <ul id='site-nav-links' className='site-nav__links'>
           {links.map(({ id, label }) => (
             <li key={id}>
-              <a
-                href={`#${id}`}
+              <SectionLink
+                id={id}
+                onHome={onHome}
                 className={active === id ? 'is-active' : ''}
                 aria-current={active === id ? 'location' : undefined}
                 onClick={closeMenu}
               >
                 {label}
-              </a>
+              </SectionLink>
+            </li>
+          ))}
+          {pages.map(({ to, label }) => (
+            <li key={to}>
+              <NavLink to={to} className={({ isActive }) => (isActive ? 'is-active' : '')} onClick={closeMenu}>
+                {label}
+              </NavLink>
             </li>
           ))}
           <li className='site-nav__cta'>
-            <a href='#contact' className='btn btn-primary' onClick={closeMenu}>Let's talk</a>
+            <SectionLink id='contact' onHome={onHome} className='btn btn-primary' onClick={closeMenu}>Let's talk</SectionLink>
           </li>
         </ul>
 
