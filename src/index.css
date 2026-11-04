@@ -59,26 +59,28 @@
 :root[data-theme="light"] {
     color-scheme: light;
 
-    --rgb-bg: 248, 250, 252;
+    /* Cobalt on cool paper: a near-monochrome base with one deliberate accent (Swiss style),
+       kept clear of warm ivory and clay so light mode doesn't read as Anthropic's palette.
+       Cobalt is 7.1:1 on the page, 7.9:1 on white, and the page colour on a cobalt fill is 7.1:1. */
+    --rgb-bg: 242, 243, 245;
     --rgb-bg-variant: 255, 255, 255;
-    /* amber-700: 5:1 on white, so it works for text as well as fills */
-    --rgb-primary: 180, 83, 9;
-    --rgb-light: 51, 65, 85;
+    --rgb-primary: 42, 60, 209;
+    --rgb-light: 39, 39, 42;
 
-    --color-bg: #F8FAFC;
+    --color-bg: #F2F3F5;
     --color-bg-variant: #FFFFFF;
-    --color-border: #E2E8F0;
-    --color-primary: #B45309;
-    --color-white: #0F172A;
-    --color-light: #334155;
-    --color-muted: #475569;
+    --color-border: #DFE1E6;
+    --color-primary: #2A3CD1;
+    --color-white: #0A0A0B;
+    --color-light: #27272A;
+    --color-muted: #52525B;
 
     --color-success: #15803D;
     --rgb-success: 21, 128, 61;
     --color-danger: #B91C1C;
     --rgb-danger: 185, 28, 28;
 
-    --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -12px rgba(15, 23, 42, 0.12);
+    --shadow-card: 0 1px 2px rgba(10, 10, 11, 0.04), 0 8px 24px -12px rgba(10, 10, 11, 0.12);
 }
 
 html {
@@ -93,7 +95,7 @@ html {
     }
 }
 
-/* Thin navy/amber scrollbar (Chromium/Safari) */
+/* Thin scrollbar in the accent colour (Chromium/Safari) */
 ::-webkit-scrollbar {
     width: 8px;
 }
