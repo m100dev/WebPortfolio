@@ -183,6 +183,49 @@
     color: var(--color-light);
 }
 
+.guide__version {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+}
+
+.guide__changelog {
+    flex-basis: 100%;
+    font-size: 0.85rem;
+    color: var(--color-light);
+}
+
+.guide__changelog summary {
+    width: fit-content;
+    cursor: pointer;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.guide__changelog summary:hover {
+    color: var(--color-white);
+}
+
+.guide__changelog ol {
+    margin-top: 0.8rem;
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--color-border);
+    display: grid;
+    gap: 0.6rem;
+}
+
+.guide__changelog li {
+    display: grid;
+    gap: 0.1rem;
+}
+
+.guide__changelog-meta {
+    font-size: 0.75rem;
+    color: var(--color-primary);
+}
+
 .guide__license {
     font-size: 0.85rem;
     color: var(--color-muted);

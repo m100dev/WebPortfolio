@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BsArrowLeft, BsGithub } from 'react-icons/bs'
+import formatDate from '../../utils/formatDate'
 import './guide.css'
 
 const slugify = (text) =>
@@ -107,6 +108,11 @@ const GuideLayout = ({ guide, children }) => {
         <p className='guide__eyebrow mono'>{guide.eyebrow || 'Guide'} · {guide.readingTime}</p>
         <h1 className='guide__title'>{guide.title}</h1>
         <p className='guide__summary'>{guide.summary}</p>
+        {guide.version && (
+          <p className='guide__version mono'>
+            v{guide.version} · Updated <time dateTime={guide.updated}>{formatDate(guide.updated)}</time>
+          </p>
+        )}
         {guide.facts && (
           <ul className='guide__facts mono'>
             {guide.facts.map((fact) => <li key={fact}>{fact}</li>)}
@@ -160,6 +166,21 @@ const GuideLayout = ({ guide, children }) => {
           <BsArrowLeft aria-hidden='true' /> Back to Guides
         </Link>
         {guide.footnote && <p className='guide__footnote'>{guide.footnote}</p>}
+        {guide.changes?.length > 0 && (
+          <details className='guide__changelog'>
+            <summary className='mono'>Version history</summary>
+            <ol>
+              {guide.changes.map((change) => (
+                <li key={change.version}>
+                  <span className='guide__changelog-meta mono'>
+                    v{change.version} · <time dateTime={change.date}>{formatDate(change.date)}</time>
+                  </span>
+                  <span>{change.note}</span>
+                </li>
+              ))}
+            </ol>
+          </details>
+        )}
         {guide.license && (
           <p className='guide__license'>
             © {guide.year} Marc Bastien · Licensed{' '}

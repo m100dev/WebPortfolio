@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import guides from '../content/guides'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import formatDate from '../utils/formatDate'
 import './pages.css'
 
 const Guides = () => {
@@ -18,9 +19,12 @@ const Guides = () => {
       </section>
 
       <div className='container guide-cards'>
-        {guides.map(({ slug, title, summary, tags, readingTime }, index) => (
+        {guides.map(({ slug, title, summary, tags, readingTime, updated }, index) => (
           <article key={slug} className='guide-card reveal' style={{ '--i': index }}>
-            <p className='guide-card__meta mono'>{readingTime}</p>
+            <p className='guide-card__meta mono'>
+              {readingTime}
+              {updated && <> · Updated <time dateTime={updated}>{formatDate(updated)}</time></>}
+            </p>
             <h3><Link to={`/guides/${slug}`} className='guide-card__link'>{title}</Link></h3>
             <p className='guide-card__summary'>{summary}</p>
             <ul className='tag-list'>

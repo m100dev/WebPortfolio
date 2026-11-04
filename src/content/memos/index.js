@@ -1,4 +1,5 @@
 import templateFile from './_template.md'
+import formatDate from '../../utils/formatDate'
 
 // Memos: short posts. Each body is a Markdown file in this folder, imported as a URL
 // (CRA emits it as a static asset) and fetched by pages/Memo.jsx.
@@ -28,5 +29,4 @@ export const findMemo = (slug, list = memos, includeDrafts = SHOW_DRAFTS) =>
 
 export const hasPublishedMemos = (list = memos) => list.some((memo) => !memo.draft)
 
-export const formatMemoDate = (date) =>
-  new Date(`${date}T12:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+export const formatMemoDate = formatDate
