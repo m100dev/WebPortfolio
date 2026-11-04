@@ -39,7 +39,7 @@ Then wire up the site:
 1. In the Amplify Console, go to **App settings → Environment variables** and add `REACT_APP_VISITOR_API_URL` with the `api_url` output, for example `https://abc123.execute-api.us-east-1.amazonaws.com/visits`.
 2. **Redeploy** the site. `REACT_APP_*` variables are baked in at build time, so the counter only appears after a new build.
 
-To try it locally, run `REACT_APP_VISITOR_API_URL=<api_url> npm start`. `localhost:3000` is already an allowed CORS origin.
+To try it locally, run `REACT_APP_VISITOR_API_URL=<api_url> npm start` (Bash) or `$env:REACT_APP_VISITOR_API_URL='<api_url>'; npm start` (PowerShell). `localhost:3000` is already an allowed CORS origin.
 
 State is stored locally in `terraform.tfstate`, which is git-ignored. Keep it somewhere safe, or add an S3 backend if you want remote state.
 

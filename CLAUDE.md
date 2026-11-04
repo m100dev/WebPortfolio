@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` — production build into `build/`
 - `npm test` — Jest in watch mode (CRA's React Testing Library setup). `src/setupTests.js` shims `matchMedia`, `IntersectionObserver` and `scrollTo` for jsdom
 - `npm test -- --watchAll=false <pattern>` — run a single test file or pattern non-interactively
-- `CI=true npm run build` — build the way Amplify does (ESLint warnings fail the build)
+- `CI=true npm run build` (Bash) / `$env:CI='true'; npm run build` (PowerShell) — build the way Amplify does (ESLint warnings fail the build). Plain `npm run build` works everywhere but treats lint warnings as warnings
 - `cd infra/visitor-counter/lambda && python -m unittest` — visitor-counter Lambda tests (stubbed DynamoDB, no AWS needed)
 
 Do not run `npm run eject` — it is a one-way operation that abandons CRA's managed config.
