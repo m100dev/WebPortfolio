@@ -1,42 +1,73 @@
 import React from 'react'
 import './about.css'
-import ME from '../../assets/me-about-nature.jpg'
-import { TbMilitaryAward, TbServer2, TbCertificate } from 'react-icons/tb'
+import ME from '../../assets/Marc Bastien About Casual.webp'
+
+// What Marc is working on right now (replaces the old stat cards, which repeated the hero metrics)
+const now = [
+  { label: 'Building', value: 'MyAutoTab, a multi-tenant SaaS' },
+  { label: 'Studying', value: 'Applied Agentic AI (Virginia Tech)' },
+  { label: 'Earning', value: 'CompTIA Security+' },
+  { label: 'Experimenting', value: 'Local LLMs on a Mac mini M5 Pro' }
+]
+
+const certs = [
+  { name: 'CCNA (2026)' },
+  { name: 'Azure Fundamentals (2024)' },
+  { name: 'CIW JavaScript Specialist (2021)' },
+  { name: 'CompTIA Security+', status: 'in progress' },
+  { name: 'Virginia Tech Applied Agentic AI', status: 'in progress' }
+]
 
 const About = () => {
   return (
     <section id='about'>
-      <h5>Learn More</h5>
-      <h2>About Me</h2>
+      <h5 className='reveal'>04 — About</h5>
+      <h2 className='reveal'>A bit about me</h2>
       <div className="container about__container">
         <div className="about__me">
           <div className="about__me-image">
-            <img src={ME} alt="Marc Bastien standing in a park surrounded by nature" />
+            <img src={ME} loading="lazy" alt="Marc Bastien in a casual jacket, smiling" />
           </div>
         </div>
 
         <div className="about__content">
-          <div className="about__cards">
-            <article className="about__card">
-              <TbMilitaryAward className='about__card-icon'/>
-              <h5>Experience</h5>
-              <small>5+ Years</small>
-            </article>
-            <article className="about__card">
-              <TbServer2 className='about__card-icon'/>
-              <h5>Environments</h5>
-              <small>5+ Managed</small>
-            </article>
-            <article className="about__card">
-              <TbCertificate className='about__card-icon'/>
-              <h5>Certifications</h5>
-              <small>6 Active</small>
-            </article>
+          <div className="about__now">
+            <p className="about__now-title mono">Currently</p>
+            <dl>
+              {now.map(({ label, value }) => (
+                <div key={label} className="about__now-row">
+                  <dt className="mono">{label}</dt>
+                  <dd>{value}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
-          <p>
-            Systems administrator and infrastructure engineer with 5+ years supporting enterprise environments across municipal government, healthcare, and cloud operations. Currently serving as Tier 2 IT Support at a South Florida municipality, managing Active Directory, Entra ID, endpoint security, network infrastructure, and IP telephony systems. CCNA and AWS Solutions Architect certified with hands-on experience in cloud infrastructure, scripting, automation, and change management. Independently building and maintaining a production-grade application project demonstrating database administration, CI/CD pipeline management, and structured deployment workflows.
-          </p>
+          <div className="about__bio">
+            <p>
+              I’m a cloud and AI engineer in the DC/Maryland area, and I like building things that actually get used.
+            </p>
+            <p>
+              Right now that’s MyAutoTab, a vehicle management app for owners of cars, boats, jet skis, and ATVs. I built it end to end with React, .NET, and PostgreSQL, set up CI/CD with GitHub Actions, and use a test-driven Claude Code workflow that took features from about a week to under a day. I share the build on YouTube, including a walkthrough of how I debugged a race condition.
+            </p>
+            <p>
+              Before this, I spent six years keeping enterprise systems running for a city government, a healthcare company, and airline customers on AWS and Azure, including identity and device management for 3,000+ devices at the City of Miami Beach.
+            </p>
+            <p>
+              I also run a sandboxed local AI agent on a Mac mini and publish hands-on lab guides, like my Hybrid Azure Virtual Desktop lab.
+            </p>
+            <p>
+              CCNA and Azure Fundamentals certified, working toward Security+. U.S. citizen, eligible for a security clearance.
+            </p>
+          </div>
+
+          <ul className="tag-list about__certs">
+            {certs.map(({ name, status }) => (
+              <li key={name} className={status ? 'tag about__cert--pending' : 'tag'}>
+                {name}{status && ` · ${status}`}
+              </li>
+            ))}
+          </ul>
 
           <a href="#contact" className="btn btn-primary">Get In Touch</a>
         </div>

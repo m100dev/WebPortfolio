@@ -6,62 +6,122 @@
 
 .about__me {
     width: 100%;
-    aspect-ratio: 1/1;
-    border-radius: 2rem;
-    background: linear-gradient(45deg, transparent, var(--color-primary), transparent);
-    display: grid;
-    place-items: center;
+    /* Follow the bio while the layout has two columns */
+    position: sticky;
+    top: 3rem;
+    align-self: start;
 }
 
+/* Same framing as the hero portrait: rounded photo with an amber offset outline */
 .about__me-image {
-    border-radius: 2rem;
-    overflow: hidden;
-    transform: rotate(10deg);
-    transition: var(--transition);
+    position: relative;
+    aspect-ratio: 4 / 5;
 }
 
-.about__me-image:hover {
-    transform: rotate(0deg);
+.about__me-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translate(-1rem, 1rem);
+    border: 2px solid var(--color-primary);
+    border-radius: 1.5rem;
+    transition: transform 500ms var(--ease-out);
 }
 
-.about__cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+.about__me-image:hover::before {
+    transform: translate(-0.5rem, 0.5rem);
 }
 
-.about__card {
-    background-color: var(--color-bg-variant);
-    border: 1px solid transparent;
-    border-radius: 1rem;
-    padding: 2rem;
-    text-align: center;
-    transition: var(--transition);
+.about__me-image img {
+    position: relative;
+    height: 100%;
+    border-radius: 1.5rem;
+    object-position: center 15%;
 }
 
-.about__card:hover {
-    background: transparent;
-    border-color: var(--color-primary-variant);
+/* "Currently" snapshot: mono labels on the left, a hairline between rows */
+.about__now {
+    padding: 1.4rem 1.6rem;
+    border-radius: 1.2rem;
+    border: 1px solid var(--color-border);
+    background-color: rgba(30, 41, 59, 0.5);
 }
 
-.about__card-icon {
+.about__now-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-primary);
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
 }
 
-.about__card h5 {
-    font-size: 0.9rem;
+/* Pulsing "live" dot */
+.about__now-title::before {
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6);
+    animation: now-pulse 2.4s ease-out infinite;
 }
 
-.about__card small {
-    font-size: 0.8rem;
-    color: var(--color-light);
+@keyframes now-pulse {
+    to {
+        box-shadow: 0 0 0 0.6rem rgba(245, 158, 11, 0);
+    }
 }
 
-.about__content p {
+.about__now-row {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.about__now-row:first-child {
+    border-top: 0;
+}
+
+.about__now-row dt {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    padding-top: 0.15rem;
+}
+
+.about__now-row dd {
+    color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about__now-title::before {
+        animation: none;
+    }
+}
+
+.about__bio {
     margin: 2rem 0 2.6rem 0;
+}
+
+.about__bio p {
     color: var(--color-light);
+}
+
+.about__bio p + p {
+    margin-top: 1rem;
+}
+
+.about__certs {
+    margin: -1rem 0 2.6rem 0;
+}
+
+.about__cert--pending {
+    border-style: dashed;
+    opacity: 0.85;
 }
 
 /* ============================== MEDIA QUERIES (MEDIUM DEVICES) ============================== */
@@ -73,11 +133,12 @@
     }
 
     .about__me {
+        position: static;
         width: 50%;
         margin: 2rem auto 4rem;
     }
 
-    .about__content p {
+    .about__bio {
         margin: 1rem 0 1.5rem;
     }
 }
@@ -91,16 +152,20 @@
         margin: 0 auto 3rem;
     }
 
-    .about__cards {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+    .about__now {
+        padding: 1.1rem 1.2rem;
     }
 
-    .about__content {
-        text-align: center;
+    .about__now-row {
+        grid-template-columns: 1fr;
+        gap: 0.1rem;
     }
 
-    .about__content p {
+    .about__certs {
+        margin: 0 0 1.5rem 0;
+    }
+
+    .about__bio {
         margin: 1.5rem 0;
     }
 }
