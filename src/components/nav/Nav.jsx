@@ -1,23 +1,85 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './nav.css'
-import { RiHome2Line, RiUser6Line, RiBook2Line } from 'react-icons/ri';
-import { MdOutlineHomeRepairService } from 'react-icons/md';
-import { BsRobot } from 'react-icons/bs';
-import { LuMessagesSquare } from 'react-icons/lu';
-import { useState } from 'react';
+import { HiOutlineMenuAlt4, HiOutlineX } from 'react-icons/hi'
+import useActiveSection from '../../hooks/useActiveSection'
 
-// This component allows the user to navigate between the different sections of the website
+const links = [
+  { id: 'portfolio', label: 'Work' },
+  { id: 'ai-engineering', label: 'How I Build' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'about', label: 'About' },
+  { id: 'contact', label: 'Contact' }
+]
+
+// Sticky top bar: transparent over the hero, frosted once scrolled.
+// The active link follows the section in view; on small screens the links move into a menu sheet.
 const Nav = () => {
-  const [activeNav, setActiveNav] = useState('#home'); // useState used to dynamically handle the the class which highlights the selected menu item
+  const active = useActiveSection()
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuButton = useRef(null)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+        menuButton.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
+  const closeMenu = () => setMenuOpen(false)
 
   return (
-    <nav>
-      <a href="#home" onClick={() => { setActiveNav('#home')}} className={ activeNav === '#home' ? 'active' : '' }><RiHome2Line/></a>
-      <a href="#about" onClick={() => { setActiveNav('#about')}} className={ activeNav === '#about' ? 'active' : '' }><RiUser6Line/></a>
-      <a href="#experience" onClick={() => { setActiveNav('#experience')}} className={ activeNav === '#experience' ? 'active' : '' }><RiBook2Line/></a>
-      <a href="#services" onClick={() => { setActiveNav('#services')}} className={ activeNav === '#services'? 'active' : '' }><MdOutlineHomeRepairService/></a>
-      <a href="#ai-engineering" onClick={() => { setActiveNav('#ai-engineering')}} className={ activeNav === '#ai-engineering'? 'active' : '' }><BsRobot/></a>
-      <a href="#contact" onClick={() => { setActiveNav('#contact')}} className={ activeNav === '#contact'? 'active' : '' }><LuMessagesSquare/></a>
+    <nav
+      aria-label='Primary'
+      className={`site-nav${scrolled || menuOpen ? ' site-nav--solid' : ''}${menuOpen ? ' site-nav--open' : ''}`}
+    >
+      <div className='site-nav__inner'>
+        <a href='#home' className='site-nav__logo' aria-label='Marc Bastien, back to top' onClick={closeMenu}>
+          MB
+        </a>
+
+        <ul id='site-nav-links' className='site-nav__links'>
+          {links.map(({ id, label }) => (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                className={active === id ? 'is-active' : ''}
+                aria-current={active === id ? 'location' : undefined}
+                onClick={closeMenu}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+          <li className='site-nav__cta'>
+            <a href='#contact' className='btn btn-primary' onClick={closeMenu}>Let's talk</a>
+          </li>
+        </ul>
+
+        <button
+          ref={menuButton}
+          type='button'
+          className='site-nav__toggle'
+          aria-expanded={menuOpen}
+          aria-controls='site-nav-links'
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <HiOutlineX /> : <HiOutlineMenuAlt4 />}
+        </button>
+      </div>
     </nav>
   )
 }
