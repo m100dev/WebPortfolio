@@ -34,6 +34,17 @@
     aspect-ratio: 16 / 10;
 }
 
+/* Hairline ring so screenshots with white edges don't melt into a white card in light mode */
+.portfolio__item-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(var(--rgb-light), 0.14);
+    pointer-events: none;
+}
+
 /* Images are stacked; only the active one is visible, so switching crossfades */
 .portfolio__item-image img {
     position: absolute;

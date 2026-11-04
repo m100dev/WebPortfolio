@@ -5,7 +5,7 @@ import IMG_MYAUTOTAB from '../../assets/MyAutoTabProject.webp';
 import IMG_AVD from '../../assets/Hybrid_Identity.webp';
 import IMG_1101_SITE from '../../assets/1101-Brickell-Site.webp';
 import IMG_1101_MAPS from '../../assets/1101-Maps-Api-Feature.webp';
-import IMG_BOCA from '../../assets/bocadelray.webp';
+import IMG_BOCA from '../../assets/bocadelraypc.webp';
 import IMG_VILLA from '../../assets/villa-majorca-site.webp';
 import IMG_LOCAL_LLM from '../../assets/Hello-LocalLLM-Project.webp';
 import { Link } from 'react-router-dom';
