@@ -14,7 +14,7 @@ const guides = [
     tags: ['Azure Virtual Desktop', 'Entra ID', 'Intune', 'PowerShell'],
     readingTime: '80 min read',
     repo: 'https://github.com/m100dev/AVD-Enterprise-Lab-Portfolio',
-    footnote: 'Advanced portfolio project for aspiring mid-to-senior system administrators.',
+    footnote: 'Advanced portfolio project for aspiring mid-to-senior cloud engineers / sysadmins.',
     license: true,
     year: 2026,
     toc: avdToc,
