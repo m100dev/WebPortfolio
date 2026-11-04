@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
 import './portfolio.css'
 import IMG_MYAUTOTAB from '../../assets/MyAutoTabProject.webp';
 import IMG_AVD from '../../assets/Hybrid_Identity.webp';
@@ -8,7 +9,8 @@ import IMG_BOCA from '../../assets/bocadelray.webp';
 import IMG_VILLA from '../../assets/villa-majorca-site.webp';
 import IMG_LOCAL_LLM from '../../assets/Hello-LocalLLM-Project.webp';
 import { Link } from 'react-router-dom';
-import { BsCpu, BsArrowRight } from 'react-icons/bs';
+import { BsCpu, BsArrowRight, BsArrowsAngleExpand, BsPauseFill, BsPlayFill } from 'react-icons/bs';
+import ImageZoom, { ZOOM_TRANSITION_NAME, canMorph } from './ImageZoom';
 
 // repo: a URL (GitHub button), 'private' (disabled Private Repo badge), or null (no repo button)
 // fit: 'contain' shows the whole image (for diagrams) instead of cropping it to the frame
@@ -75,52 +77,126 @@ const data = [
 
 const ROTATE_MS = 3000;
 
-// Crossfades through a card's images every 3s and pauses while hovered. Single images render statically.
+const prefersReducedMotion = () => !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+// A card's image frame. Multi-image cards crossfade every 3s; rotation pauses on hover, on
+// keyboard focus, while the image is enlarged, or via the pause button (WCAG 2.2.2), and never
+// starts for reduced-motion users. Clicking/tapping the image opens it enlarged (ImageZoom).
 const ImageRotator = ({ images, fit, title }) => {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [userPaused, setUserPaused] = useState(prefersReducedMotion);
+  const [zoomed, setZoomed] = useState(false);
+  const [morph, setMorph] = useState(false);
+  const imgRefs = useRef([]);
   const count = images.length;
+  const current = images[index];
+
+  const running = count > 1 && !hovered && !focused && !userPaused && !zoomed;
 
   useEffect(() => {
-    if (count < 2 || paused) return undefined;
+    if (!running) return undefined;
     const timer = setInterval(() => setIndex((i) => (i + 1) % count), ROTATE_MS);
     return () => clearInterval(timer);
-  }, [count, paused]);
+  }, [running, count]);
+
+  // The thumbnail and the enlarged image swap the shared view-transition name, so the
+  // browser morphs one into the other; without view transitions the dialog just fades in.
+  const openZoom = () => {
+    const thumb = imgRefs.current[index];
+    if (!canMorph() || !thumb) {
+      setMorph(false);
+      setZoomed(true);
+      return;
+    }
+    setMorph(true);
+    thumb.style.viewTransitionName = ZOOM_TRANSITION_NAME;
+    document.startViewTransition(() => {
+      thumb.style.viewTransitionName = '';
+      flushSync(() => setZoomed(true));
+    });
+  };
+
+  const closeZoom = () => {
+    const thumb = imgRefs.current[index];
+    if (!morph || !canMorph() || !thumb) {
+      setZoomed(false);
+      return;
+    }
+    const transition = document.startViewTransition(() => {
+      flushSync(() => setZoomed(false));
+      thumb.style.viewTransitionName = ZOOM_TRANSITION_NAME;
+    });
+    transition.finished.finally(() => { thumb.style.viewTransitionName = ''; });
+  };
 
   return (
-    <div
-      className={fit === 'contain' ? 'portfolio__item-image portfolio__item-image--contain' : 'portfolio__item-image'}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      {count === 0 && <div className="portfolio__item-placeholder"><BsCpu /></div>}
-      {images.map(({ src, caption }, i) => (
-        <img
-          key={src}
-          src={src}
-          loading="lazy"
-          alt={caption || `${title} screenshot`}
-          className={i === index ? 'is-active' : ''}
-          aria-hidden={i !== index}
-        />
-      ))}
-      {count > 1 && (
-        <>
-          <span className="portfolio__item-caption">{images[index].caption}</span>
-          <div className="portfolio__item-dots">
-            {images.map(({ src, caption }, i) => (
+    <>
+      <div
+        className={fit === 'contain' ? 'portfolio__item-image portfolio__item-image--contain' : 'portfolio__item-image'}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onFocus={() => setFocused(true)}
+        onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setFocused(false); }}
+      >
+        {count === 0 && <div className="portfolio__item-placeholder"><BsCpu /></div>}
+        {images.map(({ src, caption }, i) => (
+          <img
+            key={src}
+            ref={(el) => { imgRefs.current[i] = el; }}
+            src={src}
+            loading="lazy"
+            alt={caption || `${title} screenshot`}
+            className={i === index ? 'is-active' : ''}
+            aria-hidden={i !== index}
+          />
+        ))}
+        {count > 0 && (
+          <button
+            type="button"
+            className="portfolio__item-zoom"
+            aria-label={`Expand image: ${current.caption || title}`}
+            onClick={openZoom}
+          >
+            <span className="portfolio__item-zoom-badge mono" aria-hidden="true">
+              <BsArrowsAngleExpand /> Expand
+            </span>
+          </button>
+        )}
+        {count > 1 && (
+          <>
+            <span className="portfolio__item-caption">{current.caption}</span>
+            <div className="portfolio__item-controls">
               <button
-                key={src}
                 type="button"
-                className={i === index ? 'is-active' : ''}
-                aria-label={`Show ${caption}`}
-                onClick={() => setIndex(i)}
-              />
-            ))}
-          </div>
-        </>
+                className="portfolio__item-pause"
+                aria-pressed={userPaused}
+                aria-label={userPaused ? 'Play slideshow' : 'Pause slideshow'}
+                onClick={() => setUserPaused((p) => !p)}
+              >
+                {userPaused ? <BsPlayFill aria-hidden="true" /> : <BsPauseFill aria-hidden="true" />}
+              </button>
+              <div className="portfolio__item-dots">
+                {images.map(({ src, caption }, i) => (
+                  <button
+                    key={src}
+                    type="button"
+                    className={i === index ? 'is-active' : ''}
+                    aria-label={`Show ${caption}`}
+                    aria-current={i === index ? 'true' : undefined}
+                    onClick={() => setIndex(i)}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      {count > 0 && (
+        <ImageZoom open={zoomed} image={current} contain={fit === 'contain'} morph={morph} onClose={closeZoom} />
       )}
-    </div>
+    </>
   );
 };
 
