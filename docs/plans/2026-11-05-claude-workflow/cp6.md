@@ -40,7 +40,7 @@ After this, Marc makes the repo public.
      - May 2026: sysadmin/cloud reposition (link `docs/plans/2026-05-20-sysadmin-reposition.md`);
      - Nov 2026: v2, rebuilt with Claude Code.
    - **How I build:** spec → checkpointed plan → tests → hooks → my review. AI for speed, never at the cost of security or review. Links to `docs/plans/`.
-   - **Architecture:** an ASCII or Mermaid diagram of Amplify → React SPA → API Gateway → Lambda → DynamoDB, deployed with Terraform.
+   - **Architecture:** an ASCII or Mermaid diagram of Route 53 (domain registration and DNS) → Amplify → React SPA → API Gateway → Lambda → DynamoDB, with the counter deployed by Terraform.
    - **Stack table:** run locally, repo layout.
    - **"Why this much tooling on a portfolio site?"** A short section placed right before the skills table, so no reviewer reads it as over-engineering. Marc's framing:
      - A static site doesn't need pre-commit hooks, checkpointed plans or a security audit skill. I added them on purpose.

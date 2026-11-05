@@ -40,8 +40,8 @@ const data = [
     id: 8,
     images: [{ src: IMG_SITE, caption: 'marcbastien.com v2 home page' }],
     title: 'marcbastien.com (v2)',
-    description: 'Rebuilt my portfolio with an AI coding agent under a plan-driven workflow. Every change started as a written spec, passed tests and a lint-as-error build gate, and got my review before it shipped. I pushed back on templated AI design for an original look. Includes a serverless visitor counter (API Gateway, Lambda, DynamoDB) deployed with Terraform, scheduled memo publishing, and AWS Amplify hosting.',
-    stack: ['React', 'Claude Code', 'Terraform', 'AWS Lambda', 'DynamoDB', 'AWS Amplify'],
+    description: 'Rebuilt my portfolio with an AI coding agent under a plan-driven workflow. Every change started as a written spec, passed tests and a lint-as-error build gate, and got my review before it shipped. I pushed back on templated AI design for an original look. Includes a serverless visitor counter (API Gateway, Lambda, DynamoDB) deployed with Terraform, scheduled memo publishing, AWS Amplify hosting, and Route 53 for the domain and DNS.',
+    stack: ['React', 'Claude Code', 'Terraform', 'AWS Lambda', 'DynamoDB', 'AWS Amplify', 'Route 53'],
     repo: 'private',
     demo: null
   },
