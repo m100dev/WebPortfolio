@@ -44,13 +44,13 @@ git push -u origin portfolio-redesign
 ✓ **Check:** the Amplify build finishes green.
 
 ### 4. Check the live site
-- [ ] Hard-refresh (Ctrl+Shift+R) `https://www.marcbastien.com/guides/ai-autonomy-levels` and `/guides/avd-enterprise-workspace`. Both load, not a 404.
-- [ ] `/guides/AVD_Enterprise_Project_Guide.html` redirects to `/guides/avd-enterprise-workspace`.
-- [ ] `/guides/Marc-Bastien-AI-Autonomy-Levels.html` redirects to `/guides/ai-autonomy-levels`.
-- [ ] `/some-made-up-page` shows the site's 404 page.
-- [ ] The sun/moon toggle switches themes, and the choice survives a reload.
-- [ ] `/memos` says "Nothing published yet", and there's no Memos link in the nav. That's expected.
-- [ ] The footer has **no** visitor counter yet. That's expected; Part 2 adds it.
+- [x] Hard-refresh (Ctrl+Shift+R) `https://www.marcbastien.com/guides/ai-autonomy-levels` and `/guides/avd-enterprise-workspace`. Both load, not a 404.
+- [x] `/guides/AVD_Enterprise_Project_Guide.html` redirects to `/guides/avd-enterprise-workspace`.
+- [x] `/guides/Marc-Bastien-AI-Autonomy-Levels.html` redirects to `/guides/ai-autonomy-levels`.
+- [x] `/some-made-up-page` shows the site's 404 page.
+- [x] The sun/moon toggle switches themes, and the choice survives a reload.
+- [x] `/memos` says "Nothing published yet", and there's no Memos link in the nav. That's expected.
+- [x] The footer has **no** visitor counter yet. That's expected; Part 2 adds it.
 
 ---
 
