@@ -97,4 +97,4 @@ REPORT Duration: 7.81 ms  Billed Duration: 8 ms  Memory Size: 256 MB  Max Memory
 
 Startup got slower on purpose: boto3 now loads there, inside its own time allowance, not inside the visitor's 5-second timeout. The 157 ms first request is mostly the first secure connection to DynamoDB.
 
-_Optional re-burst (30 GETs, no POST): not run yet._
+I skipped a second burst after the fix. The cold-start line above proves the cause is gone. A burst would still show some 503s, because the account allows only 10 Lambda instances at once. That's the expected cap, not a bug.

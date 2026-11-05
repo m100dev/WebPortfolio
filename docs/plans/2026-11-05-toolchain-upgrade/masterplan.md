@@ -78,7 +78,7 @@ Rationale: this changes the production build, so it gets its own PR and its own 
 | CP | Title | Depends on | Gate | Status |
 |----|-------|------------|------|--------|
 | 0 | Security brief + this plan | -- | Marc fills in the "Marc's decision" lines in `brief.md` | [x] decided |
-| 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` (EmailJS dashboard: no changes, brief O3) | [x] applied; after-test + autofill check pending (see `cp1.md` "Marc's gate") |
+| 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` (EmailJS dashboard: no changes, brief O3) | [x] applied + verified; autofill check pending (see `cp1.md` "Marc's gate") |
 | 2 | Vite + Vitest + ESLint 9 (parity swap) | 1 | Marc confirms Amplify's Node version | [ ] |
 | 3 | Runtime majors + dependency cleanup | 2 | Marc reviews the diff | [ ] |
 | 4 | Docs, before/after numbers, PR | 3 | Marc merges and checks the live site, then the claude-workflow rebase | [ ] |
@@ -99,7 +99,7 @@ These run strictly in sequence. CP1's frontend honeypot and its Terraform are in
 
 ## Status tracker
 - [x] CP0 — security brief + plan (decisions filled 2026-11-05)
-- [x] CP1 — abuse hardening (applied 2026-11-05; after-burst test and honeypot autofill check still pending)
+- [x] CP1 — abuse hardening (applied and verified 2026-11-05; honeypot autofill check pending before merge)
 - [ ] CP2 — Vite + Vitest parity swap
 - [ ] CP3 — runtime majors
 - [ ] CP4 — docs, numbers, PR
