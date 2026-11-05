@@ -62,6 +62,39 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
 - Burst test results (if approved): the counts before, and after apply.
 - Security review: this CP touches infra and user input. Walk through the security-audit checklist from `brief.md`'s Method by hand, and record the IAM actions added.
 
+## Results (2026-11-05)
+- **Context:** `/context` wasn't run in this session (it's a user command), so this is not measured.
+- **Prerequisites:** all passed. Branch and CP0 commit OK; O1–O4 filled (Marc clarified O1 as "shared throttle, split, and alarm"); 14 Jest + 7 Lambda tests; Terraform 1.12.2 validate.
+- **Terraform:** `fmt -check` and `validate` pass. `plan` (with `-var alert_email=placeholder@example.invalid`) gives `Plan: 6 to add, 1 to change, 0 to destroy.` The change is the stage, in place.
+- **Tests:**
+  - `python -m unittest`: 7 OK, and `handler.py` is unchanged.
+  - `npm test -- --watchAll=false`: 17/17, including 3 new in `Contact.test.jsx` (filled honeypot never calls `sendForm`; empty honeypot calls it once; the field is hidden from assistive tech).
+  - `CI=true npm run build`: passes.
+- **Hand security grep:** no `dangerouslySetInnerHTML`, `eval` or `innerHTML` in the new code. The only email in the diff is the `you@example.com` placeholder.
+- **Burst test, before** (Marc approved GET-only; 31 GETs sent in total, no POST): 30 concurrent → **10 × 500, 20 × 503, no 200s and no 429s**. One GET after that → 200.
+  - **[DISCOVERED]** step 6's expectation of "~10 × 200, rest 429" was wrong. The cause is unconfirmed, because the deployer user can't read logs or metrics (AccessDenied on `logs:FilterLogEvents`, `cloudwatch:GetMetricStatistics`, `lambda:GetAccountSettings`).
+- **Burst test, after apply:** pending Marc's `terraform apply`. Repeat the same 30 GETs, then read `status`, `error`, `integrationStatus` and `integrationError` in the access logs.
+- **[DISCOVERED] D2 widened:** a `5xx` alarm was added next to the `4xx` one. The burst produced no 4xx, so a 4xx-only alarm would have missed it.
+  - Access logs also capture `$context.error.message`, `integrationErrorMessage` and `integrationStatus`.
+  - Thresholds are variables: 4xx > 50 per 5 min for 15 min; 5xx ≥ 5 per 5 min.
+- **Honeypot:** the field is named `website`, not `company`. Browser autofill can fill organisation fields even with `autocomplete="off"`, which would silently drop a real visitor's message. The input is in a wrapper with `aria-hidden`, positioned off-screen (`contact__hp`).
+- **[DISCOVERED] `infra/visitor-counter/CLAUDE.md`** exists only on `chore/claude-workflow`. Creating it here would conflict at rebase, so its facts went into the README, and cp4 "After merge" step 4 carries the update.
+- **Security walkthrough:**
+  - the throttle is still a shared cap;
+  - CORS, the Lambda IAM role and the handler are unchanged;
+  - the alert email is only a no-default, `sensitive` variable (`terraform.tfvars` is git-ignored);
+  - the SNS topic is unencrypted on purpose (alarms can't publish to the AWS-managed key; the messages hold no data);
+  - access logs hold IPs for 14 days, which the README notes;
+  - the budget covers the whole account.
+  - The deployer IAM actions are listed in the README's "Deployer IAM" table (logs delivery, SNS, CloudWatch alarms, budgets), with no read access to logs or metrics.
+
+### Marc's gate (outward-facing, not done by the agent)
+1. Add the README's "Deployer IAM" actions to the deployer policy.
+2. Create `infra/visitor-counter/terraform.tfvars` with `alert_email`, then run `terraform plan` and `terraform apply`. Click the SNS confirmation email.
+3. Check the account's Lambda concurrency limit (`aws lambda get-account-settings` with your own credentials, or the Lambda console). If it's around 10, a GET burst of 10 plus a POST burst of 5 can exceed it, so lower the bursts in tfvars.
+4. OK the "after" burst test (30 GETs, no POST) in a later session, and read the access logs.
+5. EmailJS dashboard (brief O3): origin allowlist, rate limit, and reCAPTCHA if the plan allows it.
+
 ## Commit
 `added per-route throttles, access logs, cost alerts and a contact honeypot`
 

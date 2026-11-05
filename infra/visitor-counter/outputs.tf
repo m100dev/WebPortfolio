@@ -7,3 +7,8 @@ output "table_name" {
   description = "DynamoDB table holding the count."
   value       = aws_dynamodb_table.counter.name
 }
+
+output "access_log_group" {
+  description = "CloudWatch Logs group holding the API's access logs."
+  value       = aws_cloudwatch_log_group.access.name
+}

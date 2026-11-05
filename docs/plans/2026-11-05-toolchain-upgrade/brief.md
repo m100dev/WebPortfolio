@@ -1,6 +1,6 @@
 # Security brief: can someone take this site down?
 
-## Status: AWAITING MARC'S DECISIONS
+## Status: DECIDED (2026-11-05) · O1–O3 implemented in CP1
 ## Written: 2026-11-05 · researched and drafted by Claude Code, decided by Marc
 
 ## Why this brief exists
@@ -29,6 +29,14 @@ I asked the agent to brief me first: verify or refute the hypothesis with eviden
 | V7 | **Contact form** abuse (spam the inbox, use up the EmailJS quota) | **Plausible, partly mitigated by EmailJS** | The public key is in the browser by design, and `Contact.jsx:44-62` has no honeypot or CAPTCHA. EmailJS says it applies IP-based rate limits and offers an origin allowlist and reCAPTCHA. The developer has to turn reCAPTCHA on. Plan gating to confirm in the dashboard. |
 | V8 | Abuse "Ask Marc" | **Refuted** | Canned answers, no backend. |
 
+**[DISCOVERED] in CP1, corrections to V3/V4:**
+- **Live burst test (2026-11-05, 30 concurrent GETs, before CP1's changes):** 10 × 500 and 20 × 503, with no 200s and no 429s. A single GET right after returned 200.
+  - So under a burst, even the admitted requests failed, which is worse than "real visitors get a 429".
+  - The cause isn't confirmed: the deployer user can't read logs or metrics. One suspect is the account's Lambda concurrency limit.
+  - CP1 added a 5xx alarm and error fields in the access logs to find out.
+- **AWS's throttling page doesn't say** whether `default_route_settings` is one bucket shared by every route or a default applied to each route. If it's per route, today's worst case was 5 rps per route, not 5 in total. CP1 overrides both routes, so that ambiguity no longer matters.
+- **The worst case is recomputed** in `infra/visitor-counter/README.md` at ≈ $32/month: POST 2 + GET 5 rps, now counting the reads and the access logs.
+
 ## Worst-case monthly cost of a sustained counter flood (V4)
 5 rps × 2,592,000 s = **12.96M requests a month**, on-demand prices in us-east-1, ignoring the free tier:
 
@@ -52,14 +60,14 @@ Two takeaways: it's annoying, not ruinous, and with no alarm I'd only find out f
   - That's at least $6 a month ($5 web ACL plus $1 per rule) plus $0.60 per million requests, every month, to protect a vanity counter whose worst-case abuse is about $26.
   - Switching to a REST API to get WAF raises the per-request price to $3.50 per million, which makes a flood about 3.5× more expensive.
 - **Trade-off:** a determined or distributed attacker can still blank the counter. The alarm makes it visible, and the site is never affected.
-- **Marc's decision:** ___
+- **Marc's decision:** Keep the shared throttle, split and I'll add the alarm. if the alarm triggers I can take immediate manual action at that time. Cheap, quick to implement.
 
 ### O2: Count inflation
 - **Recommended:** accept it and document it as a vanity metric.
 - **Over:** dedup by IP hash plus day in DynamoDB with a TTL.
 - **Because:** dedup doubles the writes and keeps IP-derived data, a privacy cost I'd have to disclose, for a number with no business meaning.
 - **Trade-off:** the count isn't trustworthy under attack.
-- **Marc's decision:** ___
+- **Marc's decision:** Accept the count inflation. This implementation is for demonstration of cloud tool use, making use of an api, and deploying resources via Terraform. 
 
 ### O3: Contact form
 - **Recommended:**
@@ -68,7 +76,7 @@ Two takeaways: it's annoying, not ruinous, and with no alarm I'd only find out f
 - **Over:** a backend relay (Lambda + SES) with my own rate limit.
 - **Because:** a relay is a second API to secure and pay for, just to replace a vendor that already rate-limits by IP.
 - **Trade-off:** a determined bot that skips the honeypot still depends on EmailJS's limits.
-- **Marc's decision:** ___
+- **Marc's decision:** Yes, we can add the honeypot, but also I'm able to easily see spam come into my inbox from that contact form. I can quickly take action if needed. I'll check for the additional EmailJS features and any potential costs.
 
 ### O4: Leave CRA now, even though V2 is refuted
 - **Recommended:** migrate (Vite + Vitest, then the runtime majors), on its own branch, merged before the Claude workflow branch.
@@ -79,7 +87,7 @@ Two takeaways: it's annoying, not ruinous, and with no alarm I'd only find out f
   - the planned pre-commit audit gate can't work while CRA's noise is there;
   - the AI-assisted migration costs roughly one session per checkpoint, not a weekend.
 - **Trade-off:** a production build change with real regression risk, mitigated by a parity-only CP, a headless browser route check, and an isolated PR that can be reverted on its own.
-- **Marc's decision:** ___
+- **Marc's decision:** 100% agree with the recommended. Vite is way faster and CRA is deprecated. I also perform manual testing anyway so I'll catch any issues and resolve them before pushing to prod.
 
 ## Sources
 - AWS WAF protected resource types: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html

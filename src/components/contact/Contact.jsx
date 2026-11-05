@@ -9,6 +9,8 @@ const SERVICE_ID = 'service_pqmsbzr';
 const TEMPLATE_ID = 'template_e8nna57';
 const PUBLIC_KEY = 'iAe9maex10yhKE02z';
 const EMAIL = 'mbastien.dev@gmail.com';
+// Not a browser autofill type, so a real visitor's browser won't fill it in and get their message dropped
+const HONEYPOT = 'website';
 
 const Contact = () => {
   const form = useRef();
@@ -44,6 +46,13 @@ const Contact = () => {
   const sendEmail = (e) => {
     e.preventDefault();
     if (status === 'sending') return;
+
+    // Honeypot: people never see this field, naive bots fill it. Pretend it worked and send nothing.
+    if (form.current?.elements.namedItem(HONEYPOT)?.value) {
+      setStatus('success');
+      form.current.reset();
+      return;
+    }
 
     setStatus('sending');
     setErrorMessage('');
@@ -96,6 +105,10 @@ const Contact = () => {
           <input type="text" name='name' placeholder='Your Full Name' required disabled={isSending}/>
           <input type="email" name='email' placeholder='Your Email' required disabled={isSending}/>
           <textarea name="message" rows="10" placeholder='Your Message' required disabled={isSending}></textarea>
+          <div className="contact__hp" aria-hidden="true">
+            <label htmlFor="contact-website">Leave this field empty</label>
+            <input id="contact-website" type="text" name={HONEYPOT} tabIndex={-1} autoComplete="off" />
+          </div>
           {status === 'error' && (
             <p className="contact__error" role="alert">
               Sorry, your message couldn't be sent: {errorMessage}. Please try again or email me directly.

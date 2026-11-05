@@ -71,14 +71,14 @@ Rationale: this changes the production build, so it gets its own PR and its own 
 - **Trade-off:** a non-idiomatic env prefix. Only the Node version may need a console change (Vite 8 needs Node ≥20.19).
 
 ### D5: Abuse controls sized to the asset
-- Shared throttle split per route, access logs, budget alert and 429 alarm, plus a contact-form honeypot. CloudFront + WAF and IP dedup were rejected.
+- Shared throttle split per route, access logs, budget alert and 4xx + 5xx alarms (5xx added in CP1 after the burst test returned 500/503s, not 429s), plus a contact-form honeypot. CloudFront + WAF and IP dedup were rejected.
 - The full steelman is in `brief.md` O1–O3. **Marc's decisions there override this line.**
 
 ## Checkpoint overview
 | CP | Title | Depends on | Gate | Status |
 |----|-------|------------|------|--------|
-| 0 | Security brief + this plan | -- | Marc fills in the "Marc's decision" lines in `brief.md` | [~] brief written |
-| 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` and sets the EmailJS dashboard | [ ] |
+| 0 | Security brief + this plan | -- | Marc fills in the "Marc's decision" lines in `brief.md` | [x] decided |
+| 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` and sets the EmailJS dashboard | [x] code; apply + after-test pending (see `cp1.md` "Marc's gate") |
 | 2 | Vite + Vitest + ESLint 9 (parity swap) | 1 | Marc confirms Amplify's Node version | [ ] |
 | 3 | Runtime majors + dependency cleanup | 2 | Marc reviews the diff | [ ] |
 | 4 | Docs, before/after numbers, PR | 3 | Marc merges and checks the live site, then the claude-workflow rebase | [ ] |
@@ -98,8 +98,8 @@ These run strictly in sequence. CP1's frontend honeypot and its Terraform are in
 - **Prerequisites cheat sheet:** in this branch the plan-refine skill isn't on disk. It lives on `chore/claude-workflow`. Read it with `MSYS_NO_PATHCONV=1 git show "chore/claude-workflow:.claude/skills/plan-refine/SKILL.md"`.
 
 ## Status tracker
-- [~] CP0 — security brief + plan (awaiting Marc's decisions)
-- [ ] CP1 — abuse hardening
+- [x] CP0 — security brief + plan (decisions filled 2026-11-05)
+- [x] CP1 — abuse hardening (code committed; Marc's apply, SNS confirm, Lambda concurrency check and after-burst test pending)
 - [ ] CP2 — Vite + Vitest parity swap
 - [ ] CP3 — runtime majors
 - [ ] CP4 — docs, numbers, PR

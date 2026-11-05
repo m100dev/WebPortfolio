@@ -55,7 +55,11 @@ CP1 hardened the counter and the form. CP2 swapped CRA for Vite and Vitest. CP3 
    - `package.json` / `package-lock.json` (babel devDeps, `test:security`, `vuln-check`): keep both, then `npm install`;
    - `CLAUDE.md`: keep claude-workflow's split structure, and apply this branch's command changes to it;
    - `src/content/guides/ai-autonomy/Icon.jsx`: keep the suppression comment.
-3. Re-run CP3's verification on the rebased branch (`npm run test:security`, `npm run vuln-check -- src`, gitleaks). Then CP3b, with its check 7 (`--audit-level=high` blocks) now enforceable, and `npm test` replaced by `npm run test:once` in the hook.
+3. **[DISCOVERED] in CP1:** on the rebased branch, update `infra/visitor-counter/CLAUDE.md` (which only exists on claude-workflow):
+   - per-route limits (POST 2/5, GET 5/10);
+   - `alert_email` lives only in the git-ignored `terraform.tfvars`;
+   - the deployer user can't read logs or metrics, on purpose.
+4. Re-run CP3's verification on the rebased branch (`npm run test:security`, `npm run vuln-check -- src`, gitleaks). Then CP3b, with its check 7 (`--audit-level=high` blocks) now enforceable, and `npm test` replaced by `npm run test:once` in the hook.
 
 ## Results
 | Metric | Before (CRA) | After (Vite) |

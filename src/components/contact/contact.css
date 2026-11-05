@@ -71,6 +71,15 @@
     white-space: nowrap;
 }
 
+/* Honeypot: off-screen rather than display:none, which some bots check for */
+.contact__hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
 .contact__links {
     display: flex;
     gap: 1.8rem;
