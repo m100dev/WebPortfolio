@@ -77,6 +77,10 @@ Two takeaways: it's annoying, not ruinous, and with no alarm I'd only find out f
 - **Because:** a relay is a second API to secure and pay for, just to replace a vendor that already rate-limits by IP.
 - **Trade-off:** a determined bot that skips the honeypot still depends on EmailJS's limits.
 - **Marc's decision:** Yes, we can add the honeypot, but also I'm able to easily see spam come into my inbox from that contact form. I can quickly take action if needed. I'll check for the additional EmailJS features and any potential costs.
+- **Marc's follow-up (2026-11-05, after checking the dashboard):** a judgement call to keep the form frictionless:
+  - **Origin allowlist: skipped.** It needs a paid EmailJS subscription. It would only stop other sites from using the key in browsers, and scripts can fake the origin anyway.
+  - **reCAPTCHA: skipped, even though it's free.** The extra step could put off a recruiter trying to reach me, and that costs more than the spam it would stop. It's too much for a portfolio site.
+  - **What protects the form:** the honeypot, EmailJS's own IP-based rate limit, and me watching the inbox. If spam gets past the honeypot, I'll revisit reCAPTCHA v2 (checkbox, loaded when the form is focused). The code has to deploy before the dashboard toggle is turned on, or every message fails.
 
 ### O4: Leave CRA now, even though V2 is refuted
 - **Recommended:** migrate (Vite + Vitest, then the runtime majors), on its own branch, merged before the Claude workflow branch.

@@ -98,7 +98,7 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
    - **Budget:** `budget_limit_usd = 11` in tfvars, matching Marc's existing account budget (the account also hosts another domain, so $5 would alert every month).
    - The limit of 10 is a likely contributor to the burst test's 500/503s, not a confirmed cause. Confirm it with the access logs after the apply.
 4. OK the "after" burst test (30 GETs, no POST) in a later session, and read the access logs.
-5. EmailJS dashboard (brief O3): origin allowlist, rate limit, and reCAPTCHA if the plan allows it.
+5. ~~EmailJS dashboard (brief O3).~~ **Decided 2026-11-05:** no origin allowlist (it needs a paid plan) and no reCAPTCHA (a recruiter's message matters more than stopping spam). The reasoning is in brief O3 "Marc's follow-up". No dashboard changes.
 6. **Before merging (CP4): check autofill on the honeypot.**
    - Fill the contact form with Chrome autofill, then with your password manager's identity fill (and Safari AutoFill if you have it). Submit, and confirm the email actually arrives.
    - The tests only check attributes, so they can't catch this. If autofill fills the hidden `website` field, a real message gets a success dialog and is silently dropped.

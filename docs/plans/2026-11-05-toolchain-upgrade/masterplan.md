@@ -78,7 +78,7 @@ Rationale: this changes the production build, so it gets its own PR and its own 
 | CP | Title | Depends on | Gate | Status |
 |----|-------|------------|------|--------|
 | 0 | Security brief + this plan | -- | Marc fills in the "Marc's decision" lines in `brief.md` | [x] decided |
-| 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` and sets the EmailJS dashboard | [x] code; apply + after-test pending (see `cp1.md` "Marc's gate") |
+| 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` (EmailJS dashboard: no changes, brief O3) | [x] code; apply + after-test pending (see `cp1.md` "Marc's gate") |
 | 2 | Vite + Vitest + ESLint 9 (parity swap) | 1 | Marc confirms Amplify's Node version | [ ] |
 | 3 | Runtime majors + dependency cleanup | 2 | Marc reviews the diff | [ ] |
 | 4 | Docs, before/after numbers, PR | 3 | Marc merges and checks the live site, then the claude-workflow rebase | [ ] |
