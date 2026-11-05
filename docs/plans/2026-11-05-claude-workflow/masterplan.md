@@ -65,7 +65,7 @@ Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
 | 0 | Adapt plan-refine, write this plan | -- | Marc reviews the plan | [x] |
 | 1 | AWS certs, archived sysadmin plan, Terraform tag | 0 | Marc checks the badges | [x] |
 | 2 | Principles + CLAUDE.md split | 1 | before/after token numbers recorded | [x] |
-| 3 | vuln-check tool + tests + skill; security-audit skill | 2 | 4/4 security tests, gitleaks clean | [ ] |
+| 3 | vuln-check tool + tests + skill; security-audit skill | 2 | 4/4 security tests, gitleaks clean | [x] |
 | 3b | Pre-commit checker, hooks, pre-commit-checklist skill | 3 | bad change blocked, clean one commits | [ ] |
 | 4 | comment-in-my-voice + demo; dedupe + run | 3b | Marc approves comments and dedupe fixes | [ ] |
 | 5 | graphify install + measurement | 3b | Marc reviews the hooks it adds | [ ] |
@@ -86,7 +86,7 @@ CP4 and CP5 are independent and can run in either order.
 - [x] CP0 — adapted plan-refine, wrote this plan
 - [x] CP1 — AWS certs, archived sysadmin plan, Terraform tag
 - [x] CP2 — principles + CLAUDE.md split
-- [ ] CP3 — vuln-check + security-audit
+- [x] CP3 — vuln-check + security-audit
 - [ ] CP3b — pre-commit enforcement
 - [ ] CP4 — comment-in-my-voice + dedupe
 - [ ] CP5 — graphify

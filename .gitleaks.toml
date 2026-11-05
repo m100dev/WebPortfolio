@@ -1,0 +1,8 @@
+# Extends gitleaks' default rules. The only allowlisted path is the vuln-check fixtures,
+# which hold AWS's documented dummy key on purpose so the scanner has something to catch.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "vuln-check test fixtures (intentionally vulnerable samples)"
+paths = ['''tools[/\\]vuln-check[/\\]fixtures[/\\]''']

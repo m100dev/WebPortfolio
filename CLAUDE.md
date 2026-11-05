@@ -39,3 +39,5 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 
 ## Skills (`.claude/skills/`)
 - `plan-refine`: checkpointed plans for multi-part work. Plans live in `docs/plans/`.
+- `vuln-check`: code-level scan of changed JS/JSX (`npm run vuln-check -- <paths>`, tests via `npm run test:security`).
+- `security-audit`: read-only repo-level audit (git history, deps, IAM, CORS, `.gitignore`, `public/`) that reports a findings table.

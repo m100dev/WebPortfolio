@@ -79,8 +79,35 @@ CP2 made `CLAUDE.md` lean, with the security-first principles at the top. This C
 `added the vuln check script with fixtures and the security audit skills`
 
 ## Results
-- Findings in `src/`: ___
-- security-audit: ___
+- **Findings in `src/`:** 1, a reviewed false positive:
+  - `src/content/guides/ai-autonomy/Icon.jsx:20` `unsafe-html`. The `__html` values are static string literals in `icons.js`, and `name` only picks a key.
+  - Suppressed with a reasoned `vuln-check-ignore` comment (a suppression without a reason doesn't count). Recorded in the skill's notes. `npm run vuln-check -- src` now exits 0.
+- **Tests:** `npm run test:security` reports 6/6 passing: 3 vulnerable fixtures, 1 clean, the generated syntax error, and the suppression contract (added).
+- **gitleaks:**
+  - staged scan with the config: no leaks;
+  - full history: no leaks.
+  - The default rules already skip `...EXAMPLE` keys, so a clean run doesn't prove the allowlist works. I proved it separately in a scratch dir: the same random fake key was caught in `src/` and skipped under `tools/vuln-check/fixtures/`.
+- **security-audit:** run by hand from `.claude/skills/security-audit/SKILL.md`. The skill was created mid-session, so the Skill tool couldn't invoke it yet. Invoke `/security-audit` for real in CP3b.
+
+| # | Check | Result | Evidence |
+|---|-------|--------|----------|
+| 1 | Secrets in history | PASS | `gitleaks git --config .gitleaks.toml`: no leaks found |
+| 2 | Secrets staged | PASS | `gitleaks git --staged`: no leaks found |
+| 3 | Code patterns | PASS | vuln-check exit 0, 1 reasoned suppression |
+| 4 | Dependencies | NOTE | `npm audit --omit=dev`: 77 (21 low, 22 moderate, 30 high, 4 critical), all transitive through `react-scripts` (build/dev-server tooling under `dependencies`), none in browser runtime packages. Accepted; never `--force`. See the deviation below for the one I fixed |
+| 5 | IAM | PASS | `infra/visitor-counter/main.tf:79-86`: DynamoDB Get/UpdateItem on the table ARN; logs on the log-group ARN; no `*` actions; no PassRole in this stack |
+| 6 | CORS | PASS | `main.tf:127-129`: origins from `var.allowed_origins` (pinned marcbastien.com domains); methods GET, POST |
+| 7 | EmailJS | NOTE | `src/components/contact/Contact.jsx:8-10`: service, template and public key IDs. Public by design for the browser SDK. No private key present |
+| 8 | External links | PASS | covered by #3; every `target="_blank"` has `rel` |
+| 9 | `.gitignore` | NOTE | state, tfvars (`infra/visitor-counter/.gitignore`), `.env.local` and `.claude/settings.local.json` are ignored, and none are tracked. `.env` isn't ignored. No `.env` file exists, and CRA embeds `REACT_APP_*` in the bundle anyway, so it can't hold a secret |
+| 10 | `public/` | PASS | only `favicon.svg`, `index.html` and `manifest.json` |
+
+- **Deviation (security over the step's wording):** step 1 said to add babel "at the versions already installed" (7.22.10). `npm audit` flagged `@babel/traverse <7.23.2` as critical (CVE-2023-45133). Pinning a direct dependency at that version was the wrong call, so both are `^7.29.13`.
+  - npm deduped all 4 traverse copies in the tree to 7.29.13, which also fixed the copy react-scripts uses.
+  - The lockfile change is confined to the babel family. Tests, build and vuln-check all re-passed.
+- **Recommended for Marc:**
+  - (low) Add `.env` to `.gitignore` only if non-`REACT_APP_` values ever need to live there.
+  - (info) The remaining CRA advisories go away only by leaving CRA (e.g. for Vite). That's out of scope here.
 
 ## Handoff
 `vuln-check` and `gitleaks` both run clean and can be scripted. CP3b wires them into hooks that block commits.

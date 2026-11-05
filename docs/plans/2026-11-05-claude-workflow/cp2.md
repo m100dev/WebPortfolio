@@ -56,7 +56,9 @@ CP1 shipped the cert, tag and archive changes. This CP makes `CLAUDE.md` lean an
 
 ## Results
 - Before: `/context` showed Memory files = 3.4k tokens, of which `CLAUDE.md` = 3.1k (7,690 chars, 64 lines).
-- After, root `CLAUDE.md`: 2,776 chars, 38 lines. That's 36% of the old size, so about 1.1k tokens estimated by character ratio. Confirm with `/context` in the next fresh session.
+- After, root `CLAUDE.md`: 2,776 chars, 38 lines. That's 36% of the old size, so about 1.1k tokens estimated by character ratio.
+- Measured after, in a fresh session (2026-11-05): `/context` shows Memory files = 1.5k tokens, of which `CLAUDE.md` = 1.2k (`MEMORY.md` = 373). That's 3.1k → 1.2k for `CLAUDE.md`, about 61% fewer tokens every session.
+- Spot check passed: reading `src/content/memos/index.js` in a fresh session loaded `src/content/CLAUDE.md` automatically (its Guides and Memos rules appeared in context).
 - Nested files, loaded only in their folder:
   - `src/components/CLAUDE.md`: 2,636 chars;
   - `src/content/CLAUDE.md`: 1,909 chars;

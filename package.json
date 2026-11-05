@@ -16,12 +16,16 @@
     "build": "eslint . --max-warnings=0 && vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:once": "vitest run"
+    "test:once": "vitest run",
+    "vuln-check": "node tools/vuln-check/vuln-check.js",
+    "test:security": "node --test \"tools/**/*.test.js\""
   },
   "engines": {
     "node": ">=24.15.0"
   },
   "devDependencies": {
+    "@babel/parser": "^7.29.13",
+    "@babel/traverse": "^7.29.13",
     "@eslint/js": "^10.0.1",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
