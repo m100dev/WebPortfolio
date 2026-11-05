@@ -8,7 +8,7 @@ CP1 hardened the counter API and the contact form. This CP replaces Create React
 **Prior CP commit:** `added per-route throttles, access logs, cost alerts and a contact honeypot`
 
 ## Prerequisites
-- [ ] On `chore/toolchain-upgrade`, and the CP1 commit is in `git log --oneline -3`.
+- [ ] On `chore/toolchain-upgrade`, and the CP1 commit (`c13aaa0 added per-route throttles, access logs, cost alerts and a contact honeypot`) is in `git log --oneline main..HEAD`. CP1 has about a dozen follow-up commits after it (the cold-start fix `b9d8ced`, evidence, plan notes), ending at `2708b90`.
 - [ ] `npm test -- --watchAll=false` and `CI=true npm run build` pass.
 - [ ] **Baseline numbers, recorded in Results before any change:**
   - `npm audit --omit=dev` summary line;
