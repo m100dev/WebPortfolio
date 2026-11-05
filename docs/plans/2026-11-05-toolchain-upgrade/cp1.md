@@ -91,7 +91,11 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
 ### Marc's gate (outward-facing, not done by the agent)
 1. Add the README's "Deployer IAM" actions to the deployer policy.
 2. Create `infra/visitor-counter/terraform.tfvars` with `alert_email`, then run `terraform plan` and `terraform apply`. Click the SNS confirmation email.
-3. Check the account's Lambda concurrency limit (`aws lambda get-account-settings` with your own credentials, or the Lambda console). If it's around 10, a GET burst of 10 plus a POST burst of 5 can exceed it, so lower the bursts in tfvars.
+3. ~~Check the account's Lambda concurrency limit.~~ **Checked 2026-11-05: unreserved account concurrency is 10** (the new-account default). Marc's decisions:
+   - Set `get_burst_limit = 6` and `post_burst_limit = 3` in `terraform.tfvars` (9 at once, under 10). The defaults in `variables.tf` stay 10/5 for a normal account.
+   - The other domain runs no Lambda in us-east-1, so a counter flood can't starve it.
+   - **Recommended:** request a Service Quotas increase (AWS Lambda → Concurrent executions, 100+). Once it's approved, add `reserved_concurrent_executions` (~5) to the counter function. AWS keeps at least 10 unreserved, so that's impossible at a limit of 10.
+   - The limit of 10 is a likely contributor to the burst test's 500/503s, not a confirmed cause. Confirm it with the access logs after the apply.
 4. OK the "after" burst test (30 GETs, no POST) in a later session, and read the access logs.
 5. EmailJS dashboard (brief O3): origin allowlist, rate limit, and reCAPTCHA if the plan allows it.
 6. **Before merging (CP4): check autofill on the honeypot.**
