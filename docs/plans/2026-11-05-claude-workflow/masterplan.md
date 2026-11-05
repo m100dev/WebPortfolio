@@ -78,6 +78,7 @@ CP4 and CP5 are independent and can run in either order.
 - One CP per session. Run /clear between checkpoints.
 - Before CP N+1: verify CP N's commit exists (`git log --oneline -5`).
 - This file is shared state: mark `[x]` here before /clear.
+- Every CP ends with the verification results (commands and actual output, screenshots, numbers, the commit) and then "Here is the prompt for the next session:" with a copy-paste block.
 - Detail files: `cpN.md` in this folder.
 - Outward-facing steps (push, merge, `terraform apply`, Amplify console, repo visibility) are Marc's, never the agent's.
 

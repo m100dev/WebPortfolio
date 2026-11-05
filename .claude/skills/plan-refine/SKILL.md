@@ -80,7 +80,7 @@ Every non-trivial decision (architecture, dependency, library, approach) gets th
 ## 6. Session handoff
 
 Follow `references/handoff-protocol.md`. In short:
-- **End of CP:** verify → commit → mark `[x]` in the master plan → print resume paths → user runs /clear.
+- **End of CP:** verify → commit → mark `[x]` in the master plan → show the verification results → give a copy-paste handoff prompt for the next session → user runs /clear.
 - **Start of CP:** load the master plan + CP file → run prerequisites (the gate) → execute.
 
 ## 7. Rules

@@ -12,12 +12,22 @@ Run these steps in order after completing a checkpoint's implementation:
 2. **Commit** — use the exact commit message from the CP's `## Commit` section.
 3. **Update master plan** — mark the completed CP as `[x]` (replacing `[ ]`) in both
    the `## Checkpoint overview` table and `## Status tracker`.
-4. **Output resume paths** — print:
+4. **Show the verification** — a short report the user can check without rerunning anything:
+   - every command from `## Verification`, each with its actual result (e.g. "14 tests passed", "Compiled successfully")
+   - screenshots or measured numbers when the CP has them, with full file paths
+   - anything skipped or failed, said plainly
+   - the commit hash and subject
+5. **Give the handoff prompt** — end the reply with "Here is the prompt for the next session:" followed by one copy-paste block:
    ```
-   Master plan: docs/plans/<date>-<slug>/masterplan.md
-   Next CP: docs/plans/<date>-<slug>/cpN+1.md
+   Continue the plan in docs/plans/<date>-<slug>/masterplan.md.
+   Run checkpoint N+1 from docs/plans/<date>-<slug>/cpN+1.md.
+   Prior CP: <commit hash> <commit subject>.
+   <one or two lines of anything the next session must know that isn't in the files yet,
+    e.g. a pre-step the user runs first, or a decision made after the CP file was written>
+   Follow the plan-refine skill: run the prerequisites first and stop if any fail.
    ```
-5. **User runs `/clear`** — Claude cannot do this programmatically.
+   Above the block, list anything the user must do before pasting it (e.g. run `/context` and note the number).
+6. **User runs `/clear`** — Claude cannot do this programmatically.
 
 ## Start of next checkpoint (fresh session)
 

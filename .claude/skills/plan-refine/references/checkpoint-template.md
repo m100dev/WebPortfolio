@@ -76,6 +76,9 @@ CP should expect. This becomes the basis for CP N+1's Context section.
 
 Master plan: `docs/plans/<date>-<slug>/masterplan.md`
 Next CP: `docs/plans/<date>-<slug>/cpN+1.md` [or "N/A — final checkpoint"]
+
+At the end of the CP, report the verification results and give the handoff prompt
+for the next session (see `handoff-protocol.md`, steps 4–5).
 ```
 
 ---
