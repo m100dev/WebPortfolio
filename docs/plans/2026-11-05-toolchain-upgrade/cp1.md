@@ -94,6 +94,10 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
 3. Check the account's Lambda concurrency limit (`aws lambda get-account-settings` with your own credentials, or the Lambda console). If it's around 10, a GET burst of 10 plus a POST burst of 5 can exceed it, so lower the bursts in tfvars.
 4. OK the "after" burst test (30 GETs, no POST) in a later session, and read the access logs.
 5. EmailJS dashboard (brief O3): origin allowlist, rate limit, and reCAPTCHA if the plan allows it.
+6. **Before merging (CP4): check autofill on the honeypot.**
+   - Fill the contact form with Chrome autofill, then with your password manager's identity fill (and Safari AutoFill if you have it). Submit, and confirm the email actually arrives.
+   - The tests only check attributes, so they can't catch this. If autofill fills the hidden `website` field, a real message gets a success dialog and is silently dropped.
+   - If that happens, rename `HONEYPOT` in `Contact.jsx` to a name that doesn't map to any profile field.
 
 ## Commit
 `added per-route throttles, access logs, cost alerts and a contact honeypot`

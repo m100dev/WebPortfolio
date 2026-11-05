@@ -40,7 +40,7 @@ Rationale: this changes the production build, so it gets its own PR and its own 
   - `REACT_APP_VISITOR_API_URL` is set in the console.
 - **Router surface is small and unchanged in v7:** `Routes`, `Route`, `Outlet`, `Link`, `NavLink`, `useLocation`, `useParams`, `BrowserRouter`, `MemoryRouter`. There's no `useNavigate`.
 - **Unused dependencies:** `web-vitals` and `@testing-library/user-event` (no imports in `src/`).
-- **Infra:** HTTP API with one stage-wide throttle (`infra/visitor-counter/main.tf:155-164`), no access logs, no budget or alarm. WAF can't attach to HTTP APIs.
+- **Infra:** HTTP API; WAF can't attach to HTTP APIs. At CP0 it had one stage-wide throttle and no access logs, budget or alarm. CP1 (`c13aaa0`) added per-route throttles, access logs, 4xx/5xx alarms and a budget (`infra/visitor-counter/main.tf:154-198` stage and access logs, `:208-283` alerting), not yet applied.
 
 ## Decision log
 ### D1: Harden before migrating

@@ -1,6 +1,6 @@
 # Security brief: can someone take this site down?
 
-## Status: DECIDED (2026-11-05) · O1–O3 implemented in CP1
+## Status: DECIDED (2026-11-05) · O1–O3 coded in CP1; `terraform apply` and the EmailJS dashboard are pending (Marc)
 ## Written: 2026-11-05 · researched and drafted by Claude Code, decided by Marc
 
 ## Why this brief exists
