@@ -80,8 +80,8 @@ const data = [
     id: 5,
     images: [{ src: IMG_VILLA, caption: 'Villa Majorca website' }],
     title: 'Villa Majorca',
-    description: 'Client website for a residential property, designed and built in 2020.',
-    stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Adobe XD', 'Client Work'],
+    description: 'Website for a residential property owned by Florida East Coast Realty, designed and built in 2020 while I worked there.',
+    stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Adobe XD'],
     repo: null,
     demo: 'https://villamajorca.com/'
   }
