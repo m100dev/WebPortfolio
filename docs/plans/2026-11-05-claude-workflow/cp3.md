@@ -94,7 +94,7 @@ CP2 made `CLAUDE.md` lean, with the security-first principles at the top. This C
 | 1 | Secrets in history | PASS | `gitleaks git --config .gitleaks.toml`: no leaks found |
 | 2 | Secrets staged | PASS | `gitleaks git --staged`: no leaks found |
 | 3 | Code patterns | PASS | vuln-check exit 0, 1 reasoned suppression |
-| 4 | Dependencies | NOTE | `npm audit --omit=dev`: 77 (21 low, 22 moderate, 30 high, 4 critical), all transitive through `react-scripts` (build/dev-server tooling under `dependencies`), none in browser runtime packages. Accepted; never `--force`. See the deviation below for the one I fixed |
+| 4 | Dependencies | NOTE | `npm audit --omit=dev`: 77 (21 low, 22 moderate, 30 high, 4 critical). Direct: `react-scripts` (moderate) and `react-router-dom` (moderate). The 4 criticals (`form-data`, `proxy-addr`, `shell-quote`, `websocket-driver`) are CRA build and dev-server transitives. **`react-router-dom` 6.30.6 ships to the browser**: GHSA-wrjc-x8rr-h8h6 (open redirect via backslash in `<Link>`/`useNavigate`) and GHSA-337j-9hxr-rhxg (SSR hydration). Neither is reachable: every `Link`/`NavLink` target is a static constant or a content slug (`AskMarc.jsx:27`, `Nav.jsx:28,89`, `Guides.jsx:28`, `Memos.jsx:27`), there is no `useNavigate`, and there is no SSR. The fix is v7 (a major bump). See the deviation below for the babel one I fixed |
 | 5 | IAM | PASS | `infra/visitor-counter/main.tf:79-86`: DynamoDB Get/UpdateItem on the table ARN; logs on the log-group ARN; no `*` actions; no PassRole in this stack |
 | 6 | CORS | PASS | `main.tf:127-129`: origins from `var.allowed_origins` (pinned marcbastien.com domains); methods GET, POST |
 | 7 | EmailJS | NOTE | `src/components/contact/Contact.jsx:8-10`: service, template and public key IDs. Public by design for the browser SDK. No private key present |
@@ -105,7 +105,10 @@ CP2 made `CLAUDE.md` lean, with the security-first principles at the top. This C
 - **Deviation (security over the step's wording):** step 1 said to add babel "at the versions already installed" (7.22.10). `npm audit` flagged `@babel/traverse <7.23.2` as critical (CVE-2023-45133). Pinning a direct dependency at that version was the wrong call, so both are `^7.29.13`.
   - npm deduped all 4 traverse copies in the tree to 7.29.13, which also fixed the copy react-scripts uses.
   - The lockfile change is confined to the babel family. Tests, build and vuln-check all re-passed.
+- **Command forms:** the verification ran as `gitleaks git` (history) and `gitleaks git --staged`, which are the current 8.x subcommands. The older `detect` / `protect --staged` aliases also return no leaks once the config regex is fixed (they first crashed on a backslash lost when the shell wrote `.gitleaks.toml`). The skill uses the `git` forms.
 - **Recommended for Marc:**
+  - (medium) Upgrade `react-router-dom` to v7 in its own branch. Not exploitable today, but it's a browser runtime package with an open-redirect advisory, and a future `useNavigate(userInput)` would make it live.
+  - (decision for CP3b) Check 7 in cp3b (`npm audit --omit=dev --audit-level=high` → block) would block every commit, because of CRA's 30 high and 4 critical transitives.
   - (low) Add `.env` to `.gitignore` only if non-`REACT_APP_` values ever need to live there.
   - (info) The remaining CRA advisories go away only by leaving CRA (e.g. for Vite). That's out of scope here.
 

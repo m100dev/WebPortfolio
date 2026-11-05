@@ -33,8 +33,8 @@ CP3 added `vuln-check` (a tested script) and the `security-audit` skill. On thei
 
 ## Steps
 1. **`tools/precommit/check.js`** reads `git diff --cached --name-only --diff-filter=ACMR` and classifies the staged files. Checks, in order (block = exit 1 with a clear reason):
-   1. `gitleaks protect --staged --config .gitleaks.toml`;
-   2. `vuln-check` on staged `.js` / `.jsx`;
+   1. `gitleaks git --staged --config .gitleaks.toml` (gitleaks 8.30 form, verified in CP3; the config flag is required for the fixtures allowlist);
+   2. `vuln-check` on staged `.js` / `.jsx`, **excluding `tools/vuln-check/fixtures/`** (vulnerable on purpose; also exclude them from the test heuristic in 6);
    3. `npx eslint --max-warnings=0` on staged `src/**/*.{js,jsx}`;
    4. `npm test -- --watchAll=false` and `npm run test:security`;
    5. `python -m unittest` in `infra/visitor-counter/lambda` if staged files are under it; `terraform fmt -check` if `*.tf` files are staged;

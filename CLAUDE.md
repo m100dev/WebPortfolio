@@ -14,6 +14,7 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 - `npm run build`: `eslint . --max-warnings=0`, then `vite build` into `build/`. Exactly what Amplify runs, so a lint warning fails it.
 - `npm run preview`: serves `build/` at http://localhost:3000 with the SPA fallback.
 - Lambda tests: `cd infra/visitor-counter/lambda && python -m unittest`.
+- `npm run test:security`: `node:test` suite for `tools/`. `npm run vuln-check -- <paths>`: the AST security scan.
 
 ## Hard rules
 - Import routing from `react-router`, never `react-router-dom`.
