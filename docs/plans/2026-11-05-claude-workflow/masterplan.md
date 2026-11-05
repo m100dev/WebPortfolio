@@ -63,7 +63,7 @@ Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
 | CP | Title | Depends on | Gate | Status |
 |----|-------|------------|------|--------|
 | 0 | Adapt plan-refine, write this plan | -- | Marc reviews the plan | [x] |
-| 1 | AWS certs, archived sysadmin plan, Terraform tag | 0 | Marc checks the badges | [ ] |
+| 1 | AWS certs, archived sysadmin plan, Terraform tag | 0 | Marc checks the badges | [x] |
 | 2 | Principles + CLAUDE.md split | 1 | before/after token numbers recorded | [ ] |
 | 3 | vuln-check tool + tests + skill; security-audit skill | 2 | 4/4 security tests, gitleaks clean | [ ] |
 | 3b | Pre-commit checker, hooks, pre-commit-checklist skill | 3 | bad change blocked, clean one commits | [ ] |
@@ -83,7 +83,7 @@ CP4 and CP5 are independent and can run in either order.
 
 ## Status tracker
 - [x] CP0 — adapted plan-refine, wrote this plan
-- [ ] CP1 — AWS certs, archived sysadmin plan, Terraform tag
+- [x] CP1 — AWS certs, archived sysadmin plan, Terraform tag
 - [ ] CP2 — principles + CLAUDE.md split
 - [ ] CP3 — vuln-check + security-audit
 - [ ] CP3b — pre-commit enforcement
