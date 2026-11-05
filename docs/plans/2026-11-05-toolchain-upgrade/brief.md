@@ -32,7 +32,7 @@ I asked the agent to brief me first: verify or refute the hypothesis with eviden
 **[DISCOVERED] in CP1, corrections to V3/V4:**
 - **Live burst test (2026-11-05, 30 concurrent GETs, before CP1's changes):** 10 × 500 and 20 × 503, with no 200s and no 429s. A single GET right after returned 200.
   - So under a burst, even the admitted requests failed, which is worse than "real visitors get a 429".
-  - The cause isn't confirmed: the deployer user can't read logs or metrics. One suspect is the account's Lambda concurrency limit.
+  - **Cause, confirmed from Marc's log export after the CP1 apply:** cold-start Lambda invocations timed out at 5 s (`handler.py:19-26` imports boto3 and builds the client inside the first request, at 128 MB), and those stuck instances held all 10 of the account's concurrent executions, so Lambda throttled the rest. API Gateway's route throttle returned no 429s. A fix to the handler's cold start is proposed in `cp1.md`.
   - CP1 added a 5xx alarm and error fields in the access logs to find out.
 - **AWS's throttling page doesn't say** whether `default_route_settings` is one bucket shared by every route or a default applied to each route. If it's per route, today's worst case was 5 rps per route, not 5 in total. CP1 overrides both routes, so that ambiguity no longer matters.
 - **The worst case is recomputed** in `infra/visitor-counter/README.md` at ≈ $32/month: POST 2 + GET 5 rps, now counting the reads and the access logs.
