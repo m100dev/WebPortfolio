@@ -71,7 +71,8 @@
     white-space: nowrap;
 }
 
-/* Honeypot: off-screen rather than display:none, which some bots check for */
+/* Honeypot (see Contact.jsx): moved off-screen rather than display:none,
+   because some bots skip fields that are display:none */
 .contact__hp {
     position: absolute;
     left: -10000px;
