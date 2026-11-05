@@ -89,8 +89,8 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
   - The deployer IAM actions are listed in the README's "Deployer IAM" table (logs delivery, SNS, CloudWatch alarms, budgets), with no read access to logs or metrics.
 
 ### Marc's gate (outward-facing, not done by the agent)
-1. Add the README's "Deployer IAM" actions to the deployer policy.
-2. Create `infra/visitor-counter/terraform.tfvars` with `alert_email`, then run `terraform plan` and `terraform apply`. Click the SNS confirmation email.
+1. ~~Add the README's "Deployer IAM" actions to the deployer policy.~~ **Done 2026-11-05** (separate managed policy `portfolio-visitor-counter-alerting`).
+2. ~~Create `terraform.tfvars`, plan and apply.~~ **Applied 2026-11-05.** A follow-up `terraform plan -detailed-exitcode` reported "No changes" (exit 0), so the tfvars bursts (6/3) and the budget ($11) are live. Still to do: click the SNS confirmation email if you haven't.
 3. ~~Check the account's Lambda concurrency limit.~~ **Checked 2026-11-05: unreserved account concurrency is 10** (the new-account default). Marc's decisions:
    - Set `get_burst_limit = 6` and `post_burst_limit = 3` in `terraform.tfvars` (9 at once, under 10). The defaults in `variables.tf` stay 10/5 for a normal account.
    - The other domain runs no Lambda in us-east-1, so a counter flood can't starve it.
@@ -99,7 +99,7 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
    - The limit of 10 is a likely contributor to the burst test's 500/503s, not a confirmed cause. Confirm it with the access logs after the apply.
 4. OK the "after" burst test (30 GETs, no POST) in a later session, and read the access logs.
 5. ~~EmailJS dashboard (brief O3).~~ **Decided 2026-11-05:** no origin allowlist (it needs a paid plan) and no reCAPTCHA (a recruiter's message matters more than stopping spam). The reasoning is in brief O3 "Marc's follow-up". No dashboard changes.
-6. **Before merging (CP4): check autofill on the honeypot.**
+6. **Deferred by Marc (2026-11-05), still open before merging (CP4): check autofill on the honeypot.**
    - Fill the contact form with Chrome autofill, then with your password manager's identity fill (and Safari AutoFill if you have it). Submit, and confirm the email actually arrives.
    - The tests only check attributes, so they can't catch this. If autofill fills the hidden `website` field, a real message gets a success dialog and is silently dropped.
    - If that happens, rename `HONEYPOT` in `Contact.jsx` to a name that doesn't map to any profile field.
