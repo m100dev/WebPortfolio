@@ -62,7 +62,7 @@ const data = [
       { src: IMG_1101_MAPS, caption: 'Google Maps listings feature' }
     ],
     title: '1101 Brickell',
-    description: 'Property website for a Brickell office tower, designed and built in 2020 at Florida East Coast Realty and still in production. Includes a custom map-based listings feature built with the Google Maps API.',
+    description: 'Property website for a Brickell office tower, designed and built at Florida East Coast Realty and still in production. Includes a custom map-based listings feature built with the Google Maps API.',
     stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Google Maps API', 'Adobe XD', 'Git'],
     repo: null,
     demo: 'https://www.1101brickell.com'
@@ -71,8 +71,8 @@ const data = [
     id: 4,
     images: [{ src: IMG_BOCA, caption: 'Boca Delray Polished Concrete website' }],
     title: 'Boca Delray Polished Concrete',
-    description: 'Client website for a South Florida concrete polishing company.',
-    stack: ['WordPress', 'Client Work', 'Web Design'],
+    description: 'Website for a South Florida concrete polishing company, built while I worked at Xtreme Polishing Systems.',
+    stack: ['WordPress', 'Web Design'],
     repo: null,
     demo: 'https://bocadelraypolishedconcrete.com/'
   },
@@ -80,7 +80,7 @@ const data = [
     id: 5,
     images: [{ src: IMG_VILLA, caption: 'Villa Majorca website' }],
     title: 'Villa Majorca',
-    description: 'Website for a residential property owned by Florida East Coast Realty, designed and built in 2020 while I worked there.',
+    description: 'Website for a residential property owned by Florida East Coast Realty, designed and built while I worked there.',
     stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Adobe XD'],
     repo: null,
     demo: 'https://villamajorca.com/'
