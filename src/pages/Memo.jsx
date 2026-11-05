@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { BsArrowLeft } from 'react-icons/bs'
-import { findMemo, formatMemoDate } from '../content/memos'
+import { findMemo, formatMemoDate, isScheduled } from '../content/memos'
 import NotFound from './NotFound'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import './pages.css'
@@ -47,6 +47,7 @@ const Memo = () => {
         <div className='memo__head'>
           <time className='memo__date mono' dateTime={memo.date}>{formatMemoDate(memo.date)}</time>
           {memo.draft && <span className='memo-draft mono'>Draft · not published</span>}
+          {isScheduled(memo) && <span className='memo-draft mono'>Scheduled · goes live {formatMemoDate(memo.date)}</span>}
           <h1>{memo.title}</h1>
           <p className='memo__summary'>{memo.summary}</p>
         </div>

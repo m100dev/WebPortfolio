@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { formatMemoDate, visibleMemos } from '../content/memos'
+import { formatMemoDate, isScheduled, visibleMemos } from '../content/memos'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import './pages.css'
 
@@ -26,6 +26,7 @@ const Memos = () => {
                 <h3>
                   <Link to={`/memos/${slug}`} className='memo-row__link'>{title}</Link>
                   {draft && <span className='memo-draft mono'>Draft</span>}
+                  {isScheduled({ draft, date }) && <span className='memo-draft mono'>Scheduled</span>}
                 </h3>
                 <p className='memo-row__summary'>{summary}</p>
               </div>

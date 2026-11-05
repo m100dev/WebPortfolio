@@ -18,7 +18,7 @@ const Header = () => {
       <div className="header__glow" aria-hidden="true" />
       <div className="container header__container">
         <div className="header__intro">
-          <p className="header__eyebrow mono">Cloud &amp; AI Engineer · DC/MD · Clearance-eligible</p>
+          <p className="header__eyebrow mono">Cloud, DevOps &amp; AI Engineer · DC/MD · Clearance-eligible</p>
           <h1 className="header__headline">
             I build production systems <span>— and the AI workflows that ship them.</span>
           </h1>

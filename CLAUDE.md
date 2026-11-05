@@ -36,7 +36,8 @@ Long-form content lives in `src/content/`:
 - **Memos** (`src/content/memos/`): one `.md` file per memo, imported as a URL and fetched at runtime, then rendered with `react-markdown` + `remark-gfm` inside `.prose` (in `src/pages/pages.css`).
   - Metadata goes in `index.js`.
   - `draft: true` memos only render in development; in production they 404.
-  - The Memos nav link appears only once a non-draft memo exists.
+  - `date` doubles as the release date: a non-draft memo with a future `date` is scheduled and stays hidden (404) in production until that day, in the visitor's local time.
+  - The Memos nav link appears only once a memo is live.
   - `_template.md` is a permanent draft that documents the format.
 
 Global styling lives in `src/index.css` and defines the design system as CSS custom properties. Component CSS should consume these variables rather than hardcoding colours.

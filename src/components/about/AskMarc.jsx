@@ -23,7 +23,7 @@ export const prompts = [
   {
     id: 'ai',
     question: 'How do you use AI to build software?',
-    answer: 'I build MyAutoTab with a test-driven Claude Code workflow that cut feature delivery from about a week to under a day. It has automated gates for quality, security, and process discipline so agent-written code doesn’t reach production unchecked: specialized subagents (a read-only researcher, a reviewer, and a test-runner), database security audits in the CI/CD pipeline, and plan-driven changes where every change starts with a spec and acceptance criteria.',
+    answer: 'I build MyAutoTab with a test-driven Claude Code workflow that cut feature delivery from about a week to under a day. It has automated gates for quality, security, and process discipline so agent-written code doesn’t reach production unchecked: specialized subagents (a read-only researcher, a reviewer, and a test-runner), database security audits in the CI/CD pipeline, and plan-driven changes where every change starts with a spec and acceptance criteria. I rebuilt this site the same way, with an AI coding agent working from written specs and my review before anything shipped.',
     link: { to: '/guides/ai-autonomy-levels', label: 'Read my AI autonomy framework' }
   },
   {
@@ -34,7 +34,7 @@ export const prompts = [
   {
     id: 'roles',
     question: 'Are you open to roles?',
-    answer: 'Yes. I’m open to Cloud & AI engineering roles in the DC/Maryland area or remote. I’m a U.S. citizen, eligible for a security clearance. The quickest way to reach me is mbastien.dev@gmail.com or the contact form.',
+    answer: 'Yes. I’m open to Cloud, DevOps & AI engineering roles in the DC/Maryland area or remote. I’m a U.S. citizen, eligible for a security clearance. The quickest way to reach me is mbastien.dev@gmail.com or the contact form.',
     link: { href: '#contact', label: 'Get in touch' }
   }
 ]

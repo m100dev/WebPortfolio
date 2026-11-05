@@ -8,11 +8,13 @@ import IMG_1101_MAPS from '../../assets/1101-Maps-Api-Feature.webp';
 import IMG_BOCA from '../../assets/bocadelraypc.webp';
 import IMG_VILLA from '../../assets/villa-majorca-site.webp';
 import IMG_LOCAL_LLM from '../../assets/Hello-LocalLLM-Project.webp';
+import IMG_SITE from '../../assets/marcbastien-v2.webp';
 import { Link } from 'react-router-dom';
 import { BsCpu, BsArrowRight, BsArrowsAngleExpand, BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import ImageZoom, { ZOOM_TRANSITION_NAME, canMorph } from './ImageZoom';
 
 // repo: a URL (GitHub button), 'private' (disabled Private Repo badge), or null (no repo button)
+// video: optional YouTube URL (Debug Video button)
 // fit: 'contain' shows the whole image (for diagrams) instead of cropping it to the frame
 const data = [
   {
@@ -22,6 +24,7 @@ const data = [
     description: 'Multi-tenant vehicle management SaaS built end to end. Tenant data isolation with PostgreSQL Row-Level Security, automated backups, and a GitHub Actions CI/CD pipeline. In staging with 5 test users.',
     stack: ['React', '.NET / EF Core', 'PostgreSQL', 'GitHub Actions', 'Render', 'Cloudflare'],
     repo: 'private',
+    video: 'https://www.youtube.com/watch?v=b7TRmFrNALg',
     demo: 'https://web.staging.myautotab.com'
   },
   {
@@ -31,6 +34,15 @@ const data = [
     description: 'Running Hermes Agent with local models, so prompts and data never leave the machine. Tool calls run only in a Docker sandbox, with access limited to specific folders through volume mounts. Using the setup to compare open-source LLMs on inference speed and output quality across quantization levels, and ran LTX-Video from the CLI to generate short clips locally. Now building an Obsidian knowledge base the agent uses for long-term context.',
     stack: ['Docker', 'Local LLMs', 'AI Agents', 'llama.cpp', 'Python', 'CLI'],
     repo: null,
+    demo: null
+  },
+  {
+    id: 8,
+    images: [{ src: IMG_SITE, caption: 'marcbastien.com v2 home page' }],
+    title: 'marcbastien.com (v2)',
+    description: 'Rebuilt my portfolio with an AI coding agent under a plan-driven workflow. Every change started as a written spec, passed tests and a lint-as-error build gate, and got my review before it shipped. I pushed back on templated AI design for an original look. Includes a serverless visitor counter (API Gateway, Lambda, DynamoDB) deployed with Terraform, scheduled memo publishing, and AWS Amplify hosting.',
+    stack: ['React', 'Claude Code', 'Terraform', 'AWS Lambda', 'DynamoDB', 'AWS Amplify'],
+    repo: 'private',
     demo: null
   },
   {
@@ -207,7 +219,7 @@ function Portfolio() {
       <h2 className='reveal'>Selected projects</h2>
       <div className="container portfolio__container">
         {
-          data.map(({id, images, fit, title, description, stack, repo, demo}, index) => {
+          data.map(({id, images, fit, title, description, stack, repo, video, demo}, index) => {
             return (
               <article key={id} className='portfolio__item reveal' style={{ '--i': index % 3 }}>
                 <ImageRotator images={images} fit={fit} title={title} />
@@ -219,6 +231,7 @@ function Portfolio() {
                 <div className="portfolio__item-cta">
                   {repo === 'private' && <span className='btn gh__inactive'>Private Repo</span>}
                   {repo && repo !== 'private' && <a href={repo} target='_blank' rel="noreferrer" className='btn'>GitHub</a>}
+                  {video && <a href={video} target='_blank' rel="noreferrer" className='btn'>Debug Video</a>}
                   {demo && <a href={demo} target='_blank' rel="noreferrer" className="btn btn-primary">Live Site</a>}
                 </div>
               </article>
