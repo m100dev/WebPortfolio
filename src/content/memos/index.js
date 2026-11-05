@@ -16,15 +16,15 @@ export const memos = [
   {
     slug: 'index-0-local-ai-tutor',
     title: 'Index 0 gets AI tutoring right',
-    date: '2026-11-04',
+    date: '2026-11-05',
     summary: 'A free, local-first learning app whose AI coach helps you work through DSA problems instead of handing over the answer.',
-    draft: true,
+    draft: false,
     file: index0File
   },
   {
     slug: 'dual-5070-ti-image-server',
     title: 'My Mac mini is getting a GPU worker',
-    date: '2026-11-04',
+    date: '2026-11-05',
     summary: 'Two 5070 Tis on the LAN to take image and high-bandwidth jobs off my Mac mini.',
     draft: false,
     file: gpuServerFile
