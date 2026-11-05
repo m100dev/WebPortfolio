@@ -1,6 +1,6 @@
 # Claude Code workflow: skills, guardrails, lean context, build log
 
-## Status: IN PROGRESS
+## Status: PAUSED at CP3b — waiting on `chore/toolchain-upgrade` (plan `docs/plans/2026-11-05-toolchain-upgrade/`, on that branch). Resume after it merges to `main` and this branch is rebased onto `main`.
 ## Created: 2026-11-05
 
 ## Problem summary
@@ -87,7 +87,7 @@ CP4 and CP5 are independent and can run in either order.
 - [x] CP1 — AWS certs, archived sysadmin plan, Terraform tag
 - [x] CP2 — principles + CLAUDE.md split
 - [x] CP3 — vuln-check + security-audit
-- [ ] CP3b — pre-commit enforcement
+- [ ] CP3b — pre-commit enforcement (blocked: toolchain-upgrade merge + rebase; then use `npm run test:once`, and check 7 becomes enforceable)
 - [ ] CP4 — comment-in-my-voice + dedupe
 - [ ] CP5 — graphify
 - [ ] CP6 — README, runbook, infra files, build log
