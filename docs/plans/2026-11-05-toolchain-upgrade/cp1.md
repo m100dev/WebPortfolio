@@ -104,6 +104,8 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
    - The tests only check attributes, so they can't catch this. If autofill fills the hidden `website` field, a real message gets a success dialog and is silently dropped.
    - If that happens, rename `HONEYPOT` in `Contact.jsx` to a name that doesn't map to any profile field.
 
+Redacted proof for the burst tests, alarm and fix: `burst-test-evidence.md` (in this folder).
+
 ## Commit
 `added per-route throttles, access logs, cost alerts and a contact honeypot`
 

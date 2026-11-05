@@ -92,7 +92,7 @@ The full analysis is in [`brief.md`](../../docs/plans/2026-11-05-toolchain-upgra
 - **The count can be inflated** with `curl -X POST` in a loop, up to 2 per second. It's a vanity metric, so that's accepted.
 - **Under a burst, callers see 5xx, not just 429.**
   - The CP1 burst test (30 concurrent GETs, before these changes) got 10 × 500 and 20 × 503, with no 200s and no 429s. A single GET right after returned 200.
-  - **Cause (confirmed from the access and Lambda logs, 2026-11-05):**
+  - **Cause (confirmed from the access and Lambda logs, 2026-11-05; redacted log excerpts in [`burst-test-evidence.md`](../../docs/plans/2026-11-05-toolchain-upgrade/burst-test-evidence.md)):**
     - The 500s were cold-start Lambda invocations timed out at 5 s (`handler.py:19-26` imports boto3 and builds the client inside the first request, at 128 MB).
     - The 503s were Lambda's own throttle (`integrationStatus` 429, "The Lambda function is being throttled"): the stuck instances held all 10 of the account's concurrent executions.
     - API Gateway's route throttle returned no 429s for a sub-second burst of 30. AWS calls these limits best-effort targets, so in practice the account's Lambda concurrency limit (10) is the cap. Keep `post_burst_limit + get_burst_limit` below it.
