@@ -1,6 +1,6 @@
 # Burst test evidence: visitor counter API
 
-## Status: fix committed (`b9d8ced`), after-fix numbers pending
+## Status: fix applied and verified on a cold start (2026-11-05 21:29 UTC)
 ## Date: 2026-11-05 · redacted log excerpts from my AWS account
 
 This file is the proof behind CP1's findings. I ran a small, read-only burst against my own counter API, then read the access logs, Lambda logs and alarm emails to find out what really happened.
@@ -77,6 +77,24 @@ The 4xx alarm correctly stayed OK, because a 30-request burst never reaches its 
 - Raise `memory_size` from 128 to 256 MB (`infra/visitor-counter/main.tf`), which doubles the CPU. Compute still fits in the free tier.
 
 ## After the fix
-_Pending `terraform apply`._
-- Cold-start REPORT line: `Duration` ___ ms, `Init Duration` ___ ms
-- Optional re-burst (30 GETs, no POST): ___ × 200, ___ × 500, ___ × 503, ___ × 429
+Applied with `terraform apply` (plan: `0 to add, 1 to change, 0 to destroy`, the function's code and memory).
+
+**Cold start** (first request on a fresh instance, 2026-11-05 21:29:01 UTC):
+```
+REPORT Duration: 156.69 ms  Billed Duration: 642 ms  Memory Size: 256 MB  Max Memory Used: 91 MB  Init Duration: 484.89 ms
+```
+**A warm request** on the same instance, 44 s later:
+```
+REPORT Duration: 7.81 ms  Billed Duration: 8 ms  Memory Size: 256 MB  Max Memory Used: 91 MB
+```
+
+| | Before (03:39 UTC, 128 MB) | After (21:29 UTC, 256 MB) |
+|---|---|---|
+| Startup (`Init Duration`) | 86 ms | 485 ms |
+| First request (`Duration`) | **5,000 ms, timed out** | **157 ms** |
+| What the visitor got | an error; counter hidden | the count in about 0.64 s |
+| Later (warm) requests | n/a | about 8 ms |
+
+Startup got slower on purpose: boto3 now loads there, inside its own time allowance, not inside the visitor's 5-second timeout. The 157 ms first request is mostly the first secure connection to DynamoDB.
+
+_Optional re-burst (30 GETs, no POST): not run yet._
