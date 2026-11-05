@@ -37,6 +37,13 @@ test('an empty honeypot sends the message exactly once', async () => {
   expect(emailjs.sendForm).toHaveBeenCalledTimes(1)
 })
 
+test('name and email carry autofill hints so visitors can fill them in one go', () => {
+  render(<Contact />)
+
+  expect(screen.getByPlaceholderText('Your Full Name')).toHaveAttribute('autocomplete', 'name')
+  expect(screen.getByPlaceholderText('Your Email')).toHaveAttribute('autocomplete', 'email')
+})
+
 test('the honeypot is hidden from assistive tech and the tab order', () => {
   const { container } = render(<Contact />)
   const field = container.querySelector('input[name="website"]')
