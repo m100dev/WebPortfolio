@@ -3,7 +3,7 @@
 The footer's "● N visits · counted by AWS Lambda + DynamoDB" line.
 
 ```
-Browser ──POST/GET /visits──▶ API Gateway (HTTP API) ──▶ Lambda (Python 3.12, arm64) ──▶ DynamoDB
+Browser ──POST/GET /visits──▶ API Gateway (HTTP API) ──▶ Lambda (Python 3.12, arm64, 256 MB) ──▶ DynamoDB
           CORS: marcbastien.com,                          ADD visits :1 (atomic)          1 item, on-demand
           www, localhost:3000
           throttle: POST 2 rps/burst 5, GET 5 rps/burst 10
@@ -67,7 +67,7 @@ This should be about **$0/month** at portfolio traffic. Rough free-tier headroom
 |---------|-----------|
 | API Gateway (18.1M × $1.00/M) | $18.14 |
 | Lambda requests (18.1M × $0.20/M) | $3.63 |
-| Lambda compute (~45k GB-s, under the 400k free tier) | ~$0 |
+| Lambda compute (256 MB, ~91k GB-s, under the 400k free tier) | ~$0 |
 | DynamoDB writes (5.2M POSTs × $0.625/M) | $3.24 |
 | DynamoDB reads (13.0M eventually consistent GETs) | $0.81 |
 | Lambda logs (~6.4 GB × $0.50) | $3.18 |

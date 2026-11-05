@@ -99,7 +99,7 @@ resource "aws_lambda_function" "counter" {
   runtime          = "python3.12"
   handler          = "handler.lambda_handler"
   architectures    = ["arm64"]
-  memory_size      = 128
+  memory_size      = 256 # more memory also means more CPU, so cold starts finish well inside the timeout
   timeout          = 5
   filename         = data.archive_file.lambda.output_path
   source_code_hash = data.archive_file.lambda.output_base64sha256
