@@ -227,6 +227,7 @@
 
 .portfolio__item-cta {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
     margin-top: auto;
     margin-bottom: 1rem;

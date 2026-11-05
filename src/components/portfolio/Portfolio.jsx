@@ -13,6 +13,7 @@ import { BsCpu, BsArrowRight, BsArrowsAngleExpand, BsPauseFill, BsPlayFill } fro
 import ImageZoom, { ZOOM_TRANSITION_NAME, canMorph } from './ImageZoom';
 
 // repo: a URL (GitHub button), 'private' (disabled Private Repo badge), or null (no repo button)
+// video: optional YouTube URL (Debug Video button)
 // fit: 'contain' shows the whole image (for diagrams) instead of cropping it to the frame
 const data = [
   {
@@ -22,6 +23,7 @@ const data = [
     description: 'Multi-tenant vehicle management SaaS built end to end. Tenant data isolation with PostgreSQL Row-Level Security, automated backups, and a GitHub Actions CI/CD pipeline. In staging with 5 test users.',
     stack: ['React', '.NET / EF Core', 'PostgreSQL', 'GitHub Actions', 'Render', 'Cloudflare'],
     repo: 'private',
+    video: 'https://www.youtube.com/watch?v=b7TRmFrNALg',
     demo: 'https://web.staging.myautotab.com'
   },
   {
@@ -207,7 +209,7 @@ function Portfolio() {
       <h2 className='reveal'>Selected projects</h2>
       <div className="container portfolio__container">
         {
-          data.map(({id, images, fit, title, description, stack, repo, demo}, index) => {
+          data.map(({id, images, fit, title, description, stack, repo, video, demo}, index) => {
             return (
               <article key={id} className='portfolio__item reveal' style={{ '--i': index % 3 }}>
                 <ImageRotator images={images} fit={fit} title={title} />
@@ -219,6 +221,7 @@ function Portfolio() {
                 <div className="portfolio__item-cta">
                   {repo === 'private' && <span className='btn gh__inactive'>Private Repo</span>}
                   {repo && repo !== 'private' && <a href={repo} target='_blank' rel="noreferrer" className='btn'>GitHub</a>}
+                  {video && <a href={video} target='_blank' rel="noreferrer" className='btn'>Debug Video</a>}
                   {demo && <a href={demo} target='_blank' rel="noreferrer" className="btn btn-primary">Live Site</a>}
                 </div>
               </article>
