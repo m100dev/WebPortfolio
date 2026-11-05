@@ -1,0 +1,13 @@
+My second RTX 5070 Ti got delivered and I'm pretty excited about it! The two cards are going into a box that will act as a worker node for my Mac mini.
+
+The Mac mini (M5 Pro, 64 GB) runs my local agent, Hermes, with Qwen 3.8 and 3.6. When a job comes up that needs image generation or a lot of memory bandwidth, the agent can reach out to the worker over the LAN and hand it off. Image jobs go to ComfyUI, and LLM jobs go to a llama.cpp server running across both cards. That keeps the Mac free for what its 64 GB is good at: deep reasoning, longer-horizon tasks, and bigger models that wouldn't fit anywhere else. The whole point is to get more tokens/s out of my local setup.
+
+The reason this works is because of memory bandwidth, which is what mostly decides how fast a model generates tokens. Each 5070 Ti has 896 GB/s. The M5 Pro only has 307 GB/s. That's almost three times faster for anything that fits on the cards. One thing I had to get straight: two cards don't double that number. llama.cpp splits a model across them by layers, so each token goes through one card and then the other. What the second card really gives me is room, 32 GB of VRAM instead of 16, so bigger models and longer context fit while still running at GPU speed.
+
+Also setting up a two card system also meant replacing my motherboard and case. My current board, the MSI MAG X870E Tomahawk WiFi, is modern and has been great, but it only has one PCIe 5.0 slot. The second card would have ended up in a slot that's PCIe 4.0 x4 and runs through the chipset. That link is shared with the USB ports, SATA, networking and some of the M.2 drives, so card two would be competing with everything else in the system.
+
+The new board is an MSI MPG X870E Carbon WiFi. With a Ryzen 9900X, both cards connect straight to the CPU over PCIe 5.0 at x8 for the first card and x4 for the second. It's double the bandwidth card two would've had on the Tomahawk, with no chipset in the way. Since llama.cpp only passes small amounts of data between the cards while it runs, the lane split mostly affects how fast models load, not how fast they generate.
+
+The case that I landed on was the Phanteks Enthoo Pro II Server Edition. I chose this because it provides enough space for the cards to breath. Two GPUs stacked close together means the top card pulls in the bottom card's hot exhaust, and image generation keeps both cards working for minutes at a time. The Enthoo has plenty of slot room and fan mounts, including a side bracket that blows right across the cards.
+
+Once card two lands and everything's set up, I'll post how the split between the Mac and the worker actually plays out. I'm looking forward to this build. Maybe I'll put a video out of me putting it together.

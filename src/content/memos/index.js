@@ -1,4 +1,7 @@
 import templateFile from './_template.md'
+import index0File from './index-0-local-ai-tutor.md'
+import gpuServerFile from './dual-5070-ti-image-server.md'
+import ankiFile from './ai-made-my-anki-cards.md'
 import formatDate from '../../utils/formatDate'
 
 // Memos: short posts. Each body is a Markdown file in this folder, imported as a URL
@@ -6,6 +9,30 @@ import formatDate from '../../utils/formatDate'
 // draft: true memos only render in development; in production they 404 and stay out of the list.
 // The nav shows "Memos" only once at least one memo is published.
 export const memos = [
+  {
+    slug: 'index-0-local-ai-tutor',
+    title: 'Index 0 gets AI tutoring right',
+    date: '2026-11-04',
+    summary: 'A free, local-first learning app whose AI coach helps you work through DSA problems instead of handing over the answer.',
+    draft: true,
+    file: index0File
+  },
+  {
+    slug: 'dual-5070-ti-image-server',
+    title: 'My Mac mini is getting a GPU worker',
+    date: '2026-11-04',
+    summary: 'Two 5070 Tis on the LAN to take image and high-bandwidth jobs off my Mac mini.',
+    draft: false,
+    file: gpuServerFile
+  },
+  {
+    slug: 'ai-made-my-anki-cards',
+    title: 'I stopped typing my own flashcards',
+    date: '2026-11-04',
+    summary: 'I hand-typed every CCNA card. Now AI drafts them and I review them.',
+    draft: false,
+    file: ankiFile
+  },
   {
     slug: '_template',
     title: 'Memo template',
