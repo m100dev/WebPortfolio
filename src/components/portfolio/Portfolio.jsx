@@ -63,7 +63,7 @@ const data = [
     ],
     title: '1101 Brickell',
     description: 'Property website for a Brickell office tower, built at Florida East Coast Realty and still in production. Includes a custom map-based listings feature built with the Google Maps API.',
-    stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Google Maps API', 'Git'],
+    stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Google Maps API', 'Adobe XD', 'Git'],
     repo: null,
     demo: 'https://www.1101brickell.com'
   },
@@ -81,7 +81,7 @@ const data = [
     images: [{ src: IMG_VILLA, caption: 'Villa Majorca website' }],
     title: 'Villa Majorca',
     description: 'Client website for a residential property.',
-    stack: ['Hand-coded', 'Client Work', 'Web Design'],
+    stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Adobe XD', 'Client Work'],
     repo: null,
     demo: 'https://villamajorca.com/'
   }
