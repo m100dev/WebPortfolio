@@ -99,7 +99,8 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
    - The limit of 10 is a likely contributor to the burst test's 500/503s, not a confirmed cause. Confirm it with the access logs after the apply.
 4. OK the "after" burst test (30 GETs, no POST) in a later session, and read the access logs.
 5. ~~EmailJS dashboard (brief O3).~~ **Decided 2026-11-05:** no origin allowlist (it needs a paid plan) and no reCAPTCHA (a recruiter's message matters more than stopping spam). The reasoning is in brief O3 "Marc's follow-up". No dashboard changes.
-6. **Deferred by Marc (2026-11-05), still open before merging (CP4): check autofill on the honeypot.**
+6. **Passed 2026-11-05 (Chrome address autofill, on `localhost:3000` on this branch):** after autofill, `website` was `''`. Chrome only offered autofill from the email field and left the name empty (no `autocomplete` hint). **If `autoComplete="name"`/`"email"` are ever added, re-run this check.** Password-manager identity fill wasn't tested.
+   - Original item: check autofill on the honeypot.
    - How: save an address at `chrome://settings/addresses`, then click "Your Full Name" and pick it from the dropdown. In DevTools, `document.querySelector('input[name="website"]').value` must be `''`.
    - Fill the contact form with Chrome autofill, then with your password manager's identity fill (and Safari AutoFill if you have it). Submit, and confirm the email actually arrives.
    - The tests only check attributes, so they can't catch this. If autofill fills the hidden `website` field, a real message gets a success dialog and is silently dropped.
