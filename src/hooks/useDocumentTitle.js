@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-export const SITE_TITLE = 'Marc Bastien | Cloud & AI Engineer'
+export const SITE_TITLE = 'Marc Bastien | Cloud, DevOps & AI Engineer'
 
 // Sets <title> for the current page; no argument means the home title.
 const useDocumentTitle = (title) => {

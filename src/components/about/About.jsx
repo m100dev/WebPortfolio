@@ -51,7 +51,7 @@ const About = () => {
             <summary>Read full bio</summary>
             <div className="about__bio">
               <p>
-                I’m a cloud and AI engineer in the DC/Maryland area, and I like building things that actually get used.
+                I’m a cloud, DevOps and AI engineer in the DC/Maryland area, and I like building things that actually get used.
               </p>
               <p>
                 Right now that’s MyAutoTab, a vehicle management app for owners of cars, boats, jet skis, and ATVs. I built it end to end with React, .NET, and PostgreSQL, set up CI/CD with GitHub Actions, and use a test-driven Claude Code workflow that took features from about a week to under a day. I share the build on YouTube, including <a href="https://www.youtube.com/watch?v=b7TRmFrNALg" target="_blank" rel="noreferrer">a walkthrough of how I debugged a race condition</a>.

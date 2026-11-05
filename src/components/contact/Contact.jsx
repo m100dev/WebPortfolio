@@ -73,7 +73,7 @@ const Contact = () => {
         <div className="contact__intro reveal">
           <p className="contact__status mono">
             <span className="contact__status-dot" aria-hidden="true" />
-            Open to Cloud &amp; AI engineering roles · DC/MD · Remote
+            Open to Cloud, DevOps &amp; AI engineering roles · DC/MD · Remote
           </p>
           <a href={`mailto:${EMAIL}`} className="contact__email">{EMAIL}</a>
           <div className="contact__actions">

@@ -33,8 +33,8 @@ const data = [
     icon: <BsClipboardCheck />,
     title: 'Structured Change Management',
     description:
-      'Developed a plan-driven engineering methodology where every change starts with a structured specification — problem statement, dependency ordering, acceptance criteria, and rollback strategy. Changes are implemented one at a time, each verified before moving to the next, ensuring nothing ships without passing automated checks.',
-    tags: ['Systems Design', 'Technical Writing', 'Change Management', 'Process Engineering']
+      'Developed a plan-driven engineering methodology where every change starts with a structured specification — problem statement, dependency ordering, acceptance criteria, and rollback strategy. Changes are implemented one at a time, each verified before moving to the next, ensuring nothing ships without passing automated checks. The same specs are what I hand to AI coding agents, so they build what was planned instead of guessing.',
+    tags: ['Spec-Driven Development', 'Systems Design', 'Technical Writing', 'Change Management']
   }
 ]
 
