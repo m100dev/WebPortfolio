@@ -55,7 +55,19 @@ CP1 shipped the cert, tag and archive changes. This CP makes `CLAUDE.md` lean an
 - `CLAUDE.md`: the current single file, the source for the split.
 
 ## Results
-- Before: ___ tokens. After (root only): ___ tokens.
+- Before: `/context` showed Memory files = 3.4k tokens, of which `CLAUDE.md` = 3.1k (7,690 chars, 64 lines).
+- After, root `CLAUDE.md`: 2,776 chars, 38 lines. That's 36% of the old size, so about 1.1k tokens estimated by character ratio. Confirm with `/context` in the next fresh session.
+- Nested files, loaded only in their folder:
+  - `src/components/CLAUDE.md`: 2,636 chars;
+  - `src/content/CLAUDE.md`: 1,909 chars;
+  - `infra/visitor-counter/CLAUDE.md`: 1,146 chars.
+- Deviations from the steps:
+  - The Ask Marc rule went to `src/components/CLAUDE.md`, because `AskMarc.jsx` lives there, so the rule loads where it's needed.
+  - No hook placeholder line was added. CP3b adds the commit-hook line itself.
+- Additions (facts, not new policy):
+  - why `default_tags` were removed;
+  - plan, validate and fmt are fine, and state must never be printed;
+  - the memo voice rule.
 
 ## Handoff
 The root `CLAUDE.md` is lean and starts with the principles. The detail lives in three nested files. CP3 builds the security tooling those principles point to.
