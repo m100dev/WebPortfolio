@@ -94,7 +94,8 @@ CP0 wrote `brief.md`. It confirmed that one caller can blank the visitor counter
 3. ~~Check the account's Lambda concurrency limit.~~ **Checked 2026-11-05: unreserved account concurrency is 10** (the new-account default). Marc's decisions:
    - Set `get_burst_limit = 6` and `post_burst_limit = 3` in `terraform.tfvars` (9 at once, under 10). The defaults in `variables.tf` stay 10/5 for a normal account.
    - The other domain runs no Lambda in us-east-1, so a counter flood can't starve it.
-   - **Recommended:** request a Service Quotas increase (AWS Lambda → Concurrent executions, 100+). Once it's approved, add `reserved_concurrent_executions` (~5) to the counter function. AWS keeps at least 10 unreserved, so that's impossible at a limit of 10.
+   - **Declined:** a Service Quotas increase. Without it, no `reserved_concurrent_executions` (AWS keeps at least 10 unreserved), so the tfvars bursts are the only guard. Don't reopen this unless the access logs show the limit causing real failures.
+   - **Budget:** `budget_limit_usd = 11` in tfvars, matching Marc's existing account budget (the account also hosts another domain, so $5 would alert every month).
    - The limit of 10 is a likely contributor to the burst test's 500/503s, not a confirmed cause. Confirm it with the access logs after the apply.
 4. OK the "after" burst test (30 GETs, no POST) in a later session, and read the access logs.
 5. EmailJS dashboard (brief O3): origin allowlist, rate limit, and reCAPTCHA if the plan allows it.
