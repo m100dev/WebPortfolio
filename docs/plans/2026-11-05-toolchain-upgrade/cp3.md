@@ -93,7 +93,10 @@ CP2 moved the build to Vite and the tests to Vitest, keeping parity: React 18 an
   | `npm audit --omit=dev` | **0** (CP2: 2 moderate, react-router) |
   | `npm audit` (incl. dev) | **0**, with the minimatch override |
   | `vuln-check` (from `chore/claude-workflow`, on `src` + configs) | 1 finding, pre-existing: `Icon.jsx:18` static SVG (was `:19` before the React import line went). Nothing new |
-  | Headless Chrome (`vite preview` :5056, CDP) | 21/21 checks (detail below) |
+  | Headless Chrome (`vite preview` :5056, CDP) | 18/21 on the first run. The 3 failures were script mistakes (detail below), and a re-probe confirmed the behaviour, so 21/21 |
+  | Lockfile reproduces (clean worktree of `0e6ea47`, `npm ci`) | installs clean, 18 tests pass, build passes, same 803,181 bytes of JS, audit 0. `npm ls --all` shows only unmet *optional* deps (other-platform binaries, optional peers) |
+
+- **Security coverage:** the plan-refine rule asks for `security-audit` and `vuln-check`, which live on `chore/claude-workflow`. As in CP2, `npm audit` (2 → 0) stood in for the former, and `vuln-check` was run from that branch.
 
 - **Bundle:** JS shipped 705,673 → **803,181 bytes** (+97.5 kB, +14%), 4 files. Main chunk 241.5 → 338.2 kB (gzip 82.6 → 111.3 kB). A per-library chunk split of both trees (throwaway build, scratchpad) attributes it:
 
@@ -121,6 +124,10 @@ CP2 moved the build to Vite and the tests to Vitest, keeping parity: React 18 an
   - **Lint follow-ups:** 27 unused `import React` lines removed, one per file (CP2's "31" was an over-count; `React.*` is used nowhere), `varsIgnorePattern` dropped, `no-useless-assignment` on (from ESLint's recommended set; `useCodeCopy.js:13` now `let ok`, behaviour unchanged).
   - **jsx-a11y** 6.10.2 is still the latest and still peers ESLint ≤9, so it stays off.
   - **minimatch override stays:** without it ESLint 10.14 resolves minimatch 10.2.6, and `npm audit` reports 4 moderate (dev only). Re-check when ESLint moves to minimatch 11.
+  - **Contact error path method:** the request carried the real committed public key, but CDP intercepted it inside Chrome and answered with a faked 400, so it never reached EmailJS. That stands in for "a local run with an invalid key". Marc can ask for the literal version (a local build with the key swapped).
+  - **Bundle growth (+14% vs CP2)** is a review item for Marc. See the attribution table above.
+  - **CP4 docs:** root `CLAUDE.md` Architecture still says "Create React App (react-scripts 5) with `react-router-dom` v6 (`BrowserRouter` in `src/index.js`)". It should now say Vite, `react-router` v7 and `src/index.jsx`. `cp4.md` step 1 covers the CRA wording but not the router line.
+  - **Stray dev server:** a `vite` on :3000 (PID 60552, `npm start`, started 05:59:40, not by this session) is still running and holds rolldown's binary, so `npm ci` in the main tree would fail with EPERM until it stops. Left running.
   - **Bash heredocs** with nested template literals failed in this shell ("unexpected EOF"). The CDP scripts were written with the Write tool instead.
 
 ## Commit
