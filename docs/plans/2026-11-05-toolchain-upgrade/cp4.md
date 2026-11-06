@@ -69,13 +69,37 @@ CP1 hardened the counter and the form. CP2 swapped CRA for Vite and Vitest. CP3 
 4. Re-run CP3's verification on the rebased branch (`npm run test:security`, `npm run vuln-check -- src`, gitleaks). Then CP3b, with its check 7 (`--audit-level=high` blocks) now enforceable, and `npm test` replaced by `npm run test:once` in the hook.
 
 ## Results
-| Metric | Before (CRA) | After (Vite) |
+- **Session:** Claude Opus 5.5 (`claude-opus-5-5`). `/context` 42.1k/1m (4%) at start; end total: Marc's `/context` at /clear.
+- **How measured (2026-11-06):** "Before" is `4d47532` (last CRA commit) rebuilt in a throwaway worktree with `npm ci` on Node 24.13.0. "After" is `47f14d6` on Node 24.22.2. Times are wall clock (`real`), single run. `npm outdated` counts are against the registry today. The pre-filled "77 / 4 critical" and "12" were wrong: CP2 measured 78, and today's run agrees.
+
+| Metric | Before (CRA, `4d47532`) | After (Vite, `47f14d6`) |
 |--------|--------------|--------------|
-| npm audit --omit=dev | 77 (21 low, 22 moderate, 30 high, 4 critical) | ___ |
-| npm outdated | 12 | ___ |
-| JS bundle (total / largest) | ___ | ___ |
-| Build time | ___ | ___ |
-| Test time | ___ | ___ |
+| `npm audit --omit=dev` | 78 (21 low, 22 moderate, 30 high, 5 critical) | **0** (also 0 with dev deps) |
+| `npm outdated` | 10 | 1 (`react-router` 7 → 8, deferred in `cp3.md` D4) |
+| JS shipped (total) | 802,892 bytes, 5 files | 803,181 bytes, 4 files (+0.04%) |
+| Largest JS chunk | 286,020 bytes (AVD guide, 59.4 kB gzip) | 338,214 bytes (main, 111.3 kB gzip) |
+| Main entry chunk | 270,412 bytes (94.7 kB gzip) | 338,214 bytes (111.3 kB gzip) |
+| Build (lint + bundle) | 26.2s (`CI=true npm run build`) | 2.0s (`npm run build`; `vite build` 0.27s) |
+| Tests (18) | 7.8s (Jest 5.4s) | 2.1s (Vitest 1.06s) |
+
+- **Reading the bundle row:** total JS is flat, but the main entry grew because react-dom 19 is +78 kB (`cp3.md` Results attributes it). The home page pays that cost, while the guides and memos stay lazy chunks. CP2's Vite swap on React 18 alone had cut JS by 12%.
+- **Build time vs CP2's "~10s":** CP2 recorded ~10s in the main tree. Today's 26s was the first build in a fresh worktree (cold cache). Either way, CRA took 5–13× longer than the Vite build.
+
+### Security review (step 5, by hand: `security-audit` isn't on this branch)
+| Check | Result | Verdict |
+|---|---|---|
+| `gitleaks git` (no `.gitleaks.toml` on this branch) | 173 commits, no leaks | pass |
+| `gitleaks dir .` (working tree incl. untracked) | no leaks | pass |
+| `npm audit --omit=dev --audit-level=high` | exit 0, 0 advisories | pass |
+| IAM (`infra/visitor-counter/main.tf:76-93`) | Lambda: `dynamodb:GetItem`/`UpdateItem` on the table ARN only, log writes on its own log group only | least privilege |
+| CORS (`main.tf:127-131`, `variables.tf:13-21`) | GET/POST, `content-type` header, www + apex + `http://localhost:3000` | acceptable: CORS isn't the access control here (the per-route throttles are). A localhost origin only matches pages running on that same machine |
+| Infra ignores (`infra/visitor-counter/.gitignore`) | `terraform.tfvars`, `*.tfstate`, `.terraform/` confirmed by `git check-ignore`; only `terraform.tfvars.example` is tracked | pass |
+| `build/` | no `.map` files, no `sourceMappingURL` | pass |
+| `public/` | `favicon.svg`, `manifest.json` only | pass |
+| Root `.gitignore` | ignores `.env.local` / `.env.*.local`, but not `.env` or `.env.production`, which Vite also loads | **[DISCOVERED]** low: nothing is tracked today. Two-line fix offered to Marc |
+
+### PR
+Draft in `pr.md`, next to this file. Not pushed; Marc pushes and opens it.
 
 ## Handoff
 The toolchain is current, the docs match it, and the numbers are recorded. After Marc merges, the claude-workflow plan resumes at CP3b on the rebased branch.

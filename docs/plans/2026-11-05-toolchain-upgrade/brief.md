@@ -1,6 +1,6 @@
 # Security brief: can someone take this site down?
 
-## Status: DECIDED (2026-11-05) · O1–O3 coded in CP1; `terraform apply` and the EmailJS dashboard are pending (Marc)
+## Status: CODE DONE, MERGE PENDING (2026-11-06) · O1–O3 applied in CP1 (EmailJS dashboard: no changes, see O3); O4 done in CP2–CP3. Measured before/after: `cp4.md` Results
 ## Written: 2026-11-05 · researched and drafted by Claude Code, decided by Marc
 
 ## Why this brief exists
@@ -92,6 +92,7 @@ Two takeaways: it's annoying, not ruinous, and with no alarm I'd only find out f
   - the AI-assisted migration costs roughly one session per checkpoint, not a weekend.
 - **Trade-off:** a production build change with real regression risk, mitigated by a parity-only CP, a headless browser route check, and an isolated PR that can be reverted on its own.
 - **Marc's decision:** 100% agree with the recommended. Vite is way faster and CRA is deprecated. I also perform manual testing anyway so I'll catch any issues and resolve them before pushing to prod.
+- **Outcome (CP4):** `npm audit --omit=dev` went from 78 advisories to 0. The before/after numbers and the security review are in [`cp4.md` Results](cp4.md#results).
 
 ## Sources
 - AWS WAF protected resource types: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
