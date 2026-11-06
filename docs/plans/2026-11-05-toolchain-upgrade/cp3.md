@@ -79,7 +79,7 @@ CP2 moved the build to Vite and the tests to Vitest, keeping parity: React 18 an
 - Bundle size: record before (CP2 Results) and after.
 
 ## Results
-- **Session:** model Claude Opus 5.5 (`claude-opus-5-5`, 1M window). `/context` total 41.9k (4%) at start. End total: Marc's `/context` before /clear, recorded in a follow-up commit.
+- **Session:** model Claude Opus 5.5 (`claude-opus-5-5`, 1M window). `/context` total 41.9k (4%) at start → 223.3k (22%) at /clear (Messages row 180.9k). CP3 and CP3d ran in the same session, so that end total covers both.
 - **Baseline `npm outdated`** (before any change, `a49aaa9`): `@emailjs/browser` 3.11.0 → 5.0.3, `@testing-library/jest-dom` 6.9.1 → 7.0.1, `@testing-library/react` 13.4.0 → 16.3.3, `@testing-library/user-event` 13.5.0 → 14.6.8, `react`/`react-dom` 18.2.0 → 19.3.1, `react-icons` 4.10.1 → 5.7.0, `react-markdown` 9.1.0 → 10.1.0, `react-router-dom` 6.30.6 → 7.18.5, `web-vitals` 2.1.4 → 6.2.3.
 - **After `npm outdated`:** one entry, `react-router` 7.18.5 (latest 8.5.1), explained in D4.
 - **Installed:** react/react-dom 19.3.1, @testing-library/react 16.3.3 + @testing-library/dom 10.4.2 (new peer), jest-dom 7.0.1 (its `/vitest` entry is unchanged), react-router 7.18.5, @emailjs/browser 5.0.3, react-markdown 10.1.0, react-icons 5.7.0. Removed: react-router-dom, web-vitals, @testing-library/user-event.

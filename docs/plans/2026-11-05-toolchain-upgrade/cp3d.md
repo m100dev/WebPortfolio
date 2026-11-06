@@ -58,6 +58,7 @@ CP2 (`15d63d8`) and CP3 (`0e6ea47`) changed the toolchain, but the docs still de
 - Every path and npm script named in `README.md` and `CLAUDE.md` exists.
 
 ## Results
+- **Session:** same session as CP3 (Claude Opus 5.5, `claude-opus-5-5`). The combined `/context` total is in `cp3.md` Results: 41.9k → 223.3k (22%).
 - `npm run test:once`: 4 files, 18 tests pass. `npm run build`: 0 lint warnings, built in about 0.3s.
 - Docs grep (`cp4.md` Verification): the only hits are the three deliberate "don't use the old thing" notes in `CLAUDE.md` (lines 9, 10, 18). The first version of the grep matched "reject" and binary files, so it now uses `\beject\b`, `-I` and `--exclude-dir=.terraform`.
 - Every path named in `README.md` and `CLAUDE.md` exists, and all five npm scripts (`start`, `test`, `test:once`, `build`, `preview`) are in `package.json`.
