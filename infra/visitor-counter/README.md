@@ -6,8 +6,8 @@ The footer's "● N visits · counted by AWS Lambda + DynamoDB" line.
 Browser ──POST/GET /visits──▶ API Gateway (HTTP API) ──▶ Lambda (Python 3.12, arm64, 256 MB) ──▶ DynamoDB
           CORS: marcbastien.com,                          ADD visits :1 (atomic)          1 item, on-demand
           www, localhost:3000
-          throttle: POST 2 rps/burst 5, GET 5 rps/burst 10
-          access logs + 4xx/5xx alarms + $5 budget ──▶ SNS email
+          throttle: POST 2 rps/burst 3, GET 5 rps/burst 6
+          access logs + 4xx/5xx alarms + $11 budget ──▶ SNS email
 ```
 
 - **DynamoDB**: one item (`pk = "site"`) with a `visits` number. On-demand billing, encrypted at rest.
@@ -17,7 +17,7 @@ Browser ──POST/GET /visits──▶ API Gateway (HTTP API) ──▶ Lambda 
   - Errors return a generic 500, and the details go to the logs only.
 - **API Gateway HTTP API**:
   - CORS is limited to the site's origins plus `http://localhost:3000`.
-  - Per-route throttling caps abuse and cost: `POST /visits` 2 rps (burst 5), `GET /visits` 5 rps (burst 10). The limits apply to all callers combined, not per IP. The stage default (5 rps, burst 10) only covers routes added later.
+  - Per-route throttling caps abuse and cost: `POST /visits` 2 rps (burst 3), `GET /visits` 5 rps (burst 6). The limits apply to all callers combined, not per IP. The bursts add up to 9, under the account's Lambda concurrency limit of 10 (see [Abuse model](#abuse-model)). The stage default (5 rps, burst 10) only covers routes added later.
   - Access logs go to `/aws/apigateway/portfolio-visitor-counter`, kept 14 days (see [Abuse model](#abuse-model)).
 - **IAM**: the function's role can only `GetItem`/`UpdateItem` on this table and write to its own log group.
 - **Logs**: `/aws/lambda/portfolio-visitor-counter`, kept 14 days.
@@ -103,7 +103,7 @@ The full analysis is in [`brief.md`](../../docs/plans/2026-11-05-toolchain-upgra
 |-------|-----------|
 | `portfolio-visitor-counter-5xx` | 5 or more server errors in 5 minutes. It fires first under a burst, and also if the Lambda or table breaks. |
 | `portfolio-visitor-counter-4xx` | More than 50 4xx responses (throttled 429s, probes for missing routes) per 5 minutes, for 15 minutes. |
-| Budget `portfolio-visitor-counter-monthly` | Account spend passes 80% of $5, or is forecast to pass 100%. It covers the **whole account**, not just this stack. |
+| Budget `portfolio-visitor-counter-monthly` | Account spend passes 80% of $11, or is forecast to pass 100%. It covers the **whole account**, not just this stack. That's why I set `budget_limit_usd = 11` in `terraform.tfvars`, to match my existing account budget: the account hosts another site too, so the variable's $5 default would alert every month. |
 
 **Reading the access logs:**
 - Each request is one JSON line: `requestId`, `ip`, `routeKey`, `status`, `responseLatency`, `error`, `integrationError`, `integrationStatus`.

@@ -14,7 +14,7 @@ What shipped, when, and the one-line reason. Newest first, grouped by release. T
 - **2026-11-06:** published [How I Build with AI Agents](https://www.marcbastien.com/guides/how-i-build-with-ai-agents), a visual version of these results. Every number on it comes from one data file that a test checks against the plan files, so the page, the README and this log can't drift apart. I also stopped draft memos from shipping in the production build. Their bodies and titles had been in the bundle even though the routes 404.
 
 ## Toolchain upgrade (PR #3, merged 2026-11-06)
-- **2026-11-05:** hardened the visitor counter: per-route throttles, API access logs, 4xx/5xx alarms, a $5 budget alert, and a honeypot on the contact form. The counter is public, so its cost and abuse needed a ceiling.
+- **2026-11-05:** hardened the visitor counter: per-route throttles, API access logs, 4xx/5xx alarms, an $11 budget alert, and a honeypot on the contact form. The counter is public, so its cost and abuse needed a ceiling.
 - **2026-11-05:** a burst test fired the 5xx alarm, and the access logs traced it to Lambda cold starts. I moved the DynamoDB client to init and raised memory to 256 MB.
 - **2026-11-05:** replaced Create React App with Vite and Jest with Vitest. CRA was deprecated and carried 78 npm advisories with no fixes coming. The swap alone took the audit from 78 to 2.
 - **2026-11-06:** upgraded to React 19 and React Router 7 and dropped unused dependencies. Across the whole upgrade, npm audit went from 78 to 0, builds from 10–26 s to about 2 s, and the JS bundle stayed flat.

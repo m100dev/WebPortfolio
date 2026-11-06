@@ -41,9 +41,9 @@ variable "post_rate_limit" {
 }
 
 variable "post_burst_limit" {
-  description = "Burst allowed for POST /visits."
+  description = "Burst allowed for POST /visits. Keep post_burst_limit + get_burst_limit below the account's Lambda concurrency limit (10)."
   type        = number
-  default     = 5
+  default     = 3
 }
 
 variable "get_rate_limit" {
@@ -53,9 +53,9 @@ variable "get_rate_limit" {
 }
 
 variable "get_burst_limit" {
-  description = "Burst allowed for GET /visits."
+  description = "Burst allowed for GET /visits. Keep post_burst_limit + get_burst_limit below the account's Lambda concurrency limit (10)."
   type        = number
-  default     = 10
+  default     = 6
 }
 
 variable "log_retention_days" {

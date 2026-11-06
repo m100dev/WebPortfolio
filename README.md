@@ -27,7 +27,7 @@ flowchart LR
   spa -->|contact form| emailjs["EmailJS"]
   subgraph tf ["Terraform: infra/visitor-counter"]
     apigw --> lambda["Lambda<br/>Python 3.12"] --> ddb[("DynamoDB")]
-    apigw -.->|access logs, 4xx/5xx| alerts["CloudWatch alarms<br/>SNS email, $5 budget"]
+    apigw -.->|access logs, 4xx/5xx| alerts["CloudWatch alarms<br/>SNS email, $11 budget"]
   end
 ```
 Only the visitor counter is managed by Terraform. Route 53 and Amplify are set up in the console, and the Amplify rewrite rules are versioned in [`infra/amplify/redirects.json`](infra/amplify/redirects.json).

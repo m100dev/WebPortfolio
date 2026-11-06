@@ -4,8 +4,9 @@ Terraform for DynamoDB, a Python 3.12 Lambda and an API Gateway HTTP API. Archit
 
 - **Never run `terraform apply` or `destroy` without asking.** The stack is deployed by hand. `terraform plan`, `validate` and `fmt` are fine.
 - **State is local and git-ignored** (`terraform.tfstate`, `terraform.tfvars`). Never commit it, and never print its contents.
+- **The budget is $11, set in `terraform.tfvars`** (`budget_limit_usd`; the variable defaults to $5). It covers the whole account, so docs that quote it should say $11.
 - **`alert_email` lives only in the git-ignored `terraform.tfvars`** (copy `terraform.tfvars.example`). Never write the address into a tracked file.
-- **Per-route throttles** (`main.tf` stage block, `variables.tf`): `POST /visits` 2 rps / burst 5, `GET /visits` 5 rps / burst 10; the stage default only covers routes added later. Keep `post_burst_limit + get_burst_limit` below the account's Lambda concurrency limit (10), which is the real cap under a burst (README "Abuse model").
+- **Per-route throttles** (`main.tf` stage block, `variables.tf`): `POST /visits` 2 rps / burst 3, `GET /visits` 5 rps / burst 6; the stage default only covers routes added later. Keep `post_burst_limit + get_burst_limit` below the account's Lambda concurrency limit (10), which is the real cap under a burst (README "Abuse model").
 - **AWS provider is `~> 6.0`.** `default_tags` were removed on purpose, because tagging API Gateway resources needs `apigateway:TagResource`, which the least-privilege deployer policy doesn't grant.
 - **Least privilege:**
   - the Lambda role may only `GetItem` / `UpdateItem` on its table and write its own log group;
