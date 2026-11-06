@@ -2,9 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import emailjs from '@emailjs/browser'
 import Contact from './Contact'
 
-jest.mock('@emailjs/browser', () => ({
+vi.mock('@emailjs/browser', () => ({
   __esModule: true,
-  default: { sendForm: jest.fn() }
+  default: { sendForm: vi.fn() }
 }))
 
 const fillAndSubmit = ({ honeypot = '' } = {}) => {

@@ -12,7 +12,7 @@ const AvdEnterpriseWorkspace = () => {
 
   return (
     // Copy buttons are handled by delegation, like the original page's cp()
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    // The copy buttons inside are real <button>s, so the wrapper needs no key handler (jsx-a11y is off until it supports ESLint 10)
     <div className="avd" onClick={onCopyClick}>
       <div className="phase" id="p0">
         <div className="phase-num adv">{"00"}</div>

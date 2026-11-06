@@ -47,7 +47,14 @@ CP2 moved the build to Vite and the tests to Vitest, keeping parity: React 18 an
 5. **react-markdown 10:** check the changelog for removed props. `Memo.jsx:59` uses `remarkPlugins` and `components` only.
 6. **react-icons 5:** check that every imported icon name still exists (`npm run build` fails on a missing export).
 7. **Remove** `web-vitals` and `@testing-library/user-event`, after confirming there are no imports with `grep -r "web-vitals\|user-event" src`.
-8. **In-range bumps** for everything else (`npm update`). Then record `npm outdated` again: it should be empty, or every remaining entry explained.
+8. **CP2 lint follow-ups** (`cp2.md` Results, [DISCOVERED]):
+   - remove the unused `import React` lines, then the `varsIgnorePattern`;
+   - turn on `no-useless-assignment` (`useCodeCopy.js:13`);
+   - re-add jsx-a11y if it supports ESLint 10, and drop the `minimatch` override if ESLint's own dependency is patched;
+   - decide whether to keep or remove the unused `browserslist` field.
+
+   After the RTL 16 bump, recheck the AskMarc `(asked)` regex (`AskMarc.test.jsx:35-37`). Keep it if jsdom still drops the space.
+9. **In-range bumps** for everything else (`npm update`). Then record `npm outdated` again: it should be empty, or every remaining entry explained.
 
 ## Verification
 - `npm run test:once` passes, and `npm run build` passes with 0 lint warnings.

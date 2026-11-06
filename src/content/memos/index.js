@@ -1,11 +1,11 @@
-import templateFile from './_template.md'
-import index0File from './index-0-local-ai-tutor.md'
-import gpuServerFile from './dual-5070-ti-image-server.md'
-import ankiFile from './ai-made-my-anki-cards.md'
+import templateFile from './_template.md?url'
+import index0File from './index-0-local-ai-tutor.md?url'
+import gpuServerFile from './dual-5070-ti-image-server.md?url'
+import ankiFile from './ai-made-my-anki-cards.md?url'
 import formatDate from '../../utils/formatDate'
 
 // Memos: short posts. Each body is a Markdown file in this folder, imported as a URL
-// (CRA emits it as a static asset) and fetched by pages/Memo.jsx.
+// (Vite emits it as a static asset) and fetched by pages/Memo.jsx.
 // Release rules (production):
 //   draft: true                        -> hidden, whatever the date (the route 404s)
 //   draft: false, date in the future   -> scheduled: hidden until that date, then appears on its own
@@ -48,7 +48,7 @@ export const memos = [
 ]
 
 // Development previews everything: drafts and scheduled memos, each with a badge
-const PREVIEW = process.env.NODE_ENV !== 'production'
+const PREVIEW = !import.meta.env.PROD
 
 // The visitor's local date as YYYY-MM-DD (not toISOString, which is UTC and runs a day ahead on US evenings)
 export const todayISO = (now = new Date()) =>
