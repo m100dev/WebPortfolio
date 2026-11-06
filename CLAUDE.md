@@ -43,4 +43,5 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 - `plan-refine`: checkpointed plans for multi-part work. Plans live in `docs/plans/`.
 - `vuln-check`: code-level scan of changed JS/JSX (`npm run vuln-check -- <paths>`, tests via `npm run test:security`).
 - `pre-commit-checklist`: the judgment checks before any commit (test coverage, security review, guide/memo metadata, Ask Marc copy, CLAUDE.md, message style). The hook enforces; this judges.
+- `comment-in-my-voice`: sparse first-person "why" comments, with reasons only from the code, git history or plan docs (asks otherwise).
 - `security-audit`: read-only repo-level audit (git history, deps, IAM, CORS, `.gitignore`, `public/`) that reports a findings table.

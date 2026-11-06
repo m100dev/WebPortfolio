@@ -69,7 +69,8 @@ Commit each skill and its change separately:
 - `added the dedupe skill and removed duplicate code`
 
 ## Results
-- Baseline JS/CSS gz: ___ / ___. After: ___ / ___.
+- Baseline JS/CSS gz (2026-11-06, `567a313`, Node 26.13): `index-*.js` **111.53 kB** / `index-*.css` **8.71 kB**. After: ___ / ___.
+- Baseline lazy chunks gz (so a dedupe can't just move bytes between chunks): `Memo` js 49.56; `AvdEnterpriseWorkspace` js 59.43 / css 1.99; `AiAutonomyLevels` js 6.77 / css 2.55. **Total JS 227.29 kB, total CSS 13.25 kB.** After: ___ / ___.
 - Dedupe rows applied: ___ of ___.
 
 ## Handoff

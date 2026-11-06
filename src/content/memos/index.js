@@ -10,7 +10,8 @@ import formatDate from '../../utils/formatDate'
 //   draft: true                        -> hidden, whatever the date (the route 404s)
 //   draft: false, date in the future   -> scheduled: hidden until that date, then appears on its own
 //   draft: false, date today or past   -> live
-// `date` is both the release date and the date shown on the memo. Development shows everything.
+// `date` is both the release date and the date shown on the memo. One field, so the date a
+// reader sees is always the day the memo went live. Development shows everything.
 // The nav shows "Memos" only once at least one memo is live.
 export const memos = [
   {
@@ -50,7 +51,8 @@ export const memos = [
 // Development previews everything: drafts and scheduled memos, each with a badge
 const PREVIEW = !import.meta.env.PROD
 
-// The visitor's local date as YYYY-MM-DD (not toISOString, which is UTC and runs a day ahead on US evenings)
+// I release memos on the visitor's local date, not toISOString(). That one is UTC, so on a
+// US evening it's already tomorrow, and a memo scheduled for tomorrow would go live early.
 export const todayISO = (now = new Date()) =>
   [now.getFullYear(), now.getMonth() + 1, now.getDate()].map((n) => String(n).padStart(2, '0')).join('-')
 
