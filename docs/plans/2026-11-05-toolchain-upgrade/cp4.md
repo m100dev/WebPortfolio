@@ -69,7 +69,7 @@ CP1 hardened the counter and the form. CP2 swapped CRA for Vite and Vitest. CP3 
 4. Re-run CP3's verification on the rebased branch (`npm run test:security`, `npm run vuln-check -- src`, gitleaks). Then CP3b, with its check 7 (`--audit-level=high` blocks) now enforceable, and `npm test` replaced by `npm run test:once` in the hook.
 
 ## Results
-- **Session:** Claude Opus 5.5 (`claude-opus-5-5`). `/context` 42.1k/1m (4%) at start; end total: Marc's `/context` at /clear.
+- **Session:** Claude Opus 5.5 (`claude-opus-5-5`, 1M window; every CP in this plan ran on it). `/context` 42.1k/1m (4%) at start → 108.7k (11%) at the end, after the `.gitignore` and README follow-ups (Messages row 66.8k).
 - **How measured (2026-11-06):** "Before" is `4d47532` (last CRA commit) rebuilt in a throwaway worktree with `npm ci` on Node 24.13.0. "After" is `47f14d6` on Node 24.22.2. Times are wall clock (`real`), single run. `npm outdated` counts are against the registry today. The pre-filled "77 / 4 critical" and "12" were wrong: CP2 measured 78, and today's run agrees.
 
 | Metric | Before (CRA, `4d47532`) | After (Vite, `47f14d6`) |
