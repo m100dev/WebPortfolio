@@ -1,6 +1,6 @@
 # Toolchain modernization + abuse hardening
 
-## Status: COMPLETE (merge pending, Marc)
+## Status: COMPLETE — merged to `main` as `3e5c25a` (PR #3, 2026-11-06); after-merge steps 2–4 in `cp4.md` done on `chore/claude-workflow`
 ## Created: 2026-11-05
 
 ## Problem summary

@@ -1,6 +1,6 @@
 # Claude Code workflow: skills, guardrails, lean context, build log
 
-## Status: IN PROGRESS — resumed at CP3b on 2026-11-06, after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
+## Status: IN PROGRESS — CP3b done 2026-11-06, CP4 or CP5 next (either order), after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
 ## Created: 2026-11-05
 
 ## Problem summary
@@ -66,7 +66,7 @@ Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
 | 1 | AWS certs, archived sysadmin plan, Terraform tag | 0 | Marc checks the badges | [x] |
 | 2 | Principles + CLAUDE.md split | 1 | before/after token numbers recorded | [x] |
 | 3 | vuln-check tool + tests + skill; security-audit skill | 2 | 4/4 security tests, gitleaks clean | [x] |
-| 3b | Pre-commit checker, hooks, pre-commit-checklist skill | 3 | bad change blocked, clean one commits | [ ] |
+| 3b | Pre-commit checker, hooks, pre-commit-checklist skill | 3 | bad change blocked, clean one commits | [x] |
 | 4 | comment-in-my-voice + demo; dedupe + run | 3b | Marc approves comments and dedupe fixes | [ ] |
 | 5 | graphify install + measurement | 3b | Marc reviews the hooks it adds | [ ] |
 | 6 | README, runbook, infra files, build log, skills table | 2, 4, 5 | Marc reviews copy, then makes the repo public | [ ] |
@@ -87,7 +87,7 @@ CP4 and CP5 are independent and can run in either order.
 - [x] CP1 — AWS certs, archived sysadmin plan, Terraform tag
 - [x] CP2 — principles + CLAUDE.md split
 - [x] CP3 — vuln-check + security-audit
-- [ ] CP3b — pre-commit enforcement (unblocked 2026-11-06: use `npm run test:once` and `npm run build`; check 7 is now enforceable, audit at 0)
+- [x] CP3b — pre-commit enforcement (2026-11-06; bypass refused via Bash and PowerShell, eval blocked, build at commit and push; system Node now 26)
 - [ ] CP4 — comment-in-my-voice + dedupe
 - [ ] CP5 — graphify
 - [ ] CP6 — README, runbook, infra files, build log

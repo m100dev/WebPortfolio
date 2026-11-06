@@ -6,6 +6,7 @@ Marc Bastien's portfolio (marcbastien.com). Vite 8 + React 19 with `react-router
 - **Security over quality over speed.** Never skip a security check or a review to ship faster. Changes that touch auth, user input, secrets, infra or dependencies get a security review before commit.
 - **Quality:** tests and `npm run build` pass before every commit, and every change gets Marc's review.
 - **Best patterns over clever one-offs:** established React and Terraform practice, design tokens, least-privilege IAM.
+- **Commits go through the pre-commit hook** (secrets, vuln-check, build, tests, audit; `tools/precommit/check.js`). Never bypass it. Run `pre-commit-checklist` before proposing a commit. Pre-push runs `npm run build`.
 
 ## Commands
 Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true` in `.npmrc` make npm refuse older versions. Amplify's build spec installs Node 24.
@@ -41,4 +42,5 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 ## Skills (`.claude/skills/`)
 - `plan-refine`: checkpointed plans for multi-part work. Plans live in `docs/plans/`.
 - `vuln-check`: code-level scan of changed JS/JSX (`npm run vuln-check -- <paths>`, tests via `npm run test:security`).
+- `pre-commit-checklist`: the judgment checks before any commit (test coverage, security review, guide/memo metadata, Ask Marc copy, CLAUDE.md, message style). The hook enforces; this judges.
 - `security-audit`: read-only repo-level audit (git history, deps, IAM, CORS, `.gitignore`, `public/`) that reports a findings table.

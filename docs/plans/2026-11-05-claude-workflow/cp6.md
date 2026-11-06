@@ -47,6 +47,7 @@ After this, Marc makes the repo public.
      - They're a small slice of how I use Claude Code on MyAutoTab, the SaaS I'm building to production standards, where they *are* load-bearing.
      - This repo is public and MyAutoTab isn't, so this is where I can show the workflow.
      - Tone: one confident paragraph, not an apology.
+     - **What I'd add serving clients** (from `cp3b.md` D4): say plainly that local hooks can be bypassed, so in production the gate is server-side: protected `main` with no admin bypass, CI as the required check, `CODEOWNERS` review on the guard rails, secret-scanning push protection, deploy only from `main`, and the agent sandboxed with managed hooks. Keep it to a short list; it shows I know where this demo stops.
      - Say "built to production standards", not "production SaaS", because the site's MyAutoTab card says it's in staging with test users. The two claims have to agree.
    - **Skills table:** Skill | Source | Why | Instead of. The same content as `.claude/skills/README.md`, including the "considered, not used" rows.
    - **Numbers:** `CLAUDE.md` before/after tokens, graphify measurements, the dedupe size delta.

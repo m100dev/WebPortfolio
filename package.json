@@ -18,7 +18,8 @@
     "test": "vitest",
     "test:once": "vitest run",
     "vuln-check": "node tools/vuln-check/vuln-check.js",
-    "test:security": "node --test \"tools/**/*.test.js\""
+    "test:security": "node --test \"tools/**/*.test.js\"",
+    "prepare": "node tools/precommit/install-hooks.js"
   },
   "engines": {
     "node": ">=24.15.0"
