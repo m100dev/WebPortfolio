@@ -87,6 +87,58 @@ This CP also closes a leak found while planning. Draft memo bodies ship in the p
 - `stopped draft memos from shipping in the production build`
 - `added a visual guide to the claude workflow results`
 
+## Results (2026-11-06)
+- **Prerequisites:** `4d35f14` at HEAD. 35/35 Vitest, 32/32 security, build clean.
+- **Commits:**
+  - `92cfb74`: draft memos out of the build;
+  - `ce6adc5`: the guide.
+  - Both passed the pre-commit hook.
+
+**Draft memos out of the build**
+- Drafts moved to a `drafts` array inside `import.meta.env.DEV ? [...] : []`, with `load: () => import('./x.md?url')`. `memoUrl()` resolves `file` or `load`, and `Memo.jsx` fetches through it.
+- **Deviation:** the planned per-entry loader wasn't enough.
+  - **[DISCOVERED]** A `devOnly(load)` helper isn't constant-folded: `_template-*.md` and a chunk still shipped.
+  - **[DISCOVERED]** With the condition inlined, the draft's slug, title and summary still sat in the main bundle. For a real unreleased memo, that leaks its title.
+  - Folding the whole drafts array drops all three.
+- **After `npm run build`:**
+  - `ls build/assets | grep -i template` and `grep -l -e _template -e "Memo template" build/assets/*.js` both return nothing;
+  - the 3 published memos' `.md` still ship.
+- **Dev preview:** `/memos/_template` on the dev server renders with the "Draft · not published" badge.
+- **Tests:** 3 new memo tests (no static `file` on drafts, `memoUrl` paths, the real loader in dev).
+
+**Guide**
+- **Route:** `/guides/how-i-build-with-ai-agents`. A lazy chunk of 4.78 kB gz JS + 1.20 kB gz CSS. The main entry is 111.65 kB gz (+0.15 kB: the guide's metadata).
+- **Data:** `workflow/data.js` holds every number, each with a `source` and an exact `quote`.
+  - `workflow/data.test.js` (31 cases) checks each quote is in its source file, each charted value appears in its quote, and the README's 3 headline numbers match.
+  - **[DISCOVERED]** It caught one mis-citation while I wrote it: "all answers correct both ways" is in the master plan, not cp5. Fixed.
+- **Numbers spot-checked:** all of them, mechanically, by the test.
+  - cp2: 3.1k → 1.2k, −61%;
+  - cp3 → cp3b: 6 → 32 tests, plus the 6 matrix rows (2 found and fixed, eval blocked, nested shell as a known limit);
+  - cp4: 227.29 → 227.27 / 13.25 → 13.24 kB gz, −0.03 kB, 236 kB, byte-identical;
+  - cp5: a/b/c and 161,614 → 160,809, −0.5%;
+  - toolchain cp4: npm audit 78 → 0, credited to the toolchain upgrade, not this workflow.
+- **Deviations:**
+  - No shaded "fixed overhead" on the graphify bars. cp5 only says "~50k, mostly fixed", which isn't measured, so the callout says it in words.
+  - "See the code" lists the paths as plain text (Marc's call: the repo URL isn't recorded yet).
+  - Guide `repo: null` until the repo is public.
+- **Visual** (headless Chrome, `vite preview`; screenshots in the session scratchpad):
+  - light and dark at 1440 and 390;
+  - `scrollWidth == clientWidth` in all 4.
+  - **[DISCOVERED]** `.visually-hidden` on a `<table>` doesn't clip (tables ignore width/overflow). It pushed the 390px layout to 608px. Fixed with a wrapper div.
+- **Accessibility** (`design:accessibility-review`, measured in the page):
+  - every text style passes AA in both themes (lowest 4.52:1, light);
+  - bars and swatches are 4.86:1 or better (3:1 needed);
+  - heading order h1 → 8 h2s;
+  - every chart is a `<figure>` with a `<figcaption>` stating the numbers;
+  - the graphify chart is `aria-hidden` with a hidden table carrying all 8 values;
+  - the bypass matrix is a real table with a caption;
+  - outcome badges are text, not colour alone;
+  - no interactive controls added.
+- **Checks:**
+  - vuln-check on `src/content/guides src/content/memos src/pages`: no findings;
+  - `npm run test:once` 70/70, `test:security` 32/32, build clean;
+  - 12-digit scan of the staged diff: none.
+
 ## Handoff
 The code is done. Marc's launch steps:
 1. Push, open a PR, review it and merge. Amplify deploys. Then replace the build log's "in review" heading with the PR number and merge date.

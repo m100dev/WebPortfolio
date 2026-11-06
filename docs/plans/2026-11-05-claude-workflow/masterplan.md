@@ -1,6 +1,6 @@
 # Claude Code workflow: skills, guardrails, lean context, build log
 
-## Status: IN PROGRESS — CP6 done 2026-11-06 (README, runbook, tracked Amplify + IAM config, build log; account ID scrubbed from unpushed history), CP7 next. CP5 done 2026-11-06 (graphify measured at −0.5%, essentially no saving at this repo size), CP6 next, then CP7 (re-planned as a visual results guide, D7) before the repo goes public. Earlier: CP4 done 2026-11-06, after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
+## Status: IN PROGRESS — CP7 code done 2026-11-06 (visual results guide + draft memos out of the build); Marc's launch steps pending (cp7.md Handoff), then COMPLETE. CP6 done 2026-11-06 (README, runbook, tracked Amplify + IAM config, build log; account ID scrubbed from unpushed history), CP7 next. CP5 done 2026-11-06 (graphify measured at −0.5%, essentially no saving at this repo size), CP6 next, then CP7 (re-planned as a visual results guide, D7) before the repo goes public. Earlier: CP4 done 2026-11-06, after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
 ## Created: 2026-11-05
 
 ## Problem summary
@@ -77,7 +77,7 @@ Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
 | 4 | comment-in-my-voice + demo; dedupe + run | 3b | Marc approves comments and dedupe fixes | [x] |
 | 5 | graphify install + measurement | 3b | Marc reviews the hooks it adds | [x] |
 | 6 | README, runbook, infra files, build log, skills table | 2, 4, 5 | Marc reviews copy | [x] |
-| 7 | Visual results guide + no draft memos in the build | 6 | Marc reviews the design (both themes, 390px), merges, then makes the repo public | [ ] |
+| 7 | Visual results guide + no draft memos in the build | 6 | Marc reviews the design (both themes, 390px), merges, then makes the repo public | [x] |
 
 CP4 and CP5 are independent and can run in either order.
 
@@ -98,4 +98,4 @@ CP4 and CP5 are independent and can run in either order.
 - [x] CP4 — comment-in-my-voice + dedupe (2026-11-06; 4 of 5 dedupe rows plus shared tag style, net −0.03 kB gz)
 - [x] CP5 — graphify (2026-11-06; 0.9.103, nudge-only project hooks, no CLAUDE.md section; 161.6k → 160.8k tokens over 3 questions, all answers correct both ways)
 - [x] CP6 — README, runbook, infra files, build log (2026-11-06; 3 commits, both deployer policies tracked, history rewritten to remove the account ID)
-- [ ] CP7 — visual results guide (re-planned 2026-11-06, D7)
+- [x] CP7 — visual results guide (2026-11-06; `92cfb74` drafts out of the build, `ce6adc5` guide with a quote-checked data.js; launch steps are Marc's)
