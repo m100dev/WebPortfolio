@@ -6,7 +6,7 @@ The source for my portfolio site: my projects and experience, long-form guides, 
 - **Frontend:** React 19, routed with `react-router` 7, built with Vite 8 and tested with Vitest and React Testing Library.
 - **Hosting:** AWS Amplify (static hosting with an SPA rewrite).
 - **Visitor counter:** an API Gateway HTTP API, a Python 3.12 Lambda and DynamoDB, managed with Terraform in [`infra/visitor-counter/`](infra/visitor-counter/README.md).
-- **Contact form:** EmailJS, sent straight from the browser, with a honeypot field against bots ([`src/components/contact/README.md`](src/components/contact/README.md)).
+- **Contact form:** EmailJS, sent straight from the browser, with a honeypot field against naive bots ([`src/components/contact/README.md`](src/components/contact/README.md)).
 
 ## Requirements
 Node 24.15 or later. `.npmrc` sets `engine-strict`, so npm refuses older versions.
