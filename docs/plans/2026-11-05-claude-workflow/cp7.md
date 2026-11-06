@@ -138,6 +138,12 @@ This CP also closes a leak found while planning. Draft memo bodies ship in the p
   - vuln-check on `src/content/guides src/content/memos src/pages`: no findings;
   - `npm run test:once` 70/70, `test:security` 32/32, build clean;
   - 12-digit scan of the staged diff: none.
+- **Copy corrections (follow-up commit, review pass):** the drift test only checks numbers, not the prose around them. Three sentences overclaimed against the records:
+  - "the screenshots were byte-identical". cp4 says only the touched sections were, apart from the carousel, and the tag style changed on purpose;
+  - "each in a fresh session". cp5 used fresh subagents;
+  - "a hook … can't be skipped" and "Every bypass attempt". These became the D1 wording and "Bypass attempts from the test matrix, plus the known limit".
+  - The guide stays at v1.0, because it's unpublished.
+  - **For Marc:** the first-person lines, e.g. "Then I tested the hooks against bypass attempts", are his call.
 
 ## Handoff
 The code is done. Marc's launch steps:

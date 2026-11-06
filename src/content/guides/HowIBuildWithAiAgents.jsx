@@ -98,9 +98,10 @@ const HowIBuildWithAiAgents = () => {
       <div className='wf-section'>
         <h2>Gates: hooks enforce, skills judge</h2>
         <p>
-          A hook that exits non-zero can’t be skipped, so the checks a script can decide (secrets,
-          unsafe code, the build, tests, the dependency audit) block every commit. Skills cover the
-          judgment calls a script can’t make. Then I tried to get past the hooks myself.
+          A skill is instructions an agent can skip. A hook that exits non-zero blocks the commit
+          unless something gets around it. So the checks a script can decide (secrets, unsafe code,
+          the build, tests, the dependency audit) run as hooks on every commit, and skills cover the
+          judgment calls. Then I tested the hooks against bypass attempts.
         </p>
         <div className='wf-stats'>
           <div className='wf-stat'>
@@ -109,7 +110,7 @@ const HowIBuildWithAiAgents = () => {
           </div>
         </div>
         <table className='wf-table wf-matrix'>
-          <caption>Every bypass attempt and what happened</caption>
+          <caption>Bypass attempts from the test matrix, plus the known limit</caption>
           <thead>
             <tr><th scope='col'>Attempt</th><th scope='col'>Result</th></tr>
           </thead>
@@ -149,10 +150,11 @@ const HowIBuildWithAiAgents = () => {
             <p className='wf-stat__label'>of unused images deleted from the repo</p>
           </div>
         </div>
-        <Callout value={quality.net.value} title='net, and the screenshots were byte-identical.'>
+        <Callout value={quality.net.value} title='net. The bundle didn’t grow.'>
           <p>
-            The site was already small, so the win is a cleaner codebase, not a smaller bundle. The
-            check that matters is that nothing grew and nothing on screen changed.
+            The site was already small, so the win is a cleaner codebase, not a smaller bundle.
+            Screenshots of the sections the dedupe touched were {quality.visualDiff.value}, apart
+            from the autoplaying carousel. The one visible change, a shared tag style, was on purpose.
           </p>
         </Callout>
       </div>
@@ -162,7 +164,7 @@ const HowIBuildWithAiAgents = () => {
         <p>
           graphify builds a knowledge graph of the code so an agent can query structure instead of
           reading files. I asked the same three questions with and without it, each in a fresh
-          session, and checked every answer against a key written beforehand.
+          subagent, and checked every answer against a key written beforehand.
         </p>
         <figure className='wf-figure'>
           <div className='wf-legend mono' aria-hidden='true'>
