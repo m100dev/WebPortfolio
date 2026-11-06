@@ -69,8 +69,8 @@ Commit each skill and its change separately:
 - `added the dedupe skill and removed duplicate code`
 
 ## Results
-- Baseline JS/CSS gz (2026-11-06, `567a313`, Node 26.13): `index-*.js` **111.53 kB** / `index-*.css` **8.71 kB**. After: **111.51 kB** / **8.70 kB** (JS −0.02; CSS −0.01: the four new tokens add bytes, the removed tag rules take more away).
-- Commit 1 (`ce6258a`, comments + hook tests): build byte-identical, same hashes (Vite strips comments).
+- Baseline JS/CSS gz (2026-11-06, `de25ccc`, Node 26.13): `index-*.js` **111.53 kB** / `index-*.css` **8.71 kB**. After: **111.51 kB** / **8.70 kB** (JS −0.02; CSS −0.01: the four new tokens add bytes, the removed tag rules take more away).
+- Commit 1 (`c06b049`, comments + hook tests): build byte-identical, same hashes (Vite strips comments).
 - Baseline lazy chunks gz (so a dedupe can't just move bytes between chunks): `Memo` js 49.56; `AvdEnterpriseWorkspace` js 59.43 / css 1.99; `AiAutonomyLevels` js 6.77 / css 2.55. **Total JS 227.29 kB, total CSS 13.25 kB.** After: **227.27 kB** / **13.24 kB**. Lazy chunks unchanged. Net −0.03 kB.
 - Dedupe rows applied: **4 of 5**, plus one consolidation Marc approved after seeing it:
   1. Deleted unused `src/assets/bg-texture.png` and `MyAutoTabProject.jpg` (236 kB from the repo; never bundled).

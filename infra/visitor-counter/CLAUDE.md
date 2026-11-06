@@ -10,6 +10,6 @@ Terraform for DynamoDB, a Python 3.12 Lambda and an API Gateway HTTP API. Archit
 - **Least privilege:**
   - the Lambda role may only `GetItem` / `UpdateItem` on its table and write its own log group;
   - keep CORS pinned to the site origins plus `http://localhost:3000`;
-  - the deployer user can't read logs or metrics, on purpose. Reading access logs or alarm history takes Marc's own credentials, so don't add read actions to the deployer policy (README "Deployer IAM").
+  - the deployer user can't read logs or metrics, on purpose. Reading access logs or alarm history takes Marc's own credentials, so don't add read actions to the deployer policies (`deployer-policy*.json`, README "Deployer IAM"). Any change to them is mirrored in those files, account ID as `<ACCOUNT_ID>`.
 - **Tests:** `cd lambda && python -m unittest` (stubbed DynamoDB, no AWS needed).
 - **Frontend contract:** `src/hooks/useVisitorCount.js` sends one `POST` per browser session, then a `GET` every 60 seconds while the tab is visible. Keep `POST /visits` (increment) and `GET /visits` (read) returning `{"visits": n}`.

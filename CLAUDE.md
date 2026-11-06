@@ -33,7 +33,7 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 - **Assets:** import images from `src/assets/` as modules so Vite fingerprints them. Never reference them by path from `public/`.
 - **Colours:** always CSS custom properties from `src/index.css`, never hardcoded values.
 - **Visitor counter hook:** `src/hooks/useVisitorCount.js` reads `import.meta.env.REACT_APP_VISITOR_API_URL` at build time, and the counter is hidden without it.
-- **Hosting:** Amplify's rewrite rules live in the untracked `amplify-redirects.json` and are pasted into the console by hand, with the SPA rewrite last. That rewrite sends any extension missing from its allowlist to `index.html`, so a new static file type (`.md`, `.pdf`) must be added to the list.
+- **Hosting:** Amplify's rewrite rules live in `infra/amplify/redirects.json` and are pasted into the console by hand, with the SPA rewrite last. That rewrite sends any extension missing from its allowlist to `index.html`, so a new static file type (`.md`, `.pdf`) must be added to the list.
 - **Nested CLAUDE.md files** load when you work in their folder:
   - `src/components/CLAUDE.md`: sections, nav, styling, Ask Marc, contact form;
   - `src/content/CLAUDE.md`: guides and memos;

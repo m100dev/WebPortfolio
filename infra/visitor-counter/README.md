@@ -120,19 +120,19 @@ The logs hold caller IP addresses, which is personal data. Retention is 14 days 
 
 ## Deployer IAM
 
-The deployer policy isn't tracked in this repo. The alerting and access logs need these actions on top of what it already grants.
-- Replace `ACCOUNT` with the account ID.
-- If `plan` or `apply` fails with AccessDenied, add the named action, scoped the same way.
+Terraform runs as a dedicated deployer user with two least-privilege managed policies, tracked here with the account ID replaced by `<ACCOUNT_ID>`:
 
-| Purpose | Actions | Resource |
-|---------|---------|----------|
-| Access-log delivery (from AWS's HTTP API logging page; no resource scoping) | `logs:CreateLogDelivery`, `logs:GetLogDelivery`, `logs:UpdateLogDelivery`, `logs:DeleteLogDelivery`, `logs:ListLogDeliveries`, `logs:PutResourcePolicy`, `logs:DescribeResourcePolicies` | `*` |
-| Access-log group (skip any your Lambda log-group grant already covers) | `logs:CreateLogGroup`, `logs:DeleteLogGroup`, `logs:PutRetentionPolicy`, `logs:ListTagsForResource`; plus `logs:DescribeLogGroups` on `*` | `arn:aws:logs:us-east-1:ACCOUNT:log-group:/aws/apigateway/portfolio-visitor-counter*` |
-| SNS topic + subscription | `sns:CreateTopic`, `sns:DeleteTopic`, `sns:GetTopicAttributes`, `sns:SetTopicAttributes`, `sns:ListTagsForResource`, `sns:Subscribe`, `sns:Unsubscribe`, `sns:GetSubscriptionAttributes`, `sns:SetSubscriptionAttributes`, `sns:ListSubscriptionsByTopic` | `arn:aws:sns:us-east-1:ACCOUNT:portfolio-visitor-counter-alerts` |
-| Alarms | `cloudwatch:PutMetricAlarm`, `cloudwatch:DeleteAlarms`, `cloudwatch:DescribeAlarms`, `cloudwatch:ListTagsForResource` | `arn:aws:cloudwatch:us-east-1:ACCOUNT:alarm:portfolio-visitor-counter-*` |
-| Budget | `budgets:ModifyBudget`, `budgets:ViewBudget`, `budgets:ListTagsForResource` | `arn:aws:budgets::ACCOUNT:budget/portfolio-visitor-counter-monthly` |
+| File | Covers |
+|------|--------|
+| [`deployer-policy.json`](deployer-policy.json) | The core stack: the table, the Lambda, its role (`iam:PassRole` only to Lambda), its log group and the HTTP API. Statements are scoped to this stack's ARNs, with three exceptions AWS forces: HTTP API IDs are generated, so the API actions cover `/apis/*`; `kms:DescribeKey` covers the account's keys, because the table's default key ID isn't known in advance; `logs:DescribeLogGroups` only works on `log-group:*` |
+| [`deployer-policy-alerting.json`](deployer-policy-alerting.json) | Access logs, the SNS topic, the two alarms and the budget. A second policy, attached when the alerting was added |
 
-None of these let the deployer read logs or metrics. That stays with your own credentials.
+- To reuse them, replace `<ACCOUNT_ID>` with your account ID.
+- The log-delivery actions have no resource scoping (AWS's HTTP API logging page lists them on `*`), and neither does `logs:DescribeLogGroups`.
+- There are no tag-write actions. `default_tags` were removed so the stack doesn't need `apigateway:TagResource` (see `CLAUDE.md`).
+- If `plan` or `apply` fails with AccessDenied, add only the named action, scoped the same way, and update the file here.
+
+Neither policy lets the deployer read logs or metrics. That stays with your own credentials.
 
 ## Tests
 

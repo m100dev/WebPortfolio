@@ -1,0 +1,22 @@
+[
+  {
+    "source": "https://marcbastien.com",
+    "status": "302",
+    "target": "https://www.marcbastien.com"
+  },
+  {
+    "source": "/guides/AVD_Enterprise_Project_Guide.html",
+    "status": "301",
+    "target": "/guides/avd-enterprise-workspace"
+  },
+  {
+    "source": "/guides/Marc-Bastien-AI-Autonomy-Levels.html",
+    "status": "301",
+    "target": "/guides/ai-autonomy-levels"
+  },
+  {
+    "source": "</^[^.]+$|\\.(?!(css|gif|ico|jpg|jpeg|js|png|txt|svg|woff|woff2|ttf|map|json|webp|html|md)$)([^.]+$)/>",
+    "status": "200",
+    "target": "/index.html"
+  }
+]
