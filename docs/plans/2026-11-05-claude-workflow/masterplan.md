@@ -1,6 +1,6 @@
 # Claude Code workflow: skills, guardrails, lean context, build log
 
-## Status: IN PROGRESS — CP5 done 2026-11-06 (graphify measured at −0.5%, essentially no saving at this repo size), CP6 next. Earlier: CP4 done 2026-11-06, after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
+## Status: IN PROGRESS — CP5 done 2026-11-06 (graphify measured at −0.5%, essentially no saving at this repo size), CP6 next, then CP7 (re-planned as a visual results guide, D7) before the repo goes public. Earlier: CP4 done 2026-11-06, after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
 ## Created: 2026-11-05
 
 ## Problem summary
@@ -60,6 +60,12 @@ Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
 - **Because:** recruiters keyword-match on them, and the skills are real. Clearance roles check for active status, so the dates keep it honest.
 - **Trade-off:** shows a lapse. Years confirmed: both earned in 2023, expired June 2026.
 
+### D7: Visual results guide over a prose guide (re-planned 2026-11-06)
+- **Chosen:** CP7 becomes a visual-first guide with the measured results from CP2–CP5, built before the repo goes public. The README quotes 2–3 headline numbers and links to it.
+- **Over:** the original backlog prose guide, written after the repo went public.
+- **Because:** reviewers skim. A designed page with real numbers (including the null ones) shows design and data presentation, which a README can't. Marc controls both the merge and the public switch, so the page can be live before reviewers arrive.
+- **Trade-off:** it's the costliest CP, and the repo going public now waits on it. The numbers live in one `data.js` so the README and the page can't drift.
+
 ## Checkpoint overview
 | CP | Title | Depends on | Gate | Status |
 |----|-------|------------|------|--------|
@@ -70,8 +76,8 @@ Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
 | 3b | Pre-commit checker, hooks, pre-commit-checklist skill | 3 | bad change blocked, clean one commits | [x] |
 | 4 | comment-in-my-voice + demo; dedupe + run | 3b | Marc approves comments and dedupe fixes | [x] |
 | 5 | graphify install + measurement | 3b | Marc reviews the hooks it adds | [x] |
-| 6 | README, runbook, infra files, build log, skills table | 2, 4, 5 | Marc reviews copy, then makes the repo public | [ ] |
-| 7 | Backlog: "How I build with an AI agent" site guide | 6 + public repo | -- | [ ] |
+| 6 | README, runbook, infra files, build log, skills table | 2, 4, 5 | Marc reviews copy | [ ] |
+| 7 | Visual results guide + no draft memos in the build | 6 | Marc reviews the design (both themes, 390px), merges, then makes the repo public | [ ] |
 
 CP4 and CP5 are independent and can run in either order.
 
@@ -92,4 +98,4 @@ CP4 and CP5 are independent and can run in either order.
 - [x] CP4 — comment-in-my-voice + dedupe (2026-11-06; 4 of 5 dedupe rows plus shared tag style, net −0.03 kB gz)
 - [x] CP5 — graphify (2026-11-06; 0.9.103, nudge-only project hooks, no CLAUDE.md section; 161.6k → 160.8k tokens over 3 questions, all answers correct both ways)
 - [ ] CP6 — README, runbook, infra files, build log
-- [ ] CP7 — backlog: workflow guide
+- [ ] CP7 — visual results guide (re-planned 2026-11-06, D7)

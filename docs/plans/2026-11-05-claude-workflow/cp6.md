@@ -8,7 +8,7 @@ CP1–5 produced the site changes, a lean `CLAUDE.md` with before/after token nu
 - a dated build log;
 - a skills table that shows judgment.
 
-After this, Marc makes the repo public.
+After this, CP7 builds the visual results guide the README links to. Marc makes the repo public after CP7, not here.
 
 **Master plan:** `docs/plans/2026-11-05-claude-workflow/masterplan.md`
 **Branch:** `chore/claude-workflow` (continue)
@@ -50,7 +50,7 @@ After this, Marc makes the repo public.
      - **What I'd add serving clients** (from `cp3b.md` D4): say plainly that local hooks can be bypassed, so in production the gate is server-side: protected `main` with no admin bypass, CI as the required check, `CODEOWNERS` review on the guard rails, secret-scanning push protection, deploy only from `main`, and the agent sandboxed with managed hooks. Keep it to a short list; it shows I know where this demo stops.
      - Say "built to production standards", not "production SaaS", because the site's MyAutoTab card says it's in staging with test users. The two claims have to agree.
    - **Skills table:** Skill | Source | Why | Instead of. The same content as `.claude/skills/README.md`, including the "considered, not used" rows.
-   - **Numbers:** `CLAUDE.md` before/after tokens, graphify measurements, the dedupe size delta.
+   - **Numbers:** only 2–3 headlines (`CLAUDE.md` 3.1k → 1.2k tokens; hooks block every bypass tried; graphify measured at −0.5%), then "See the visual version: https://www.marcbastien.com/guides/how-i-build-with-ai-agents". CP7 builds that page and holds the full numbers in one `data.js`, so don't repeat the tables here.
      - graphify's −0.5% gets the framing from `cp5.md` "Why it's here anyway". I wouldn't run a code graph on a small site. It's here to show the install, the hook review and the measurement. The savings come on large codebases with agents. Don't put a number on that unless it's measured.
    - **Copyright:** © Marc Bastien, code all rights reserved; guides CC BY 4.0.
 2. **`.claude/skills/README.md`:** opens with the same one-line framing (intentional, a demo of the MyAutoTab workflow, not something a static site needs), then the skills table with one line per skill.
@@ -97,14 +97,8 @@ Commit each change separately:
 - `added a build log`
 
 ## Handoff
-The repo is ready to go public.
-
-Marc's steps:
-- push and open a PR, then merge;
-- flip the repo to public;
-- switch the site card's `repo` to the GitHub URL;
-- save the live site on web.archive.org.
+The README links to the CP7 guide, which doesn't exist yet. Don't push or merge until CP7 is done. The repo going public, and Marc's other launch steps, are now in CP7's handoff.
 
 ## Resume paths
 Master plan: `docs/plans/2026-11-05-claude-workflow/masterplan.md`
-Next CP: `docs/plans/2026-11-05-claude-workflow/cp7.md` (backlog)
+Next CP: `docs/plans/2026-11-05-claude-workflow/cp7.md` (visual results guide, same branch)
