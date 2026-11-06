@@ -11,7 +11,7 @@
 
 /* ============= DESIGN TOKENS ============= */
 
-/* Dark is the default (and what renders without JS); public/index.html sets
+/* Dark is the default (and what renders without JS); the root index.html sets
    data-theme on <html> before React mounts, and useTheme toggles it.
    --color-white is "strongest text", so it turns dark in the light theme.
    --rgb-* helpers are comma-separated for rgba(var(--rgb-x), alpha). */

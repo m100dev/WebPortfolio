@@ -10,12 +10,12 @@ These are the steps to take the `portfolio-redesign` branch live. They cover the
 ## Part 1: Ship the site
 
 ### 1. Sanity check before pushing
-PowerShell (the VS Code default on Windows):
-```powershell
-$env:CI = 'true'; npm run build; Remove-Item Env:CI   # builds like Amplify (warnings fail the build)
-npm test -- --watchAll=false
+Any shell:
+```bash
+npm run build      # lint (zero warnings) + Vite build, exactly what Amplify runs
+npm run test:once
 ```
-Git Bash / macOS / Linux: `CI=true npm run build`. That form fails in PowerShell or cmd with "The term 'CI=true' is not recognized".
+- Both need Node 24.15 or later (`engine-strict`). Amplify's build spec has to install Node 24 (`nvm install 24` + `nvm use 24` in the preBuild phase).
 - In the Amplify Console, note which branch the app builds from. It's probably `main`.
 
 ✓ **Check:** both commands finish clean.

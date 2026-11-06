@@ -81,7 +81,8 @@ Rationale: this changes the production build, so it gets its own PR and its own 
 | 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` (EmailJS dashboard: no changes, brief O3) | [x] applied, verified, autofill check passed (see `cp1.md` "Marc's gate") |
 | 2 | Vite + Vitest + ESLint 10 (parity swap) | 1 | Marc confirms Amplify's Node version (decided: Node 24, `cp2.md` D4) | [x] done; Marc sets Node 24 in the Amplify build spec before merge |
 | 3 | Runtime majors + dependency cleanup | 2 | Marc reviews the diff | [x] done; Marc reviews the diff (RR8 deferred, `cp3.md` D4) |
-| 4 | Docs, before/after numbers, PR | 3 | Marc merges and checks the live site, then the claude-workflow rebase | [ ] |
+| 3d | Docs for Vite, React 19, RR7 (pulled forward from CP4) | 3 | Marc reviews the docs diff | [x] |
+| 4 | Before/after numbers, security review, PR | 3 | Marc merges and checks the live site, then the claude-workflow rebase | [ ] |
 
 These run strictly in sequence. CP1's frontend honeypot and its Terraform are independent, so `terraform apply` can happen any time after CP1.
 
@@ -91,7 +92,7 @@ These run strictly in sequence. CP1's frontend honeypot and its Terraform are in
   - run `/context` at the start and end of each CP, and note both top-line totals (e.g. `39.2k/1m (4%)`, not the `CLAUDE.md` row) plus the model ID in that CP's Results;
   - if a session passes 60%, finalize and hand off (plan-refine rule).
   - CP2 and CP3 are the heavy ones, because of the dependency output, so delegate long `npm` output reading to an Explore agent.
-- **`CLAUDE.md` tokens:** this branch still has the old ~3.1k-token root `CLAUDE.md` from `main`. Don't re-measure it here, and keep CP4's edits to its Commands lines so the rebase onto the split version stays small.
+- **`CLAUDE.md` tokens:** this branch still has the old ~3.1k-token root `CLAUDE.md` from `main`, so don't re-measure it here. CP3d fixed every stale fact in it (not just the Commands lines; see `cp3d.md` D2: the claude-workflow split conflicts on the whole file anyway). `cp4.md` "After merge" lists the facts to port.
 - This file is shared state: mark `[x]` here before /clear.
 - Every CP ends with the verification results, then "Here is the prompt for the next session:".
 - Outward-facing steps (push, merge, `terraform apply`, Amplify or EmailJS console, live API requests) are Marc's, or need his explicit OK.
@@ -102,4 +103,5 @@ These run strictly in sequence. CP1's frontend honeypot and its Terraform are in
 - [x] CP1 — abuse hardening (applied, verified and honeypot autofill check passed, 2026-11-05)
 - [x] CP2 — Vite + Vitest parity swap (2026-11-05; audit 78 → 2, JS −12%, build 10s → 2s; Amplify build spec must use Node 24 before merge)
 - [x] CP3 — runtime majors (2026-11-06; audit 2 → 0, React 19 + RR7, JS +14% vs CP2 from react-dom 19, now equal to CRA's total)
-- [ ] CP4 — docs, numbers, PR
+- [x] CP3d — docs for Vite, React 19 and RR7 (2026-11-06; CLAUDE.md, README, LAUNCH, contact README; old site plan archived)
+- [ ] CP4 — numbers, security review, PR

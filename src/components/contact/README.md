@@ -45,7 +45,7 @@ document.querySelector('input[name="website"]').value  // ''
 - **Hidden properly:** the field has `tabindex="-1"` and `autocomplete="off"`, sits inside an `aria-hidden` wrapper, and screen readers can't find it.
 - **Autofill hints:** the name and email fields have their autofill hints.
 
-Run them with `npm test -- --watchAll=false Contact`.
+Run them with `npm run test:once -- Contact`.
 
 ## What it doesn't stop
 
