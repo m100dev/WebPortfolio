@@ -55,6 +55,7 @@ CP1 hardened the counter and the form. CP2 swapped CRA for Vite and Vitest. CP3 
    - `package.json` / `package-lock.json` (babel devDeps, `test:security`, `vuln-check`): keep both, then `npm install`;
    - `CLAUDE.md`: keep claude-workflow's split structure, and apply this branch's command changes to it;
    - `src/content/guides/ai-autonomy/Icon.jsx`: keep the suppression comment.
+   - **Checked in CP2:** claude-workflow's `tools/vuln-check/` is CommonJS. That's why `package.json` has no `"type": "module"` and the configs are `.mjs`. With that tree copied in, `eslint .` passed (fixtures ignored, `tools/**/*.js` linted as Node CJS), Vitest stayed on its 18 `src/` tests, and `node --test "tools/**/*.test.js"` passed 6/6. After the rebase, `npm run test:security` and `npm run vuln-check` need Node ≥24.15 like everything else.
 3. **[DISCOVERED] in CP1:** on the rebased branch, update `infra/visitor-counter/CLAUDE.md` (which only exists on claude-workflow):
    - per-route limits (POST 2/5, GET 5/10);
    - `alert_email` lives only in the git-ignored `terraform.tfvars`;

@@ -6,7 +6,8 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 // Parity with CRA's react-app preset: ESLint 10 core tracks JSX references, so
 // eslint-plugin-react (no ESLint 10 support yet) isn't needed for unused-vars.
 export default [
-  { ignores: ['build/', 'coverage/', 'infra/'] },
+  // tools/vuln-check/fixtures/ (chore/claude-workflow) holds deliberately unsafe code for the scanner's tests
+  { ignores: ['build/', 'coverage/', 'infra/', 'tools/**/fixtures/'] },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],
@@ -36,7 +37,12 @@ export default [
     languageOptions: { globals: { ...globals.browser, ...globals.vitest } }
   },
   {
-    files: ['vite.config.js', 'eslint.config.js'],
+    files: ['*.config.mjs'],
     languageOptions: { globals: globals.node }
+  },
+  {
+    // Node CommonJS scripts (package.json has no "type": "module" so require() keeps working)
+    files: ['tools/**/*.js'],
+    languageOptions: { sourceType: 'commonjs', globals: globals.node }
   }
 ]

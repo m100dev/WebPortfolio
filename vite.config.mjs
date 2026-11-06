@@ -16,6 +16,8 @@ export default defineConfig({
   preview: { port: 3000 },
   test: {
     environment: 'jsdom',
+    // App tests only: tools/**/*.test.js are node:test suites run by test:security
+    include: ['src/**/*.test.{js,jsx}'],
     globals: true,
     setupFiles: 'src/setupTests.js'
   }
