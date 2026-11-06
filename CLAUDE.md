@@ -46,3 +46,4 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 - `comment-in-my-voice`: sparse first-person "why" comments, with reasons only from the code, git history or plan docs (asks otherwise).
 - `dedupe`: whole-repo duplication sweep (rule of three), report first, apply approved rows, measure gzipped sizes. Use `/simplify` for a single diff.
 - `security-audit`: read-only repo-level audit (git history, deps, IAM, CORS, `.gitignore`, `public/`) that reports a findings table.
+- `graphify` (third-party, `graphifyy` 0.9.103): code knowledge graph in `graphify-out/`. Project hooks only nudge toward `graphify query`. Rebuild with `graphify extract . --code-only`. It doesn't index CSS or (without the extra) Terraform. Measured savings here are about zero (`docs/plans/2026-11-05-claude-workflow/cp5.md`).
