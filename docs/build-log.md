@@ -2,7 +2,7 @@
 
 What shipped, when, and the one-line reason. Newest first, grouped by release. The detail behind each 2026 release is in [`docs/plans/`](plans/).
 
-## Claude Code workflow (branch `chore/claude-workflow`, in review)
+## Claude Code workflow (PR #4, merged 2026-11-06)
 - **2026-11-05:** adapted my planning skill from MyAutoTab into `plan-refine`: a master plan with steelmanned decisions, plus one detail file per checkpoint that a fresh session can run. I removed its database and multi-tenant rules, which don't apply here.
 - **2026-11-05:** added my AWS certs with their dates (2023–2026) and renewal status. Recruiters search for them, and the dates keep the lapse honest.
 - **2026-11-05:** put security first in the principles and split `CLAUDE.md` into a lean root plus three folder files. It went from 3.1k to 1.2k tokens per session, and the gotchas still load where they matter.
@@ -11,6 +11,7 @@ What shipped, when, and the one-line reason. Newest first, grouped by release. T
 - **2026-11-06:** added the `comment-in-my-voice` and `dedupe` skills. Dedupe removed 236 kB of unused images and duplicate CSS, and the measured bundle went down 0.03 kB gzipped, not up.
 - **2026-11-06:** installed graphify (a code knowledge graph) and measured it on 3 fixed questions: −0.5% tokens. That's no real saving at about 155 files, which I expected. It's here to show the install, the hook review and an honest measurement. The payoff is on large codebases with agents working across them.
 - **2026-11-06:** wrote the README, this log and a reusable runbook, and started tracking the Amplify rewrite rules and the deployer IAM policies (account ID removed).
+- **2026-11-06:** published [How I Build with AI Agents](https://www.marcbastien.com/guides/how-i-build-with-ai-agents), a visual version of these results. Every number on it comes from one data file that a test checks against the plan files, so the page, the README and this log can't drift apart. I also stopped draft memos from shipping in the production build. Their bodies and titles had been in the bundle even though the routes 404.
 
 ## Toolchain upgrade (PR #3, merged 2026-11-06)
 - **2026-11-05:** hardened the visitor counter: per-route throttles, API access logs, 4xx/5xx alarms, a $5 budget alert, and a honeypot on the contact form. The counter is public, so its cost and abuse needed a ceiling.
