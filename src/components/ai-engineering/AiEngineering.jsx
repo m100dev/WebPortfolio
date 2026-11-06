@@ -55,9 +55,9 @@ const AiEngineering = () => {
             <div className='ai-engineering__card-icon'>{icon}</div>
             <h3 className='ai-engineering__card-title'>{title}</h3>
             <p className='ai-engineering__card-description'>{description}</p>
-            <ul className='ai-engineering__card-tags'>
+            <ul className='tag-list'>
               {tags.map((tag, index) => (
-                <li key={index} className='ai-engineering__tag'>{tag}</li>
+                <li key={index} className='tag'>{tag}</li>
               ))}
             </ul>
           </article>

@@ -69,9 +69,18 @@ Commit each skill and its change separately:
 - `added the dedupe skill and removed duplicate code`
 
 ## Results
-- Baseline JS/CSS gz (2026-11-06, `567a313`, Node 26.13): `index-*.js` **111.53 kB** / `index-*.css` **8.71 kB**. After: ___ / ___.
-- Baseline lazy chunks gz (so a dedupe can't just move bytes between chunks): `Memo` js 49.56; `AvdEnterpriseWorkspace` js 59.43 / css 1.99; `AiAutonomyLevels` js 6.77 / css 2.55. **Total JS 227.29 kB, total CSS 13.25 kB.** After: ___ / ___.
-- Dedupe rows applied: ___ of ___.
+- Baseline JS/CSS gz (2026-11-06, `567a313`, Node 26.13): `index-*.js` **111.53 kB** / `index-*.css` **8.71 kB**. After: **111.51 kB** / **8.70 kB** (JS −0.02; CSS −0.01: the four new tokens add bytes, the removed tag rules take more away).
+- Commit 1 (`ce6258a`, comments + hook tests): build byte-identical, same hashes (Vite strips comments).
+- Baseline lazy chunks gz (so a dedupe can't just move bytes between chunks): `Memo` js 49.56; `AvdEnterpriseWorkspace` js 59.43 / css 1.99; `AiAutonomyLevels` js 6.77 / css 2.55. **Total JS 227.29 kB, total CSS 13.25 kB.** After: **227.27 kB** / **13.24 kB**. Lazy chunks unchanged. Net −0.03 kB.
+- Dedupe rows applied: **4 of 5**, plus one consolidation Marc approved after seeing it:
+  1. Deleted unused `src/assets/bg-texture.png` and `MyAutoTabProject.jpg` (236 kB from the repo; never bundled).
+  2. AI Engineering's tag list uses the shared `.tag-list` instead of an identical copy.
+  3. Merged `ai-engineering.css`'s early media blocks into the ones at the bottom.
+  4. Theme-invariant colours became `:root` tokens (`--color-diagram-bg`, `--color-code-bg`, `--color-code-text`, `--rgb-shadow`); no hardcoded colours left in CSS/JSX outside `index.css`, the AVD guide and the AI Autonomy level tokens.
+  + AI Engineering's tags use the shared `.tag` (deleted `.ai-engineering__tag`). A visible change on purpose: they're now monospace and slightly smaller like every other section's tags, and lose a hover that made non-links look clickable.
+  - Skipped: report row 5 (`SectionHeading` for 6 two-line headings; clearer inline). Kept: `useTheme`'s literal theme colours (needed before CSS loads), 4 CSS pairs (rule of three).
+- Visual check (headless Chrome, before vs after rows 1–4, both themes): AI Engineering, Contact, AI Autonomy guide and a memo with an injected code block are byte-identical screenshots. Portfolio differs only by its autoplaying carousel (two runs of the same build differ too) and looks the same.
+- Tag consolidation: screenshot of the AI Engineering cards in both themes matches the shared `.tag` style used by Experience and Portfolio.
 
 ## Handoff
 The two quality skills exist, the demo comments are in, and the duplicates are reduced with a measured size delta. CP6 cites these numbers in the build log.

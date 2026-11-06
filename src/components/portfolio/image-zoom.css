@@ -38,13 +38,13 @@ html:has(.image-zoom[open]) {
     max-height: calc(88vh - 3rem);
     border-radius: 0.75rem;
     background-color: var(--color-bg-variant);
-    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 30px 80px -20px rgba(var(--rgb-shadow), 0.55);
 }
 
 /* Diagrams keep the same off-white backdrop they have in their card */
 .image-zoom--contain .image-zoom__img {
     padding: 0.75rem;
-    background-color: #f8f8f6;
+    background-color: var(--color-diagram-bg);
 }
 
 .image-zoom__caption {

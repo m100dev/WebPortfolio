@@ -12,6 +12,7 @@
 - **Theme:** dark is the default on `:root`, and `:root[data-theme="light"]` overrides it. An inline script in the root `index.html` sets `data-theme` before first paint, from `localStorage` key `theme` and falling back to `prefers-color-scheme`. `src/hooks/useTheme.js` drives the nav toggle.
 - **`--color-white` means "strongest text":** it turns dark in light mode.
 - **Translucent colours:** use the comma-separated RGB helpers, e.g. `rgba(var(--rgb-primary), 0.35)`.
+- **Colours that stay the same in both themes** (diagram backdrop, the always-dark code block, black shadows) are still tokens: `--color-diagram-bg`, `--color-code-bg`, `--color-code-text`, `--rgb-shadow`, set on `:root` only, so the light block doesn't override them.
 - **Card surfaces:** add `box-shadow: var(--shadow-card)` so they still separate in light mode.
 - **Global `<header>` / `<footer>` rules:** `header.css` and `footer.css` style the bare elements, so use divs for headers and footers inside pages.
 - **Overriding global rules:** `src/index.css` is imported after `App`, so its global rules (`.btn`, `.container { margin: 0 auto }`) beat single-class component rules. Override with compound selectors (`.container.guide-cards`, `.btn.contact__copy`).
