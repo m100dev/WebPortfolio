@@ -19,9 +19,10 @@ const guides = [
     repoLabel: 'Source code',
     license: true,
     year: 2026,
-    version: '1.1',
+    version: '1.2',
     updated: '2026-11-06',
     changes: [
+      { version: '1.2', date: '2026-11-06', note: 'Said exactly which commits the hooks check and which advisories block.' },
       { version: '1.1', date: '2026-11-06', note: 'Linked the source repo now that it’s public.' },
       { version: '1.0', date: '2026-11-06', note: 'First published.' }
     ],

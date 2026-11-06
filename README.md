@@ -13,7 +13,7 @@ The dated detail is in the [build log](docs/build-log.md).
 ## How I build
 Spec → checkpointed plan → tests → hooks → my review.
 
-- Every multi-part change starts as a written plan in [`docs/plans/`](docs/plans/), with the decisions steelmanned (chosen, over what, because, trade-off) and a verification gate per checkpoint.
+- Every change starts from a written spec. Every multi-part change also gets a written plan in [`docs/plans/`](docs/plans/), with the decisions steelmanned (chosen, over what, because, trade-off) and a verification gate per checkpoint.
 - The agent writes code against tests. Hooks enforce what a script can check, skills cover the judgment calls, and nothing ships without my review.
 - I use AI for speed, but never at the cost of security or review. The order is security, then quality, then speed.
 

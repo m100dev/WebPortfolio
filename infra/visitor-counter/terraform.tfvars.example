@@ -3,3 +3,5 @@
 # allowed_origins = ["https://www.marcbastien.com", "https://marcbastien.com", "http://localhost:3000"]
 # Required: where budget and alarm emails go. Only ever set it in terraform.tfvars.
 # alert_email = "you@example.com"
+# Monthly budget for the whole account, in USD (default 5). I use 11 because the account also hosts another site.
+# budget_limit_usd = 11

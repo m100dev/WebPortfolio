@@ -6,7 +6,7 @@ Marc Bastien's portfolio (marcbastien.com). Vite 8 + React 19 with `react-router
 - **Security over quality over speed.** Never skip a security check or a review to ship faster. Changes that touch auth, user input, secrets, infra or dependencies get a security review before commit.
 - **Quality:** tests and `npm run build` pass before every commit, and every change gets Marc's review.
 - **Best patterns over clever one-offs:** established React and Terraform practice, design tokens, least-privilege IAM.
-- **Commits go through the pre-commit hook** (secrets, vuln-check, build, tests, audit; `tools/precommit/check.js`). Never bypass it. Run `pre-commit-checklist` before proposing a commit. Pre-push runs `npm run build`.
+- **Commits go through the pre-commit hook** (gitleaks, vuln-check, build, Vitest and `node:test`, the Lambda tests or `terraform fmt` when those are staged, the test heuristic, and `npm audit` of runtime deps at high or above; docs-only commits run just gitleaks and the audit; `tools/precommit/check.js`). Never bypass it. Run `pre-commit-checklist` before proposing a commit. Pre-push runs `npm run build`.
 
 ## Commands
 Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true` in `.npmrc` make npm refuse older versions. Amplify's build spec installs Node 24.
@@ -20,20 +20,20 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 ## Hard rules
 - Import routing from `react-router`, never `react-router-dom`.
 - Never `terraform apply`, change Amplify settings, push, merge or change repo visibility without asking.
-- Commit messages: lowercase, past tense, one line.
+- Commit messages: lowercase, past tense, one line (plus the Co-Authored-By trailer).
 
 ## Map
 - **Config:** `vite.config.mjs` (build + Vitest; `envPrefix` keeps the `REACT_APP_` names, output goes to `build/`, `.md` is never inlined) and `eslint.config.mjs`. They're `.mjs` because `package.json` deliberately has no `"type": "module"`: the CommonJS `tools/` scripts use `require()`.
 - **Routes** (`src/App.jsx`, inside a shared `Layout` of `Nav`, `<Outlet/>` and `Footer`):
   - `/` → `pages/Home.jsx` (every home section, in order);
   - `/guides` and `/guides/:slug`;
-  - `/memos` and `/memos/:slug` (lazy-loaded);
+  - `/memos` and `/memos/:slug` (the memo page is lazy-loaded, for react-markdown; every guide body is its own lazy chunk too);
   - `*` → `NotFound`.
 - **New pages:** add a `<Route>` in `App.jsx`, a nav entry in `Nav.jsx`'s `pages` list if it belongs in the nav, a `<title>` via `useDocumentTitle`, and use the shared `.page` / `.page-intro` styles in `src/pages/pages.css`.
 - **Assets:** import images from `src/assets/` as modules so Vite fingerprints them. Never reference them by path from `public/`.
 - **Colours:** always CSS custom properties from `src/index.css`, never hardcoded values.
 - **Visitor counter hook:** `src/hooks/useVisitorCount.js` reads `import.meta.env.REACT_APP_VISITOR_API_URL` at build time, and the counter is hidden without it.
-- **Hosting:** Amplify's rewrite rules live in `infra/amplify/redirects.json` and are pasted into the console by hand, with the SPA rewrite last. That rewrite sends any extension missing from its allowlist to `index.html`, so a new static file type (`.md`, `.pdf`) must be added to the list.
+- **Hosting:** Amplify's rewrite rules live in `infra/amplify/redirects.json` and are pasted into the console by hand, with the SPA rewrite last. That rewrite sends any extension missing from its allowlist to `index.html`, so a new static file type must be added to the list (`md` is already there for memos; a PDF would need `pdf`).
 - **Nested CLAUDE.md files** load when you work in their folder:
   - `src/components/CLAUDE.md`: sections, nav, styling, Ask Marc, contact form;
   - `src/content/CLAUDE.md`: guides and memos;
@@ -46,4 +46,4 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 - `comment-in-my-voice`: sparse first-person "why" comments, with reasons only from the code, git history or plan docs (asks otherwise).
 - `dedupe`: whole-repo duplication sweep (rule of three), report first, apply approved rows, measure gzipped sizes. Use `/simplify` for a single diff.
 - `security-audit`: read-only repo-level audit (git history, deps, IAM, CORS, `.gitignore`, `public/`) that reports a findings table.
-- `graphify` (third-party, `graphifyy` 0.9.103): code knowledge graph in `graphify-out/`. Project hooks only nudge toward `graphify query`. Rebuild with `graphify extract . --code-only`. It doesn't index CSS or (without the extra) Terraform. Measured savings here are about zero (`docs/plans/2026-11-05-claude-workflow/cp5.md`).
+- `graphify` (third-party, `graphifyy` 0.9.103): code knowledge graph in `graphify-out/`. Project hooks only nudge toward `graphify query`. Rebuild with `graphify extract . --code-only` then `graphify cluster-only . --no-viz --no-label`. It doesn't index CSS or (without the extra) Terraform. Measured savings here are about zero (`docs/plans/2026-11-05-claude-workflow/cp5.md`).

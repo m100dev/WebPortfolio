@@ -34,7 +34,7 @@ Prerequisites:
 ```bash
 cd infra/visitor-counter
 terraform init
-terraform plan          # review: 1 table, 1 function, 1 role + policy, 2 log groups, 1 HTTP API (+ routes/stage/permission),
+terraform plan          # review: 1 table, 1 function, 1 role + policy, 2 log groups, 1 HTTP API (+ integration/routes/stage/permission),
                         #         1 SNS topic + email subscription, 2 alarms, 1 budget
 terraform apply
 terraform output api_url
@@ -44,7 +44,7 @@ After the first apply, click the confirmation link AWS sends to `alert_email`. U
 
 Then wire up the site:
 
-1. In the Amplify Console, go to **App settings → Environment variables** and add `REACT_APP_VISITOR_API_URL` with the `api_url` output, for example `https://abc123.execute-api.us-east-1.amazonaws.com/visits`.
+1. In the Amplify Console, go to **Hosting → Environment variables** and add `REACT_APP_VISITOR_API_URL` with the `api_url` output, for example `https://abc123.execute-api.us-east-1.amazonaws.com/visits`.
 2. **Redeploy** the site. `REACT_APP_*` variables are baked in at build time, so the counter only appears after a new build.
 
 To try it locally, run `REACT_APP_VISITOR_API_URL=<api_url> npm start` (Bash) or `$env:REACT_APP_VISITOR_API_URL='<api_url>'; npm start` (PowerShell). `localhost:3000` is already an allowed CORS origin.
@@ -85,15 +85,15 @@ Writes, the line that also inflates the count, drop from $8.10 to $3.24. AWS cal
 
 The full analysis is in [`brief.md`](../../docs/plans/2026-11-05-toolchain-upgrade/brief.md). In short:
 
-- **The site can't be taken down through this API.** At worst the footer counter goes blank, because `useVisitorCount.js` hides it on any error.
-- **The counter can be blanked** by anyone sending more than the route limits.
+- **The site can't be taken down through this API.** At worst the footer counter goes blank, because `Footer.jsx` shows nothing until `useVisitorCount.js` gets a first successful response. After that, a failed refresh keeps the last count on screen.
+- **The counter can be blanked or frozen** by anyone sending more than the route limits: new visitors see no counter, and open tabs keep a stale number.
   - Per-route limits mean a POST flood no longer starves the GETs real visitors make.
   - Per-IP limiting would need CloudFront + WAF in front (WAF can't attach to HTTP APIs). That costs more per month than the abuse it would prevent.
 - **The count can be inflated** with `curl -X POST` in a loop, up to 2 per second. It's a vanity metric, so that's accepted.
 - **Under a burst, callers see 5xx, not just 429.**
   - The CP1 burst test (30 concurrent GETs, before these changes) got 10 × 500 and 20 × 503, with no 200s and no 429s. A single GET right after returned 200.
   - **Cause (confirmed from the access and Lambda logs, 2026-11-05; redacted log excerpts in [`burst-test-evidence.md`](../../docs/plans/2026-11-05-toolchain-upgrade/burst-test-evidence.md)):**
-    - The 500s were cold-start Lambda invocations timed out at 5 s (`handler.py:19-26` imports boto3 and builds the client inside the first request, at 128 MB).
+    - The 500s were cold-start Lambda invocations timed out at 5 s (the handler then imported boto3 and built the client inside the first request, at 128 MB). **Fixed:** the client is now built at init and memory is 256 MB (`lambda/handler.py`, `main.tf`).
     - The 503s were Lambda's own throttle (`integrationStatus` 429, "The Lambda function is being throttled"): the stuck instances held all 10 of the account's concurrent executions.
     - API Gateway's route throttle returned no 429s for a sub-second burst of 30. AWS calls these limits best-effort targets, so in practice the account's Lambda concurrency limit (10) is the cap. Keep `post_burst_limit + get_burst_limit` below it.
 
@@ -124,12 +124,13 @@ Terraform runs as a dedicated deployer user with two least-privilege managed pol
 
 | File | Covers |
 |------|--------|
-| [`deployer-policy.json`](deployer-policy.json) | The core stack: the table, the Lambda, its role (`iam:PassRole` only to Lambda), its log group and the HTTP API. Statements are scoped to this stack's ARNs, with three exceptions AWS forces: HTTP API IDs are generated, so the API actions cover `/apis/*`; `kms:DescribeKey` covers the account's keys, because the table's default key ID isn't known in advance; `logs:DescribeLogGroups` only works on `log-group:*` |
+| [`deployer-policy.json`](deployer-policy.json) | The core stack: the table, the Lambda, its role (`iam:PassRole` only to Lambda), its log group and the HTTP API. Statements are scoped to this stack's ARNs, with exceptions AWS forces: HTTP API IDs are generated, so the API actions cover `/apis` and `/apis/*` (plus `/tags/*`, below); `kms:DescribeKey` covers the account's keys, because the table's default key ID isn't known in advance; `logs:DescribeLogGroups` only works on `log-group:*` |
 | [`deployer-policy-alerting.json`](deployer-policy-alerting.json) | Access logs, the SNS topic, the two alarms and the budget. A second policy, attached when the alerting was added |
 
 - To reuse them, replace `<ACCOUNT_ID>` with your account ID.
-- The log-delivery actions have no resource scoping (AWS's HTTP API logging page lists them on `*`), and neither does `logs:DescribeLogGroups`.
-- There are no tag-write actions. `default_tags` were removed so the stack doesn't need `apigateway:TagResource` (see `CLAUDE.md`).
+- The log-delivery actions have no resource scoping (AWS's HTTP API logging page lists them on `*`), The alerting policy also grants `logs:DescribeLogGroups` on `*`, which repeats the core policy's narrower `log-group:*` grant.
+- Tags: the `HttpApi` statement allows `GET`, `POST`, `PATCH` and `DELETE` on `/tags/*`. The stack itself tags nothing: `default_tags` were removed so it doesn't need `apigateway:TagResource` (see `CLAUDE.md`).
+- **Follow-up (least privilege, not applied yet):** check whether `POST`/`DELETE` on `/tags/*` allow tag writes on HTTP APIs, and if they do, narrow `/tags/*` to `apigateway:GET`. Also drop the alerting policy's duplicate `logs:DescribeLogGroups` on `*`. Change it in the IAM console, run `terraform plan` to confirm there's no AccessDenied, then update both files here.
 - If `plan` or `apply` fails with AccessDenied, add only the named action, scoped the same way, and update the file here.
 
 Neither policy lets the deployer read logs or metrics. That stays with your own credentials.

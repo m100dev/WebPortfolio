@@ -1,6 +1,6 @@
 // Every number on the How I Build with AI Agents guide. Each one names the plan file it was
 // measured in (`source`) and the exact text there (`quote`); data.test.js checks the quote is
-// still in that file, so this page, the README and the build log can't drift apart.
+// still in that file, so this page and the README can't drift apart.
 
 const PLAN = 'docs/plans/2026-11-05-claude-workflow'
 const CP2 = `${PLAN}/cp2.md`
@@ -61,7 +61,7 @@ export const graphify = {
     { id: 'c', text: 'Which components use the card-surface tokens?', without: 54546, with: 53371, delta: '−2.2%', source: CP5, quote: '54,546 (5) | 53,371 (4) | −2.2%' }
   ],
   total: { without: 161614, with: 160809, delta: '−0.5%', source: CP5, quote: '161,614 | 160,809 | **−0.5%**' },
-  allCorrect: { source: `${PLAN}/masterplan.md`, quote: 'all answers correct both ways' },
+  allCorrect: { source: CP5, quote: '| +4.3% | yes / yes |' },
   why: { source: CP5, quote: 'grep already finds the right file in 1–2 calls' }
 }
 

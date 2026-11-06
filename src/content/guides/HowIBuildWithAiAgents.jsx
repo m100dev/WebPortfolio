@@ -100,8 +100,8 @@ const HowIBuildWithAiAgents = () => {
         <p>
           A skill is instructions an agent can skip. A hook that exits non-zero blocks the commit
           unless something gets around it. So the checks a script can decide (secrets, unsafe code,
-          the build, tests, the dependency audit) run as hooks on every commit, and skills cover the
-          judgment calls. Then I tested the hooks against bypass attempts.
+          the build, tests, the dependency audit) run as hooks on every code commit, and skills
+          cover the judgment calls. Docs-only commits still get the secrets scan and the audit. Then I tested the hooks against bypass attempts.
         </p>
         <div className='wf-stats'>
           <div className='wf-stat'>
@@ -219,7 +219,8 @@ const HowIBuildWithAiAgents = () => {
           <p>
             npm audit advisories. That came from moving off Create React App to Vite, React 19 and
             React Router 7, not from this workflow, so I keep it separate. What the workflow adds is
-            that every commit now runs the audit and blocks on a high or critical advisory.
+            that every commit now runs the audit and blocks on a high or critical advisory in a runtime
+            dependency.
           </p>
         </div>
       </div>
