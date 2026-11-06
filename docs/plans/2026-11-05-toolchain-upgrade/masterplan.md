@@ -56,7 +56,7 @@ Rationale: this changes the production build, so it gets its own PR and its own 
 - **Trade-off:** two verification passes.
 
 ### D3: Vite + Vitest, not Next.js or another meta-framework
-- **Chosen:** Vite 8, `@vitejs/plugin-react`, Vitest, ESLint 9 flat config.
+- **Chosen:** Vite 8, `@vitejs/plugin-react`, Vitest, ESLint 10 flat config (9 when planned; 10 is current).
 - **Over:** Next.js (React's recommended framework).
 - **Because:** the site is a client-rendered SPA on Amplify static hosting. Next would add SSR and routing changes and a new Amplify build type, none of which the site needs. Vite keeps the same architecture.
 - **Trade-off:** no SSR or SEO pre-rendering, which is the same as today.
@@ -68,7 +68,7 @@ Rationale: this changes the production build, so it gets its own PR and its own 
   - `"build": "eslint . --max-warnings=0 && vite build"`.
 - **Over:** idiomatic `VITE_` names and `dist/`.
 - **Because:** zero console changes means the deploy risk is in the code only, and a revert is a clean rollback.
-- **Trade-off:** a non-idiomatic env prefix. Only the Node version may need a console change (Vite 8 needs Node ≥20.19).
+- **Trade-off:** a non-idiomatic env prefix. The Node version is the one console change: Marc sets Node 24 in the build spec, and the repo pins `>=24.15.0` (`cp2.md` D4).
 
 ### D5: Abuse controls sized to the asset
 - Shared throttle split per route, access logs, budget alert and 4xx + 5xx alarms (5xx added in CP1 after the burst test returned 500/503s, not 429s), plus a contact-form honeypot. CloudFront + WAF and IP dedup were rejected.
@@ -79,7 +79,7 @@ Rationale: this changes the production build, so it gets its own PR and its own 
 |----|-------|------------|------|--------|
 | 0 | Security brief + this plan | -- | Marc fills in the "Marc's decision" lines in `brief.md` | [x] decided |
 | 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` (EmailJS dashboard: no changes, brief O3) | [x] applied, verified, autofill check passed (see `cp1.md` "Marc's gate") |
-| 2 | Vite + Vitest + ESLint 9 (parity swap) | 1 | Marc confirms Amplify's Node version | [ ] |
+| 2 | Vite + Vitest + ESLint 9 (parity swap) | 1 | Marc confirms Amplify's Node version (decided: Node 24, `cp2.md` D4) | [ ] |
 | 3 | Runtime majors + dependency cleanup | 2 | Marc reviews the diff | [ ] |
 | 4 | Docs, before/after numbers, PR | 3 | Marc merges and checks the live site, then the claude-workflow rebase | [ ] |
 
@@ -100,6 +100,6 @@ These run strictly in sequence. CP1's frontend honeypot and its Terraform are in
 ## Status tracker
 - [x] CP0 — security brief + plan (decisions filled 2026-11-05)
 - [x] CP1 — abuse hardening (applied, verified and honeypot autofill check passed, 2026-11-05)
-- [ ] CP2 — Vite + Vitest parity swap
+- [ ] CP2 — Vite + Vitest parity swap (gate decided 2026-11-05: Node 24 pin; waiting on local Node ≥24.15)
 - [ ] CP3 — runtime majors
 - [ ] CP4 — docs, numbers, PR

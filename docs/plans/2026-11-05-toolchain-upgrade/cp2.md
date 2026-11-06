@@ -8,14 +8,15 @@ CP1 hardened the counter API and the contact form. This CP replaces Create React
 **Prior CP commit:** `added per-route throttles, access logs, cost alerts and a contact honeypot`
 
 ## Prerequisites
-- [ ] On `chore/toolchain-upgrade`, and the CP1 commit (`c13aaa0 added per-route throttles, access logs, cost alerts and a contact honeypot`) is in `git log --oneline main..HEAD`. CP1 has about a dozen follow-up commits after it (the cold-start fix `b9d8ced`, evidence, plan notes), ending at `2708b90`.
+- [ ] On `chore/toolchain-upgrade`, and the CP1 commit (`c13aaa0 added per-route throttles, access logs, cost alerts and a contact honeypot`) is in `git log --oneline main..HEAD`. CP1 has about a dozen follow-up commits after it (the cold-start fix `b9d8ced`, evidence, plan notes), ending at `4d47532`.
 - [ ] `npm test -- --watchAll=false` and `CI=true npm run build` pass.
 - [ ] **Baseline numbers, recorded in Results before any change:**
   - `npm audit --omit=dev` summary line;
   - total `build/static/js` size;
   - build time;
   - test time.
-- [ ] **Marc has confirmed Amplify's build Node version.** Vite 8 needs ≥20.19 or ≥22.12. If it's lower, STOP: Marc picks either a console build spec change or a committed `amplify.yml`.
+- [x] **Amplify Node version (gate):** decided 2026-11-05, see D4. Marc sets Node 24 in the Amplify console build spec himself.
+- [ ] Local Node is ≥24.15.0 (`node --version`). jsdom 31 requires it.
 
 ## Decisions
 ### D1: Lint inside `npm run build`
@@ -36,7 +37,14 @@ CP1 hardened the counter API and the contact form. This CP replaces Create React
 - **Because:** the smallest diff, and the test bodies stay the same.
 - **Trade-off:** globals need `eslint` globals config.
 
+### D4: Pin Node 24 LTS in the repo
+- **Chosen:** `engines.node: ">=24.15.0"`, `.nvmrc` set to `24`, and `engine-strict=true` in `.npmrc`. Marc installs and uses Node 24 in the Amplify console build spec.
+- **Over:** Node 26, the newest LTS (Amplify supports only 20/22/24), or leaving it unpinned (nothing would catch drift).
+- **Because:** 24.15 is the lowest version every current package accepts (jsdom 31 `^24.15`, vitest 5 `^24`, vite 8 `>=22.12`, eslint 10 `>=24`). With `engine-strict`, a build on the wrong Node fails at `npm ci` with a clear error, and Amplify keeps the last good deploy live.
+- **Trade-off:** Amplify ignores `engines` and `.nvmrc`, so the console spec is the actual control and the repo files only declare the requirement and enforce it.
+
 ## Steps
+0. **Node pin** per D4: `engines`, `.nvmrc`, `.npmrc`.
 1. **Dependencies:**
    - remove `react-scripts`;
    - add as devDependencies: `vite`, `@vitejs/plugin-react`, `vitest`, `jsdom`, `eslint`, `@eslint/js`, `eslint-plugin-react`, `eslint-plugin-react-hooks`, `eslint-plugin-react-refresh` and `globals`. Use current versions, and check them with `npm view <pkg> version`.
@@ -51,7 +59,7 @@ CP1 hardened the counter API and the contact form. This CP replaces Create React
    - `memos/index.js:51` → `!import.meta.env.PROD`. Its tests pass `preview` explicitly, so check they still do.
 6. **`.md` imports** (`memos/index.js:1-4`) get `?url`.
 7. **Tests:** `jest.useFakeTimers` / `advanceTimersByTime` / `useRealTimers` → `vi.*` (`AskMarc.test.jsx:17-30`). In `setupTests.js`, use `import '@testing-library/jest-dom/vitest'` and keep the shims.
-8. **`eslint.config.js`** (flat): recommended rules, react, react-hooks and react-refresh, with browser globals plus vitest globals for `*.test.*`. Remove `eslintConfig` from `package.json`.
+8. **`eslint.config.js`** (flat, ESLint 10, current as of 2026-11-05): recommended rules, react, react-hooks and react-refresh, with browser globals plus vitest globals for `*.test.*`. Remove `eslintConfig` from `package.json`.
 9. **Scripts:**
    - `start` → `vite`, `build` per D1, `preview` → `vite preview --port 3000`;
    - `test` → `vitest`, so `npm test -- --run` runs once;
@@ -68,6 +76,15 @@ CP1 hardened the counter API and the contact form. This CP replaces Create React
   - the `alv4` checklist persists across reload;
   - the counter is hidden without the env var, and with `REACT_APP_VISITOR_API_URL` set the request reaches the API.
 - `index.html` theme script byte-identical to the old `public/index.html` script (diff them).
+
+## Results
+- `/context` at start: 3.1
+- **Baseline before any change** (2026-11-05, `4d47532`, Node 24.13.0):
+  - `npm audit --omit=dev`: 78 vulnerabilities (21 low, 22 moderate, 30 high, 5 critical);
+  - `build/static/js`: 802,892 bytes of `.js` across 5 files, source maps excluded;
+  - build (`CI=true npm run build`): ~10s;
+  - tests (`npm test -- --watchAll=false`): 4 suites, 18 tests, Jest 2.65s (~5s wall).
+- **Verification note:** the env-var check must not POST to the live counter (Marc's rule). Point `REACT_APP_VISITOR_API_URL` at a local stub and confirm the request reaches the stub.
 
 ## Commit
 `replaced create react app with vite and jest with vitest`
