@@ -52,7 +52,7 @@ This CP also closes a leak found while planning. Draft memo bodies ship in the p
 7. **Links:** the repo's `.claude/skills/`, `tools/`, `.githooks/` and `docs/plans/`.
 
 **Honesty rules:**
-- `npm audit` 77 → 0 came from the Vite toolchain upgrade, not this workflow. Leave it out or attribute it correctly.
+- `npm audit` 78 → 0 (the toolchain plan's measured number; CP3 here saw 77 before the babel fix) came from the Vite toolchain upgrade, not this workflow. Leave it out or attribute it correctly.
 - No claims about large-repo savings with a number unless measured.
 - MyAutoTab is "built to production standards" (it's in staging).
 - The site's palette only; no vendor look.
@@ -89,7 +89,7 @@ This CP also closes a leak found while planning. Draft memo bodies ship in the p
 
 ## Handoff
 The code is done. Marc's launch steps:
-1. Push, open a PR, review it and merge. Amplify deploys.
+1. Push, open a PR, review it and merge. Amplify deploys. Then replace the build log's "in review" heading with the PR number and merge date.
 2. Check the guide live, then make the repo public.
 3. Switch the site card's `repo` to the GitHub URL, and save the live site on web.archive.org.
 4. Release the memos per Marc's local launch plan.

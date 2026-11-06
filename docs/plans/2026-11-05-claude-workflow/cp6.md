@@ -96,6 +96,22 @@ Commit each change separately:
 - `turned the launch checklist into a runbook and tracked the amplify and iam config`
 - `added a build log`
 
+## Results (2026-11-06)
+- **Prerequisites:** `200bdf6` at HEAD; 35/35 Vitest, 32/32 security, build clean; CP2/4/5 Results filled.
+- **Commits:** `f057f18` runbook + infra config, `2b61662` README + skills README, `179b0f6` build log. Each passed the pre-commit hook. Marc reviewed the copy and confirmed both policy files.
+- **Deviations from the steps:**
+  - The deployer IAM is **two** managed policies, so both are tracked: `deployer-policy.json` (the core stack, rebuilt from the 2026-11-04 scratchpad) and `deployer-policy-alerting.json` (what toolchain CP1 attached). The infra README's table was replaced by pointers to the files, and the three wildcard resources AWS forces are named with their reasons.
+  - Commit order: the runbook commit went first, because `git mv` had already staged the rename.
+  - The README headline doesn't say "blocks every bypass". It says every bypass in the test matrix was refused, two found in testing were fixed, and the remaining limits are documented (links to `cp3b.md` D4).
+  - The runbook recounts the stack at 17 resources (LAUNCH said 11, before CP1's alerting), and notes that Amplify builds on Node 24 while local is 26.
+- **[DISCOVERED] Account ID in history.** This file's own step 4 and its verification line contained the AWS account ID, committed in `0935855` (plus `2c35a9f` on `backup/claude-workflow-pre-rebase`) and carried by 34 commits. Neither branch had been pushed. At Marc's request, both branches were rewritten (`git filter-branch --index-filter`, changing only those two lines), the reflog expired and old objects pruned. A scan of all objects in `.git` finds 0 matches. Every hash on this branch changed (e.g. `200bdf6` → `5df6fc0`, `a3969b8` → `14573d2`); `cp4.md`'s two citations were updated. The ID remains only in the git-ignored tfstate.
+- **Verification:**
+  - account-ID grep (tracked + untracked) clean;
+  - gitleaks clean on every new file and the full history;
+  - `security-audit`: all PASS except the EmailJS NOTE (public by design) and the deployer wildcards, which are now documented;
+  - `npm run test:once`, `npm run test:security`, `npm run build` and the Lambda tests (7/7) pass.
+- **For CP7:** the build log's "in review" heading needs the PR number and merge date; use npm audit 78 → 0.
+
 ## Handoff
 The README links to the CP7 guide, which doesn't exist yet. Don't push or merge until CP7 is done. The repo going public, and Marc's other launch steps, are now in CP7's handoff.
 
