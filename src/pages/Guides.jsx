@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import guides from '../content/guides'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import formatDate from '../utils/formatDate'

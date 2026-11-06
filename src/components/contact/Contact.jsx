@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './contact.css';
 import { BsLinkedin } from 'react-icons/bs';
 import { FaGithub } from 'react-icons/fa';
@@ -9,6 +9,15 @@ const SERVICE_ID = 'service_pqmsbzr';
 const TEMPLATE_ID = 'template_e8nna57';
 const PUBLIC_KEY = 'iAe9maex10yhKE02z';
 const EMAIL = 'mbastien.dev@gmail.com';
+// Spam filter: a honeypot (how it works, for readers: ./README.md).
+// The form has a hidden fourth field that people never see, but simple spam bots
+// fill in every field they find. If it comes back filled in, I know it's a bot.
+//
+// I named it "website" because bots happily fill that in, but browsers don't
+// autofill it. I avoided names like "company": a browser could autofill those
+// for a real visitor, and their message would be silently dropped. Tested with
+// Chrome autofill on 2026-11-05: the field stayed empty.
+const HONEYPOT = 'website';
 
 const Contact = () => {
   const form = useRef();
@@ -45,10 +54,20 @@ const Contact = () => {
     e.preventDefault();
     if (status === 'sending') return;
 
+    // Honeypot check, before anything is sent. If the hidden field has anything in
+    // it, this is a bot: I show the normal "Message Sent" dialog but never call
+    // EmailJS. Faking success means the bot thinks it worked and moves on, instead
+    // of retrying or trying something smarter.
+    if (form.current?.elements.namedItem(HONEYPOT)?.value) {
+      setStatus('success');
+      form.current.reset();
+      return;
+    }
+
     setStatus('sending');
     setErrorMessage('');
 
-    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, { publicKey: PUBLIC_KEY })
       .then(() => {
         setStatus('success');
         form.current?.reset();
@@ -93,9 +112,16 @@ const Contact = () => {
           </ul>
         </div>
         <form ref={form} onSubmit={sendEmail} className="contact__form reveal" style={{ '--i': 1 }}>
-          <input type="text" name='name' placeholder='Your Full Name' required disabled={isSending}/>
-          <input type="email" name='email' placeholder='Your Email' required disabled={isSending}/>
+          <input type="text" name='name' placeholder='Your Full Name' autoComplete="name" required disabled={isSending}/>
+          <input type="email" name='email' placeholder='Your Email' autoComplete="email" required disabled={isSending}/>
           <textarea name="message" rows="10" placeholder='Your Message' required disabled={isSending}></textarea>
+          {/* The honeypot field, hidden from people in three ways: pushed off-screen by
+              .contact__hp, skipped by screen readers (aria-hidden), and skipped by the
+              Tab key (tabIndex -1). The label is there for bots that read labels. */}
+          <div className="contact__hp" aria-hidden="true">
+            <label htmlFor="contact-website">Leave this field empty</label>
+            <input id="contact-website" type="text" name={HONEYPOT} tabIndex={-1} autoComplete="off" />
+          </div>
           {status === 'error' && (
             <p className="contact__error" role="alert">
               Sorry, your message couldn't be sent: {errorMessage}. Please try again or email me directly.

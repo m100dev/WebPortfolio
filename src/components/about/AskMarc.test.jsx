@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router'
 import AskMarc, { prompts } from './AskMarc'
 
 const setReducedMotion = (reduce) => {
@@ -11,14 +11,16 @@ const setReducedMotion = (reduce) => {
   })
 }
 
+const escapeRegExp = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
 const renderChat = () => render(<MemoryRouter><AskMarc /></MemoryRouter>)
 
 afterEach(() => {
-  jest.useRealTimers()
+  vi.useRealTimers()
 })
 
 test('a chip streams its answer in, then marks itself asked', () => {
-  jest.useFakeTimers()
+  vi.useFakeTimers()
   setReducedMotion(false)
   renderChat()
   const [first] = prompts
@@ -27,10 +29,12 @@ test('a chip streams its answer in, then marks itself asked', () => {
   expect(screen.getByText(first.question, { selector: 'p' })).toBeInTheDocument()
   expect(screen.getByLabelText('Marc is typing')).toBeInTheDocument()
 
-  act(() => { jest.advanceTimersByTime(20000) })
+  act(() => { vi.advanceTimersByTime(20000) })
 
   expect(screen.getByText(first.answer)).toBeInTheDocument()
-  expect(screen.getByRole('button', { name: `${first.question} (asked)` })).toBeDisabled()
+  // jsdom's accessible-name code drops the space inside <span> (asked)</span>; browsers keep it.
+  const askedName = new RegExp(`^${escapeRegExp(first.question)} ?\\(asked\\)$`)
+  expect(screen.getByRole('button', { name: askedName })).toBeDisabled()
   expect(screen.getByRole('link', { name: `${first.link.label} →` })).toBeInTheDocument()
 })
 

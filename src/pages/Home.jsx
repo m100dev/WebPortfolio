@@ -1,4 +1,3 @@
-import React from 'react'
 import Header from '../components/header/Header'
 import ScrollButton from '../components/header/ScrollButton'
 import About from '../components/about/About'

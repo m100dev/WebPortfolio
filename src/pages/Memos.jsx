@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { formatMemoDate, isScheduled, visibleMemos } from '../content/memos'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import './pages.css'

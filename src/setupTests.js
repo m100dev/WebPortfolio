@@ -1,5 +1,5 @@
 // jest-dom adds custom matchers like toBeInTheDocument()
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/vitest'
 
 // jsdom lacks these browser APIs; components and hooks use them unguarded.
 if (!window.matchMedia) {

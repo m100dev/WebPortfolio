@@ -4,18 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- `npm start` — run the dev server at http://localhost:3000
-- `npm run build` — production build into `build/`
-- `npm test` — Jest in watch mode (CRA's React Testing Library setup). `src/setupTests.js` shims `matchMedia`, `IntersectionObserver` and `scrollTo` for jsdom
-- `npm test -- --watchAll=false <pattern>` — run a single test file or pattern non-interactively
-- `CI=true npm run build` (Bash) / `$env:CI='true'; npm run build` (PowerShell) — build the way Amplify does (ESLint warnings fail the build). Plain `npm run build` works everywhere but treats lint warnings as warnings
+- `npm start` — Vite dev server at http://localhost:3000
+- `npm test` — Vitest in watch mode (React Testing Library, jsdom). `src/setupTests.js` shims `matchMedia`, `IntersectionObserver` and `scrollTo` for jsdom
+- `npm run test:once [pattern]` — run the tests once, optionally filtered to a file or pattern (`--watchAll=false` no longer exists)
+- `npm run build` — `eslint . --max-warnings=0`, then `vite build` into `build/`. This is exactly what Amplify runs, so a lint warning fails it; no `CI=true` needed
+- `npm run preview` — serve `build/` at http://localhost:3000 with the SPA fallback
 - `cd infra/visitor-counter/lambda && python -m unittest` — visitor-counter Lambda tests (stubbed DynamoDB, no AWS needed)
 
-Do not run `npm run eject` — it is a one-way operation that abandons CRA's managed config.
+Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true` in `.npmrc` make npm refuse older versions. Amplify's build spec installs Node 24.
 
 ## Architecture
 
-Personal portfolio built on Create React App (react-scripts 5) with `react-router-dom` v6 (`BrowserRouter` in `src/index.js`). `src/App.jsx` defines the routes inside a shared `Layout` (`Nav` + `<Outlet/>` + `Footer`):
+Personal portfolio built with Vite 8 and React 19, routed by `react-router` v7 (`BrowserRouter` in `src/index.jsx`; import from `react-router`, not `react-router-dom`). Build and test config is in `vite.config.mjs` (`envPrefix` keeps the `REACT_APP_` names, output goes to `build/`, `.md` files are never inlined) and lint config in `eslint.config.mjs`. The configs are `.mjs` because `package.json` deliberately has no `"type": "module"`: the CommonJS `tools/` scripts (arriving from `chore/claude-workflow`) use `require()`. `src/App.jsx` defines the routes inside a shared `Layout` (`Nav` + `<Outlet/>` + `Footer`):
 
 - `/` → `src/pages/Home.jsx`, which renders every home section in order (`Header`, `Portfolio`, `AiEngineering`, `Experience`, `About`, `Testimonials`, `Contact`, plus the floating `ScrollButton`).
 - `/guides`, `/guides/:slug` → `src/pages/Guides.jsx` / `Guide.jsx`, driven by `src/content/guides/index.js`.
@@ -33,7 +33,7 @@ Long-form content lives in `src/content/`:
 - **Guides** (`src/content/guides/`): `index.js` holds each guide's metadata (slug, title, summary, tags, reading time, optional explicit `toc`, license flag, `version` + `updated` date, and a `changes` list for the Version history) and a `lazy()` component. Bump `version`/`updated` and add a `changes` line whenever a guide's content changes, so every guide is its own chunk. `src/components/guides/GuideLayout.jsx` renders the hero, a sticky table of contents with scroll-spy (the guide's `toc`, or else its h2s), and the CC BY 4.0 line.
   - `AiAutonomyLevels.jsx` is data-driven from `ai-autonomy/data.js`. Its checklist persists in `localStorage` under `alv4` with the shape `{ "<level>-<skill>": bool }`. Keep both the key and the shape: they match the retired standalone page, so visitors keep their progress.
   - `AvdEnterpriseWorkspace.jsx` was generated from the old standalone HTML. Text sits in `{"..."}` expressions so `<pre>` whitespace survives. Its class vocabulary (`phase`, `sec`, `steps`/`step`, `ib note|tip|warn|danger`, `tbl`, `code` + `kk/ks/kv/km/kc`, `card`, `arch-*`, `split-*`) is styled in `avd/guide-avd.css`, scoped under `.avd`.
-- **Memos** (`src/content/memos/`): one `.md` file per memo, imported as a URL and fetched at runtime, then rendered with `react-markdown` + `remark-gfm` inside `.prose` (in `src/pages/pages.css`).
+- **Memos** (`src/content/memos/`): one `.md` file per memo, imported as a URL (`?url`) and fetched at runtime, then rendered with `react-markdown` + `remark-gfm` inside `.prose` (in `src/pages/pages.css`).
   - Metadata goes in `index.js`.
   - `draft: true` memos only render in development; in production they 404.
   - `date` doubles as the release date: a non-draft memo with a future `date` is scheduled and stays hidden (404) in production until that day, in the visitor's local time.
@@ -43,7 +43,7 @@ Long-form content lives in `src/content/`:
 Global styling lives in `src/index.css` and defines the design system as CSS custom properties. Component CSS should consume these variables rather than hardcoding colours.
 
 - **Theme:** dark is the default on `:root`; `:root[data-theme="light"]` overrides it.
-- **Inline script:** one in `public/index.html` sets `data-theme` before first paint, from `localStorage` key `theme`, falling back to `prefers-color-scheme`. `src/hooks/useTheme.js` drives the nav's toggle.
+- **Inline script:** one in the root `index.html` sets `data-theme` before first paint, from `localStorage` key `theme`, falling back to `prefers-color-scheme`. `src/hooks/useTheme.js` drives the nav's toggle.
 - **`--color-white` means "strongest text":** it turns dark in light mode.
 - **Translucent colours:** use the comma-separated RGB helpers, e.g. `rgba(var(--rgb-primary), 0.35)`.
 - **Card surfaces:** add `box-shadow: var(--shadow-card)` so they still separate in light mode.
@@ -55,10 +55,10 @@ The About section's "Ask Marc" panel (`src/components/about/AskMarc.jsx`) is a s
 
 The footer's visitor counter (`src/hooks/useVisitorCount.js`) calls the API in `infra/visitor-counter/`: Terraform for DynamoDB, a Python 3.12 Lambda and an API Gateway HTTP API.
 
-- The hook reads `REACT_APP_VISITOR_API_URL` at build time. With no value, the counter is hidden.
+- The hook reads `import.meta.env.REACT_APP_VISITOR_API_URL` at build time. With no value, the counter is hidden.
 - It sends one `POST` per browser session, then a `GET` every 60 seconds while the tab is visible.
 - The stack is deployed by hand with `terraform apply` (see its README). Don't apply it, or change Amplify settings, without asking.
 
 The contact form (`src/components/contact/Contact.jsx`) sends mail via EmailJS (`@emailjs/browser`) directly from the browser. The EmailJS service ID, template ID, and public key are committed in the source — they are intentionally public-key credentials, not secrets, but treat the template/service IDs as load-bearing when editing the form.
 
-Images and other assets are imported as ES modules from `src/assets/` (e.g. `import IMG1 from '../../assets/expense-tracker-project.png'`) so webpack fingerprints them; do not reference them by string paths from `public/`.
+Images and other assets are imported as ES modules from `src/assets/` (e.g. `import IMG1 from '../../assets/expense-tracker-project.png'`) so Vite fingerprints them; do not reference them by string paths from `public/`.

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 // Endpoint from infra/visitor-counter (terraform output api_url). Baked in at build time;
 // when it's unset (local dev, or before the stack is deployed) the counter stays hidden.
-const API_URL = process.env.REACT_APP_VISITOR_API_URL
+const API_URL = import.meta.env.REACT_APP_VISITOR_API_URL
 const SESSION_KEY = 'visit-counted'
 const POLL_MS = 60000
 

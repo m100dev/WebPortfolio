@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { BsX } from 'react-icons/bs'
 import './image-zoom.css'
 

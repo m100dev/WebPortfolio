@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import DATA from './ai-autonomy/data'
 import Icon from './ai-autonomy/Icon'
 import './ai-autonomy/ai-autonomy.css'

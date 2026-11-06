@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 
-// Must match the inline script in public/index.html, which applies the theme before first paint.
+// Must match the inline script in the root index.html, which applies the theme before first paint.
 export const THEME_KEY = 'theme'
 const THEME_COLORS = { dark: '#0F172A', light: '#F2F3F5' }
 const LIGHT_QUERY = '(prefers-color-scheme: light)'

@@ -1,4 +1,3 @@
-import React from 'react'
 import CTA from './CTA'
 import ME from '../../assets/Marc Bastien Professional Portrait.webp'
 import HeaderSocials from './HeaderSocials'
