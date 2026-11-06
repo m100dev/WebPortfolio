@@ -96,7 +96,7 @@ CP1 hardened the counter and the form. CP2 swapped CRA for Vite and Vitest. CP3 
 | Infra ignores (`infra/visitor-counter/.gitignore`) | `terraform.tfvars`, `*.tfstate`, `.terraform/` confirmed by `git check-ignore`; only `terraform.tfvars.example` is tracked | pass |
 | `build/` | no `.map` files, no `sourceMappingURL` | pass |
 | `public/` | `favicon.svg`, `manifest.json` only | pass |
-| Root `.gitignore` | ignores `.env.local` / `.env.*.local`, but not `.env` or `.env.production`, which Vite also loads | **[DISCOVERED]** low: nothing is tracked today. Two-line fix offered to Marc |
+| Root `.gitignore` | ignores `.env.local` / `.env.*.local`, but not `.env` or `.env.production`, which Vite also loads | **[DISCOVERED]** low: nothing was tracked. **Fixed in `55e3335`**: `.env` and `.env.*` are now ignored, with an exception for `.env.example` (checked with `git check-ignore`) |
 
 ### PR
 Draft in `pr.md`, next to this file. Not pushed; Marc pushes and opens it.
