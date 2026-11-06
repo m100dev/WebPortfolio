@@ -8,6 +8,23 @@ import avdToc from './avd/toc'
 // content changes, and add a line to changes (newest first) for the Version history list.
 const guides = [
   {
+    slug: 'how-i-build-with-ai-agents',
+    eyebrow: 'Build log, measured',
+    title: 'How I Build with AI Agents',
+    summary: 'The plans, hooks and skills behind this site, and what each one measurably changed, including the results that came out close to zero.',
+    tags: ['AI Engineering', 'Claude Code', 'Security', 'Workflow'],
+    readingTime: '5 min read',
+    repo: null,
+    license: true,
+    year: 2026,
+    version: '1.0',
+    updated: '2026-11-06',
+    changes: [
+      { version: '1.0', date: '2026-11-06', note: 'First published.' }
+    ],
+    Component: lazy(() => import('./HowIBuildWithAiAgents'))
+  },
+  {
     slug: 'avd-enterprise-workspace',
     eyebrow: 'Advanced Portfolio Project',
     title: 'Hybrid Enterprise Workspace with AVD & Auto-Remediation',

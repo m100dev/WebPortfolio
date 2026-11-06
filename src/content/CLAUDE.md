@@ -12,6 +12,9 @@
 - `AiAutonomyLevels.jsx` is data-driven from `ai-autonomy/data.js`.
   - Its checklist persists in `localStorage` under `alv4`, with the shape `{ "<level>-<skill>": bool }`.
   - Keep both the key and the shape: they match the retired standalone page, so visitors keep their progress.
+- `HowIBuildWithAiAgents.jsx` is data-driven from `workflow/data.js`.
+  - Every number there cites its plan file (`source`) and the exact text (`quote`). `workflow/data.test.js` fails if a quote leaves its source or the README's headline numbers stop matching.
+  - Add numbers only from a plan's `## Results`.
 - `AvdEnterpriseWorkspace.jsx` was generated from the old standalone HTML.
   - Text sits in `{"..."}` expressions so `<pre>` whitespace survives.
   - Its class vocabulary (`phase`, `sec`, `steps`/`step`, `ib note|tip|warn|danger`, `tbl`, `code` + `kk/ks/kv/km/kc`, `card`, `arch-*`, `split-*`) is styled in `avd/guide-avd.css`, scoped under `.avd`.
