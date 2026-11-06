@@ -40,8 +40,8 @@ const data = [
     id: 8,
     images: [{ src: IMG_SITE, caption: 'marcbastien.com v2 home page' }],
     title: 'marcbastien.com (v2)',
-    description: 'Rebuilt my portfolio with an AI coding agent under a plan-driven workflow. Every change started as a written spec, passed tests and a lint-as-error build gate, and got my review before it shipped. I pushed back on templated AI design for an original look. Includes a serverless visitor counter (API Gateway, Lambda, DynamoDB) deployed with Terraform, scheduled memo publishing, and AWS Amplify hosting.',
-    stack: ['React', 'Claude Code', 'Terraform', 'AWS Lambda', 'DynamoDB', 'AWS Amplify'],
+    description: 'Rebuilt my portfolio with an AI coding agent under a plan-driven workflow. Every change started as a written spec, passed tests and a lint-as-error build gate, and got my review before it shipped. I pushed back on templated AI design for an original look. Includes a serverless visitor counter (API Gateway, Lambda, DynamoDB) deployed with Terraform, scheduled memo publishing, AWS Amplify hosting, and Route 53 for the domain and DNS.',
+    stack: ['React', 'Claude Code', 'Terraform', 'AWS Lambda', 'DynamoDB', 'AWS Amplify', 'Route 53'],
     repo: 'private',
     demo: null
   },
@@ -62,8 +62,8 @@ const data = [
       { src: IMG_1101_MAPS, caption: 'Google Maps listings feature' }
     ],
     title: '1101 Brickell',
-    description: 'Property website for a Brickell office tower, built at Florida East Coast Realty and still in production. Includes a custom map-based listings feature built with the Google Maps API.',
-    stack: ['HTML5', 'CSS3', 'JavaScript', 'Google Maps API', 'Git'],
+    description: 'Property website for a Brickell office tower, designed and built at Florida East Coast Realty and still in production. Includes a custom map-based listings feature built with the Google Maps API.',
+    stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Google Maps API', 'Adobe XD', 'Git'],
     repo: null,
     demo: 'https://www.1101brickell.com'
   },
@@ -71,8 +71,8 @@ const data = [
     id: 4,
     images: [{ src: IMG_BOCA, caption: 'Boca Delray Polished Concrete website' }],
     title: 'Boca Delray Polished Concrete',
-    description: 'Client website for a South Florida concrete polishing company.',
-    stack: ['Client Work', 'Web Design'],
+    description: 'Website for a South Florida concrete polishing company, built while I worked at Xtreme Polishing Systems.',
+    stack: ['WordPress', 'Web Design'],
     repo: null,
     demo: 'https://bocadelraypolishedconcrete.com/'
   },
@@ -80,8 +80,8 @@ const data = [
     id: 5,
     images: [{ src: IMG_VILLA, caption: 'Villa Majorca website' }],
     title: 'Villa Majorca',
-    description: 'Client website for a residential property.',
-    stack: ['Client Work', 'Web Design'],
+    description: 'Website for a residential property owned by Florida East Coast Realty, designed and built while I worked there.',
+    stack: ['Hand-coded', 'HTML5', 'CSS3', 'JavaScript', 'Adobe XD'],
     repo: null,
     demo: 'https://villamajorca.com/'
   }

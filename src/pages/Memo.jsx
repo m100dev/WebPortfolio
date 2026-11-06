@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { BsArrowLeft } from 'react-icons/bs'
-import { findMemo, formatMemoDate, isScheduled } from '../content/memos'
+import { findMemo, formatMemoDate, isScheduled, memoUrl } from '../content/memos'
 import NotFound from './NotFound'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import './pages.css'
@@ -26,7 +26,8 @@ const Memo = () => {
     if (!memo) return undefined
     let cancelled = false
     setBody({ status: 'loading', text: '' })
-    fetch(memo.file)
+    memoUrl(memo)
+      .then((url) => fetch(url))
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`)
         return res.text()

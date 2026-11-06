@@ -1,0 +1,9 @@
+# Generated, vendored or binary: nothing worth graphing
+build/
+node_modules/
+src/assets/
+# Terraform working dir and state can hold account details
+infra/visitor-counter/.terraform/
+*.tfstate*
+# Amplify console config (JSON pasted by hand, nothing to graph)
+infra/amplify/

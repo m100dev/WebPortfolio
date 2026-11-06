@@ -40,6 +40,13 @@
     /* Cards sit on a lighter surface in dark mode; light mode needs a soft shadow instead */
     --shadow-card: none;
 
+    /* The same in both themes on purpose, so the light block doesn't override them:
+       the off-white behind light diagram images, the always-dark code block, black shadows */
+    --color-diagram-bg: #f8f8f6;
+    --color-code-bg: #0B1220;
+    --color-code-text: #E2E8F0;
+    --rgb-shadow: 0, 0, 0;
+
     --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
     --font-mono: 'Roboto Mono', ui-monospace, monospace;

@@ -29,7 +29,7 @@ export const prompts = [
   {
     id: 'certs',
     question: 'What certifications do you have?',
-    answer: 'CCNA (2026), Azure Fundamentals (2024), and CIW JavaScript Specialist (2021). I’m working toward CompTIA Security+ and studying Applied Agentic AI at Virginia Tech.'
+    answer: 'CCNA (2026), Azure Fundamentals (2024), and CIW JavaScript Specialist (2021). I also held AWS Solutions Architect – Associate and Cloud Practitioner from 2023 to 2026, with the Solutions Architect renewal planned. I’m working toward CompTIA Security+ and studying Applied Agentic AI at Virginia Tech.'
   },
   {
     id: 'roles',

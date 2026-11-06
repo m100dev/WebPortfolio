@@ -1,6 +1,8 @@
-# marcbastien.com — Site Update Plan
-
+> Archived plan from May 2026, since superseded. Certs and roles are as of that date.
+>
 > **Historical (superseded):** this plan predates the redesign. Its stack and hosting notes (TypeScript, CRA, Render) are wrong. See the root `CLAUDE.md` for the current site.
+
+# marcbastien.com — Site Update Plan
 
 ## Problem Statement
 The site currently positions Marc as a "Cloud Developer" focused on frontend/fullstack web development. It needs to be repositioned as a **Systems Administrator & Cloud Engineer** to align with his current career trajectory, resume, and active job application (Junior System Administrator — City of Miami Beach). The hiring panel may visit this URL — it must reinforce, not contradict, the resume narrative.

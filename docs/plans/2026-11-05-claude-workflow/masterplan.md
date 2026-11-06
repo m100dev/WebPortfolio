@@ -1,0 +1,101 @@
+# Claude Code workflow: skills, guardrails, lean context, build log
+
+## Status: IN PROGRESS — CP7 code done 2026-11-06 (visual results guide + draft memos out of the build); Marc's launch steps pending (cp7.md Handoff), then COMPLETE. CP6 done 2026-11-06 (README, runbook, tracked Amplify + IAM config, build log; account ID scrubbed from unpushed history), CP7 next. CP5 done 2026-11-06 (graphify measured at −0.5%, essentially no saving at this repo size), CP6 next, then CP7 (re-planned as a visual results guide, D7) before the repo goes public. Earlier: CP4 done 2026-11-06, after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
+## Created: 2026-11-05
+
+## Problem summary
+The repo is going public, and it should show *how* I build with an AI coding agent, not just the finished site. That means project skills I designed for specific jobs, hooks that actually enforce security and tests before every commit, a lean always-loaded `CLAUDE.md`, measured (not claimed) token savings, and a dated build log. The README is still the Create React App boilerplate.
+
+**This is intentional overkill.** A static site doesn't need hooks, checkpointed plans or security skills. They're a small, public slice of the workflow I use on MyAutoTab, the SaaS I'm building to production standards, where they're load-bearing. graphify is the clearest case. I wouldn't run a code graph on a site this small. It's here to show I can set one up, review its hooks, and measure it honestly. The savings show up on large codebases with agents working across them, not on about 155 files. The README, `.claude/skills/README.md` and the CP7 guide all say so, so reviewers read it as a demonstration, not over-engineering.
+
+## Branch strategy
+Decision: SINGLE-BRANCH
+Branch: `chore/claude-workflow`, created from `main` after `portfolio-redesign` merges
+Rationale: every CP builds one tooling-and-docs initiative. The redesign merges first because it's the biggest visible fix and shouldn't wait on tooling.
+Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
+
+## Codebase findings
+- Content is hardcoded `data` arrays mapped in each component (`src/components/<name>/<Name>.jsx`). Ask Marc answers must come from site copy.
+- The cert list already supports a `status` that renders with `about__cert--pending` (`src/components/about/About.jsx:14-20`).
+- `@babel/parser` and `@babel/traverse` are in `node_modules` (transitively, via react-scripts). `gitleaks` and `uv` are installed locally.
+- CRA's Jest only runs tests under `src/`, so tooling tests use Node's built-in `node:test` under `tools/`.
+- The current `CLAUDE.md` is about 3.1k tokens and is loaded every session.
+- [DISCOVERED] `amplify-redirects.json` and the IAM deployer policy aren't tracked. Both are config worth versioning (sanitized).
+
+## Decision log
+### D1: Hooks enforce, skills judge
+- **Chosen:** deterministic checks (secrets, vuln-check, lint, tests) run in a Claude `PreToolUse` hook and a git `pre-commit` hook. The `pre-commit-checklist` skill covers the judgment calls.
+- **Over:** a skill alone.
+- **Because:** a skill is instructions the agent can skip. A hook that exits non-zero can't be skipped.
+- **Trade-off:** commits get slower (the slow full build moves to `pre-push`).
+
+### D2: Own vuln-check script over a third-party linter
+- **Chosen:** a small AST script (`tools/vuln-check/`) with a few rules I can read, tested against fixtures (3 vulnerable, 1 clean).
+- **Over:** `eslint-plugin-security` or a SaaS scanner.
+- **Because:** a few readable rules aimed at this codebase's real risks (`dangerouslySetInnerHTML`, `eval`, `innerHTML`, `javascript:` URLs, `target=_blank` without `rel`, key-shaped strings) are easier to trust and explain.
+- **Trade-off:** narrower coverage. `security-audit` and `npm audit` cover the rest.
+
+### D3: Nested CLAUDE.md files over one long root file
+- **Chosen:** a root file of about 25 lines (principles, commands, hard rules) plus `src/content/`, `src/components/` and `infra/visitor-counter/` files that load only when work happens there.
+- **Over:** deleting detail to get lean.
+- **Because:** the gotchas are load-bearing (stylesheet order, Amplify allowlist, the `alv4` key), but they don't need to be in every session.
+- **Trade-off:** rules are spread across four files.
+
+### D4: Measure graphify before claiming savings
+- **Chosen:** install it and compare 3 fixed questions with and without the graph, then publish the real numbers.
+- **Over:** quoting third-party figures.
+- **Because:** the official README has no open-source token number, and gains scale with repo size. This repo has about 100 files.
+- **Trade-off:** the number may be small. A small honest number is still the stronger signal.
+- **Outcome (CP5):** −0.5%, as expected at this size. CP6 publishes it as a demonstration of the setup and the measurement, not a saving. Where a graph pays off is a large codebase that agents query repeatedly.
+
+### D5: Publish the adapted plan-refine, not the original
+- **Chosen:** commit only the adapted skill, with an "Adapted from" note.
+- **Over:** publishing a before/after diff.
+- **Because:** MyAutoTab is private. The original reveals its internals and can't be verified anyway.
+- **Trade-off:** reviewers see the result, not the full adaptation.
+
+### D6: Show expired AWS certs with date ranges
+- **Chosen:** `AWS Solutions Architect – Associate (2023–2026) · renewal planned` and `AWS Cloud Practitioner (2023–2026) · expired`.
+- **Over:** leaving them off, or listing them like active certs.
+- **Because:** recruiters keyword-match on them, and the skills are real. Clearance roles check for active status, so the dates keep it honest.
+- **Trade-off:** shows a lapse. Years confirmed: both earned in 2023, expired June 2026.
+
+### D7: Visual results guide over a prose guide (re-planned 2026-11-06)
+- **Chosen:** CP7 becomes a visual-first guide with the measured results from CP2–CP5, built before the repo goes public. The README quotes 2–3 headline numbers and links to it.
+- **Over:** the original backlog prose guide, written after the repo went public.
+- **Because:** reviewers skim. A designed page with real numbers (including the null ones) shows design and data presentation, which a README can't. Marc controls both the merge and the public switch, so the page can be live before reviewers arrive.
+- **Trade-off:** it's the costliest CP, and the repo going public now waits on it. The numbers live in one `data.js` so the README and the page can't drift.
+
+## Checkpoint overview
+| CP | Title | Depends on | Gate | Status |
+|----|-------|------------|------|--------|
+| 0 | Adapt plan-refine, write this plan | -- | Marc reviews the plan | [x] |
+| 1 | AWS certs, archived sysadmin plan, Terraform tag | 0 | Marc checks the badges | [x] |
+| 2 | Principles + CLAUDE.md split | 1 | before/after token numbers recorded | [x] |
+| 3 | vuln-check tool + tests + skill; security-audit skill | 2 | 4/4 security tests, gitleaks clean | [x] |
+| 3b | Pre-commit checker, hooks, pre-commit-checklist skill | 3 | bad change blocked, clean one commits | [x] |
+| 4 | comment-in-my-voice + demo; dedupe + run | 3b | Marc approves comments and dedupe fixes | [x] |
+| 5 | graphify install + measurement | 3b | Marc reviews the hooks it adds | [x] |
+| 6 | README, runbook, infra files, build log, skills table | 2, 4, 5 | Marc reviews copy | [x] |
+| 7 | Visual results guide + no draft memos in the build | 6 | Marc reviews the design (both themes, 390px), merges, then makes the repo public | [x] |
+
+CP4 and CP5 are independent and can run in either order.
+
+## Session protocol
+- One CP per session. Run /clear between checkpoints.
+- Before CP N+1: verify CP N's commit exists (`git log --oneline -5`).
+- This file is shared state: mark `[x]` here before /clear.
+- Every CP ends with the verification results (commands and actual output, screenshots, numbers, the commit) and then "Here is the prompt for the next session:" with a copy-paste block.
+- Detail files: `cpN.md` in this folder.
+- Outward-facing steps (push, merge, `terraform apply`, Amplify console, repo visibility) are Marc's, never the agent's.
+
+## Status tracker
+- [x] CP0 — adapted plan-refine, wrote this plan
+- [x] CP1 — AWS certs, archived sysadmin plan, Terraform tag
+- [x] CP2 — principles + CLAUDE.md split
+- [x] CP3 — vuln-check + security-audit
+- [x] CP3b — pre-commit enforcement (2026-11-06; bypass refused via Bash and PowerShell, eval blocked, build at commit and push; system Node now 26)
+- [x] CP4 — comment-in-my-voice + dedupe (2026-11-06; 4 of 5 dedupe rows plus shared tag style, net −0.03 kB gz)
+- [x] CP5 — graphify (2026-11-06; 0.9.103, nudge-only project hooks, no CLAUDE.md section; 161.6k → 160.8k tokens over 3 questions, all answers correct both ways)
+- [x] CP6 — README, runbook, infra files, build log (2026-11-06; 3 commits, both deployer policies tracked, history rewritten to remove the account ID)
+- [x] CP7 — visual results guide (2026-11-06; `92cfb74` drafts out of the build, `ce6adc5` guide with a quote-checked data.js; launch steps are Marc's)

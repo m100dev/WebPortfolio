@@ -160,7 +160,7 @@ button[disabled] {
 .contact__modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(var(--rgb-shadow), 0.6);
     backdrop-filter: blur(4px);
     display: grid;
     place-items: center;
@@ -177,7 +177,7 @@ button[disabled] {
     max-width: 28rem;
     width: 100%;
     text-align: center;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1rem 3rem rgba(var(--rgb-shadow), 0.4);
 }
 
 .contact__modal h3 {

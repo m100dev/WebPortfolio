@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
-// Runs on route changes only (not on in-page #hash clicks, which the browser handles).
-// With a hash, e.g. /#about from /guides, it scrolls to that section once the page has
-// laid out; otherwise a new page starts at the top instead of inheriting the old scroll.
+// The browser only jumps to a #hash if that element is already on the page. Going from
+// /guides to /#about, it isn't: React renders Home after the URL changes, so the native
+// jump finds nothing. That's why I scroll here, after the route change. Without a hash I
+// go to the top, because otherwise the new page keeps the old page's scroll position.
+// In-page #hash clicks don't change the pathname, so the browser still handles those.
 const useHashScroll = () => {
   const { pathname, hash } = useLocation()
 
@@ -17,7 +19,8 @@ const useHashScroll = () => {
     }
 
     const id = decodeURIComponent(hash.slice(1))
-    // Wait a frame plus a beat so images above the target have taken their space
+    // I wait a frame plus 60 ms so the images above the target have taken their space.
+    // Scroll any sooner and the layout shifts afterwards, leaving the section off target.
     frame = window.requestAnimationFrame(() => {
       timer = window.setTimeout(() => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' })

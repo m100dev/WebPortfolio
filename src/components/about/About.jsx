@@ -13,6 +13,8 @@ const now = [
 const certs = [
   { name: 'CCNA (2026)' },
   { name: 'Azure Fundamentals (2024)' },
+  { name: 'AWS Solutions Architect – Associate (2023–2026)', status: 'renewal planned' },
+  { name: 'AWS Cloud Practitioner (2023–2026)', status: 'expired' },
   { name: 'CIW JavaScript Specialist (2021)' },
   { name: 'CompTIA Security+', status: 'in progress' },
   { name: 'Virginia Tech Applied Agentic AI', status: 'in progress' }
@@ -62,7 +64,7 @@ const About = () => {
                 I also run a sandboxed local AI agent on a Mac mini and publish hands-on lab guides, like my Hybrid Azure Virtual Desktop lab.
               </p>
               <p>
-                CCNA and Azure Fundamentals certified, working toward Security+. U.S. citizen, eligible for a security clearance.
+                CCNA and Azure Fundamentals certified, previously AWS Solutions Architect – Associate (renewal planned), working toward Security+. U.S. citizen, eligible for a security clearance.
               </p>
             </div>
           </details>

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Runs every check before a commit (tools/precommit/check.js). Never bypass it with --no-verify.
+exec node tools/precommit/check.js

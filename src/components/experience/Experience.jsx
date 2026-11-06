@@ -13,7 +13,7 @@ const data = [
       'Built a semi-autonomous, test-driven coding agent workflow with Claude Code that cut feature delivery from about a week to under a day.',
       'Added security and database audits to the CI/CD pipeline to catch issues in agent-written code before release.'
     ],
-    tags: ['Agentic AI Development', 'Claude Code', 'Full-Stack Development', 'React', '.NET', 'PostgreSQL']
+    tags: ['Agentic AI Development', 'Claude Code', 'Full-Stack Development', 'React', '.NET', 'PostgreSQL', 'Terraform']
   },
   {
     id: 2,

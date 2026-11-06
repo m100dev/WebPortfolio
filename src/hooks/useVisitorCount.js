@@ -22,9 +22,13 @@ const setFlag = () => {
   }
 }
 
-// Returns the site's visit count, or null until known / when the counter is disabled.
-// Counts one visit per browser session (POST), then refreshes with GET every minute
-// while the tab is visible, and right away when it becomes visible again.
+// Returns the site's visit count, or null until it's known or when the counter is off.
+//
+// I count one visit per browser session, not per page load: the POST only happens when
+// sessionStorage has no flag yet, so reloading the page doesn't add another visit.
+// After that it's GETs only, every minute while the tab is visible and right away when it
+// comes back. I skip hidden tabs because the API's GET throttle (5 rps) is shared by every
+// caller, not per IP, so tabs left open in the background would use up everyone's budget.
 const useVisitorCount = (url = API_URL) => {
   const [count, setCount] = useState(null)
 

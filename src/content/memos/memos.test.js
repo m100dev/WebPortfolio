@@ -1,4 +1,4 @@
-import { findMemo, hasPublishedMemos, isScheduled, todayISO, visibleMemos } from './index'
+import { findMemo, hasPublishedMemos, isScheduled, memos, memoUrl, todayISO, visibleMemos } from './index'
 
 const TODAY = '2026-03-15'
 
@@ -44,6 +44,27 @@ test('the Memos nav link needs at least one live memo', () => {
   expect(hasPublishedMemos([{ slug: 'x', date: '2026-01-01', draft: true }], TODAY)).toBe(false)
   expect(hasPublishedMemos([{ slug: 'y', date: '2026-04-01', draft: false }], TODAY)).toBe(false)
   expect(hasPublishedMemos([], TODAY)).toBe(false)
+})
+
+test('drafts never import their body statically, so it stays out of the production build', () => {
+  const drafts = memos.filter((m) => m.draft)
+  expect(drafts.length).toBeGreaterThan(0)
+  for (const d of drafts) {
+    expect(d.file).toBeUndefined()
+    expect(typeof d.load).toBe('function') // drafts exist only in development builds
+  }
+  for (const m of memos.filter((m) => !m.draft)) expect(m.file).toBeTruthy()
+})
+
+test('memoUrl resolves a bundled file, a loader, or rejects', async () => {
+  await expect(memoUrl({ slug: 'a', file: '/assets/a.md' })).resolves.toBe('/assets/a.md')
+  await expect(memoUrl({ slug: 'b', load: () => Promise.resolve({ default: '/assets/b.md' }) })).resolves.toBe('/assets/b.md')
+  await expect(memoUrl({ slug: 'c', load: null })).rejects.toThrow('c')
+})
+
+test('the real draft loader resolves to a URL in development', async () => {
+  const template = memos.find((m) => m.slug === '_template')
+  await expect(memoUrl(template)).resolves.toMatch(/_template\.md/)
 })
 
 test('todayISO uses the local date, zero-padded', () => {

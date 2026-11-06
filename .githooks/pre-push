@@ -1,0 +1,4 @@
+#!/bin/sh
+# The same build Amplify runs (eslint . --max-warnings=0, then vite build). Backstop for commits
+# that skipped pre-commit (rebase, cherry-pick).
+exec npm run build

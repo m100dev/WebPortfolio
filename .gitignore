@@ -21,3 +21,12 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# claude code (personal settings)
+.claude/settings.local.json
+
+# graphify: commit only graph.json and GRAPH_REPORT.md. The rest is cache, hook state,
+# or (.graphify_root) the absolute local path of the repo.
+/graphify-out/*
+!/graphify-out/graph.json
+!/graphify-out/GRAPH_REPORT.md
