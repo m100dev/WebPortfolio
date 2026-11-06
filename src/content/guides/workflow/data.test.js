@@ -15,7 +15,9 @@ test.each(sourced.map((e) => [e.quote, e]))('"%s" is still in its source plan fi
 test('every charted number appears in the quote it cites', () => {
   const n = (v) => v.toLocaleString('en-US')
   expect(context.before.quote).toContain(`${context.before.value}k`)
-  expect(context.after.quote).toContain(`${context.after.value}k`)
+  expect(context.atSplit.quote).toContain(`→ ${context.atSplit.value}k`)
+  expect(context.after.quote).toContain(`→ ${context.after.value}k`)
+  expect(context.saving.quote).toContain(context.saving.value.replace('−', ''))
   expect(gates.testsBefore.quote).toContain(`${gates.testsBefore.value}/${gates.testsBefore.value}`)
   expect(gates.testsAfter.quote).toContain(`${gates.testsAfter.value}/${gates.testsAfter.value}`)
   for (const k of ['js', 'css']) {

@@ -2,6 +2,10 @@
 
 What shipped, when, and the one-line reason. Newest first, grouped by release. The detail behind each 2026 release is in [`docs/plans/`](plans/).
 
+## Docs sync (branch `docs/sync-budget-throttles`, in review)
+- **2026-11-06:** re-measured `CLAUDE.md` at 2.2k tokens per session, up from 1.2k right after the split, as I documented the hooks, skills and graphify. The headline is now 3.1k → 2.2k (−29%). An old number shouldn’t stand in for a current one.
+- **2026-11-06:** audited every doc against the code and config and fixed the mismatches. The worst two: the memo steps would have shipped a draft, and the burst defaults broke the README’s own Lambda concurrency rule. They now match the live 3/6.
+
 ## Repo goes public (PR #5, merged 2026-11-06)
 - **2026-11-06:** made the repo public and linked it from the site card and the workflow guide, so reviewers can read the code behind the numbers.
 

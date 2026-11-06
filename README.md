@@ -94,7 +94,7 @@ I design each skill (what it's for, its rules, when not to use it) and write it 
 
 ## Numbers
 Measured, not claimed:
-- **`CLAUDE.md`: 3.1k → 1.2k tokens per session (−61%).** I split it into a lean root plus folder files that load only when the agent works there.
+- **`CLAUDE.md`: 3.1k → 2.2k tokens per session (−29%).** I split it into a lean root plus folder files that load only when the agent works there. The split alone reached 1.2k. Documenting the hooks, skills and graphify since added 1k back, so I re-measured instead of keeping the old number.
 - **The hooks refused every bypass in the test matrix.** Testing found two more (an abbreviated `--no-veri`, a `core.hooksPath` change chained before a commit), and both are fixed. The limits that remain, like a nested shell, are [documented](docs/plans/2026-11-05-claude-workflow/cp3b.md#d4-local-hooks-are-the-demo-a-production-gate-would-be-server-side-decided-2026-11-06-marc), and the server-side list above is how I'd close them.
 - **graphify: −0.5% tokens over 3 questions, all answered correctly both ways.** I wouldn't run a code graph on a site this small. It's here to show the install, the review of the hooks it adds, and an honest measurement. The savings come on large codebases with agents working across them.
 
