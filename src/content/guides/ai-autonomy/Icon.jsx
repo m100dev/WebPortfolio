@@ -1,4 +1,3 @@
-import React from 'react'
 import ICONS from './icons'
 
 // Static, trusted SVG bodies from icons.js (never user input), so innerHTML is safe here.

@@ -1,5 +1,3 @@
-import React from 'react'
-
 // "Interview Talking Points", the AVD guide's closing section.
 // Hidden while job hunting and deliberately NOT imported anywhere, so its text isn't in the
 // deployed bundle. To restore it: render <InterviewPoints /> as the last child of the guide's

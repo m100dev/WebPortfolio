@@ -1,4 +1,3 @@
-import React from 'react'
 import './ai-engineering.css'
 import { BsShieldCheck, BsRobot, BsClipboardCheck } from 'react-icons/bs'
 import { MdSecurity } from 'react-icons/md'

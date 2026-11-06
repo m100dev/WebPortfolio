@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BsArrowDown } from 'react-icons/bs'
 import './scroll-button.css'
 

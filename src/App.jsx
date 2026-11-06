@@ -1,5 +1,5 @@
-import React, { Suspense, lazy } from 'react'
-import { Outlet, Route, Routes, useLocation } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
+import { Outlet, Route, Routes, useLocation } from 'react-router'
 import Nav from './components/nav/Nav'
 import Footer from './components/footer/Footer'
 import Home from './pages/Home'

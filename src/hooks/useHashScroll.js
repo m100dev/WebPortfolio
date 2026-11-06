@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 
 // Runs on route changes only (not on in-page #hash clicks, which the browser handles).
 // With a hash, e.g. /#about from /guides, it scrolls to that section once the page has

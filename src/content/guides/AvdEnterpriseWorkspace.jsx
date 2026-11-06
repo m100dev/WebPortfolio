@@ -3,7 +3,6 @@
 // Text is kept as {"..."} expressions so <pre> newlines and spaces survive JSX.
 // Class vocabulary (phase, sec, steps/step, ib, tbl, code, kk/ks/kv/km/kc, card,
 // arch-*, split-*) is styled in avd/guide-avd.css with site tokens.
-import React from 'react'
 import useCodeCopy from './avd/useCodeCopy'
 import './avd/guide-avd.css'
 

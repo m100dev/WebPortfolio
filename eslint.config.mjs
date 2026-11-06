@@ -19,10 +19,8 @@ export default [
     },
     plugins: { 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
     rules: {
-      // CRA's options; React is still imported in most components from the old JSX transform
-      'no-unused-vars': ['warn', { args: 'none', ignoreRestSiblings: true, varsIgnorePattern: '^React$' }],
-      // New in ESLint 10's recommended set, not in CRA's. Off for parity; revisit in CP3
-      'no-useless-assignment': 'off',
+      // CRA's options (the automatic JSX runtime means components no longer import React)
+      'no-unused-vars': ['warn', { args: 'none', ignoreRestSiblings: true }],
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       // Data exported next to a component on purpose (tests and the guide TOC read them)

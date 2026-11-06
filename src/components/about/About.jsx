@@ -1,4 +1,3 @@
-import React from 'react'
 import './about.css'
 import ME from '../../assets/Marc Bastien About Casual.webp'
 import AskMarc from './AskMarc'

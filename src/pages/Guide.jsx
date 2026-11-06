@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react'
-import { useParams } from 'react-router-dom'
+import { Suspense } from 'react'
+import { useParams } from 'react-router'
 import { findGuide } from '../content/guides'
 import GuideLayout from '../components/guides/GuideLayout'
 import NotFound from './NotFound'

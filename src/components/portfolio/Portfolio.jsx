@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { flushSync } from 'react-dom'
 import './portfolio.css'
 import IMG_MYAUTOTAB from '../../assets/MyAutoTabProject.webp';
@@ -9,7 +9,7 @@ import IMG_BOCA from '../../assets/bocadelraypc.webp';
 import IMG_VILLA from '../../assets/villa-majorca-site.webp';
 import IMG_LOCAL_LLM from '../../assets/Hello-LocalLLM-Project.webp';
 import IMG_SITE from '../../assets/marcbastien-v2.webp';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { BsCpu, BsArrowRight, BsArrowsAngleExpand, BsPauseFill, BsPlayFill } from 'react-icons/bs';
 import ImageZoom, { ZOOM_TRANSITION_NAME, canMorph } from './ImageZoom';
 

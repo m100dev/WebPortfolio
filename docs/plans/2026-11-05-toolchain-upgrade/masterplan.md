@@ -80,7 +80,7 @@ Rationale: this changes the production build, so it gets its own PR and its own 
 | 0 | Security brief + this plan | -- | Marc fills in the "Marc's decision" lines in `brief.md` | [x] decided |
 | 1 | Abuse hardening (Terraform + contact honeypot) | 0 | Marc approves the live burst test, then runs `terraform apply` (EmailJS dashboard: no changes, brief O3) | [x] applied, verified, autofill check passed (see `cp1.md` "Marc's gate") |
 | 2 | Vite + Vitest + ESLint 10 (parity swap) | 1 | Marc confirms Amplify's Node version (decided: Node 24, `cp2.md` D4) | [x] done; Marc sets Node 24 in the Amplify build spec before merge |
-| 3 | Runtime majors + dependency cleanup | 2 | Marc reviews the diff | [ ] |
+| 3 | Runtime majors + dependency cleanup | 2 | Marc reviews the diff | [x] done; Marc reviews the diff (RR8 deferred, `cp3.md` D4) |
 | 4 | Docs, before/after numbers, PR | 3 | Marc merges and checks the live site, then the claude-workflow rebase | [ ] |
 
 These run strictly in sequence. CP1's frontend honeypot and its Terraform are independent, so `terraform apply` can happen any time after CP1.
@@ -101,5 +101,5 @@ These run strictly in sequence. CP1's frontend honeypot and its Terraform are in
 - [x] CP0 — security brief + plan (decisions filled 2026-11-05)
 - [x] CP1 — abuse hardening (applied, verified and honeypot autofill check passed, 2026-11-05)
 - [x] CP2 — Vite + Vitest parity swap (2026-11-05; audit 78 → 2, JS −12%, build 10s → 2s; Amplify build spec must use Node 24 before merge)
-- [ ] CP3 — runtime majors
+- [x] CP3 — runtime majors (2026-11-06; audit 2 → 0, React 19 + RR7, JS +14% vs CP2 from react-dom 19, now equal to CRA's total)
 - [ ] CP4 — docs, numbers, PR

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router'
 import { BsArrowLeft, BsGithub } from 'react-icons/bs'
 import formatDate from '../../utils/formatDate'
 import './guide.css'
