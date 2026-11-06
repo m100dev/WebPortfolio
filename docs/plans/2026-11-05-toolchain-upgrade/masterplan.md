@@ -88,7 +88,7 @@ These run strictly in sequence. CP1's frontend honeypot and its Terraform are in
 ## Session protocol
 - One CP per session, with /clear between them. Before CP N+1, check that CP N's commit is in `git log --oneline -5`.
 - **Context budget:**
-  - run `/context` at the start of each CP and note the total in that CP's Results;
+  - run `/context` at the start and end of each CP, and note both top-line totals (e.g. `39.2k/1m (4%)`, not the `CLAUDE.md` row) plus the model ID in that CP's Results;
   - if a session passes 60%, finalize and hand off (plan-refine rule).
   - CP2 and CP3 are the heavy ones, because of the dependency output, so delegate long `npm` output reading to an Explore agent.
 - **`CLAUDE.md` tokens:** this branch still has the old ~3.1k-token root `CLAUDE.md` from `main`. Don't re-measure it here, and keep CP4's edits to its Commands lines so the rebase onto the split version stays small.
