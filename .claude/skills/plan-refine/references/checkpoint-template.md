@@ -27,7 +27,7 @@ Run these checks before any implementation. If any fail, STOP and report to user
 
 - [ ] Verify branch: `git branch --show-current` should show `<branch-name>`
 - [ ] Verify prior CP (if N > 1): `git log --oneline -3` should include `<prior commit subject>`
-- [ ] Verify tests pass: `npm test -- --watchAll=false` (plus `npm run test:security` once it exists)
+- [ ] Verify tests pass: `npm run test:once` and `npm run test:security`
 
 ## Decisions
 

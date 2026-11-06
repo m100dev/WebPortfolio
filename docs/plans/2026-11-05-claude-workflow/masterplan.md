@@ -1,6 +1,6 @@
 # Claude Code workflow: skills, guardrails, lean context, build log
 
-## Status: PAUSED at CP3b — waiting on `chore/toolchain-upgrade` (plan `docs/plans/2026-11-05-toolchain-upgrade/`, on that branch). Resume after it merges to `main` and this branch is rebased onto `main`.
+## Status: IN PROGRESS — resumed at CP3b on 2026-11-06, after `chore/toolchain-upgrade` merged (`3e5c25a`) and this branch was rebased onto `main`. Rebase notes: CP3d's Vite/React 19/RR7 facts ported into the split `CLAUDE.md` files, skills' stale commands fixed, `infra/visitor-counter/CLAUDE.md` given the CP1 throttle/alert/deployer facts, sysadmin plan kept at its dated path with both history notes.
 ## Created: 2026-11-05
 
 ## Problem summary
@@ -87,7 +87,7 @@ CP4 and CP5 are independent and can run in either order.
 - [x] CP1 — AWS certs, archived sysadmin plan, Terraform tag
 - [x] CP2 — principles + CLAUDE.md split
 - [x] CP3 — vuln-check + security-audit
-- [ ] CP3b — pre-commit enforcement (blocked: toolchain-upgrade merge + rebase; then use `npm run test:once`, and check 7 becomes enforceable)
+- [ ] CP3b — pre-commit enforcement (unblocked 2026-11-06: use `npm run test:once` and `npm run build`; check 7 is now enforceable, audit at 0)
 - [ ] CP4 — comment-in-my-voice + dedupe
 - [ ] CP5 — graphify
 - [ ] CP6 — README, runbook, infra files, build log

@@ -31,7 +31,7 @@ If any of these apply, split the work so the risky step happens first, or make i
 
 1. **Amplify rewrite rules before a deploy that removes or moves files.** Old URLs 404 if the build ships before the rules (`infra/amplify/redirects.json`) are pasted into the console. New static file types also need adding to the SPA rewrite's extension allowlist.
 2. **`terraform apply` before the build that uses its output.** `REACT_APP_VISITOR_API_URL` is baked in at build time, so the stack must exist and the Amplify env var must be set before the redeploy.
-3. **The CI build gate.** Amplify builds with `CI=true`, so lint warnings fail the deploy. A CP that changes lint config or adds files under `src/` has to pass `CI=true npm run build` before anything merges.
+3. **The build gate.** `npm run build` runs `eslint . --max-warnings=0` before `vite build`, exactly as Amplify does, so a lint warning fails the deploy. A CP that changes lint config or adds files under `src/` has to pass `npm run build` before anything merges.
 
 ## Recording the decision
 

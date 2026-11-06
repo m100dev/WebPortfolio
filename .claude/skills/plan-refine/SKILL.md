@@ -86,7 +86,7 @@ Follow `references/handoff-protocol.md`. In short:
 ## 7. Rules
 
 - Security over quality over speed (root `CLAUDE.md`). A checkpoint that touches auth, user input, secrets, infra or dependencies must list "run `security-audit` and `vuln-check`" in its verification.
-- Every checkpoint lists at least one verification command from `CLAUDE.md` (`npm test -- --watchAll=false`, `CI=true npm run build`, `npm run test:security`).
+- Every checkpoint lists at least one verification command from `CLAUDE.md` (`npm run test:once`, `npm run build`, `npm run test:security`).
 - Commit messages follow the repo style: lowercase, past tense, one line.
 - Reference files by `path:line`. Never paste source code into plans.
 - Mark issues found along the way `[DISCOVERED]` with a one-line justification.

@@ -25,7 +25,7 @@ description: >
 | 1 | Secrets in history | `gitleaks git --config .gitleaks.toml` | no leaks (fixtures are allowlisted) |
 | 2 | Secrets in pending changes | `gitleaks git --staged --config .gitleaks.toml` | no leaks |
 | 3 | Code patterns | `npm run vuln-check -- src` | exit 0, and every suppression has a reason |
-| 4 | Dependencies | `npm audit --omit=dev`, then list the direct ones: `npm audit --omit=dev --json` and filter `isDirect` | every advisory on a browser-runtime package (`react-router-dom`, `react-markdown`, `@emailjs/browser`, ...) has its reachability checked and reported. Advisories that come in only through `react-scripts` / testing-library (both under `dependencies` in CRA) are noted as accepted, never "fixed" with `--force` |
+| 4 | Dependencies | `npm audit --omit=dev`, then list the direct ones: `npm audit --omit=dev --json` and filter `isDirect` | every advisory on a browser-runtime package (`react-router`, `react-markdown`, `@emailjs/browser`, ...) has its reachability checked and reported. Never "fix" an advisory with `--force` |
 | 5 | IAM | read `infra/visitor-counter/main.tf` | no `"*"` actions or resources; any `iam:PassRole` is scoped to specific role ARNs with a `PassedToService` condition |
 | 6 | CORS / API | read `main.tf` | allowed origins pinned to the real domains, not `*`; methods limited to what's used |
 | 7 | EmailJS | grep `src` for the service/template/public key IDs | they're public by design (browser SDK). Note it, and confirm no *private* key is present |
