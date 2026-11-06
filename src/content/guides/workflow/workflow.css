@@ -309,6 +309,10 @@
     color: var(--color-light);
 }
 
+.wf a code {
+    color: inherit;
+}
+
 .wf-paths span::before {
     content: '— ';
     color: var(--color-muted);

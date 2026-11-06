@@ -1,7 +1,7 @@
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import process from 'node:process'
-import { context, gates, graphify, quality, sourced, toolchain } from './data'
+import { codePaths, context, gates, graphify, quality, REPO, sourced, toolchain } from './data'
 
 // Vitest runs from the repo root (vite.config.mjs); under jsdom import.meta.url isn't a file: URL
 const read = (path) => readFileSync(resolve(process.cwd(), path), 'utf8')
@@ -29,6 +29,13 @@ test('every charted number appears in the quote it cites', () => {
   }
   expect(toolchain.auditBefore.quote).toMatch(new RegExp(`^${toolchain.auditBefore.value} `))
   expect(toolchain.auditAfter.quote).toContain(`**${toolchain.auditAfter.value}**`)
+})
+
+test('every "See the code" link points at a folder that exists in this repo', () => {
+  for (const { path, url } of codePaths) {
+    expect(url).toBe(`${REPO}/tree/main/${path.replace(/\/$/, '')}`)
+    expect(existsSync(resolve(process.cwd(), path))).toBe(true)
+  }
 })
 
 test('the README headline numbers match this page', () => {

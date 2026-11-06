@@ -3,6 +3,7 @@ import avdToc from './avd/toc'
 
 // Guide metadata. Each guide's body is a React component in this folder, loaded lazily
 // (its own chunk) so the guides don't weigh down the home page.
+// repoLabel: the repo button's text (defaults to "Lab repo").
 // license: show the CC BY 4.0 line (only where the original guide carried it).
 // version / updated (YYYY-MM-DD): shown in the hero and on the Guides cards. Bump both when the
 // content changes, and add a line to changes (newest first) for the Version history list.
@@ -14,12 +15,14 @@ const guides = [
     summary: 'The plans, hooks and skills behind this site, and what each one measurably changed, including the results that came out close to zero.',
     tags: ['AI Engineering', 'Claude Code', 'Security', 'Workflow'],
     readingTime: '5 min read',
-    repo: null,
+    repo: 'https://github.com/m100dev/WebPortfolio',
+    repoLabel: 'Source code',
     license: true,
     year: 2026,
-    version: '1.0',
+    version: '1.1',
     updated: '2026-11-06',
     changes: [
+      { version: '1.1', date: '2026-11-06', note: 'Linked the source repo now that it’s public.' },
       { version: '1.0', date: '2026-11-06', note: 'First published.' }
     ],
     Component: lazy(() => import('./HowIBuildWithAiAgents'))

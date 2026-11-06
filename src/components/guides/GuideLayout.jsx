@@ -124,7 +124,7 @@ const GuideLayout = ({ guide, children }) => {
           </ul>
           {guide.repo && (
             <a href={guide.repo} target='_blank' rel='noreferrer' className='btn guide__repo'>
-              <BsGithub aria-hidden='true' /> Lab repo
+              <BsGithub aria-hidden='true' /> {guide.repoLabel || 'Lab repo'}
             </a>
           )}
         </div>

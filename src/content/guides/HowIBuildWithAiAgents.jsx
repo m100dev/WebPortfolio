@@ -1,4 +1,4 @@
-import { codePaths, context, flow, gates, graphify, quality, toolchain } from './workflow/data'
+import { codePaths, context, flow, gates, graphify, quality, REPO, toolchain } from './workflow/data'
 import './workflow/workflow.css'
 
 // Every number comes from workflow/data.js, which cites the plan file it was measured in.
@@ -226,10 +226,12 @@ const HowIBuildWithAiAgents = () => {
 
       <div className='wf-section'>
         <h2>See the code</h2>
-        <p>All of it lives in the site’s repo:</p>
+        <p>All of it lives in the site’s <a href={REPO} target='_blank' rel='noreferrer'>public repo</a>:</p>
         <ul className='wf-paths'>
-          {codePaths.map(({ path, holds }) => (
-            <li key={path}><code>{path}</code> <span>{holds}</span></li>
+          {codePaths.map(({ path, holds, url }) => (
+            <li key={path}>
+              <a href={url} target='_blank' rel='noreferrer'><code>{path}</code></a> <span>{holds}</span>
+            </li>
           ))}
         </ul>
       </div>

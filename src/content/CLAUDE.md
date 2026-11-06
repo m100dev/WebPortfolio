@@ -4,6 +4,7 @@
 - `index.js` holds each guide's metadata:
   - slug, title, summary, tags and reading time;
   - an optional explicit `toc`;
+  - an optional `repo` URL, with `repoLabel` for the button text (default "Lab repo");
   - a license flag;
   - `version` plus `updated` date, and a `changes` list for the Version history;
   - a `lazy()` component, so every guide is its own chunk.

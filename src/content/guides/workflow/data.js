@@ -71,13 +71,15 @@ export const toolchain = {
   auditAfter: { value: 0, source: TOOLCHAIN, quote: '78 (21 low, 22 moderate, 30 high, 5 critical) | **0**' }
 }
 
-// Folder paths in the repo. Plain text until the repo is public (then they become links).
+export const REPO = 'https://github.com/m100dev/WebPortfolio'
+
+// Folders in the public repo, linked from "See the code"
 export const codePaths = [
   { path: '.claude/skills/', holds: 'the project skills: planning, security, comments, dedupe' },
   { path: 'tools/', holds: 'the vuln-check scanner and the pre-commit checker, with their tests' },
   { path: '.githooks/', holds: 'the git pre-commit and pre-push hooks' },
   { path: 'docs/plans/', holds: 'every checkpointed plan, with its measured Results' }
-]
+].map((p) => ({ ...p, url: `${REPO}/tree/main/${p.path.replace(/\/$/, '')}` }))
 
 // Every entry with a source, for the drift test
 export const sourced = [
