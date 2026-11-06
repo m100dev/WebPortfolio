@@ -30,5 +30,5 @@ description: >
 1. Read the file and its history, and find the 2–3 non-obvious spots.
 2. For each one, find the reason and note where it's recorded.
 3. Draft the comments. In the diff you show me, label each reason **on record** (cite the file or commit) or **derived from code**, and list the open questions separately.
-4. If the file is under `src/hooks/`, is a content `index.js`, or is under `tools/`, the pre-commit hook needs a test beside it. A comment-only change still counts as staged logic. Make sure the test checks the behaviour the comment claims.
+4. If the file is under `src/hooks/`, is a content `index.js`, is under `tools/`, or is a Lambda `.py` (which needs `test_<name>.py`), the pre-commit hook needs a test beside it. A comment-only change still counts as staged logic. Make sure the test checks the behaviour the comment claims.
 5. Show me the diff before committing. Comments are copy in my voice, so they get my review like any other copy.

@@ -1,6 +1,6 @@
 // Every number on the How I Build with AI Agents guide. Each one names the plan file it was
 // measured in (`source`) and the exact text there (`quote`); data.test.js checks the quote is
-// still in that file, so this page, the README and the build log can't drift apart.
+// still in that file, so this page and the README can't drift apart.
 
 const PLAN = 'docs/plans/2026-11-05-claude-workflow'
 const CP2 = `${PLAN}/cp2.md`
@@ -22,8 +22,10 @@ export const flow = [
 
 export const context = {
   before: { value: 3.1, label: 'Before: one CLAUDE.md', source: CP2, quote: '3.1k → 1.2k for `CLAUDE.md`' },
-  after: { value: 1.2, label: 'After: lean root CLAUDE.md', source: CP2, quote: '3.1k → 1.2k for `CLAUDE.md`' },
-  saving: { value: '−61%', source: CP2, quote: 'about 61% fewer tokens every session' },
+  // The split reached 1.2k; documenting hooks, skills and graphify since grew it to 2.2k (re-measured)
+  atSplit: { value: 1.2, label: 'Right after the split', source: CP2, quote: '3.1k → 1.2k for `CLAUDE.md`' },
+  after: { value: 2.2, label: 'Now, re-measured', source: CP2, quote: 'That\'s 3.1k → 2.2k now' },
+  saving: { value: '−29%', source: CP2, quote: 'about 29% fewer tokens every session' },
   nested: [
     { file: 'src/components/CLAUDE.md', holds: 'sections, nav, styling tokens, Ask Marc, the contact form', source: CP2, quote: '`src/components/CLAUDE.md`: 2,636 chars' },
     { file: 'src/content/CLAUDE.md', holds: 'guides and memos, including the release rules', source: CP2, quote: '`src/content/CLAUDE.md`: 1,909 chars' },
@@ -61,7 +63,7 @@ export const graphify = {
     { id: 'c', text: 'Which components use the card-surface tokens?', without: 54546, with: 53371, delta: '−2.2%', source: CP5, quote: '54,546 (5) | 53,371 (4) | −2.2%' }
   ],
   total: { without: 161614, with: 160809, delta: '−0.5%', source: CP5, quote: '161,614 | 160,809 | **−0.5%**' },
-  allCorrect: { source: `${PLAN}/masterplan.md`, quote: 'all answers correct both ways' },
+  allCorrect: { source: CP5, quote: '| +4.3% | yes / yes |' },
   why: { source: CP5, quote: 'grep already finds the right file in 1–2 calls' }
 }
 
@@ -83,7 +85,7 @@ export const codePaths = [
 
 // Every entry with a source, for the drift test
 export const sourced = [
-  context.before, context.after, context.saving, ...context.nested,
+  context.before, context.atSplit, context.after, context.saving, ...context.nested,
   gates.testsBefore, gates.testsAfter, ...gates.matrix, gates.evalAgain,
   quality.js, quality.css, quality.net, quality.unusedAssets, quality.visualDiff,
   ...graphify.questions, graphify.total, graphify.allCorrect, graphify.why,

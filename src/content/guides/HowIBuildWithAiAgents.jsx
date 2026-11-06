@@ -70,16 +70,21 @@ const HowIBuildWithAiAgents = () => {
         <h2>Context: a lean CLAUDE.md</h2>
         <p>
           Every session loads <code>CLAUDE.md</code> before doing anything. I split mine into a lean
-          root file and three folder files that load only when the agent works in that folder.
+          root file and three folder files that load only when the agent works in that folder. The
+          root has grown back since, as I documented the hooks, skills and graphify, so I
+          re-measured it.
         </p>
         <figure className='wf-figure'>
           <div className='wf-bars'>
             <Bar value={context.before.value} max={context.before.value} label={context.before.label} shown={`${context.before.value}k tokens`} tone='muted' />
+            <Bar value={context.atSplit.value} max={context.before.value} label={context.atSplit.label} shown={`${context.atSplit.value}k tokens`} tone='muted' />
             <Bar value={context.after.value} max={context.before.value} label={context.after.label} shown={`${context.after.value}k tokens`} tone='primary' />
           </div>
           <figcaption>
-            Tokens loaded every session: {context.before.value}k before the split, {context.after.value}k
-            after (<strong>{context.saving.value}</strong>).
+            Tokens loaded every session: {context.before.value}k before the split,{' '}
+            {context.atSplit.value}k right after it, and {context.after.value}k now
+            (<strong>{context.saving.value}</strong>). Keeping the root lean is ongoing work, not a
+            one-off.
           </figcaption>
         </figure>
         <table className='wf-table'>
@@ -100,8 +105,8 @@ const HowIBuildWithAiAgents = () => {
         <p>
           A skill is instructions an agent can skip. A hook that exits non-zero blocks the commit
           unless something gets around it. So the checks a script can decide (secrets, unsafe code,
-          the build, tests, the dependency audit) run as hooks on every commit, and skills cover the
-          judgment calls. Then I tested the hooks against bypass attempts.
+          the build, tests, the dependency audit) run as hooks on every code commit, and skills
+          cover the judgment calls. Docs-only commits still get the secrets scan and the audit. Then I tested the hooks against bypass attempts.
         </p>
         <div className='wf-stats'>
           <div className='wf-stat'>
@@ -219,7 +224,8 @@ const HowIBuildWithAiAgents = () => {
           <p>
             npm audit advisories. That came from moving off Create React App to Vite, React 19 and
             React Router 7, not from this workflow, so I keep it separate. What the workflow adds is
-            that every commit now runs the audit and blocks on a high or critical advisory.
+            that every commit now runs the audit and blocks on a high or critical advisory in a runtime
+            dependency.
           </p>
         </div>
       </div>

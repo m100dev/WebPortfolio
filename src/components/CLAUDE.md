@@ -2,8 +2,8 @@
 
 ## Sections and nav
 - Each home section lives in `src/components/<name>/` as `<Name>.jsx` plus `<name>.css`, and the component imports its own stylesheet.
-- Content (portfolio cards, experience items, testimonials, Ask Marc answers) is a hardcoded `data` array at the top of the component, rendered with `.map()`. There's no CMS or backend.
-- Sections are reached by anchor `id`s. A new section needs an `id` on its `<section>` and an entry in `nav/Nav.jsx`.
+- Content (portfolio cards, experience items, testimonials, Ask Marc answers) is a hardcoded array at the top of the component (`data`, or `prompts` in Ask Marc), rendered with `.map()`. There's no CMS or backend.
+- Sections are reached by anchor `id`s. A new section needs an `id` on its `<section>`, an entry in `nav/Nav.jsx`, and its id in `SECTION_IDS` (`src/hooks/useActiveSection.js`) so the nav highlights it.
 - On `/`, the nav uses plain `<a href="#id">` links so `html { scroll-behavior: smooth }` animates them. On other pages the same links become router links to `/#id`, and `src/hooks/useHashScroll.js` scrolls to the hash after the route changes (or to the top when there's no hash).
 - `useActiveSection` only tracks on `/`.
 

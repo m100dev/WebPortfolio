@@ -2,19 +2,26 @@
 
 What shipped, when, and the one-line reason. Newest first, grouped by release. The detail behind each 2026 release is in [`docs/plans/`](plans/).
 
+## Docs sync (PR #6, merged 2026-11-06)
+- **2026-11-06:** re-measured `CLAUDE.md` at 2.2k tokens per session, up from 1.2k right after the split, as I documented the hooks, skills and graphify. The headline is now 3.1k → 2.2k (−29%). An old number shouldn’t stand in for a current one.
+- **2026-11-06:** audited every doc against the code and config and fixed the mismatches. The worst two: the memo steps would have shipped a draft, and the burst defaults broke the README’s own Lambda concurrency rule. They now match the live 3/6.
+
+## Repo goes public (PR #5, merged 2026-11-06)
+- **2026-11-06:** made the repo public and linked it from the site card and the workflow guide, so reviewers can read the code behind the numbers.
+
 ## Claude Code workflow (PR #4, merged 2026-11-06)
 - **2026-11-05:** adapted my planning skill from MyAutoTab into `plan-refine`: a master plan with steelmanned decisions, plus one detail file per checkpoint that a fresh session can run. I removed its database and multi-tenant rules, which don't apply here.
 - **2026-11-05:** added my AWS certs with their dates (2023–2026) and renewal status. Recruiters search for them, and the dates keep the lapse honest.
 - **2026-11-05:** put security first in the principles and split `CLAUDE.md` into a lean root plus three folder files. It went from 3.1k to 1.2k tokens per session, and the gotchas still load where they matter.
 - **2026-11-05:** wrote `vuln-check`, a small AST scanner with fixture tests, and the `security-audit` skill. A few readable rules aimed at this codebase are easier to trust than a generic linter.
 - **2026-11-06:** added pre-commit and pre-push hooks (secrets, vuln-check, build, tests, audit) and a Claude hook that refuses `--no-verify`. A skill is advice the agent can skip; a hook that exits non-zero isn't. Testing found two bypasses (`--no-veri`, a `core.hooksPath` change chained before a commit), and both are fixed. The limits that are left are documented.
-- **2026-11-06:** added the `comment-in-my-voice` and `dedupe` skills. Dedupe removed 236 kB of unused images and duplicate CSS, and the measured bundle went down 0.03 kB gzipped, not up.
+- **2026-11-06:** added the `comment-in-my-voice` and `dedupe` skills. Dedupe removed 236 kB of unused images, plus duplicate CSS, and the measured bundle went down 0.03 kB gzipped, not up.
 - **2026-11-06:** installed graphify (a code knowledge graph) and measured it on 3 fixed questions: −0.5% tokens. That's no real saving at about 155 files, which I expected. It's here to show the install, the hook review and an honest measurement. The payoff is on large codebases with agents working across them.
 - **2026-11-06:** wrote the README, this log and a reusable runbook, and started tracking the Amplify rewrite rules and the deployer IAM policies (account ID removed).
-- **2026-11-06:** published [How I Build with AI Agents](https://www.marcbastien.com/guides/how-i-build-with-ai-agents), a visual version of these results. Every number on it comes from one data file that a test checks against the plan files, so the page, the README and this log can't drift apart. I also stopped draft memos from shipping in the production build. Their bodies and titles had been in the bundle even though the routes 404.
+- **2026-11-06:** published [How I Build with AI Agents](https://www.marcbastien.com/guides/how-i-build-with-ai-agents), a visual version of these results. Every number on it comes from one data file that a test checks against the plan files, so the page and the README can't drift apart. I also stopped draft memos from shipping in the production build. Their bodies and titles had been in the bundle even though the routes 404.
 
 ## Toolchain upgrade (PR #3, merged 2026-11-06)
-- **2026-11-05:** hardened the visitor counter: per-route throttles, API access logs, 4xx/5xx alarms, a $5 budget alert, and a honeypot on the contact form. The counter is public, so its cost and abuse needed a ceiling.
+- **2026-11-05:** hardened the visitor counter: per-route throttles, API access logs, 4xx/5xx alarms, an $11 budget alert, and a honeypot on the contact form. The counter is public, so its cost and abuse needed a ceiling.
 - **2026-11-05:** a burst test fired the 5xx alarm, and the access logs traced it to Lambda cold starts. I moved the DynamoDB client to init and raised memory to 256 MB.
 - **2026-11-05:** replaced Create React App with Vite and Jest with Vitest. CRA was deprecated and carried 78 npm advisories with no fixes coming. The swap alone took the audit from 78 to 2.
 - **2026-11-06:** upgraded to React 19 and React Router 7 and dropped unused dependencies. Across the whole upgrade, npm audit went from 78 to 0, builds from 10–26 s to about 2 s, and the JS bundle stayed flat.

@@ -13,7 +13,7 @@ The site is a static Vite build on AWS Amplify. Amplify builds `main` on every p
 npm run build      # lint (zero warnings) + Vite build, exactly what Amplify runs
 npm run test:once
 ```
-- Both need Node 24.15 or later (`engine-strict`). Locally I run Node 26. Amplify's build spec installs Node 24 (`nvm install 24` + `nvm use 24` in preBuild), so production builds one major version behind. To match, set Node 26 in the build spec.
+- Both need Node 24.15 or later (`engine-strict`). Locally I run Node 26. Amplify's build spec installs Node 24 (`nvm install 24` + `nvm use 24` in preBuild), matching `.nvmrc`, so production builds one major version behind. Both satisfy `engines`. If Amplify ever builds on 26, update `.nvmrc` with it.
 - The pre-commit and pre-push hooks already run these, so this step is a sanity check.
 
 ✓ **Check:** both finish clean.
@@ -47,7 +47,7 @@ Open a PR into `main` and merge it. Amplify starts a build automatically.
 - Terraform ≥ 1.5 and the AWS CLI (`aws --version`, `terraform version`).
 - Use the deployer user, which has the two policies in `infra/visitor-counter/deployer-policy*.json`. It can't read logs or metrics, on purpose.
 - Confirm the account: `aws sts get-caller-identity`.
-- `infra/visitor-counter/terraform.tfvars` (git-ignored) sets `alert_email`. Copy `terraform.tfvars.example` the first time.
+- `infra/visitor-counter/terraform.tfvars` (git-ignored) sets `alert_email` and `budget_limit_usd = 11`. Copy `terraform.tfvars.example` the first time.
 
 ✓ **Check:** `get-caller-identity` prints the account you expect.
 
@@ -62,7 +62,7 @@ terraform plan
 
 Then `terraform apply`. After a first apply, click the confirmation link AWS emails to `alert_email`, or the alarms email nobody.
 
-✓ **Check:** `terraform output api_url` prints `https://<id>.execute-api.us-east-1.amazonaws.com/visits`.
+✓ **Check:** `terraform output -raw api_url` prints `https://<id>.execute-api.us-east-1.amazonaws.com/visits`.
 
 ### 3. Point the site at the API (first deploy, or if the URL changed)
 1. Amplify Console → **Hosting → Environment variables** → set `REACT_APP_VISITOR_API_URL` to the `api_url` output.
@@ -116,6 +116,6 @@ Skip the `POST`. It adds a real visit.
 ## Publish a memo
 The rules are in `src/content/CLAUDE.md`. In short:
 1. Copy `src/content/memos/_template.md` to `<slug>.md` and write it.
-2. Add its entry in `src/content/memos/index.js`: `slug`, `title`, `date` (YYYY-MM-DD), `summary`, `draft`, `file`.
-3. `draft: false` with today's date publishes it. A future `date` schedules it: it stays hidden until that day, with no redeploy needed.
+2. While it's a draft, add its entry to the `drafts` array in `src/content/memos/index.js`: `slug`, `title`, `date` (YYYY-MM-DD), `summary`, `draft: true`, and `load: () => import('./<slug>.md?url')`. Never a static import: that ships the draft in the production build.
+3. To publish, move the entry to `published` with `draft: false` and a static `file` import. Today's `date` publishes it. A future `date` schedules it: it stays hidden until that day, with no redeploy needed.
 4. Merge to `main`. The Memos nav link appears once one memo is live.

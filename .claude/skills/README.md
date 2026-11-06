@@ -2,7 +2,7 @@
 
 A static site doesn't need these. They're here on purpose: a public slice of the Claude Code workflow I use on MyAutoTab, the SaaS I'm building to production standards, where they carry real weight.
 
-I design each skill (what it's for, its rules, when not to use it) and write it with Claude Code. Each `SKILL.md` opens with why it exists and when not to use it.
+I design each skill (what it's for, its rules, when not to use it) and write it with Claude Code. Each of my `SKILL.md` files opens with why it exists and when not to use it.
 
 | Skill | Source | Why | Instead of |
 |---|---|---|---|
@@ -18,6 +18,6 @@ I design each skill (what it's for, its rules, when not to use it) and write it 
 ## Considered, not used
 | Skill | Why not |
 |---|---|
-| A database security audit | This site has no database. I use one on MyAutoTab. |
+| A database security audit | This site has no relational or multi-tenant database, just the counter's one-item DynamoDB table. I use one on MyAutoTab. |
 | Generic commenting skills | They don't write in my voice, and they comment the obvious. |
 | A third-party vulnerability linter | A few readable rules aimed at this codebase's real risks are easier to trust and explain. `security-audit` and `npm audit` cover the rest. |
