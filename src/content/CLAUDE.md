@@ -23,4 +23,7 @@
   - `date` doubles as the release date. A non-draft memo with a future `date` is scheduled and stays hidden (404) in production until that day, in the visitor's local time.
   - The Memos nav link appears only once a memo is live.
 - `_template.md` is a permanent draft that documents the format.
+- **Drafts go in the `drafts` array** (inside `import.meta.env.DEV ? [...] : []`) with `load: () => import('./x.md?url')`, never a static import. Otherwise the body and title ship in the production build.
+  - When a draft goes live, move it to `published` with a static `file` import. Scheduled memos are `published` too.
+  - `memoUrl()` resolves either form.
 - **Voice:** first person and plain, in Marc's own phrasing. Never invent personal details.
