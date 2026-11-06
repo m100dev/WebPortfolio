@@ -90,7 +90,7 @@ CP1 hardened the counter API and the contact form. This CP replaces Create React
 - `index.html` theme script byte-identical to the old `public/index.html` script (diff them).
 
 ## Results
-- **Session:** model Claude Opus 5.5 (`claude-opus-5-5`, 1M window). `/context` total: 39.2k (4%) at start → 187.1k (19%) at end, so the CP used about 148k. Fixed overhead grew mid-session when plugins connected (skills 6.6k → 10k, deferred MCP tools 3.6k → 17.3k, custom agents +1.9k). The 3.1k first reported here was the `CLAUDE.md` row, which this branch doesn't track.
+- **Session:** model Claude Opus 5.5 (`claude-opus-5-5`, 1M window). `/context` total: 39.2k (4%) at start → 187.1k (19%) when the CP work ended (about 148k) → 198.2k (20%) at /clear, after handoff Q&A (about 159k in all). Fixed overhead grew mid-session when plugins connected (skills 6.6k → 10k, deferred MCP tools 3.6k → 17.3k, custom agents +1.9k). The 3.1k first reported here was the `CLAUDE.md` row, which this branch doesn't track.
 - **Baseline before any change** (2026-11-05, `4d47532`, Node 24.13.0):
   - `npm audit --omit=dev`: 78 vulnerabilities (21 low, 22 moderate, 30 high, 5 critical);
   - `build/static/js`: 802,892 bytes of `.js` across 5 files, source maps excluded;
