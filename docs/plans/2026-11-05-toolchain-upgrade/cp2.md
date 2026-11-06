@@ -90,7 +90,7 @@ CP1 hardened the counter API and the contact form. This CP replaces Create React
 - `index.html` theme script byte-identical to the old `public/index.html` script (diff them).
 
 ## Results
-- `/context` at start: 3.1
+- `/context` at start: 39.2k / 1M (4%) total. The 3.1k first reported here was the `CLAUDE.md` row, which this branch doesn't track (masterplan "Session protocol").
 - **Baseline before any change** (2026-11-05, `4d47532`, Node 24.13.0):
   - `npm audit --omit=dev`: 78 vulnerabilities (21 low, 22 moderate, 30 high, 5 critical);
   - `build/static/js`: 802,892 bytes of `.js` across 5 files, source maps excluded;
