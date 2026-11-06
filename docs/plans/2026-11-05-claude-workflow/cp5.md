@@ -61,6 +61,8 @@ Run 2026-11-06. graphify version: **0.9.103** (`graphifyy` on PyPI; the repo has
 
 **Verdict:** no measurable saving on this repo. Each run's ~50k total is mostly fixed session overhead (system prompt, tools, `CLAUDE.md`). On a ~155-file repo, grep already finds the right file in 1–2 calls, so the graph saves at most a call. Question (c) is about CSS tokens, which graphify doesn't index.
 
+**Why it's here anyway:** I wouldn't normally put a code graph on a small web project. This is a demonstration: installing a third-party agent tool, reviewing the hooks it adds, and measuring it instead of quoting someone else's numbers. The savings come on large codebases, where agents would otherwise read their way through many files to orient. CP6 should say exactly that in the README and build log.
+
 **Method:**
 - Each cell is one fresh general-purpose subagent (Marc's choice over manual `/context` sessions), and the tokens are its reported `subagent_tokens`. n=1 per cell, so this is a small sample.
 - The answer key was written from the code before any run.

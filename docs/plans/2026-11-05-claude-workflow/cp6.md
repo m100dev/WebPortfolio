@@ -51,11 +51,12 @@ After this, Marc makes the repo public.
      - Say "built to production standards", not "production SaaS", because the site's MyAutoTab card says it's in staging with test users. The two claims have to agree.
    - **Skills table:** Skill | Source | Why | Instead of. The same content as `.claude/skills/README.md`, including the "considered, not used" rows.
    - **Numbers:** `CLAUDE.md` before/after tokens, graphify measurements, the dedupe size delta.
+     - graphify's −0.5% gets the framing from `cp5.md` "Why it's here anyway". I wouldn't run a code graph on a small site. It's here to show the install, the hook review and the measurement. The savings come on large codebases with agents. Don't put a number on that unless it's measured.
    - **Copyright:** © Marc Bastien, code all rights reserved; guides CC BY 4.0.
 2. **`.claude/skills/README.md`:** opens with the same one-line framing (intentional, a demo of the MyAutoTab workflow, not something a static site needs), then the skills table with one line per skill.
    - **Mine, new:** `security-audit`, `vuln-check`, `pre-commit-checklist`, `comment-in-my-voice`, `dedupe`.
    - **Mine, adapted:** `plan-refine`.
-   - **Third-party, measured:** graphify.
+   - **Third-party, measured:** graphify. A demo at this size (−0.5%, measured). It's worth it on large agent-driven codebases.
    - **Built-in:** `/simplify`, `/code-review`, `/security-review`.
    - **Considered, not used:**
      - a DB security audit skill: this site has no database;

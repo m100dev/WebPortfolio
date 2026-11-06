@@ -6,7 +6,7 @@
 ## Problem summary
 The repo is going public, and it should show *how* I build with an AI coding agent, not just the finished site. That means project skills I designed for specific jobs, hooks that actually enforce security and tests before every commit, a lean always-loaded `CLAUDE.md`, measured (not claimed) token savings, and a dated build log. The README is still the Create React App boilerplate.
 
-**This is intentional overkill.** A static site doesn't need hooks, checkpointed plans or security skills. They're a small, public slice of the workflow I use on MyAutoTab, the SaaS I'm building to production standards, where they're load-bearing. The README, `.claude/skills/README.md` and the CP7 guide all say so, so reviewers read it as a demonstration, not over-engineering.
+**This is intentional overkill.** A static site doesn't need hooks, checkpointed plans or security skills. They're a small, public slice of the workflow I use on MyAutoTab, the SaaS I'm building to production standards, where they're load-bearing. graphify is the clearest case. I wouldn't run a code graph on a site this small. It's here to show I can set one up, review its hooks, and measure it honestly. The savings show up on large codebases with agents working across them, not on about 155 files. The README, `.claude/skills/README.md` and the CP7 guide all say so, so reviewers read it as a demonstration, not over-engineering.
 
 ## Branch strategy
 Decision: SINGLE-BRANCH
@@ -46,6 +46,7 @@ Fallback: if the redesign hasn't merged yet, branch from `portfolio-redesign`.
 - **Over:** quoting third-party figures.
 - **Because:** the official README has no open-source token number, and gains scale with repo size. This repo has about 100 files.
 - **Trade-off:** the number may be small. A small honest number is still the stronger signal.
+- **Outcome (CP5):** −0.5%, as expected at this size. CP6 publishes it as a demonstration of the setup and the measurement, not a saving. Where a graph pays off is a large codebase that agents query repeatedly.
 
 ### D5: Publish the adapted plan-refine, not the original
 - **Chosen:** commit only the adapted skill, with an "Adapted from" note.
