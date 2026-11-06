@@ -9,7 +9,7 @@ This is backlog work. Start it only after CP6 is done **and** the repo is public
 
 ## Prerequisites
 - [ ] The repo is public, and `https://github.com/<user>/<repo>/tree/main/.claude/skills` loads.
-- [ ] `npm test -- --watchAll=false` passes.
+- [ ] `npm run test:once` passes.
 
 ## Decisions
 ### D1: A guide over a memo
@@ -31,7 +31,7 @@ This is backlog work. Start it only after CP6 is done **and** the repo is public
 4. Use only the real numbers from the CP2, CP4 and CP5 `## Results` sections.
 
 ## Verification
-- `npm test -- --watchAll=false` and `CI=true npm run build` both pass.
+- `npm run test:once` and `npm run build` both pass.
 - The guide renders in both themes and at 390px.
 
 ## Commit

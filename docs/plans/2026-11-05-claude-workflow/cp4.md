@@ -13,8 +13,8 @@ Each one runs once, and I approve the results before commit. This CP doesn't dep
 
 ## Prerequisites
 - [ ] The CP3b commit is in `git log --oneline -5`.
-- [ ] `npm test -- --watchAll=false` and `npm run test:security` pass.
-- [ ] Run `CI=true npm run build` and **record the gzipped `main.*.js` / `main.*.css` sizes** it prints (the baseline).
+- [ ] `npm run test:once` and `npm run test:security` pass.
+- [ ] Run `npm run build` and **record the gzipped `build/assets/index-*.js` / `index-*.css` sizes** it prints (the baseline).
 
 ## Decisions
 ### D1: Rule of three for extraction
@@ -59,7 +59,7 @@ Each one runs once, and I approve the results before commit. This CP doesn't dep
 5. Add both skills to the root `CLAUDE.md` skills list.
 
 ## Verification
-- `npm test -- --watchAll=false`, `npm run test:security` and `CI=true npm run build` all pass.
+- `npm run test:once`, `npm run test:security` and `npm run build` all pass.
 - Record the size delta under `## Results`. It should be ≤ 0, or explained.
 - Visual spot check: home, a guide and a memo look unchanged (headless Chrome).
 

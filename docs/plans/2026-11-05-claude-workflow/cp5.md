@@ -42,7 +42,7 @@ The pre-commit hooks are in place (CP3b), and CP4 may or may not be done yet, si
 7. Add graphify to the root `CLAUDE.md` skills list as **third-party**, with its version.
 
 ## Verification
-- `npm test -- --watchAll=false` passes, and the pre-commit hook passes on this commit.
+- `npm run test:once` passes, and the pre-commit hook passes on this commit.
 - Running `gitleaks protect --staged` on the graph files finds nothing. A graph can capture string literals.
 - Record the measurements under `## Results`.
 

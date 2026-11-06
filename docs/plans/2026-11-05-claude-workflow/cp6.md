@@ -2,7 +2,7 @@
 
 ## Context
 CP1–5 produced the site changes, a lean `CLAUDE.md` with before/after token numbers, the security tooling and hooks, the quality skills with a measured size delta, and graphify with measured token numbers. This CP turns all of that into what a reviewer reads first:
-- a real README (currently the CRA boilerplate);
+- a real README (currently the short factual one from toolchain CP3d);
 - a reusable runbook (from `LAUNCH.md`);
 - the versioned infra config;
 - a dated build log;
@@ -16,7 +16,7 @@ After this, Marc makes the repo public.
 
 ## Prerequisites
 - [ ] The CP2, CP4 and CP5 `## Results` sections are filled in.
-- [ ] `npm test -- --watchAll=false` and `npm run test:security` pass.
+- [ ] `npm run test:once` and `npm run test:security` pass.
 
 ## Decisions
 ### D1: Commit the redirects file and the deployer policy
@@ -85,7 +85,7 @@ After this, Marc makes the repo public.
 ## Verification
 - Run `git grep --untracked -nE '[0-9]{12}'` and check every hit. Expected: no AWS account ID (the pattern is generic, so the plan never has to contain the ID).
 - `gitleaks detect --config .gitleaks.toml` is clean. Run the `security-audit` skill one final time.
-- `npm test -- --watchAll=false`, `npm run test:security` and `CI=true npm run build` all pass.
+- `npm run test:once`, `npm run test:security` and `npm run build` all pass.
 - Marc reviews the README, runbook and build log copy before commit.
 
 ## Commit
