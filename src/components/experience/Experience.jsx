@@ -49,7 +49,8 @@ const data = [
     dates: "Mar '24 – Sep '24",
     highlights: [
       'Reconciled a $1.5M outstanding vendor bill during an ITAM restructuring, working with the vendor, accounting, and management.',
-      'Wrote a 9-page proposal that led ServiceNow developers to automate manual ITAM workflows in Flow Designer; administered 1,000+ mobile devices in Workspace ONE.'
+      'Wrote a 9-page proposal that led ServiceNow developers to automate manual ITAM workflows in Flow Designer.',
+      'Administered 1,000+ mobile devices in Workspace ONE.'
     ],
     tags: ['ServiceNow', 'ITAM', 'Workspace ONE', 'Excel VBA']
   },
@@ -61,7 +62,7 @@ const data = [
     dates: "Jan '23 – Mar '23, Jul '23 – Sep '23",
     highlights: [
       'Configured and maintained AWS infrastructure (VPC, EC2, S3, EBS, security groups) for Java deployments across airline customer production environments.',
-      'Automated CloudWatch Agent, AWS WAF, CrushFTP, and WildFly deployment with Bash, cutting about 4 hours of manual provisioning per deployment.'
+      'Automated CloudWatch Agent, AWS WAF, CrushFTP, and WildFly deployments with Bash, cutting about 4 hours of manual provisioning per deployment.'
     ],
     tags: ['AWS', 'Bash', 'CloudWatch', 'AWS WAF', 'Linux']
   },
@@ -72,7 +73,7 @@ const data = [
     location: 'Pompano Beach, FL',
     dates: "May '22 – Dec '22",
     highlights: [
-      'Built and launched 10+ WordPress sites as the company’s only active WordPress developer, and built a Shopify store prototype with about 150 products.'
+      'Built and launched 10+ WordPress sites as the company’s only active WordPress developer and built a Shopify store prototype with about 150 products.'
     ],
     tags: ['WordPress', 'Shopify', 'SEO']
   },
@@ -101,7 +102,7 @@ const data = [
   }
 ]
 
-const earlier = 'Microsoft (Services Advisor) · Florida East Coast Realty (IT Technician / Web Developer — cut workstation deployment time 31% with WDS/MDT) · Best Buy Geek Squad'
+const earlier = 'Microsoft (Services Advisor) · Florida East Coast Realty (IT Technician / Web Developer — cut workstation deployment time by 31% with WDS/MDT) · Best Buy Geek Squad'
 
 const Experience = () => {
   return (
