@@ -677,7 +677,7 @@ const AvdEnterpriseWorkspace = () => {
           <div className="split-grid">
             <div className="split-side a">
               <div className="split-side-title">{"GRP-AD-* (AD-sourced)"}</div>
-              <div className="split-side-body">{"Lives in on-prem Active Directory. Created in ADUC or via PowerShell on a DC. Syncs "}<strong>{"up"}</strong>{" to Entra via Entra Connect Sync."}<br /><br />{" "}<strong>{"Used for:"}</strong>{" GPO scoping, file share permissions, anything that needs to work both in AD and Entra."}<br /><br />{" "}<strong>{"Modified in:"}</strong>{" AD only. Edits in the Entra portal fail with errors because Entra treats synced groups as read-only."}</div>
+              <div className="split-side-body">{"Lives in on-prem Active Directory. Created in ADUC or via PowerShell on a DC. Syncs "}<strong>{"up"}</strong>{" to Entra via Entra Connect Sync."}<br /><br />{" "}<strong>{"Used for:"}</strong>{" GPO scoping, file share permissions, anything that needs to work in both AD and Entra."}<br /><br />{" "}<strong>{"Modified in:"}</strong>{" AD only. Edits in the Entra portal fail with errors because Entra treats synced groups as read-only."}</div>
             </div>
             <div className="split-side b">
               <div className="split-side-title">{"GRP-CLOUD-* (Entra-only)"}</div>
@@ -752,8 +752,8 @@ const AvdEnterpriseWorkspace = () => {
           </table>
         </div>
         <div className="ib note"><b>{"What This Means for the Lab"}</b>{"Assign E5 (or your trial equivalent) to every test user who will actually connect to AVD or test M365 features. You don't need to license every user in your tenant — only the ones actively testing. Break-glass accounts in "}<code>{"GRP-CLOUD-CA-Excluded"}</code>{" don't need licenses (they exist for emergency tenant access, not productivity). Service accounts don't need licenses unless they're using a licensed service."}</div>
-        <div className="ib warn"><b>{"AVD Has a License Trap"}</b>{"For AVD specifically, users need one of a specific list of \"AVD-eligible\" licenses or the service rejects their connection — even if everything else is configured correctly. Eligible licenses include: Microsoft 365 E3/E5/A3/A5/F3/Business Premium, Windows 10/11 Enterprise E3/E5 (per-user), or Windows VDA E3/E5. Without one of these on the user, AVD will fail to connect with a generic licensing error. Always license users "}<em>{"before"}</em>{" trying to test AVD connectivity."}</div>
-        <div className="ib note"><b>{"Assigned Groups Don't Need P1/P2"}</b>{"The licensing requirement applies only to groups using "}<strong>{"dynamic membership rules"}</strong>{". Groups marked as "}<strong>{"Assigned"}</strong>{" in the table (manual membership) work on the free Entra ID tier. If you want to skip the trial entirely, you can manually populate every group — you'll lose the automation benefit but the lab still functions."}</div>
+        <div className="ib warn"><b>{"AVD Has a License Trap"}</b>{"For AVD specifically, users need one of a specific list of \"AVD-eligible\" licenses, or the service rejects their connection — even if everything else is configured correctly. Eligible licenses include: Microsoft 365 E3/E5/A3/A5/F3/Business Premium, Windows 10/11 Enterprise E3/E5 (per-user), or Windows VDA E3/E5. Without one of these on the user, AVD will fail to connect with a generic licensing error. Always license users "}<em>{"before"}</em>{" trying to test AVD connectivity."}</div>
+        <div className="ib note"><b>{"Assigned Groups Don't Need P1/P2"}</b>{"The licensing requirement applies only to groups using "}<strong>{"dynamic membership rules"}</strong>{". Groups marked as "}<strong>{"Assigned"}</strong>{" in the table (manual membership) work on the free Entra ID tier. If you want to skip the trial entirely, you can manually populate every group — you'll lose the automation benefit, but the lab still functions."}</div>
         <h4>{"The \"Microsoft Entra Roles Can Be Assigned to the Group\" Option"}</h4>
         <p>{"When you create a group in Entra, you'll see a toggle labeled "}<strong>{"\"Microsoft Entra roles can be assigned to the group\""}</strong>{". This setting determines whether the group can be used to grant Entra directory roles (Global Admin, Helpdesk Admin, User Admin, etc.) to its members. Most documentation glosses over what this option actually does and when to use it — here's the full picture."}</p>
         <h5>{"What It Does"}</h5>
@@ -844,7 +844,7 @@ const AvdEnterpriseWorkspace = () => {
           <li><strong>{"IT service owner."}</strong>{" A specific IT staff member or team owns the group — e.g., the Identity Team owns all role-assignable groups. Pros: consistent management practices. Cons: doesn't solve the help desk bottleneck."}</li>
           <li><strong>{"Service principal / automation."}</strong>{" An automation account owns the group, and a workflow (Power Automate, Graph script) manages membership programmatically. Pros: automated, scales infinitely. Cons: requires automation infrastructure."}</li>
         </ul>
-        <p>{"Most mature organizations use a mix: functional owners for department/business groups, IT service owners for infrastructure groups, automation for high-volume or compliance-driven groups."}</p>
+        <p>{"Most mature organizations use a mix: functional owners for department/business groups, IT service owners for infrastructure groups, and automation for high-volume or compliance-driven groups."}</p>
         <h5>{"Owners vs. Members — Don't Confuse Them"}</h5>
         <p>{"A common point of confusion: "}<strong>{"being an owner does not make you a member"}</strong>{". If a group grants access to a SharePoint site, the owner doesn't get that access unless they're also added as a member. A manager who owns a Finance group can manage who's in it but can't see the Finance documents themselves without being explicitly added."}</p>
         <p>{"Microsoft 365 groups have a setting called \"Owners can also be members\" that's usually enabled by default — it adds owners as members automatically. For security groups, ownership and membership are completely separate."}</p>
@@ -1245,7 +1245,7 @@ const AvdEnterpriseWorkspace = () => {
         </div>
         <h5>{"Configure Settings"}</h5>
         <p>{"Navigate to: "}<strong>{"User Configuration → Policies → Administrative Templates → Microsoft Outlook 2016 → Account Settings → Exchange → Cached Exchange Mode"}</strong></p>
-        <p><em>{"Note:"}</em>{" The node is labeled \"Outlook 2016\" but it applies to all newer versions including the M365 click-to-run Outlook used in AVD."}</p>
+        <p><em>{"Note:"}</em>{" The node is labeled \"Outlook 2016\", but it applies to all newer versions including the M365 click-to-run Outlook used in AVD."}</p>
         <div className="tbl-wrap">
           <table className="tbl">
             <thead>
@@ -1274,7 +1274,7 @@ const AvdEnterpriseWorkspace = () => {
         <div className="ib note"><b>{"Why 3 Months?"}</b>{"FSLogix profile containers hold the entire OST file. A user with 5 years of email and a 50 MB attachment per day produces a 90 GB OST. 3 months keeps it under 5 GB for most users."}</div>
         <hr style={{ border: "none", borderTop: "1px solid var(--border)", margin: "1.5rem 0" }} />
         <h4>{"Verify the GPOs Are Configured Correctly"}</h4>
-        <p>{"At this point in the build, you've created and linked four GPOs but the "}<strong>{"AVD session hosts don't exist yet"}</strong>{" — they're built in Phase 5. That means you can't yet verify the GPOs by signing in as a test user. What you can verify is that the GPOs are "}<strong>{"linked to the correct OU"}</strong>{" and that their settings are "}<strong>{"configured as expected"}</strong>{". Full end-to-end verification happens in Phase 5 after session hosts exist."}</p>
+        <p>{"At this point in the build, you've created and linked four GPOs, but the "}<strong>{"AVD session hosts don't exist yet"}</strong>{" — they're built in Phase 5. That means you can't yet verify the GPOs by signing in as a test user. What you can verify is that the GPOs are "}<strong>{"linked to the correct OU"}</strong>{" and that their settings are "}<strong>{"configured as expected"}</strong>{". Full end-to-end verification happens in Phase 5 after session hosts exist."}</p>
         <h5>{"Interim Verification (Phase 3) — Confirm Linking and Settings"}</h5>
         <p>{"From DC01, confirm all four GPOs are linked to the AVD OU:"}</p>
         <div className="code">
@@ -1345,7 +1345,7 @@ const AvdEnterpriseWorkspace = () => {
             <div className="step-t">{"Click "}<strong>{"Configure"}</strong>{" on the Ready to configure page → wait for completion → "}<strong>{"Exit"}</strong></div>
           </div>
         </div>
-        <div className="ib tip"><b>{"What the SCP Does"}</b>{"The Service Connection Point is a registry entry written to your AD forest's Configuration partition. When a domain-joined machine starts up, it looks for the SCP to find out which Entra tenant to register with. Without the SCP, machines won't know where to register — even if everything else is configured correctly. Setting the SCP requires Enterprise Admin once, then it stays there permanently."}</div>
+        <div className="ib tip"><b>{"What the SCP Does"}</b>{"The Service Connection Point is a registry entry written to your AD forest's Configuration partition. When a domain-joined machine starts up, it looks for the SCP to find out which Entra tenant to register with. Without the SCP, machines won't know where to register — even if everything else is configured correctly. Setting the SCP requires Enterprise Admin once, and then it stays there permanently."}</div>
         <div className="ib note"><b>{"OU Scoping Already Handled"}</b>{"Entra Connect Sync only syncs computer objects from the OUs you selected during Step 1.3 setup. Since your AVD session hosts will live in "}<code>{"OU=HostPool-Prod,OU=AVD,OU=Contoso"}</code>{" and your existing OU filter includes the Contoso OU tree, the AVD computer objects will sync automatically — no additional scoping needed here. If your sync filter excludes the AVD OU, re-run the wizard and adjust the OU filter in "}<strong>{"Configure synchronization filtering"}</strong>{"."}</div>
         <h4>{"Part 2 — Enable Intune Automatic Enrollment"}</h4>
         <p>{"This is done in the Microsoft Intune admin center. Automatic MDM enrollment lets devices that join Entra (hybrid or cloud-joined) automatically enroll into Intune without manual setup on each one."}</p>
@@ -1596,7 +1596,7 @@ const AvdEnterpriseWorkspace = () => {
         <p>{"If you choose Option A or B above, you need a Site-to-Site VPN between your on-prem network and an Azure VNet. Here's the conceptual setup. (Each step has Microsoft Learn documentation linked from the Azure portal during creation — this is the high-level flow.)"}</p>
         <h5>{"Prerequisites"}</h5>
         <ul>
-          <li><strong>{"Static public IP on the on-prem side."}</strong>{" Most residential ISPs use CGNAT (Carrier-Grade NAT) which makes S2S VPN impossible. Check with your ISP — you may need to pay for a static IP add-on, or use a dynamic DNS service if your IP rotates infrequently. "}<strong>{"This is the most common deal-breaker for home labs."}</strong></li>
+          <li><strong>{"Static public IP on the on-prem side."}</strong>{" Most residential ISPs use CGNAT (Carrier-Grade NAT), which makes S2S VPN impossible. Check with your ISP — you may need to pay for a static IP add-on, or use a dynamic DNS service if your IP rotates infrequently. "}<strong>{"This is the most common deal-breaker for home labs."}</strong></li>
           <li><strong>{"A VPN-capable device on-prem."}</strong>{" Options: a commercial firewall (pfSense, OPNsense, Unifi, Fortinet, Cisco ASA), a Windows Server with RRAS, or a router with IKEv2 IPSec support. Most consumer routers don't support this"}</li>
           <li><strong>{"Non-overlapping IP address spaces."}</strong>{" Your on-prem network (currently "}<code>{"10.100.1.0/24"}</code>{") and your Azure VNet must not overlap. Pick something like "}<code>{"10.200.0.0/16"}</code>{" for Azure"}</li>
           <li><strong>{"Budget."}</strong>{" Azure VPN Gateway costs roughly "}<strong>{"$30-150/month"}</strong>{" depending on SKU. VpnGw1 (~$140/mo) is the recommended starting SKU since Basic SKU was deprecated. Outbound data is billed at standard egress rates"}</li>
@@ -1610,7 +1610,7 @@ const AvdEnterpriseWorkspace = () => {
           </div>
           <div className="step">
             <div className="step-n">{"2"}</div>
-            <div className="step-t">{"Add two subnets: "}<code>{"snet-avd-hosts"}</code>{" ("}<code>{"10.200.1.0/24"}</code>{") for session hosts, and "}<code>{"GatewaySubnet"}</code>{" ("}<code>{"10.200.255.0/27"}</code>{") — "}<strong>{"the name must be exactly "}<code>{"GatewaySubnet"}</code></strong>{", this is a special reserved name Azure recognizes"}</div>
+            <div className="step-t">{"Add two subnets: "}<code>{"snet-avd-hosts"}</code>{" ("}<code>{"10.200.1.0/24"}</code>{") for session hosts, and "}<code>{"GatewaySubnet"}</code>{" ("}<code>{"10.200.255.0/27"}</code>{") — "}<strong>{"the name must be exactly "}<code>{"GatewaySubnet"}</code></strong>{"; this is a special reserved name Azure recognizes"}</div>
           </div>
           <div className="step">
             <div className="step-n">{"3"}</div>
@@ -1630,7 +1630,7 @@ const AvdEnterpriseWorkspace = () => {
           </div>
         </div>
         <h5>{"On-Prem Side Setup"}</h5>
-        <p>{"Exact steps depend on your VPN device — Microsoft maintains "}<a href="https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-devices">{"supported device list"}</a>{" with configuration scripts. The conceptual steps:"}</p>
+        <p>{"Exact steps depend on your VPN device — Microsoft maintains a "}<a href="https://learn.microsoft.com/azure/vpn-gateway/vpn-gateway-about-vpn-devices">{"supported device list"}</a>{" with configuration scripts. The conceptual steps:"}</p>
         <div className="steps">
           <div className="step">
             <div className="step-n">{"7"}</div>
@@ -1697,7 +1697,7 @@ const AvdEnterpriseWorkspace = () => {
             <tbody>
               <tr>
                 <td><strong>{"Building skills end-to-end for a cloud engineer / sysadmin role"}</strong>{" (the most common reader)"}</td>
-                <td><strong>{"Option B"}</strong>{" — Second DC in Azure with S2S VPN. Teaches networking, hybrid identity, GPO, and matches how real enterprises actually run AVD. Highest learning ROI"}</td>
+                <td><strong>{"Option B"}</strong>{" — Second DC in Azure with S2S VPN. Teaches networking, hybrid identity, and GPO, and it matches how real enterprises actually run AVD. Highest learning ROI"}</td>
               </tr>
               <tr>
                 <td>{"Building a portfolio piece for interviews"}</td>
@@ -1717,7 +1717,7 @@ const AvdEnterpriseWorkspace = () => {
               </tr>
               <tr>
                 <td>{"You only need a working AVD deployment as fast as possible with no learning interest in identity or networking"}</td>
-                <td><strong>{"Option C"}</strong>{" — Be honest with yourself that this is what you want. It will work, just don't expect it to teach you cloud engineering or sysadmin skills"}</td>
+                <td><strong>{"Option C"}</strong>{" — Be honest with yourself that this is what you want. It will work; just don't expect it to teach you cloud engineering or sysadmin skills"}</td>
               </tr>
             </tbody>
           </table>
@@ -1731,7 +1731,7 @@ const AvdEnterpriseWorkspace = () => {
         <p>{"For Option C readers: the path is groups first, then configuration profiles target those groups, then session hosts auto-populate the groups once they enroll. Doing the order in reverse leaves a window where session hosts exist with no configuration applied."}</p>
         <h4>{"Why Groups First"}</h4>
         <ul>
-          <li><strong>{"Dynamic groups take time to evaluate."}</strong>{" Newly-created dynamic device groups can take 5-30 minutes for membership to populate. Creating them before hosts exist means they're ready and evaluating when hosts come online"}</li>
+          <li><strong>{"Dynamic groups take time to evaluate."}</strong>{" Newly created dynamic device groups can take 5-30 minutes for membership to populate. Creating them before hosts exist means they're ready and evaluating when hosts come online"}</li>
           <li><strong>{"Configuration Profiles need targets."}</strong>{" Each Intune Configuration Profile is assigned to a group. You can create profiles before devices exist, and they apply the moment matching devices enroll"}</li>
           <li><strong>{"Pilot/production split needs separate groups."}</strong>{" You'll stage policies on a small pilot group first, then expand to full production. Creating both groups upfront avoids re-configuring assignments later"}</li>
         </ul>
@@ -1836,7 +1836,7 @@ const AvdEnterpriseWorkspace = () => {
         <h4>{"Why Settings Catalog Over ADMX Import"}</h4>
         <p>{"Intune offers three ways to configure devices: "}<strong>{"Settings Catalog"}</strong>{" (modern, Microsoft-maintained), "}<strong>{"Administrative Templates"}</strong>{" (Microsoft's bundled ADMX), and "}<strong>{"Imported ADMX"}</strong>{" (custom/third-party). For AVD on Entra-only joined Windows multi-session, "}<strong>{"Settings Catalog is the preferred path"}</strong>{":"}</p>
         <ul>
-          <li><strong>{"FSLogix is in Settings Catalog since October 2023"}</strong>{" — no ADMX import needed"}</li>
+          <li><strong>{"FSLogix has been in Settings Catalog since October 2023"}</strong>{" — no ADMX import needed"}</li>
           <li><strong>{"Imported ADMX often returns \"Not Applicable\""}</strong>{" on Windows multi-session AVD hosts — a known limitation Microsoft acknowledges in their docs"}</li>
           <li><strong>{"Settings Catalog includes search and category filtering"}</strong>{" — easier to find the exact setting"}</li>
           <li><strong>{"Better long-term support"}</strong>{" — Microsoft is actively adding settings to Settings Catalog while ADMX import is in maintenance mode"}</li>
@@ -1881,7 +1881,7 @@ const AvdEnterpriseWorkspace = () => {
           </table>
         </div>
         <h4>{"Common Workflow — Creating Any Configuration Profile"}</h4>
-        <p>{"Every profile below follows this pattern. Read this once, then each profile section only lists the unique settings:"}</p>
+        <p>{"Every profile below follows this pattern. Read this once; then each profile section only lists the unique settings:"}</p>
         <div className="steps">
           <div className="step">
             <div className="step-n">{"A"}</div>
@@ -2101,7 +2101,7 @@ const AvdEnterpriseWorkspace = () => {
             <div className="step-t">{"After deployment, test by signing in to "}<strong>{"Windows App"}</strong>{" at "}<code>{"https://windows.cloud.microsoft"}</code>{" as a test user → your AVD desktop should appear in the workspace list → click to launch"}</div>
           </div>
         </div>
-        <div className="ib danger"><b>{"Old AVD URLs Are Deprecated"}</b>{"If you've used AVD before, you may be familiar with "}<code>{"client.wvd.microsoft.com/arm/webclient"}</code>{" or "}<code>{"rdweb.wvd.microsoft.com/arm/webclient"}</code>{". "}<strong>{"These URLs were deprecated on March 27, 2026"}</strong>{" and the Remote Desktop web client is no longer supported for public cloud AVD environments. The current and only Microsoft-supported web client is "}<strong>{"Windows App"}</strong>{" at "}<code>{"windows.cloud.microsoft"}</code>{". The Remote Desktop MSI client extension lasts until September 28, 2026 for Azure Government and Azure China only. For all new deployments and testing, use Windows App."}</div>
+        <div className="ib danger"><b>{"Old AVD URLs Are Deprecated"}</b>{"If you've used AVD before, you may be familiar with "}<code>{"client.wvd.microsoft.com/arm/webclient"}</code>{" or "}<code>{"rdweb.wvd.microsoft.com/arm/webclient"}</code>{". "}<strong>{"These URLs were deprecated on March 27, 2026"}</strong>{", and the Remote Desktop web client is no longer supported for public cloud AVD environments. The current and only Microsoft-supported web client is "}<strong>{"Windows App"}</strong>{" at "}<code>{"windows.cloud.microsoft"}</code>{". The Remote Desktop MSI client extension lasts until September 28, 2026 for Azure Government and Azure China only. For all new deployments and testing, use Windows App."}</div>
         <div className="ib note"><b>{"Windows App vs Remote Desktop App"}</b>{"Windows App is Microsoft's unified client that replaces the older Remote Desktop app. It connects to AVD, Windows 365 Cloud PCs, Microsoft Dev Box, and on-prem Remote Desktop Services from a single interface. Available as a web client ("}<code>{"windows.cloud.microsoft"}</code>{"), Windows desktop app (Microsoft Store), iOS, Android, and macOS app. The older Microsoft Store \"Remote Desktop\" app reached end of support in September 2025."}</div>
       </div>
       <div className="sec" id="s52">
@@ -2130,7 +2130,7 @@ const AvdEnterpriseWorkspace = () => {
       </div>
       <div className="sec" id="s53">
         <h3>{"Step 5.5 — Verify Shared Computer Activation"}</h3>
-        <p>{"SCA must be on, otherwise every M365 sign-in consumes a device license and they max out fast. Confirm:"}</p>
+        <p>{"SCA must be on; otherwise, every M365 sign-in consumes a device license and they max out fast. Confirm:"}</p>
         <div className="code">
           <div className="code-head">
             <span className="code-lang">{"PowerShell — verify SCA"}</span>

@@ -31,7 +31,7 @@ const data = [
     id: 6,
     images: [{ src: IMG_LOCAL_LLM, caption: 'Hermes Agent running Qwen3.6-35B-A3B locally' }],
     title: 'Self-Hosted AI Agent (Mac mini M5 Pro)',
-    description: 'Running Hermes Agent with local models, so prompts and data never leave the machine. Tool calls run only in a Docker sandbox, with access limited to specific folders through volume mounts. Using the setup to compare open-source LLMs on inference speed and output quality across quantization levels, and ran LTX-Video from the CLI to generate short clips locally. Now building an Obsidian knowledge base the agent uses for long-term context.',
+    description: 'Running Hermes Agent with local models, so prompts and data never leave the machine. Tool calls run only in a Docker sandbox, with access limited to specific folders through volume mounts. Using the setup to compare open-source LLMs on inference speed and output quality across quantization levels. Also ran LTX-Video from the CLI to generate short clips locally. Now building an Obsidian knowledge base the agent uses for long-term context.',
     stack: ['Docker', 'Local LLMs', 'AI Agents', 'llama.cpp', 'Python', 'CLI'],
     repo: null,
     demo: null

@@ -13,7 +13,7 @@ const DATA = [
       {i:"ok",    t:"Accept / reject", h:1},
     ],
     cards:[
-      {i:"target",t:"What this level does",items:["AI provides inline code completions as you type","Chat sidebar answers questions about your code","Generates boilerplate from natural language prompts","Explains errors when you paste stack traces"]},
+      {i:"target",t:"What this level does",items:["AI provides inline code completions as you type","Chat sidebar answers questions about your code","Generates boilerplate from natural-language prompts","Explains errors when you paste stack traces"]},
       {i:"list",t:"What you should be doing",items:["Making all architectural decisions yourself","Reviewing every line of AI output before accepting","Learning to write clear, specific prompts","Using version control manually for all changes"]}
     ],
     skills:[
@@ -88,7 +88,7 @@ const DATA = [
       {s:"Run headless sessions",d:"Run the agent non-interactively from a script or CI job so it produces PRs"},
       {s:"Achieve 70%+ test coverage",d:"Including E2E tests for critical user flows"},
       {s:"Let agent commit to branches",d:"Without manual review of every change"},
-      {s:"Run overnight tasks",d:"Agent produces PR, you review in the morning"},
+      {s:"Run overnight tasks",d:"Agent produces PR; you review in the morning"},
       {s:"Machine-verifiable criteria",d:"Every plan has acceptance criteria the agent can check itself"}
     ]
   },
@@ -127,7 +127,7 @@ const DATA = [
   },
   {
     id:5, label:"Orchestrator", title:"Multi-agent orchestration", c:"c5",
-    desc:"Multiple specialized agents coordinate on complex work. A planning agent creates specs, workers build in parallel, review agents audit. You approve final output and make strategic decisions.",
+    desc:"Multiple specialized agents coordinate on complex work. A planning agent creates specs, workers build in parallel, and review agents audit. You approve final output and make strategic decisions.",
     flow:[
       {i:"compass",  t:"You set direction",h:1},
       {i:"hierarchy",t:"Manager plans"},

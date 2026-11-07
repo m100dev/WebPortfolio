@@ -23,13 +23,13 @@ export const prompts = [
   {
     id: 'ai',
     question: 'How do you use AI to build software?',
-    answer: 'I build MyAutoTab with a test-driven Claude Code workflow that cut feature delivery from about a week to under a day. It has automated gates for quality, security, and process discipline so agent-written code doesn’t reach production unchecked: specialized subagents (a read-only researcher, a reviewer, and a test-runner), database security audits in the CI/CD pipeline, and plan-driven changes where every change starts with a spec and acceptance criteria. I rebuilt this site the same way, with an AI coding agent working from written specs and my review before anything shipped.',
+    answer: 'I build MyAutoTab with a test-driven Claude Code workflow that cut feature delivery from about a week to under a day. It has automated gates for quality, security, and process discipline so agent-written code doesn’t reach production unchecked: specialized subagents (a read-only researcher, a reviewer, and a test-runner), database security audits in the development workflow, and plan-driven changes where every change starts with a spec and acceptance criteria. I rebuilt this site the same way, with an AI coding agent working from written specs and my review before anything shipped.',
     link: { to: '/guides/ai-autonomy-levels', label: 'Read my AI autonomy framework' }
   },
   {
     id: 'certs',
     question: 'What certifications do you have?',
-    answer: 'CCNA (2026), Azure Fundamentals (2024), and CIW JavaScript Specialist (2021). I also held AWS Solutions Architect – Associate and Cloud Practitioner from 2023 to 2026, with the Solutions Architect renewal planned. I’m working toward CompTIA Security+ and studying Applied Agentic AI at Virginia Tech.'
+    answer: 'CCNA (2026), Azure Fundamentals (2024), and CIW JavaScript Specialist (2021). I also held AWS Solutions Architect – Associate from 2023 to 2026, with renewal planned, and AWS Cloud Practitioner from 2022 to 2026. I’m working toward CompTIA Security+ and studying Applied Agentic AI at Virginia Tech.'
   },
   {
     id: 'roles',

@@ -15,7 +15,7 @@ export const flow = [
   { step: 'Spec', detail: 'What done looks like, written before any code.' },
   { step: 'Checkpointed plan', detail: 'Small steps, each with its own gate and a fresh session.' },
   { step: 'Tests', detail: 'The behaviour I expect, so a regression fails loudly.' },
-  { step: 'Hooks enforce', detail: 'Secrets, unsafe code, build, tests and audit block the commit.' },
+  { step: 'Hooks enforce', detail: 'Secrets, unsafe code, build, tests, and audit block the commit.' },
   { step: 'Skills judge', detail: 'The calls a script can’t make, run as checklists.' },
   { step: 'My review', detail: 'Every change, at every gate.' }
 ]
