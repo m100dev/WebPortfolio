@@ -11,25 +11,38 @@ const data = [
     highlights: [
       'Designed and built a multi-tenant vehicle management SaaS end to end: React, .NET/EF Core, PostgreSQL with Row-Level Security, GitHub Actions, Render, Cloudflare.',
       'Built a semi-autonomous, test-driven coding agent workflow with Claude Code that cut feature delivery from about a week to under a day.',
-      'Added security and database audits to the CI/CD pipeline to catch issues in agent-written code before release.'
+      'Built security and database audits into the development workflow, alongside a GitHub Actions CI/CD pipeline, to catch issues in agent-written code before release.'
     ],
-    tags: ['Agentic AI Development', 'Claude Code', 'Full-Stack Development', 'React', '.NET', 'PostgreSQL', 'Terraform']
+    tags: ['Agentic AI Development', 'Claude Code', 'Full-Stack Development', 'React', '.NET', 'PostgreSQL']
   },
   {
     id: 2,
+    company: 'Independent Work',
+    title: 'AI Adoption Trainer',
+    location: 'Gaithersburg, MD (Remote)',
+    dates: "Sep '26 – Present",
+    highlights: [
+      'Led 9 AI adoption trainings (1–3 hours each) for 11 attendees, covering everyday AI use, prompting, and the move from cloud chat tools to local AI setups.',
+      'Attendees reported greater confidence in prompting and left with a plan to implement AI in areas of their lives they hadn’t considered.',
+      'Explained the security risks of relying only on cloud AI models, ethical and unethical uses of AI, and practical steps to protect personal and work data.'
+    ],
+    tags: ['AI Training', 'Prompting', 'Local AI', 'AI Security', 'AI Ethics']
+  },
+  {
+    id: 3,
     company: 'City of Miami Beach',
     title: 'IT Support Specialist II',
     location: 'Miami, FL',
     dates: "Dec '24 – Sep '26",
     highlights: [
-      'Administered identity and device management across Active Directory, Entra ID, and Intune with Autopilot for 3,000+ devices in a public-sector security environment.',
-      'Proposed and prototyped a group-based license management model in Entra ID after budget cuts ruled out third-party tools; the project manager endorsed it as the preferred approach.',
-      'Built a proof-of-concept ARM template, deployed with PowerShell, to provision VMs, network security groups, and storage in the city’s Azure environment under change control.'
+      'Administered identity and device management across Active Directory, Entra ID, and Intune with Autopilot for 3,000+ devices.',
+      'After budget cuts ruled out third-party licensing tools, proposed adding license reclamation to the IT offboarding process; endorsed by the IT manager and the project manager, who submitted it to change control.',
+      'Built a self-initiated proof-of-concept ARM template, deployed with PowerShell, to provision VMs, network security groups, and storage in the city’s Azure test environment, scoped to comply with change control.'
     ],
     tags: ['Entra ID', 'Intune', 'Autopilot', 'Azure', 'PowerShell', 'Zscaler', 'VoIP']
   },
   {
-    id: 3,
+    id: 4,
     company: 'Vitas Healthcare',
     title: 'Business Systems Analyst',
     location: 'Pembroke Pines, FL',
@@ -41,11 +54,11 @@ const data = [
     tags: ['ServiceNow', 'ITAM', 'Workspace ONE', 'Excel VBA']
   },
   {
-    id: 4,
+    id: 5,
     company: 'Trax Corp USA',
     title: 'Cloud Systems Operations Engineer',
     location: 'Coral Gables, FL',
-    dates: "Jan '23 – Sep '23",
+    dates: "Jan '23 – Mar '23, Jul '23 – Sep '23",
     highlights: [
       'Configured and maintained AWS infrastructure (VPC, EC2, S3, EBS, security groups) for Java deployments across airline customer production environments.',
       'Automated CloudWatch Agent, AWS WAF, CrushFTP, and WildFly deployment with Bash, cutting about 4 hours of manual provisioning per deployment.'
@@ -53,18 +66,18 @@ const data = [
     tags: ['AWS', 'Bash', 'CloudWatch', 'AWS WAF', 'Linux']
   },
   {
-    id: 5,
+    id: 6,
     company: 'Xtreme Polishing Systems',
     title: 'Lead Frontend Web Developer',
     location: 'Pompano Beach, FL',
     dates: "May '22 – Dec '22",
     highlights: [
-      'Built and launched 10+ WordPress sites as the company’s only WordPress developer, and a Shopify store prototype managing about 150 products.'
+      'Built and launched 10+ WordPress sites as the company’s only active WordPress developer, and built a Shopify store prototype with about 150 products.'
     ],
     tags: ['WordPress', 'Shopify', 'SEO']
   },
   {
-    id: 6,
+    id: 7,
     company: 'Wiretap Telecom',
     title: 'Lead Frontend Developer / Helpdesk Engineer',
     location: 'Brickell, FL',
@@ -76,11 +89,11 @@ const data = [
     tags: ['JavaScript', 'Bootstrap', '3CX', 'Amazon EC2']
   },
   {
-    id: 7,
+    id: 8,
     company: 'Lyrist',
     title: 'React Native Developer Intern',
     location: 'Seattle, WA (Remote)',
-    dates: "Jun '21 – Oct '21, Jul '23",
+    dates: "Jun '21 – Oct '21, Jul '23 (part-time)",
     highlights: [
       'Built React Native features with TypeScript, Redux, and Firebase, including a YouTube Data API integration, and fixed failing Azure DevOps builds.'
     ],
