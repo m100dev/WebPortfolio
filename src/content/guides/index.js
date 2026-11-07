@@ -12,16 +12,17 @@ const guides = [
     slug: 'how-i-build-with-ai-agents',
     eyebrow: 'Build log, measured',
     title: 'How I Build with AI Agents',
-    summary: 'The plans, hooks and skills behind this site, and what each one measurably changed, including the results that came out close to zero.',
+    summary: 'The plans, hooks, and skills behind this site, and what each one measurably changed, including the results that came out close to zero.',
     tags: ['AI Engineering', 'Claude Code', 'Security', 'Workflow'],
     readingTime: '5 min read',
     repo: 'https://github.com/m100dev/WebPortfolio',
     repoLabel: 'Source code',
     license: true,
     year: 2026,
-    version: '1.2',
-    updated: '2026-11-06',
+    version: '1.3',
+    updated: '2026-11-07',
     changes: [
+      { version: '1.3', date: '2026-11-07', note: 'Fixed grammar and punctuation.' },
       { version: '1.2', date: '2026-11-06', note: 'Re-measured CLAUDE.md (2.2k tokens now, from 1.2k right after the split), and said exactly which commits the hooks check and which advisories block.' },
       { version: '1.1', date: '2026-11-06', note: 'Linked the source repo now that it’s public.' },
       { version: '1.0', date: '2026-11-06', note: 'First published.' }
@@ -40,9 +41,10 @@ const guides = [
     footnote: 'Advanced portfolio project for aspiring mid-to-senior cloud engineers / sysadmins.',
     license: true,
     year: 2026,
-    version: '1.1',
-    updated: '2026-11-04',
+    version: '1.2',
+    updated: '2026-11-07',
     changes: [
+      { version: '1.2', date: '2026-11-07', note: 'Fixed grammar and punctuation.' },
       { version: '1.1', date: '2026-11-04', note: 'Reframed for cloud engineers as well as sysadmins.' },
       { version: '1.0', date: '2026-07-01', note: 'First published.' }
     ],
@@ -59,9 +61,10 @@ const guides = [
     repo: null,
     license: true,
     year: 2026,
-    version: '1.1',
-    updated: '2026-11-04',
+    version: '1.2',
+    updated: '2026-11-07',
     changes: [
+      { version: '1.2', date: '2026-11-07', note: 'Fixed grammar and punctuation.' },
       { version: '1.1', date: '2026-11-04', note: 'Made the framework tool-agnostic: it now applies to any agentic coding tool, not just Claude Code.' },
       { version: '1.0', date: '2026-07-01', note: 'First published.' }
     ],

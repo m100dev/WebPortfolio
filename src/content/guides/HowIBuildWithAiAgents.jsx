@@ -40,7 +40,7 @@ const HowIBuildWithAiAgents = () => {
       <div className='wf-section'>
         <h2>Why this much tooling</h2>
         <p>
-          A static site doesn’t need checkpointed plans, commit hooks or security skills. This is
+          A static site doesn’t need checkpointed plans, commit hooks, or security skills. This is
           more than the site needs, on purpose. It’s a public slice of how I work on MyAutoTab, the
           SaaS I’m building to production standards, where these tools carry real weight. Here
           they’re small enough to read in one sitting.
@@ -71,7 +71,7 @@ const HowIBuildWithAiAgents = () => {
         <p>
           Every session loads <code>CLAUDE.md</code> before doing anything. I split mine into a lean
           root file and three folder files that load only when the agent works in that folder. The
-          root has grown back since, as I documented the hooks, skills and graphify, so I
+          root has grown back since, as I documented the hooks, skills, and graphify, so I
           re-measured it.
         </p>
         <figure className='wf-figure'>
@@ -222,7 +222,7 @@ const HowIBuildWithAiAgents = () => {
         <div className='wf-aside'>
           <p className='wf-stat__value mono'>{toolchain.auditBefore.value} → {toolchain.auditAfter.value}</p>
           <p>
-            npm audit advisories. That came from moving off Create React App to Vite, React 19 and
+            npm audit advisories. That came from moving off Create React App to Vite, React 19, and
             React Router 7, not from this workflow, so I keep it separate. What the workflow adds is
             that every commit now runs the audit and blocks on a high or critical advisory in a runtime
             dependency.
