@@ -1,3 +1,4 @@
+import { useOutletContext } from 'react-router'
 import CTA from './CTA'
 import ME from '../../assets/Marc Bastien Professional Portrait.webp'
 import HeaderSocials from './HeaderSocials'
@@ -12,6 +13,8 @@ const metrics = [
 
 // Landing hero: value proposition + proof metrics on the left, portrait on the right
 const Header = () => {
+  const { visits } = useOutletContext() ?? {}
+
   return (
     <header id='home'>
       <div className="header__glow" aria-hidden="true" />
@@ -38,7 +41,7 @@ const Header = () => {
             ))}
           </ul>
 
-          <HeaderSocials/>
+          <HeaderSocials visits={visits}/>
         </div>
 
         <div className="header__portrait">

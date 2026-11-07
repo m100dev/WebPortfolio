@@ -32,7 +32,7 @@ Node ≥24.15 is required: `engines` in `package.json` plus `engine-strict=true`
 - **New pages:** add a `<Route>` in `App.jsx`, a nav entry in `Nav.jsx`'s `pages` list if it belongs in the nav, a `<title>` via `useDocumentTitle`, and use the shared `.page` / `.page-intro` styles in `src/pages/pages.css`.
 - **Assets:** import images from `src/assets/` as modules so Vite fingerprints them. Never reference them by path from `public/`.
 - **Colours:** always CSS custom properties from `src/index.css`, never hardcoded values.
-- **Visitor counter hook:** `src/hooks/useVisitorCount.js` reads `import.meta.env.REACT_APP_VISITOR_API_URL` at build time, and the counter is hidden without it.
+- **Visitor counter hook:** `src/hooks/useVisitorCount.js` reads `import.meta.env.REACT_APP_VISITOR_API_URL` at build time, and the counter is hidden without it. It runs once in `Layout` (`App.jsx`), which hands the count to the footer as a prop and to the hero through `<Outlet context>`. Both render `components/visits/VisitCounter.jsx`. Never call the hook a second time: that would mean two POSTs on a first visit and double the polling.
 - **Hosting:** Amplify's rewrite rules live in `infra/amplify/redirects.json` and are pasted into the console by hand, with the SPA rewrite last. That rewrite sends any extension missing from its allowlist to `index.html`, so a new static file type must be added to the list (`md` is already there for memos; a PDF would need `pdf`).
 - **Nested CLAUDE.md files** load when you work in their folder:
   - `src/components/CLAUDE.md`: sections, nav, styling, Ask Marc, contact form;

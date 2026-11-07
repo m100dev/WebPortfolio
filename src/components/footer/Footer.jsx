@@ -1,29 +1,11 @@
-import { useRef } from 'react';
 import './footer.css';
 import {BsLinkedin} from 'react-icons/bs';
 import {FaGithub} from 'react-icons/fa';
-import CountUp from '../header/CountUp';
-import useVisitorCount from '../../hooks/useVisitorCount';
+import VisitCounter from '../visits/VisitCounter';
 
-// Quiet live counter from infra/visitor-counter. The first number counts up once;
-// later refreshes show plainly instead of re-animating from zero every minute.
-const VisitCounter = () => {
-  const count = useVisitorCount();
-  const first = useRef(null);
-  if (count === null) return null;
-  if (first.current === null) first.current = count;
-
-  return (
-    <small className='footer__visits mono'>
-      <span className='footer__visits-dot' aria-hidden='true' />
-      {count === first.current ? <CountUp end={count} /> : count.toLocaleString('en-US')} visits
-      <span className='footer__visits-via'> · counted by AWS Lambda + DynamoDB</span>
-    </small>
-  );
-};
-
-// Quiet one-row sign-off; navigation lives in the top bar
-const Footer = () => {
+// Quiet one-row sign-off; navigation lives in the top bar.
+// `visits` comes from Layout, which runs the counter hook once for the hero and the footer.
+const Footer = ({ visits }) => {
   const year = new Date().getFullYear();
 
   return (
@@ -33,7 +15,7 @@ const Footer = () => {
 
         <div className='footer__meta'>
           <small className='footer__built mono'>Built with React · Hosted on AWS Amplify</small>
-          <VisitCounter />
+          <VisitCounter count={visits} />
         </div>
 
         <div className='footer__socials'>

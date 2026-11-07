@@ -9,6 +9,7 @@ import Memos from './pages/Memos'
 import NotFound from './pages/NotFound'
 import useReveal from './hooks/useReveal'
 import useHashScroll from './hooks/useHashScroll'
+import useVisitorCount from './hooks/useVisitorCount'
 
 // react-markdown is ~60 kB; keep it out of the home bundle
 const Memo = lazy(() => import('./pages/Memo'))
@@ -19,14 +20,17 @@ const Layout = () => {
   useHashScroll()
   // Re-scan for .reveal elements whenever the page changes
   useReveal(pathname)
+  // One counter for the whole site: the hero (via outlet context) and the footer share it,
+  // so a first visit sends one POST and polling isn't doubled
+  const visits = useVisitorCount()
 
   return (
     <>
       <Nav/>
       <main id='main'>
-        <Outlet/>
+        <Outlet context={{ visits }}/>
       </main>
-      <Footer/>
+      <Footer visits={visits}/>
     </>
   )
 }

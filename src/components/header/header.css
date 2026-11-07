@@ -130,6 +130,7 @@ header {
 .header__socials {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1.2rem;
     margin-top: 2rem;
     font-size: 1.2rem;
@@ -140,6 +141,19 @@ header {
     width: 2.5rem;
     height: 1px;
     background-color: var(--color-primary);
+}
+
+/* Live visit count: arrives after the hero entrance, so it fades in on its own */
+.visits.header__visits {
+    margin-left: 0.6rem;
+    font-size: 0.78rem;
+    animation: visits-in 600ms var(--ease-out) both;
+}
+
+@keyframes visits-in {
+    from {
+        opacity: 0;
+    }
 }
 
 /* ============ PORTRAIT ============ */
@@ -176,7 +190,8 @@ header {
 @media (prefers-reduced-motion: reduce) {
     .header__glow,
     .header__intro > *,
-    .header__portrait {
+    .header__portrait,
+    .visits.header__visits {
         animation: none;
     }
 }
@@ -233,5 +248,11 @@ header {
 
     .header__metric-value {
         font-size: 1.3rem;
+    }
+
+    /* Count drops under the icons instead of squeezing the row */
+    .visits.header__visits {
+        flex-basis: 100%;
+        margin-left: 0;
     }
 }
